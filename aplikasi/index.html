@@ -34,6 +34,7 @@
     <title>Agroplay - Belajar Hortikultura Seru!</title>
     
     <!-- Tailwind CSS -->
+    <!--suppress TlsCheck -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -942,7 +943,7 @@
                     </div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/kebun_ajaib.png" alt="Kebun Ajaib" class="menu-logo">
+                            <img src="/assets/kebun_ajaib.png" alt="Kebun Ajaib" class="menu-logo">
                         </div>
                         <h3 class="menu-title">Kebun Ajaib</h3>
                         <p class="menu-description">Main game menanam sayuran!</p>
@@ -961,7 +962,7 @@
                     </div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/tanam_yuk.png" alt="Tanam Yuk" class="menu-logo">
+                            <img src="/assets/tanam_yuk.png" alt="Tanam Yuk" class="menu-logo">
                         </div>
                         <h3 class="menu-title">Tanam Yuk!</h3>
                         <p class="menu-description">Mari menanam bersama!</p>
@@ -980,7 +981,7 @@
                     </div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/kuis_seru_tani.png" alt="Kuis Seru Tani" class="menu-logo">
+                            <img src="/assets/kuis_seru_tani.png" alt="Kuis Seru Tani" class="menu-logo">
                         </div>
                         <h3 class="menu-title">Kuis Seru Tani</h3>
                         <p class="menu-description">Tes pengetahuanmu!</p>
@@ -999,7 +1000,7 @@
                     </div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku-new.png" alt="Buku Tanamku" class="menu-logo">
+                            <img src="/assets/buku-tanamku-new.png" alt="Buku Tanamku" class="menu-logo">
                         </div>
                         <h3 class="menu-title">Buku Tanamku</h3>
                         <p class="menu-description">Panduan menanam sayuran</p>
@@ -1018,7 +1019,7 @@
                     </div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/cuan_farming.png" alt="Cuan Farming" class="menu-logo">
+                            <img src="/assets/cuan_farming.png" alt="Cuan Farming" class="menu-logo">
                         </div>
                         <h3 class="menu-title">Cuan Farming</h3>
                         <p class="menu-description">Farm virtual yang seru!</p>
@@ -1062,6 +1063,28 @@
     <script src="js/universal-nav.js"></script>
     
     <script>
+        // ==================== GLOBAL FUNCTIONS ====================
+        // Define global functions immediately to ensure they're available
+        function goBack() {
+            window.history.back();
+        }
+        
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+        
+        function openSettings() {
+            showToast('Pengaturan akan segera hadir!', 'info');
+        }
+        
+        function openSearch() {
+            document.querySelector('.search-bar').focus();
+        }
+        
+        function openNotifications() {
+            showToast('Notifikasi akan segera hadir!', 'info');
+        }
+        
         // ==================== AUTHENTICATION CHECK ====================
         // Check if user is authenticated, if not redirect to login
         document.addEventListener('DOMContentLoaded', function() {
@@ -1082,27 +1105,6 @@
             
             checkAuth();
         });
-        
-        // ==================== NAVIGATION FUNCTIONS ====================
-        function navigateTo(url) {
-            window.location.href = url;
-        }
-        
-        function goBack() {
-            window.history.back();
-        }
-        
-        function openSettings() {
-            showToast('Pengaturan akan segera hadir!', 'info');
-        }
-        
-        function openSearch() {
-            document.querySelector('.search-bar').focus();
-        }
-        
-        function openNotifications() {
-            showToast('Notifikasi akan segera hadir!', 'info');
-        }
         
         // ==================== SEARCH FUNCTIONALITY ====================
         document.addEventListener('DOMContentLoaded', function() {

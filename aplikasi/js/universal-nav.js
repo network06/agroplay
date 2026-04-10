@@ -344,12 +344,12 @@
     // Make it global
     window.universalNav = universalNav;
     
-    // Auto-initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => universalNav.init());
-    } else {
-        universalNav.init();
-    }
+    // Auto-initialize when DOM is ready - DISABLED to remove duplicate menu
+    // if (document.readyState === 'loading') {
+    //     document.addEventListener('DOMContentLoaded', () => universalNav.init());
+    // } else {
+    //     universalNav.init();
+    // }
     
     console.log('🌱 Universal Navigation System loaded');
 })();
