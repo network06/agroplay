@@ -283,6 +283,26 @@
             margin-top: 2px;
         }
         
+        .header-btn.logout {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header-btn.logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+        }
+        
         /* ==================== WEATHER & MARKET BAR ==================== */
         .weather-market-bar {
             position: fixed;
@@ -797,6 +817,9 @@
                     <div class="stat-value" id="xp-display">0/500</div>
                     <div class="stat-label">XP</div>
                 </div>
+                <button class="header-btn logout" onclick="handleLogout()" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
         </div>
     </header>
