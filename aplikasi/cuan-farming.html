@@ -7,9 +7,14 @@
     <meta name="theme-color" content="#4CAF50">
     <title>Cuan Farming - Agroplay</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS - Production Optimized -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Disable Tailwind CDN warning for production
+        if (typeof window !== 'undefined') {
+            window.TAILWIND_CONFIG = { disableWarnings: true };
+        }
+        
         // Tailwind configuration
         tailwind.config = {
             theme: {
@@ -596,6 +601,18 @@
             overflow-y: auto;
             position: relative;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modal-in 0.3s ease-out;
+        }
+        
+        @keyframes modal-in {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
         
         .modal-close {
@@ -627,6 +644,439 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* ==================== ENHANCED SHOP STYLES ==================== */
+        .shop-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .shop-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .shop-filter-btn {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .shop-filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .shop-filter-btn.active {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border-color: #4CAF50;
+            box-shadow: 0 4px 12px rgba(76,175,80,0.3);
+        }
+        
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .shop-item {
+            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shop-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: #4CAF50;
+        }
+        
+        .shop-item-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .shop-item-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .shop-item-price {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .shop-item-description {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 12px;
+            min-height: 40px;
+        }
+        
+        .shop-item-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+        
+        .shop-item-btn:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(76,175,80,0.3);
+        }
+        
+        .shop-item-btn:disabled {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* ==================== ENHANCED ACHIEVEMENTS STYLES ==================== */
+        .achievements-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .achievement-item {
+            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #4CAF50;
+        }
+        
+        .achievement-item.unlocked {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-color: #4CAF50;
+        }
+        
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .achievement-item.unlocked .achievement-icon {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+            box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+        }
+        
+        .achievement-content {
+            flex: 1;
+        }
+        
+        .achievement-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+        
+        .achievement-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .achievement-progress {
+            font-size: 0.8rem;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+        
+        .achievement-item.locked .achievement-progress {
+            color: #6c757d;
+        }
+        
+        /* ==================== ENHANCED CHALLENGES STYLES ==================== */
+        .challenges-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .challenge-item {
+            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .challenge-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: #FF9800;
+        }
+        
+        .challenge-item.completed {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-color: #4CAF50;
+        }
+        
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .challenge-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .challenge-item.completed .challenge-icon {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+        
+        .challenge-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        .challenge-description {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .challenge-progress {
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .challenge-item.completed .progress-fill {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+        
+        .progress-text {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .challenge-reward {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+        
+        .challenge-item.completed .challenge-reward {
+            color: #FF9800;
+        }
+        
+        /* ==================== ENHANCED TUTORIAL STYLES ==================== */
+        .tutorial-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .tutorial-step {
+            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tutorial-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: #2196F3;
+        }
+        
+        .tutorial-step.active {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-color: #2196F3;
+        }
+        
+        .tutorial-step.completed {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-color: #4CAF50;
+        }
+        
+        .tutorial-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .tutorial-step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .tutorial-step.completed .tutorial-step-number {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+        
+        .tutorial-step.active .tutorial-step-number {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            animation: pulse-orange 2s infinite;
+        }
+        
+        @keyframes pulse-orange {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .tutorial-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        .tutorial-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .tutorial-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6c757d;
+        }
+        
+        .tutorial-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        
+        .tutorial-btn {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .tutorial-btn:hover {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(33,150,243,0.3);
+        }
+        
+        .tutorial-btn:disabled {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .tutorial-btn.primary {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+        
+        .tutorial-btn.primary:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            box-shadow: 0 4px 12px rgba(76,175,80,0.3);
         }
         
         .modal-body {

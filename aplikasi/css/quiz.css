@@ -193,6 +193,66 @@ body::after {
 
 .quiz-screen.active {
     display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Plant Cards Styling */
+.plant-card {
+    background: white;
+    border: 3px solid #E0E0E0;
+    border-radius: var(--radius-lg);
+    padding: 16px 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+.plant-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,152,0,0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+.plant-card:hover::before {
+    animation: shimmer 0.6s ease;
+}
+
+.plant-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: var(--primary-orange);
+    box-shadow: 0 12px 35px rgba(255,152,0,0.2);
+    z-index: 10;
+}
+
+.plant-card.selected {
+    border-color: var(--primary-orange);
+    background: #FFF3E0;
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255,152,0,0.3);
+}
+
+.plant-emoji {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 8px;
+    animation: bounce 2s ease infinite;
+}
+
+.plant-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dark);
+    font-family: var(--font-secondary);
 }
 
 @keyframes fadeIn {

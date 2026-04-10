@@ -1375,7 +1375,7 @@
             console.log('goToPlantSelection available:', typeof goToPlantSelection);
             console.log('backToCategories available:', typeof backToCategories);
             
-            // Force category cards to work
+            // Force category cards to work with multiple event handlers
             document.querySelectorAll('.category-card').forEach(function(card) {
                 const categoryId = Array.from(card.classList).find(cls => 
                     ['pangan', 'industri', 'hias', 'obat', 'makanan', 'serat', 'hama'].includes(cls)
@@ -1383,18 +1383,76 @@
                 
                 if (categoryId) {
                     console.log('Setting up click for category:', categoryId);
-                    card.onclick = function(e) {
+                    
+                    // Remove existing handlers
+                    card.onclick = null;
+                    
+                    // Add new robust click handler
+                    card.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                         console.log('Category clicked:', categoryId);
+                        
+                        // Visual feedback
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.transform = '';
+                        }, 150);
+                        
                         if (typeof selectCategory === 'function') {
                             selectCategory(categoryId);
                         } else {
                             console.error('selectCategory not available!');
+                            alert('Error: Category selection not available. Please refresh the page.');
                         }
-                    };
+                    });
+                    
+                    // Touch support
+                    card.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        console.log('Category touched:', categoryId);
+                        
+                        // Visual feedback
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.transform = '';
+                        }, 150);
+                        
+                        if (typeof selectCategory === 'function') {
+                            selectCategory(categoryId);
+                        }
+                    });
                 }
             });
+            
+            // Setup button handlers
+            const btnSelectCategory = document.getElementById('btn-select-category');
+            if (btnSelectCategory) {
+                btnSelectCategory.onclick = function(e) {
+                    e.preventDefault();
+                    console.log('Continue button clicked');
+                    
+                    if (typeof goToPlantSelection === 'function') {
+                        goToPlantSelection();
+                    } else {
+                        console.error('goToPlantSelection not available!');
+                        alert('Error: Navigation not available. Please refresh the page.');
+                    }
+                };
+            }
+            
+            // Setup back button
+            const backBtn = document.querySelector('[onclick*="backToCategories"]');
+            if (backBtn) {
+                backBtn.onclick = function(e) {
+                    e.preventDefault();
+                    if (typeof backToCategories === 'function') {
+                        backToCategories();
+                    }
+                };
+            }
+            
+            console.log('Enhanced event handlers setup complete');
         }, 1000);
     </script>
 </body>

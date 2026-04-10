@@ -12,77 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-green': '#4CAF50',
-                        'primary-green-dark': '#388E3C',
-                        'primary-green-light': '#81C784',
-                        'primary-orange': '#FF9800',
-                        'primary-orange-dark': '#F57C00',
-                        'primary-orange-light': '#FFB74D',
-                        'primary-pink': '#E91E63',
-                        'primary-purple': '#9C27B0',
-                        'primary-blue': '#2196F3',
-                        'primary-red': '#F44336'
-                    },
-                    fontFamily: {
-                        'fredoka': ['Fredoka', 'sans-serif'],
-                        'nunito': ['Nunito', 'sans-serif']
-                    },
-                    animation: {
-                        'float-particle': 'floatParticle 15s infinite ease-in-out',
-                        'icon-bounce': 'iconBounce 2s ease infinite',
-                        'modal-slide-up': 'modalSlideUp 0.4s ease',
-                        'char-wave': 'charWave 1s ease infinite',
-                        'guide-accordion': 'guideAccordion 0.4s ease',
-                        'plant-card-entrance': 'plantCardEntrance 0.5s ease forwards',
-                        'category-btn-active': 'categoryBtnActive 0.3s ease',
-                        'step-item-hover': 'stepItemHover 0.3s ease'
-                    },
-                    keyframes: {
-                        floatParticle: {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '33%': { transform: 'translateY(-20px) rotate(120deg)' },
-                            '66%': { transform: 'translateY(10px) rotate(240deg)' }
-                        },
-                        iconBounce: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-8px)' }
-                        },
-                        modalSlideUp: {
-                            'from': { opacity: '0', transform: 'translateY(50px)' },
-                            'to': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        charWave: {
-                            '0%, 100%': { transform: 'rotate(-5deg)' },
-                            '50%': { transform: 'rotate(5deg)' }
-                        },
-                        guideAccordion: {
-                            'from': { maxHeight: '0', padding: '0' },
-                            'to': { maxHeight: '2000px', padding: '16px' }
-                        },
-                        plantCardEntrance: {
-                            'from': { opacity: '0', transform: 'translateY(30px) scale(0.9)' },
-                            'to': { opacity: '1', transform: 'translateY(0) scale(1)' }
-                        },
-                        categoryBtnActive: {
-                            '0%': { boxShadow: '0 0 0 3px white, 0 0 0 5px currentColor' },
-                            '100%': { boxShadow: '0 0 0 3px white, 0 0 0 5px currentColor' }
-                        },
-                        stepItemHover: {
-                            'from': { transform: 'translateX(0)' },
-                            'to': { transform: 'translateX(5px)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Custom CSS (Production-ready) -->
+    <link rel="stylesheet" href="css/tailwind-custom.css">
     
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/animations.css">

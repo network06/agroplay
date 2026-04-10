@@ -483,25 +483,23 @@ function startGrowthSimulation() {
 // ==================== SHOP FUNCTIONS ====================
 function showShop() {
     const shopHTML = `
-        <div class="shop-modal">
-            <h3 class="text-xl font-bold mb-4">?? Toko Pertanian</h3>
-            
-            <div class="flex flex-wrap gap-2 mb-4">
-                <button onclick="filterShop('seeds')" class="shop-filter-btn active">
+        <div class="shop-container">
+            <div class="shop-filters">
+                <button class="shop-filter-btn active" onclick="filterShop('seeds')">
                     ?? Bibit
                 </button>
-                <button onclick="filterShop('fertilizers')" class="shop-filter-btn">
+                <button class="shop-filter-btn" onclick="filterShop('fertilizers')">
                     ?? Pupuk
                 </button>
-                <button onclick="filterShop('tools')" class="shop-filter-btn">
+                <button class="shop-filter-btn" onclick="filterShop('tools')">
                     ?? Alat
                 </button>
-                <button onclick="filterShop('upgrades')" class="shop-filter-btn">
+                <button class="shop-filter-btn" onclick="filterShop('upgrades')">
                     ?? Upgrade
                 </button>
             </div>
             
-            <div id="shop-items-grid" class="grid grid-cols-2 gap-3 max-h-96 overflow-y-auto">
+            <div id="shop-items-grid" class="shop-grid">
                 <!-- Items will be rendered here -->
             </div>
         </div>
@@ -521,12 +519,14 @@ function renderShopItems(category = 'seeds') {
         const canAfford = gameState.coins >= item.price;
         
         return `
-            <div class="shop-item ${canAfford ? 'affordable' : 'expensive'}" onclick="buyItem('${item.id}', '${category}')">
+            <div class="shop-item" onclick="buyItem('${item.id}', '${category}')">
                 <div class="shop-item-icon">${item.icon}</div>
                 <div class="shop-item-name">${item.name}</div>
                 <div class="shop-item-price">${formatNumber(item.price)} coins</div>
-                ${item.description ? `<div class="shop-item-desc">${item.description}</div>` : ''}
-                ${!canAfford ? '<div class="shop-item-warning">?? Coins tidak cukup</div>' : ''}
+                <div class="shop-item-description">${item.description || 'Item berkualitas tinggi'}</div>
+                <button class="shop-item-btn" ${!canAfford ? 'disabled' : ''}>
+                    ${canAfford ? '🛒 Beli' : '💰 Kurang'}
+                </button>
             </div>
         `;
     }).join('');
@@ -537,7 +537,9 @@ function filterShop(category) {
     document.querySelectorAll('.shop-filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    event.target.classList.add('active');
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
     
     renderShopItems(category);
 }
@@ -1065,9 +1067,11 @@ function startPeriodicUpdates() {
     
     // Check growth every 5 seconds
     setInterval(() => {
-        const hasActivePlants = sessionState.plots.some(plot => plot && plot.progress < 100);
-        if (hasActivePlots) {
-            renderPlots();
+        if (window.sessionState && window.sessionState.plots) {
+            const hasActivePlants = window.sessionState.plots.some(plot => plot && plot.progress < 100);
+            if (hasActivePlots) {
+                renderPlots();
+            }
         }
     }, 5000);
 }

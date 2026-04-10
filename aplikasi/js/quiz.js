@@ -568,6 +568,7 @@ function goToPlantSelection() {
     
     if (!selectedCategory) {
         console.log('No selected category - returning');
+        showToast('error', 'Pilih kategori terlebih dahulu!');
         return;
     }
     
@@ -587,9 +588,20 @@ function goToPlantSelection() {
     console.log('Rendering plant grid for:', category.plants);
     renderPlantGrid(category.plants);
     
-    // Show plant screen
-    console.log('Showing plant screen');
-    showScreen('plant-screen');
+    // Show plant screen with delay to ensure DOM is ready
+    setTimeout(function() {
+        console.log('Showing plant screen');
+        showScreen('plant-screen');
+        
+        // Force reflow to ensure animation works
+        var plantScreen = document.getElementById('plant-screen');
+        if (plantScreen) {
+            plantScreen.style.display = 'none';
+            plantScreen.offsetHeight; // Force reflow
+            plantScreen.style.display = 'block';
+            plantScreen.classList.add('active');
+        }
+    }, 100);
 }
 
 function backToCategories() {
@@ -734,10 +746,25 @@ function startQuiz() {
 }
 
 function showScreen(screenId) {
+    console.log('showScreen called with:', screenId);
+    
+    // Hide all screens with animation
     document.querySelectorAll('.quiz-screen').forEach(function(screen) {
         screen.classList.remove('active');
+        screen.style.display = 'none';
     });
-    document.getElementById(screenId).classList.add('active');
+    
+    // Show target screen with animation
+    var targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.style.display = 'block';
+        // Force reflow
+        targetScreen.offsetHeight;
+        targetScreen.classList.add('active');
+        console.log('Screen shown:', screenId);
+    } else {
+        console.error('Screen not found:', screenId);
+    }
 }
 
 function displayQuestion() {
