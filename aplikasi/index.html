@@ -156,6 +156,16 @@
             box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
         }
         
+        .header-btn.settings {
+            background: #FF9800;
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+        }
+        
+        .header-btn.settings:hover {
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+        }
+        
         .header-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
@@ -165,19 +175,19 @@
             width: 80px;
             height: 40px;
             border-radius: 20px;
-            background: #4CAF50;
+            background: #2196F3;
             border: none;
             color: white;
             font-family: 'Fredoka', sans-serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
         }
         
         .menu-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
         }
         
         /* Search Bar */
@@ -897,7 +907,7 @@
         <button class="menu-btn">
             Menu
         </button>
-        <button class="header-btn" onclick="openSettings()">
+        <button class="header-btn settings" onclick="openSettings()">
             <i class="fas fa-cog"></i>
         </button>
     </div>
@@ -1001,17 +1011,13 @@
                     </div>
                 </div>
 
-                <!-- Cuan Farming (Featured) -->
-                <div class="enhanced-menu-card orange featured" onclick="navigateTo('cuan-farming.html')">
-                    <div class="featured-badge">
-                        <i class="fas fa-crown"></i>
-                        <span>BARU!</span>
-                    </div>
+                <!-- Cuan Farming -->
+                <div class="enhanced-menu-card orange" onclick="navigateTo('cuan-farming.html')">
                     <div class="card-background">
                         <div class="card-pattern"></div>
                     </div>
                     <div class="card-content">
-                        <div class="menu-logo-wrapper featured-logo">
+                        <div class="menu-logo-wrapper">
                             <img src="assets/cuan_farming.png" alt="Cuan Farming" class="menu-logo">
                         </div>
                         <h3 class="menu-title">Cuan Farming</h3>
@@ -1056,6 +1062,27 @@
     <script src="js/universal-nav.js"></script>
     
     <script>
+        // ==================== AUTHENTICATION CHECK ====================
+        // Check if user is authenticated, if not redirect to login
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for AUTH to be available
+            function checkAuth() {
+                if (typeof AUTH !== 'undefined') {
+                    const user = AUTH.getCurrentUser();
+                    if (!user) {
+                        // User not authenticated, redirect to login
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                } else {
+                    // AUTH not loaded yet, wait and retry
+                    setTimeout(checkAuth, 100);
+                }
+            }
+            
+            checkAuth();
+        });
+        
         // ==================== NAVIGATION FUNCTIONS ====================
         function navigateTo(url) {
             window.location.href = url;
