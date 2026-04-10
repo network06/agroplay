@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Olahan Makanan - Resep dari Hasil Bumi Agroplay">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Olahan Makanan - Agroplay</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/guide.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-food"></div>
+
+    <!-- Header -->
+    <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="header-content">
+            <h1>🍳 Olahan Makanan</h1>
+            <p>Resep dari hasil bumi</p>
+        </div>
+        <button class="search-btn">
+            <i class="fas fa-search"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content">
+        <!-- Info Banner -->
+        <div class="info-banner food-banner">
+            <div class="banner-icon">🥗</div>
+            <div class="banner-text">
+                <h2>Resep Lezat!</h2>
+                <p>Dari bahan alami ke hidangan Nusantara</p>
+            </div>
+        </div>
+
+        <!-- Recipe Categories -->
+        <div class="recipe-categories">
+            <button class="category-btn active" data-category="all" onclick="filterRecipes('all')">
+                <span>🍽️</span> Semua
+            </button>
+            <button class="category-btn" data-category="sayuran" onclick="filterRecipes('sayuran')">
+                <span>🥬</span> Sayuran
+            </button>
+            <button class="category-btn" data-category="buah" onclick="filterRecipes('buah')">
+                <span>🍎</span> Buah
+            </button>
+            <button class="category-btn" data-category="kelas" onclick="filterRecipes('kelas')">
+                <span>📺</span> Video
+            </button>
+        </div>
+
+        <!-- Recipes Grid -->
+        <div class="recipes-grid" id="recipes-grid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
+        <!-- Popular Recipes -->
+        <div class="popular-section">
+            <h3 class="section-title">
+                <i class="fas fa-fire"></i> Resep Populer
+            </h3>
+            <div class="popular-list">
+                <div class="popular-item" onclick="showRecipe('sambal')">
+                    <span class="popular-icon">🌶️</span>
+                    <div class="popular-info">
+                        <h4>Sambal Terasi</h4>
+                        <p>Resep sambal khas Indonesia</p>
+                    </div>
+                    <span class="popular-time">10 menit</span>
+                </div>
+                <div class="popular-item" onclick="showRecipe('getuk')">
+                    <span class="popular-icon">🍠</span>
+                    <div class="popular-info">
+                        <h4>Getuk Singkong</h4>
+                        <p>Kue tradisional singkong</p>
+                    </div>
+                    <span class="popular-time">25 menit</span>
+                </div>
+                <div class="popular-item" onclick="showRecipe('keripik')">
+                    <span class="popular-icon">🥔</span>
+                    <div class="popular-info">
+                        <h4>Keripik Sayuran</h4>
+                        <p>Camilan renyah sehat</p>
+                    </div>
+                    <span class="popular-time">30 menit</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Recipe Modal -->
+    <div class="modal-overlay" id="recipe-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modal-body">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='index.html'">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item" onclick="window.location.href='industri.html'">
+            <div class="nav-icon"><i class="fas fa-industry"></i></div>
+            <span class="nav-label">Industri</span>
+        </button>
+        <button class="nav-item active">
+            <div class="nav-icon"><i class="fas fa-utensils"></i></div>
+            <span class="nav-label">Olahan</span>
+        </button>
+        <button class="nav-item" onclick="window.location.href='profil-simple.html'">
+            <div class="nav-icon"><i class="fas fa-user"></i></div>
+            <span class="nav-label">Profil</span>
+        </button>
+    </nav>
+
+    <script src="js/food.js"></script>
+</body>
+</html>
+
+

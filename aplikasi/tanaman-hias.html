@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tanaman Hias - Koleksi Tanaman Hias Indah Agroplay">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Tanaman Hias - Agroplay</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/guide.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Feature Navigation - Consistent styling */
+        .feature-navigation {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 150;
+        }
+        
+        .nav-link {
+            padding: 10px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.green {
+            background: #E8F5E9;
+            color: #388E3C;
+        }
+        
+        .nav-link.green:hover {
+            background: #C8E6C9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-decoration"></div>
+
+    <!-- Header -->
+    <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="header-content">
+            <h1>Tanaman Hias</h1>
+            <p>Koleksi tanaman hias indah</p>
+        </div>
+        <button class="search-btn">
+            <i class="fas fa-search"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content">
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="tab active" data-category="all" onclick="filterPlants('all')">Semua</button>
+            <button class="tab" data-category="indoor" onclick="filterPlants('indoor')">Indoor</button>
+            <button class="tab" data-category="outdoor" onclick="filterPlants('outdoor')">Outdoor</button>
+            <button class="tab" data-category="flower" onclick="filterPlants('flower')">Bunga</button>
+        </div>
+
+        <!-- Plants Grid -->
+        <div class="plants-grid" id="plants-grid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Plant Detail Modal -->
+    <div class="modal-overlay" id="plant-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modal-body">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='index.html'">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item active">
+            <div class="nav-icon"><i class="fas fa-spa"></i></div>
+            <span class="nav-label">Hias</span>
+        </button>
+        <button class="nav-item" onclick="window.location.href='buku-tanamku.html'">
+            <div class="nav-icon"><i class="fas fa-book"></i></div>
+            <span class="nav-label">Buku</span>
+        </button>
+        <button class="nav-item" onclick="window.location.href='profil-simple.html'">
+            <div class="nav-icon"><i class="fas fa-user"></i></div>
+            <span class="nav-label">Profil</span>
+        </button>
+    </nav>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Feature Navigation -->
+    <div class="feature-navigation" style="padding-bottom: 20px;">
+        <a href="kebun-ajaib.html" class="nav-link green">
+            <i class="fas fa-seedling"></i> Kebun Ajaib
+        </a>
+        <a href="tanam-yuk.html" class="nav-link orange">
+            <i class="fas fa-hand-planting"></i> Tanam Yuk
+        </a>
+        <a href="kuis-seru.html" class="nav-link orange">
+            <i class="fas fa-brain"></i> Kuis Seru
+        </a>
+        <a href="cuan-farming.html" class="nav-link orange">
+            <i class="fas fa-coins"></i> Cuan Farming
+        </a>
+    </div>
+
+    <script src="js/ornamental.js"></script>
+</body>
+</html>
+
+

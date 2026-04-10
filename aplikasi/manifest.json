@@ -1,0 +1,114 @@
+{
+  "name": "Agroplay - Belajar Hortikultura Seru",
+  "short_name": "Agroplay",
+  "description": "Aplikasi Edukasi Hortikultura untuk SMP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4CAF50",
+  "theme_color": "#4CAF50",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "id",
+  "categories": ["education", "games", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kebun Ajaib",
+      "short_name": "Kebun",
+      "description": "Mulai petualangan di kebun ajaib",
+      "url": "/kebun-ajaib.html",
+      "icons": [{ "src": "assets/kebun_ajaib.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tanam Yuk!",
+      "short_name": "Tanam",
+      "description": "Belajar menanam dengan seru",
+      "url": "/tanam-yuk.html",
+      "icons": [{ "src": "assets/tanam_yuk.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Kuis Seru Tani",
+      "short_name": "Kuis",
+      "description": "Uji pengetahuan pertanianmu",
+      "url": "/kuis-seru.html",
+      "icons": [{ "src": "assets/kuis_seru_tani.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Buku Tanamku",
+      "short_name": "Buku",
+      "description": "Panduan lengkap bertanam",
+      "url": "/buku-tanamku.html",
+      "icons": [{ "src": "assets/buku-tanamku-new.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Cuan Farming",
+      "short_name": "Cuan",
+      "description": "Game pertanian seru",
+      "url": "/cuan-farming.html",
+      "icons": [{ "src": "assets/cuan_farming.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "assets/screenshot2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}

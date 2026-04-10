@@ -1,0 +1,76 @@
+/* Offline mode styles */
+.offline-mode .search-bar {
+    background: #f0f0f0;
+    border: 2px solid #ccc;
+}
+
+.offline-mode .menu-card {
+    opacity: 0.7;
+    position: relative;
+}
+
+.offline-mode .menu-card::after {
+    content: 'Offline';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #FF9800;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.offline-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #FF9800;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1000;
+    display: none;
+}
+
+.offline-mode .offline-banner {
+    display: block;
+}
+
+/* Loading states for offline */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create PWA Icons</title>
+</head>
+<body>
+    <canvas id="canvas" width="512" height="512" style="display:none;"></canvas>
+    <div id="output"></div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const output = document.getElementById('output');
+        
+        // Icon sizes to generate
+        const sizes = [16, 32, 70, 72, 96, 128, 144, 150, 152, 192, 310, 384, 512];
+        
+        // Create icon with green gradient and leaf symbol
+        function createIcon(size) {
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#4CAF50');
+            gradient.addColorStop(1, '#66BB6A');
+            
+            // Draw rounded rectangle background
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.15);
+            ctx.fill();
+            
+            // Draw leaf symbol
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.4}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('A', size * 0.5, size * 0.5);
+            
+            // Add small plant icon
+            ctx.font = `${size * 0.2}px Arial`;
+            ctx.fillText(' planting', size * 0.5, size * 0.75);
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        // Generate all icons
+        sizes.forEach(size => {
+            const dataURL = createIcon(size);
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = dataURL;
+            link.textContent = `Download icon-${size}x${size}.png`;
+            link.style.display = 'block';
+            link.style.margin = '5px';
+            output.appendChild(link);
+        });
+        
+        console.log('Icons generated! Right-click to save or click the download links.');
+    </script>
+</body>
+</html>

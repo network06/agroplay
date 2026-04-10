@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Siswa - Agroplay</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366F1;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        .profile-header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile-level {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .profile-xp {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-section {
+            padding: 0 30px 30px;
+        }
+
+        .progress-item {
+            margin-bottom: 20px;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E2E8F0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: rotate(180deg);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading .refresh-btn {
+            animation: spin 1s linear infinite;
+        }
+
+        .loading .stat-value {
+            opacity: 0.5;
+        }
+
+        .loading .progress-fill {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </a>
+
+    <div class="profile-container">
+        <!-- Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">🌱</div>
+            <div class="profile-name" id="profile-name">Loading...</div>
+            <div class="profile-level" id="profile-level">Level 1</div>
+            <div class="profile-xp" id="profile-xp">0 XP</div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🧠</div>
+                <div class="stat-value" id="stat-quizzes">0</div>
+                <div class="stat-label">Kuis Selesai</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value" id="stat-score">0</div>
+                <div class="stat-label">Total Skor</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-value" id="stat-streak">0</div>
+                <div class="stat-label">Hari Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌱</div>
+                <div class="stat-value" id="stat-plants">0</div>
+                <div class="stat-label">Tanaman</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-value" id="stat-books">0</div>
+                <div class="stat-label">Buku Dibaca</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-value" id="stat-games">0</div>
+                <div class="stat-label">Game Dimainkan</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-value" id="stat-achievements">0</div>
+                <div class="stat-label">Achievements</div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Progress XP</span>
+                    <span id="xp-progress-text">0/100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="xp-progress"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Progress Kuis</span>
+                    <span id="quiz-progress-text">0/50</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quiz-progress"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label">
+                    <span>Progress Bertani</span>
+                    <span id="plant-progress-text">0/100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="plant-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="refreshSimpleProfile()">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/realtime.js"></script>
+    <script src="js/profile-simple.js"></script>
+</body>
+</html>

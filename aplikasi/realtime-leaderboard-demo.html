@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Leaderboard Demo - Agroplay</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #2196F3; margin-bottom: 10px; }
+        .demo-section { margin: 30px 0; padding: 20px; border: 2px solid #e0e0e0; border-radius: 10px; }
+        .demo-section h3 { color: #2196F3; margin-bottom: 15px; }
+        .btn { padding: 12px 24px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; background: #4CAF50; color: white; font-weight: 600; transition: all 0.3s; }
+        .btn:hover { background: #45a049; transform: translateY(-2px); }
+        .btn.secondary { background: #2196F3; }
+        .btn.secondary:hover { background: #1976D2; }
+        .btn.warning { background: #FF9800; }
+        .btn.warning:hover { background: #F57C00; }
+        .btn.danger { background: #F44336; }
+        .btn.danger:hover { background: #D32F2F; }
+        .leaderboard-container { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; max-height: 400px; overflow-y: auto; }
+        .leaderboard-row { display: flex; align-items: center; gap: 15px; padding: 15px; margin-bottom: 10px; border-radius: 12px; transition: all 0.3s ease; }
+        .leaderboard-row.current-user { border: 2px solid #4CAF50; background: rgba(76,175,80,0.1); }
+        .rank { font-size: 20px; font-weight: bold; width: 40px; text-align: center; }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 600; color: #333; margin-bottom: 5px; }
+        .user-details { font-size: 12px; color: #666; }
+        .score-info { text-align: right; }
+        .holistic-score { font-weight: bold; color: #2196F3; font-size: 18px; margin-bottom: 5px; }
+        .xp-info { font-size: 11px; color: #666; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #4CAF50; }
+        .stat-label { color: #666; margin-top: 5px; }
+        .notification { position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: slideInRight 0.5s ease; z-index: 1000; }
+        .notification.ranking-down { background: #FF9800; }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+        .leaderboard-update { animation: slideInRight 0.5s ease; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Real-Time Leaderboard Demo</h1>
+            <p>Sistem leaderboard yang otomatis update saat XP berubah</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="current-xp">0</div>
+                <div class="stat-label">Current XP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="current-rank">#-</div>
+                <div class="stat-label">Your Rank</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-users">0</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="updates-count">0</div>
+                <div class="stat-label">Updates</div>
+            </div>
+        </div>
+
+        <!-- Real-Time Leaderboard -->
+        <div class="demo-section">
+            <h3>🏆 Real-Time Leaderboard</h3>
+            <div id="leaderboard-container" class="leaderboard-container">
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    🏆 Loading leaderboard...
+                </div>
+            </div>
+        </div>
+
+        <!-- XP Simulation Controls -->
+        <div class="demo-section">
+            <h3>🎮 XP Simulation Controls</h3>
+            <p>Test real-time updates dengan menambah XP:</p>
+            <button class="btn" onclick="addXP(25)">+25 XP (Baca Materi)</button>
+            <button class="btn" onclick="addXP(50)">+50 XP (Selesai Kuis)</button>
+            <button class="btn" onclick="addXP(100)">+100 XP (Achievement)</button>
+            <button class="btn secondary" onclick="addXP(500)">+500 XP (Bonus)</button>
+            <button class="btn warning" onclick="simulateCompetition()">🏆 Simulate Competition</button>
+            <button class="btn danger" onclick="resetDemo()">🔄 Reset Demo</button>
+        </div>
+
+        <!-- Auto Simulation -->
+        <div class="demo-section">
+            <h3>🤖 Auto Simulation</h3>
+            <button class="btn secondary" onclick="startAutoSimulation()">▶️ Start Auto Simulation</button>
+            <button class="btn warning" onclick="stopAutoSimulation()">⏸️ Stop Auto Simulation</button>
+            <p id="sim-status">Auto simulation: OFF</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="demo-section">
+            <h3>🔗 Navigation</h3>
+            <button class="btn secondary" onclick="window.open('index.html', '_blank')">🏠 Buka Home Page</button>
+            <button class="btn secondary" onclick="window.open('profil-simple.html', '_blank')">👤 Buka Profil</button>
+            <button class="btn secondary" onclick="window.open('debug-xp-tracking.html', '_blank')">🐛 Debug XP</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/realtime.js"></script>
+    <script>
+        let updateCount = 0;
+        let autoSimulationInterval = null;
+        let lastUserRank = null;
+
+        function showNotification(message, isPositive = true) {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${isPositive ? '' : 'ranking-down'}`;
+            notification.innerHTML = `
+                <strong>${isPositive ? '🎉' : '📊'} ${message}</strong>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        function updateStats() {
+            if (typeof REALTIME !== 'undefined') {
+                const userData = REALTIME.getCurrentUserData();
+                if (userData) {
+                    document.getElementById('current-xp').textContent = userData.xp || 0;
+                    
+                    // Update rank
+                    const leaderboard = getLeaderboard();
+                    const currentRank = leaderboard.findIndex(user => user.email === userData.email) + 1;
+                    document.getElementById('current-rank').textContent = currentRank > 0 ? `#${currentRank}` : '#-';
+                    
+                    // Check ranking change
+                    if (lastUserRank !== null && lastUserRank !== currentRank && currentRank > 0) {
+                        const rankChange = lastUserRank - currentRank;
+                        const message = rankChange > 0 
+                            ? `Naik peringkat! #${currentRank} (+${rankChange})` 
+                            : `Turun peringkat #${currentRank} (${rankChange})`;
+                        
+                        showNotification(message, rankChange > 0);
+                        console.log(`🏆 Ranking changed: #${lastUserRank} → #${currentRank}`);
+                    }
+                    lastUserRank = currentRank > 0 ? currentRank : null;
+                    
+                    document.getElementById('total-users').textContent = leaderboard.length;
+                }
+            }
+            document.getElementById('updates-count').textContent = updateCount;
+        }
+
+        function getLeaderboard() {
+            if (typeof REALTIME !== 'undefined' && typeof REALTIME.getAllUsersData === 'function') {
+                const allData = REALTIME.getAllUsersData();
+                const leaderboard = [];
+                
+                Object.keys(allData).forEach(userId => {
+                    const user = allData[userId];
+                    if (user.email && user.email !== 'admin@test.com') {
+                        const xpScore = user.xp || 0;
+                        const levelBonus = (user.level || 1) * 50;
+                        const quizScore = (user.stats?.totalScore || 0) * 0.1;
+                        const streakBonus = (user.streak || 0) * 10;
+                        const achievementBonus = (user.achievements || []).length * 25;
+                        
+                        const holisticScore = xpScore + levelBonus + quizScore + streakBonus + achievementBonus;
+                        
+                        leaderboard.push({
+                            email: user.email,
+                            name: user.name || 'Siswa',
+                            holisticScore: Math.round(holisticScore),
+                            xp: user.xp || 0,
+                            level: user.level || 1,
+                            streak: user.streak || 0
+                        });
+                    }
+                });
+                
+                leaderboard.sort((a, b) => b.holisticScore - a.holisticScore);
+                return leaderboard;
+            }
+            return [];
+        }
+
+        function loadLeaderboard(animated = false) {
+            const container = document.getElementById('leaderboard-container');
+            const leaderboard = getLeaderboard();
+            
+            if (leaderboard.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">🏆 Belum ada data siswa</div>';
+                return;
+            }
+            
+            const currentUser = typeof AUTH !== 'undefined' ? AUTH.getCurrentUser() : null;
+            const currentUserEmail = currentUser ? currentUser.email : null;
+            
+            let html = '';
+            leaderboard.forEach((user, index) => {
+                const rank = index + 1;
+                const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank + '.';
+                const isCurrentUser = user.email === currentUserEmail;
+                
+                let bgColor = 'background: rgba(255,255,255,0.8);';
+                if (rank === 1) bgColor = 'background: rgba(255,215,0,0.3);';
+                else if (rank === 2) bgColor = 'background: rgba(192,192,192,0.3);';
+                else if (rank === 3) bgColor = 'background: rgba(205,127,50,0.3);';
+                else if (isCurrentUser) bgColor = 'background: rgba(76,175,80,0.3);';
+                
+                const animClass = animated ? 'leaderboard-update' : '';
+                
+                html += `
+                    <div class="leaderboard-row ${animClass} ${isCurrentUser ? 'current-user' : ''}" style="${bgColor}">
+                        <div class="rank">${medal}</div>
+                        <div class="user-info">
+                            <div class="user-name">${user.name} ${isCurrentUser ? '(YOU)' : ''}</div>
+                            <div class="user-details">Lv.${user.level} • ${user.streak}🔥 streak</div>
+                        </div>
+                        <div class="score-info">
+                            <div class="holistic-score">${formatNumber(user.holisticScore)} PTS</div>
+                            <div class="xp-info">XP: ${user.xp}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            updateCount++;
+            updateStats();
+            
+            console.log(`🏆 Demo leaderboard updated: ${leaderboard.length} users`);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+            if (num >= 1e3) return (num / 1e3).toFixed(0) + 'K';
+            return num.toLocaleString();
+        }
+
+        function addXP(amount) {
+            if (typeof REALTIME !== 'undefined') {
+                const result = REALTIME.addXP(amount, `Demo: +${amount} XP`);
+                console.log(`✅ Added ${amount} XP:`, result);
+                
+                // Trigger leaderboard update
+                setTimeout(() => {
+                    loadLeaderboard(true);
+                }, 100);
+                
+                showNotification(`+${amount} XP earned!`, true);
+            }
+        }
+
+        function simulateCompetition() {
+            console.log('🏆 Starting competition simulation...');
+            
+            // Simulate other users getting XP
+            if (typeof REALTIME !== 'undefined') {
+                const allData = REALTIME.getAllUsersData();
+                const currentUser = AUTH.getCurrentUser();
+                
+                Object.keys(allData).forEach(userId => {
+                    const user = allData[userId];
+                    if (user.email && user.email !== currentUser.email && user.email !== 'admin@test.com') {
+                        // Random XP for other users
+                        const randomXP = Math.floor(Math.random() * 100) + 50;
+                        allData[userId].xp = (allData[userId].xp || 0) + randomXP;
+                    }
+                });
+                
+                REALTIME.saveAllUsersData(allData);
+                
+                setTimeout(() => {
+                    loadLeaderboard(true);
+                    showNotification('🏆 Competition update! Other users gained XP!', false);
+                }, 100);
+            }
+        }
+
+        function startAutoSimulation() {
+            if (autoSimulationInterval) return;
+            
+            document.getElementById('sim-status').textContent = 'Auto simulation: RUNNING';
+            console.log('🤖 Starting auto simulation...');
+            
+            autoSimulationInterval = setInterval(() => {
+                // Random XP for current user
+                const randomXP = Math.floor(Math.random() * 30) + 10;
+                addXP(randomXP);
+                
+                // Occasionally simulate competition
+                if (Math.random() < 0.3) {
+                    setTimeout(() => simulateCompetition(), 500);
+                }
+            }, 2000);
+        }
+
+        function stopAutoSimulation() {
+            if (autoSimulationInterval) {
+                clearInterval(autoSimulationInterval);
+                autoSimulationInterval = null;
+                document.getElementById('sim-status').textContent = 'Auto simulation: STOPPED';
+                console.log('⏸️ Auto simulation stopped');
+            }
+        }
+
+        function resetDemo() {
+            if (confirm('Reset semua data demo?')) {
+                localStorage.removeItem('agroplay_all_users_data');
+                location.reload();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏆 Real-Time Leaderboard Demo loaded');
+            
+            if (typeof AUTH !== 'undefined') {
+                const user = AUTH.getCurrentUser();
+                if (user) {
+                    console.log('✅ User authenticated:', user.email);
+                    
+                    // Initial load
+                    loadLeaderboard();
+                    
+                    // Setup real-time listeners
+                    if (typeof REALTIME !== 'undefined') {
+                        const originalAddXP = REALTIME.addXP;
+                        REALTIME.addXP = function(amount, source) {
+                            const result = originalAddXP.call(this, amount, source);
+                            setTimeout(() => loadLeaderboard(true), 100);
+                            return result;
+                        };
+                        
+                        console.log('👂 Real-time listeners installed');
+                    }
+                    
+                    // Auto refresh every 3 seconds
+                    setInterval(() => loadLeaderboard(), 3000);
+                    
+                } else {
+                    console.warn('⚠️ No user authenticated');
+                    setTimeout(() => window.location.href = 'login.html', 2000);
+                }
+            } else {
+                console.error('❌ AUTH not available');
+            }
+        });
+    </script>
+</body>
+</html>

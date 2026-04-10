@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agroplay - Aplikasi Edukasi Hortikultura untuk SMP">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Agroplay">
+    <meta name="application-name" content="Agroplay">
+    <meta name="msapplication-TileColor" content="#4CAF50">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="/assets/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="/assets/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/assets/icon-512x512.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <title>Agroplay - Belajar Hortikultura Seru!</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'fredoka': ['Fredoka', 'sans-serif'],
+                        'nunito': ['Nunito', 'sans-serif']
+                    },
+                    colors: {
+                        'primary-green': '#4CAF50',
+                        'primary-orange': '#FF9800',
+                        'sky-blue': '#87CEEB'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="offline.css">
+    
+    <style>
+        /* Mobile First Design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #B4E7CE 60%, #4CAF50 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Clouds */
+        .clouds-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            opacity: 0.8;
+        }
+        
+        .cloud1 {
+            width: 80px;
+            height: 30px;
+            top: 20px;
+            left: 20px;
+            animation: float 20s infinite;
+        }
+        
+        .cloud2 {
+            width: 100px;
+            height: 35px;
+            top: 60px;
+            right: 30px;
+            animation: float 25s infinite reverse;
+        }
+        
+        .cloud3 {
+            width: 70px;
+            height: 25px;
+            top: 100px;
+            left: 50%;
+            animation: float 30s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(-10px) translateY(5px); }
+            75% { transform: translateX(15px) translateY(-5px); }
+        }
+        
+        /* Header Styles */
+        .header-container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #4CAF50;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        .header-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .menu-btn {
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        .menu-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            z-index: 10;
+            padding: 0 20px 30px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            height: 50px;
+            background: white;
+            border-radius: 25px;
+            border: none;
+            padding: 0 20px 0 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+        
+        /* Main Content */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            padding: 0 20px 120px;
+        }
+        
+                
+                
+                
+        /* Enhanced Main Menu Section Styles */
+        .main-menu-section {
+            padding: 30px 0 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .menu-section-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        
+        .menu-section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .menu-section-title i {
+            color: #FFD700;
+            font-size: 20px;
+            animation: sparkle 2s infinite;
+        }
+        
+        .menu-section-subtitle {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+        
+        /* Enhanced Menu Grid */
+        .enhanced-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        /* Enhanced Menu Cards */
+        .enhanced-menu-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            min-height: 160px;
+        }
+        
+        .enhanced-menu-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .enhanced-menu-card.featured {
+            grid-column: span 2;
+            max-width: 400px;
+            margin: 0 auto;
+            min-height: 180px;
+        }
+        
+        /* Card Background */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        
+        .enhanced-menu-card.green .card-background {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+        }
+        
+        .enhanced-menu-card.orange .card-background {
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Menu Logo Wrapper - Replaces Icon Wrapper */
+        .menu-logo-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .enhanced-menu-card.featured .menu-logo-wrapper {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            border: 4px solid rgba(255, 215, 0, 0.6);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .enhanced-menu-card.featured .menu-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Fallback for icons if logo fails to load */
+        .menu-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none; /* Hidden by default, shown if logo fails */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .enhanced-menu-card.featured .menu-icon-wrapper {
+            width: 70px;
+            height: 70px;
+        }
+        
+        .menu-icon {
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .enhanced-menu-card.featured .menu-icon {
+            font-size: 32px;
+        }
+        
+        .menu-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .enhanced-menu-card.featured .menu-title {
+            font-size: 20px;
+        }
+        
+        .menu-description {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        /* Featured Badge */
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 3;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+            animation: bounce 2s infinite;
+        }
+        
+        .featured-badge i {
+            font-size: 10px;
+        }
+        
+        /* Card Decorations */
+        .card-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .decoration-item {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        /* Leaf decorations */
+        .leaf1 {
+            width: 20px;
+            height: 20px;
+            top: 20px;
+            left: 20px;
+            border-radius: 0 50% 0 50%;
+            transform: rotate(45deg);
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .leaf2 {
+            width: 15px;
+            height: 15px;
+            top: 30px;
+            right: 25px;
+            border-radius: 50% 0 50% 0;
+            transform: rotate(-45deg);
+            animation: float 3s infinite ease-in-out reverse;
+        }
+        
+        .leaf3 {
+            width: 18px;
+            height: 18px;
+            bottom: 25px;
+            left: 30px;
+            border-radius: 0 50% 0 50%;
+            transform: rotate(90deg);
+            animation: float 3s infinite ease-in-out 1s;
+        }
+        
+        /* Spark decorations */
+        .spark1, .spark2, .spark3 {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        .spark1 {
+            top: 25px;
+            left: 25px;
+            animation: sparkle 1.5s infinite;
+        }
+        
+        .spark2 {
+            top: 20px;
+            right: 30px;
+            animation: sparkle 1.5s infinite 0.5s;
+        }
+        
+        .spark3 {
+            bottom: 30px;
+            left: 35px;
+            animation: sparkle 1.5s infinite 1s;
+        }
+        
+        /* Star decorations */
+        .star1, .star2, .star3 {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.4);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        
+        .star1 {
+            top: 20px;
+            left: 20px;
+            animation: rotate 3s infinite linear;
+        }
+        
+        .star2 {
+            top: 30px;
+            right: 25px;
+            animation: rotate 3s infinite linear reverse;
+        }
+        
+        .star3 {
+            bottom: 25px;
+            left: 30px;
+            animation: rotate 3s infinite linear 1s;
+        }
+        
+        /* Page decorations */
+        .page1, .page2, .page3 {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+        
+        .page1 {
+            width: 25px;
+            height: 30px;
+            top: 20px;
+            left: 20px;
+            transform: rotate(-5deg);
+        }
+        
+        .page2 {
+            width: 20px;
+            height: 25px;
+            top: 25px;
+            right: 25px;
+            transform: rotate(3deg);
+        }
+        
+        .page3 {
+            width: 22px;
+            height: 28px;
+            bottom: 20px;
+            left: 30px;
+            transform: rotate(-2deg);
+        }
+        
+        /* Coin decorations */
+        .coin1, .coin2, .coin3, .coin4 {
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 215, 0, 0.6);
+            border: 2px solid rgba(255, 215, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 8px;
+            font-weight: bold;
+            color: #FF9800;
+        }
+        
+        .coin1 {
+            top: 25px;
+            left: 25px;
+            animation: bounce 2s infinite;
+        }
+        
+        .coin2 {
+            top: 20px;
+            right: 30px;
+            animation: bounce 2s infinite 0.5s;
+        }
+        
+        .coin3 {
+            bottom: 30px;
+            left: 35px;
+            animation: bounce 2s infinite 1s;
+        }
+        
+        .coin4 {
+            bottom: 25px;
+            right: 25px;
+            animation: bounce 2s infinite 1.5s;
+        }
+        
+        /* Animations */
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0.3; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.2);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { 
+                transform: translateY(0); 
+            }
+            50% { 
+                transform: translateY(-10px); 
+            }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(45deg); 
+            }
+            50% { 
+                transform: translateY(-5px) rotate(45deg); 
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Design for Enhanced Menu */
+        @media (max-width: 380px) {
+            .enhanced-menu-grid {
+                gap: 15px;
+                padding: 0 15px;
+            }
+            
+            .enhanced-menu-card {
+                min-height: 140px;
+            }
+            
+            .menu-section-title {
+                font-size: 20px;
+            }
+            
+            .menu-title {
+                font-size: 16px;
+            }
+            
+            .menu-description {
+                font-size: 12px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 70px;
+                height: 70px;
+                border-radius: 12px;
+            }
+            
+            .enhanced-menu-card.featured .menu-logo-wrapper {
+                width: 80px;
+                height: 80px;
+                border-radius: 16px;
+            }
+            
+            .menu-icon-wrapper {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .menu-icon {
+                font-size: 24px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .enhanced-menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 900px;
+                margin: 0 auto;
+                gap: 25px;
+                padding: 0 20px;
+            }
+            
+            .enhanced-menu-card {
+                min-height: 180px;
+            }
+            
+            .enhanced-menu-card.featured {
+                grid-column: span 1;
+                min-height: 200px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 90px;
+                height: 90px;
+                border-radius: 18px;
+            }
+            
+            .enhanced-menu-card.featured .menu-logo-wrapper {
+                width: 100px;
+                height: 100px;
+                border-radius: 22px;
+            }
+            
+            .menu-title {
+                font-size: 20px;
+            }
+            
+            .menu-description {
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .enhanced-menu-grid {
+                max-width: 1000px;
+                gap: 30px;
+            }
+            
+            .enhanced-menu-card {
+                min-height: 200px;
+            }
+            
+            .enhanced-menu-card.featured {
+                min-height: 220px;
+            }
+        }
+        
+        /* Prevent overlapping and ensure clean layout */
+        .main-container {
+            position: relative;
+            z-index: 5;
+            padding-bottom: 120px; /* Extra space for bottom nav */
+            padding-top: 20px;
+        }
+        
+        .enhanced-menu-card {
+            position: relative;
+            z-index: 10;
+            overflow: hidden; /* Prevent content overflow */
+        }
+        
+        /* Ensure proper stacking context */
+        .card-decoration {
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .card-content {
+            z-index: 2;
+        }
+        
+        .menu-logo-wrapper {
+            z-index: 3;
+        }
+        
+        .featured-badge {
+            z-index: 4;
+        }
+        
+        /* Logo loading states */
+        .menu-logo {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .menu-logo.loaded {
+            opacity: 1;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #4CAF50;
+            border-radius: 25px 25px 0 0;
+            padding: 15px 20px 25px;
+            z-index: 20;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .nav-item span {
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .nav-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #FF5722;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Banner -->
+    <div class="offline-banner">
+        <i class="fas fa-wifi"></i> Kamu sedang offline - Aplikasi tetap bisa digunakan!
+    </div>
+    
+    <!-- Animated Clouds Background -->
+    <div class="clouds-container">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="header-container">
+        <button class="header-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <button class="menu-btn">
+            Menu
+        </button>
+        <button class="header-btn" onclick="openSettings()">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div style="position: relative;">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-bar" placeholder="Apa yang kamu cari?">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Special Section for 5 Main Menu -->
+        <section class="main-menu-section">
+            <!-- Section Header -->
+            <div class="menu-section-header">
+                <h2 class="menu-section-title">
+                    <i class="fas fa-star"></i>
+                    Menu Utama Agroplay
+                </h2>
+                <p class="menu-section-subtitle">Pilih petualangan pertanianmu</p>
+            </div>
+
+            <!-- Enhanced Menu Grid -->
+            <div class="enhanced-menu-grid">
+                <!-- Kebun Ajaib -->
+                <div class="enhanced-menu-card green" onclick="navigateTo('kebun-ajaib.html')">
+                    <div class="card-background">
+                        <div class="card-pattern"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/kebun_ajaib.png" alt="Kebun Ajaib" class="menu-logo">
+                        </div>
+                        <h3 class="menu-title">Kebun Ajaib</h3>
+                        <p class="menu-description">Main game menanam sayuran!</p>
+                    </div>
+                    <div class="card-decoration">
+                        <div class="decoration-item leaf1"></div>
+                        <div class="decoration-item leaf2"></div>
+                        <div class="decoration-item leaf3"></div>
+                    </div>
+                </div>
+
+                <!-- Tanam Yuk! -->
+                <div class="enhanced-menu-card orange" onclick="navigateTo('tanam-yuk.html')">
+                    <div class="card-background">
+                        <div class="card-pattern"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/tanam_yuk.png" alt="Tanam Yuk" class="menu-logo">
+                        </div>
+                        <h3 class="menu-title">Tanam Yuk!</h3>
+                        <p class="menu-description">Mari menanam bersama!</p>
+                    </div>
+                    <div class="card-decoration">
+                        <div class="decoration-item spark1"></div>
+                        <div class="decoration-item spark2"></div>
+                        <div class="decoration-item spark3"></div>
+                    </div>
+                </div>
+
+                <!-- Kuis Seru Tani -->
+                <div class="enhanced-menu-card orange" onclick="navigateTo('kuis-seru.html')">
+                    <div class="card-background">
+                        <div class="card-pattern"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/kuis_seru_tani.png" alt="Kuis Seru Tani" class="menu-logo">
+                        </div>
+                        <h3 class="menu-title">Kuis Seru Tani</h3>
+                        <p class="menu-description">Tes pengetahuanmu!</p>
+                    </div>
+                    <div class="card-decoration">
+                        <div class="decoration-item star1"></div>
+                        <div class="decoration-item star2"></div>
+                        <div class="decoration-item star3"></div>
+                    </div>
+                </div>
+
+                <!-- Buku Tanamku -->
+                <div class="enhanced-menu-card green" onclick="navigateTo('buku-tanamku.html')">
+                    <div class="card-background">
+                        <div class="card-pattern"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku-new.png" alt="Buku Tanamku" class="menu-logo">
+                        </div>
+                        <h3 class="menu-title">Buku Tanamku</h3>
+                        <p class="menu-description">Panduan menanam sayuran</p>
+                    </div>
+                    <div class="card-decoration">
+                        <div class="decoration-item page1"></div>
+                        <div class="decoration-item page2"></div>
+                        <div class="decoration-item page3"></div>
+                    </div>
+                </div>
+
+                <!-- Cuan Farming (Featured) -->
+                <div class="enhanced-menu-card orange featured" onclick="navigateTo('cuan-farming.html')">
+                    <div class="featured-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>BARU!</span>
+                    </div>
+                    <div class="card-background">
+                        <div class="card-pattern"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper featured-logo">
+                            <img src="assets/cuan_farming.png" alt="Cuan Farming" class="menu-logo">
+                        </div>
+                        <h3 class="menu-title">Cuan Farming</h3>
+                        <p class="menu-description">Farm virtual yang seru!</p>
+                    </div>
+                    <div class="card-decoration">
+                        <div class="decoration-item coin1"></div>
+                        <div class="decoration-item coin2"></div>
+                        <div class="decoration-item coin3"></div>
+                        <div class="decoration-item coin4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="navigateTo('index.html')">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </button>
+        <button class="nav-item" onclick="openSearch()">
+            <i class="fas fa-search"></i>
+            <span>Cari</span>
+        </button>
+        <button class="nav-item" onclick="openNotifications()">
+            <i class="fas fa-bell"></i>
+            <span>Notifikasi</span>
+            <span class="nav-badge">3</span>
+        </button>
+        <button class="nav-item" onclick="navigateTo('profil-simple.html')">
+            <i class="fas fa-user"></i>
+            <span>Profil Saya</span>
+        </button>
+    </nav>
+
+    
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/role-nav.js"></script>
+    <script src="js/universal-nav.js"></script>
+    
+    <script>
+        // ==================== NAVIGATION FUNCTIONS ====================
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+        
+        function openSettings() {
+            showToast('Pengaturan akan segera hadir!', 'info');
+        }
+        
+        function openSearch() {
+            document.querySelector('.search-bar').focus();
+        }
+        
+        function openNotifications() {
+            showToast('Notifikasi akan segera hadir!', 'info');
+        }
+        
+        // ==================== SEARCH FUNCTIONALITY ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-bar');
+            
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                if (query.length > 2) {
+                    // Implement search functionality here
+                    console.log('Searching for:', query);
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const query = e.target.value;
+                    if (query.trim()) {
+                        showToast(`Mencari: ${query}`, 'info');
+                    }
+                }
+            });
+        });
+        
+        // ==================== BOTTOM NAVIGATION ====================
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all bottom nav items
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(nav => nav.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+            });
+        });
+        
+        // ==================== TOAST NOTIFICATION ====================
+        function showToast(message, type = 'info') {
+            // Create toast container if it doesn't exist
+            let toastContainer = document.getElementById('toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'toast-container';
+                toastContainer.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 9999;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(toastContainer);
+            }
+            
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                background: ${type === 'info' ? '#4CAF50' : '#FF9800'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 25px;
+                margin-bottom: 10px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                font-family: 'Nunito', sans-serif;
+                font-size: 14px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                pointer-events: auto;
+            `;
+            toast.textContent = message;
+            
+            toastContainer.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // ==================== LOGO LOADING AND ERROR HANDLING ====================
+        document.querySelectorAll('.menu-logo').forEach(logo => {
+            // Handle logo loading
+            logo.addEventListener('load', function() {
+                this.style.opacity = '1';
+                
+                // Hide fallback icon if logo loads successfully
+                const card = this.closest('.enhanced-menu-card');
+                const iconWrapper = card.querySelector('.menu-icon-wrapper');
+                if (iconWrapper) {
+                    iconWrapper.style.display = 'none';
+                }
+            });
+            
+            // Handle logo loading error
+            logo.addEventListener('error', function() {
+                console.warn('Logo failed to load:', this.src);
+                
+                // Show fallback icon
+                const card = this.closest('.enhanced-menu-card');
+                const logoWrapper = card.querySelector('.menu-logo-wrapper');
+                const iconWrapper = card.querySelector('.menu-icon-wrapper');
+                
+                if (logoWrapper) {
+                    logoWrapper.style.display = 'none';
+                }
+                
+                if (iconWrapper) {
+                    iconWrapper.style.display = 'flex';
+                }
+                
+                // Add error styling
+                this.style.display = 'none';
+            });
+            
+            // Preload logo
+            const img = new Image();
+            img.src = logo.src;
+        });
+
+        // ==================== ENHANCED MENU CARD INTERACTIONS ====================
+        document.querySelectorAll('.enhanced-menu-card').forEach(card => {
+            // Add entrance animation
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            
+            // Staggered entrance animation
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, Array.from(document.querySelectorAll('.enhanced-menu-card')).indexOf(card) * 150);
+            
+            // Enhanced hover effects
+            card.addEventListener('mouseenter', function() {
+                // Add glow effect
+                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.2)';
+                
+                // Animate decorations
+                const decorations = this.querySelectorAll('.decoration-item');
+                decorations.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.transform = 'scale(1.2)';
+                        item.style.opacity = '1';
+                    }, index * 100);
+                });
+                
+                // Animate logo wrapper
+                const logoWrapper = this.querySelector('.menu-logo-wrapper');
+                if (logoWrapper) {
+                    logoWrapper.style.transform = 'scale(1.1) rotate(3deg)';
+                    logoWrapper.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.25)';
+                    
+                    // Special effect for featured card
+                    if (this.classList.contains('featured')) {
+                        logoWrapper.style.borderColor = 'rgba(255, 215, 0, 0.8)';
+                        logoWrapper.style.boxShadow = '0 16px 40px rgba(255, 215, 0, 0.3)';
+                    }
+                }
+                
+                // Animate logo image
+                const logo = this.querySelector('.menu-logo');
+                if (logo) {
+                    logo.style.transform = 'scale(1.05)';
+                    logo.style.filter = 'brightness(1.1)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                // Reset glow effect
+                this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+                
+                // Reset decorations
+                const decorations = this.querySelectorAll('.decoration-item');
+                decorations.forEach(item => {
+                    item.style.transform = 'scale(1)';
+                    item.style.opacity = '0.6';
+                });
+                
+                // Reset logo wrapper
+                const logoWrapper = this.querySelector('.menu-logo-wrapper');
+                if (logoWrapper) {
+                    logoWrapper.style.transform = 'scale(1) rotate(0deg)';
+                    logoWrapper.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.15)';
+                    
+                    // Reset featured card special effect
+                    if (this.classList.contains('featured')) {
+                        logoWrapper.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                        logoWrapper.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.2)';
+                    }
+                }
+                
+                // Reset logo image
+                const logo = this.querySelector('.menu-logo');
+                if (logo) {
+                    logo.style.transform = 'scale(1)';
+                    logo.style.filter = 'brightness(1)';
+                }
+            });
+            
+            // Enhanced click interaction
+            card.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                    z-index: 1000;
+                `;
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+                
+                // Add pulse animation to card
+                this.classList.add('pulse');
+                setTimeout(() => {
+                    this.classList.remove('pulse');
+                }, 2000);
+                
+                // Show loading state
+                const cardContent = this.querySelector('.card-content');
+                const originalContent = cardContent.innerHTML;
+                cardContent.innerHTML = `
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+                
+                // Navigate after delay
+                setTimeout(() => {
+                    const url = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    navigateTo(url);
+                }, 500);
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .loading-spinner {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
+            
+            .spinner {
+                width: 40px;
+                height: 40px;
+                border: 4px solid rgba(255, 255, 255, 0.3);
+                border-top: 4px solid white;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+            
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // ==================== MENU SECTION HEADER ANIMATION ====================
+        const menuSectionHeader = document.querySelector('.menu-section-header');
+        if (menuSectionHeader) {
+            menuSectionHeader.style.opacity = '0';
+            menuSectionHeader.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                menuSectionHeader.style.transition = 'all 0.8s ease';
+                menuSectionHeader.style.opacity = '1';
+                menuSectionHeader.style.transform = 'translateY(0)';
+            }, 300);
+        }
+        
+        // ==================== FEATURED BADGE ANIMATION ====================
+        const featuredBadge = document.querySelector('.featured-badge');
+        if (featuredBadge) {
+            setInterval(() => {
+                featuredBadge.style.animation = 'none';
+                setTimeout(() => {
+                    featuredBadge.style.animation = 'bounce 2s infinite';
+                }, 100);
+            }, 10000);
+        }
+        
+                
+        // ==================== SERVICE WORKER REGISTRATION ====================
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', function() {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', function() {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available, show update notification
+                                    if (confirm('Versi baru Agroplay tersedia! Muat ulang sekarang?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
+        // ==================== OFFLINE STATUS HANDLING ====================
+        window.addEventListener('online', function() {
+            console.log('Application is online');
+            document.body.classList.remove('offline-mode');
+        });
+        
+        window.addEventListener('offline', function() {
+            console.log('Application is offline');
+            document.body.classList.add('offline-mode');
+        });
+        
+        // Check initial online status
+        if (!navigator.onLine) {
+            document.body.classList.add('offline-mode');
+        }
+    </script>
+</body>
+</html>

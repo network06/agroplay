@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Agroplay Anti-Crash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="js/auth.js"></script>
+<script src="js/email-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-container { background: white; border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); animation: slideUp 0.5s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .logo { text-align: center; margin-bottom: 30px; }
+        .logo img { width: 100px; height: 100px; object-fit: contain; }
+        .logo h1 { font-family: 'Fredoka', sans-serif; color: #4CAF50; font-size: 28px; margin-top: 10px; }
+        .logo p { color: #666; font-size: 14px; }
+        .auth-tabs { display: flex; margin-bottom: 25px; background: #f5f5f5; border-radius: 12px; padding: 4px; }
+        .auth-tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; border-radius: 10px; font-weight: 600; font-size: 14px; color: #666; transition: all 0.3s ease; }
+        .auth-tab.active { background: white; color: #4CAF50; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .auth-form { display: none; }
+        .auth-form.active { display: block; }
+        .role-selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+        .role-btn { padding: 15px 10px; border: 2px solid #e0e0e0; border-radius: 12px; background: white; cursor: pointer; transition: all 0.3s ease; text-align: center; font-size: 12px; position: relative; }
+        .role-btn:hover { border-color: #4CAF50; }
+        .role-btn.active { border-color: #4CAF50; background: #E8F5E9; }
+        .role-btn i { font-size: 24px; display: block; margin-bottom: 5px; color: #4CAF50; }
+        .role-required { border-color: #f44336 !important; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(244,67,54,0.7); } 50% { box-shadow: 0 0 0 10px rgba(244,67,54,0); } }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #333; font-size: 14px; }
+        .input-group input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; transition: border-color 0.3s ease; }
+        .input-group input:focus { outline: none; border-color: #4CAF50; box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1); }
+        .input-group input.error { border-color: #f44336; }
+        .password-toggle { position: relative; }
+        .password-toggle input { padding-right: 45px; }
+        .password-toggle .toggle-btn { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #999; }
+        .login-btn, .register-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; position: relative; overflow: hidden; }
+        .login-btn:hover, .register-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3); }
+        .login-btn:disabled, .register-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .login-btn.loading::after, .register-btn.loading::after { content: ''; position: absolute; top: 50%; left: 50%; width: 20px; height: 20px; margin: -10px 0 0 -10px; border: 2px solid transparent; border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .alert { padding: 12px 16px; border-radius: 10px; margin-bottom: 15px; font-size: 14px; display: none; }
+        .alert.show { display: block; animation: slideIn 0.3s ease; }
+        .alert-error { background: #ffebee; color: #c62828; border-left: 4px solid #c62828; }
+        .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #2e7d32; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .sun { position: fixed; top: 20px; right: 20px; font-size: 60px; animation: rotate 20s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .demo-info { background: #fff3e0; padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 12px; text-align: center; }
+        .forgot-password { text-align: center; margin-top: 15px; }
+        .forgot-password a { color: #4CAF50; text-decoration: none; font-size: 13px; font-weight: 600; }
+        .forgot-password a:hover { text-decoration: underline; }
+        .reset-form { display: none; }
+        .reset-form.active { display: block; }
+        .code-inputs { display: flex; gap: 8px; justify-content: center; margin: 15px 0; }
+        .code-input { width: 45px; height: 50px; text-align: center; font-size: 20px; font-weight: 700; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s ease; }
+        .code-input:focus { border-color: #4CAF50; box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1); outline: none; }
+        .code-input.filled { border-color: #4CAF50; background: #E8F5E9; }
+        .reset-steps { display: flex; justify-content: center; margin-bottom: 20px; }
+        .step { display: flex; align-items: center; color: #999; font-size: 12px; }
+        .step.active { color: #4CAF50; font-weight: 600; }
+        .step.completed { color: #4CAF50; }
+        .step-number { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #ddd; display: flex; align-items: center; justify-content: center; margin-right: 8px; font-size: 11px; font-weight: 700; }
+        .step.active .step-number { border-color: #4CAF50; background: #4CAF50; color: white; }
+        .step.completed .step-number { border-color: #4CAF50; background: #4CAF50; color: white; }
+        .step-connector { width: 30px; height: 2px; background: #ddd; margin: 0 10px; }
+        .step.completed + .step-connector { background: #4CAF50; }
+        .demo-code { background: #e3f2fd; padding: 8px; border-radius: 6px; margin-top: 10px; font-size: 12px; text-align: center; color: #1976d2; font-weight: 600; }
+        .back-btn { background: none; border: none; color: #666; cursor: pointer; font-size: 14px; margin-bottom: 15px; display: flex; align-items: center; gap: 5px; }
+        .back-btn:hover { color: #4CAF50; }
+    </style>
+</head>
+<body>
+    <div class="sun">☀️</div>
+    <div class="login-container">
+        <div class="logo">
+            <img src="assets/logo_agroplay.png" alt="Agroplay Logo" style="width:100px;height:100px;object-fit:contain;border-radius:20px;margin:0 auto;">
+            <h1>Agroplay</h1>
+            <p>Login & Daftar Anti-Crash ✅</p>
+        </div>
+        <div id="alert-container"></div>
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="tab-login"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="auth-tab" id="tab-register"><i class="fas fa-user-plus"></i> Daftar</button>
+        </div>
+        <form id="login-form" class="auth-form active">
+            <div class="input-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" placeholder="contoh@gmail.com" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password">Password:</label>
+                <div class="password-toggle">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="button" class="toggle-btn" id="toggle-login-pw"><i class="fas fa-eye"></i></button>
+                </div>
+            </div>
+            <button type="submit" class="login-btn" id="login-btn"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+            <div class="forgot-password">
+                <a href="#" id="forgot-password-link">Lupa Password?</a>
+            </div>
+        </form>
+        <form id="register-form" class="auth-form">
+            <div class="input-group">
+                <label for="register-name">Nama Lengkap:</label>
+                <input type="text" id="register-name" placeholder="Nama kamu" required>
+            </div>
+            <div class="input-group" id="siswa-class-group" style="display: none;">
+                <label for="register-class">Kelas (Siswa):</label>
+                <input list="kelas-list" id="register-class" placeholder="7A, 8B, dll" maxlength="5">
+                <datalist id="kelas-list">
+                    <option value="7A"><option value="7B"><option value="8A"><option value="8B"><option value="8C">
+                    <option value="9A"><option value="9B"><option value="10A">
+                </datalist>
+            </div>
+            <div class="input-group">
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" placeholder="contoh@gmail.com" required>
+            </div>
+            <div class="input-group">
+                <label for="register-password">Password (min 6):</label>
+                <div class="password-toggle">
+                    <input type="password" id="register-password" minlength="6" required>
+                    <button type="button" class="toggle-btn" id="toggle-register-pw"><i class="fas fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Pilih Role <span style="color: #f44336;">*</span>:</label>
+                <div class="role-selector" id="role-selector">
+                    <button type="button" class="role-btn" data-role="siswa"><i class="fas fa-user-graduate"></i>Siswa</button>
+                    <button type="button" class="role-btn" data-role="guru"><i class="fas fa-chalkboard-teacher"></i>Guru</button>
+                    <button type="button" class="role-btn" data-role="orangtua"><i class="fas fa-user-friends"></i>Orang Tua</button>
+                    <button type="button" class="role-btn" data-role="admin"><i class="fas fa-user-shield"></i>Admin</button>
+                </div>
+            </div>
+            <button type="submit" class="register-btn" id="register-btn" disabled><i class="fas fa-user-plus"></i> Daftar</button>
+            <div class="demo-info">
+                <strong>Demo:</strong> guru@test.com / 123456 | siswa7a@test.com / 123456 | admin@test.com / admin123
+            </div>
+        </form>
+
+        <!-- Password Reset Forms -->
+        <form id="reset-request-form" class="auth-form reset-form">
+            <button type="button" class="back-btn" id="back-to-login">
+                <i class="fas fa-arrow-left"></i> Kembali ke Login
+            </button>
+            <div class="reset-steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <span>Masukkan Email</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <span>Verifikasi Kode</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>Password Baru</span>
+                </div>
+            </div>
+            <h3 style="text-align: center; margin-bottom: 20px; color: #333;">Reset Password</h3>
+            <div class="input-group">
+                <label for="reset-email">Email Terdaftar:</label>
+                <input type="email" id="reset-email" placeholder="contoh@gmail.com" required>
+            </div>
+            <button type="submit" class="login-btn" id="request-reset-btn">
+                <i class="fas fa-paper-plane"></i> Kirim Kode Reset
+            </button>
+        </form>
+
+        <form id="reset-verify-form" class="auth-form reset-form">
+            <button type="button" class="back-btn" id="back-to-reset-request">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            <div class="reset-steps">
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <span>Email Dikirim</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <span>Verifikasi Kode</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>Password Baru</span>
+                </div>
+            </div>
+            <h3 style="text-align: center; margin-bottom: 15px; color: #333;">Masukkan Kode Verifikasi</h3>
+            <p style="text-align: center; color: #666; font-size: 13px; margin-bottom: 20px;">
+                Periksa email Anda untuk kode 6 digit
+            </p>
+            <div class="code-inputs">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                <input type="text" class="code-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+            </div>
+            <button type="submit" class="login-btn" id="verify-code-btn">
+                <i class="fas fa-check"></i> Verifikasi Kode
+            </button>
+        </form>
+
+        <form id="reset-password-form" class="auth-form reset-form">
+            <button type="button" class="back-btn" id="back-to-reset-verify">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            <div class="reset-steps">
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <span>Email Dikirim</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <span>Kode Terverifikasi</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step active">
+                    <div class="step-number">3</div>
+                    <span>Password Baru</span>
+                </div>
+            </div>
+            <h3 style="text-align: center; margin-bottom: 20px; color: #333;">Password Baru</h3>
+            <div class="input-group">
+                <label for="new-password">Password Baru (min 6):</label>
+                <div class="password-toggle">
+                    <input type="password" id="new-password" placeholder="Password baru" minlength="6" required>
+                    <button type="button" class="toggle-btn" id="toggle-new-pw"><i class="fas fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Konfirmasi Password:</label>
+                <div class="password-toggle">
+                    <input type="password" id="confirm-password" placeholder="Konfirmasi password" minlength="6" required>
+                    <button type="button" class="toggle-btn" id="toggle-confirm-pw"><i class="fas fa-eye"></i></button>
+                </div>
+            </div>
+            <button type="submit" class="login-btn" id="reset-password-btn">
+                <i class="fas fa-save"></i> Simpan Password Baru
+            </button>
+        </form>
+    </div>
+    <script>
+        let selectedRole = '';
+        let submitTimeout = null;
+        
+        // Wait for AUTH
+        function initWhenReady() {
+            if (typeof AUTH !== 'undefined') {
+                console.log('✅ AUTH ready - initializing UI');
+                initUI();
+            } else {
+                setTimeout(initWhenReady, 100);
+            }
+        }
+        
+        function initUI() {
+            // Tab switch
+            document.getElementById('tab-login').onclick = () => switchTab('login');
+            document.getElementById('tab-register').onclick = () => switchTab('register');
+            
+            // Forgot password link
+            document.getElementById('forgot-password-link').onclick = (e) => {
+                e.preventDefault();
+                showResetForm('reset-request-form');
+            };
+            
+            // Back buttons
+            document.getElementById('back-to-login').onclick = () => switchTab('login');
+            document.getElementById('back-to-reset-request').onclick = () => showResetForm('reset-request-form');
+            document.getElementById('back-to-reset-verify').onclick = () => showResetForm('reset-verify-form');
+            
+            // Role selection
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.onclick = () => {
+                    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active', 'role-required'));
+                    btn.classList.add('active');
+                    selectedRole = btn.dataset.role;
+                    document.getElementById('siswa-class-group').style.display = selectedRole === 'siswa' ? 'block' : 'none';
+                    document.getElementById('register-btn').disabled = false;
+                    updateRoleVisual();
+                };
+            });
+            
+            // Password toggle
+            document.getElementById('toggle-login-pw').onclick = () => togglePassword('login-password');
+            document.getElementById('toggle-register-pw').onclick = () => togglePassword('register-password');
+            document.getElementById('toggle-new-pw').onclick = () => togglePassword('new-password');
+            document.getElementById('toggle-confirm-pw').onclick = () => togglePassword('confirm-password');
+            
+            // Auto-login check - semua role redirect ke index.html
+            const user = AUTH.getCurrentUser();
+            if (user) {
+                window.location.href = 'index.html';
+            }
+        }
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`#tab-${tab}`).classList.add('active');
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.getElementById(tab + '-form').classList.add('active');
+            document.getElementById('alert-container').innerHTML = '';
+        }
+        
+        function showResetForm(formId) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.getElementById(formId).classList.add('active');
+            document.getElementById('alert-container').innerHTML = '';
+            
+            // Initialize code inputs if showing verify form
+            if (formId === 'reset-verify-form') {
+                initCodeInputs();
+            }
+        }
+        
+        function initCodeInputs() {
+            const inputs = document.querySelectorAll('.code-input');
+            inputs.forEach((input, index) => {
+                input.value = '';
+                input.classList.remove('filled');
+                
+                input.oninput = (e) => {
+                    const value = e.target.value;
+                    if (value.length === 1 && /^[0-9]$/.test(value)) {
+                        input.classList.add('filled');
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    } else {
+                        input.classList.remove('filled');
+                    }
+                };
+                
+                input.onkeydown = (e) => {
+                    if (e.key === 'Backspace' && !input.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                };
+                
+                input.onpaste = (e) => {
+                    e.preventDefault();
+                    const pasteData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+                    const digits = pasteData.split('');
+                    digits.forEach((digit, i) => {
+                        if (inputs[i]) {
+                            inputs[i].value = digit;
+                            inputs[i].classList.add('filled');
+                        }
+                    });
+                    if (digits.length > 0 && digits.length < inputs.length) {
+                        inputs[digits.length].focus();
+                    }
+                };
+            });
+        }
+        
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.parentNode.querySelector('.toggle-btn i');
+            input.type = input.type === 'password' ? 'text' : 'password';
+            icon.className = input.type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        }
+        
+        function showAlert(msg, type = 'error') {
+            const container = document.getElementById('alert-container');
+            container.innerHTML = `<div class="alert alert-${type} show">${msg}</div>`;
+            setTimeout(() => container.innerHTML = '', 5000);
+        }
+        
+        function updateRoleVisual() {
+            const hasRole = !!selectedRole;
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                if (!hasRole) btn.classList.add('role-required');
+            });
+            document.getElementById('register-btn').disabled = !hasRole;
+        }
+        
+        function debounceSubmit(fn, wait = 300) {
+            if (submitTimeout) clearTimeout(submitTimeout);
+            submitTimeout = setTimeout(fn, wait);
+        }
+        
+        // Form handlers - simplified, rely on AUTH
+        document.getElementById('login-form').onsubmit = async e => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+            
+            btn.disabled = true;
+            btn.classList.add('loading');
+            btn.innerHTML = '⏳ Memverifikasi...';
+            
+            const result = await AUTH.login(email, password);
+            btn.classList.remove('loading');
+            
+            if (result.success) {
+                showAlert(result.message, 'success');
+                // Semua role redirect ke index.html setelah login berhasil
+                setTimeout(() => window.location.href = 'index.html', 800);
+            } else {
+                showAlert(result.message);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk';
+            }
+        };
+        
+        document.getElementById('register-form').onsubmit = async e => {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value.trim();
+            const email = document.getElementById('register-email').value.trim().toLowerCase();
+            const password = document.getElementById('register-password').value;
+            const cls = selectedRole === 'siswa' ? document.getElementById('register-class').value.trim() : '';
+            const btn = document.getElementById('register-btn');
+            
+            if (!selectedRole) {
+                showAlert('Pilih role terlebih dahulu!');
+                updateRoleVisual();
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.classList.add('loading');
+            btn.innerHTML = '⏳ Mendaftar...';
+            
+            const result = await AUTH.register(name, email, password, selectedRole, cls);
+            btn.classList.remove('loading');
+            
+            if (result.success) {
+                showAlert(result.message + '<br><strong>Gunakan email & password ini untuk login</strong>', 'success');
+                switchTab('login');
+                document.getElementById('login-email').value = email;
+                document.getElementById('login-password').value = password;
+            } else {
+                showAlert(result.message);
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-user-plus"></i> Daftar';
+        };
+        
+        // Password Reset Form Handlers
+        document.getElementById('reset-request-form').onsubmit = async e => {
+            e.preventDefault();
+            const email = document.getElementById('reset-email').value.trim().toLowerCase();
+            const btn = document.getElementById('request-reset-btn');
+            
+            btn.disabled = true;
+            btn.classList.add('loading');
+            btn.innerHTML = '⏳ Mengirim...';
+            
+            const result = await AUTH.requestPasswordReset(email);
+            btn.classList.remove('loading');
+            
+            if (result.success) {
+                showAlert(result.message, 'success');
+                setTimeout(() => {
+                    showResetForm('reset-verify-form');
+                }, 1500);
+            } else {
+                showAlert(result.message);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Kode Reset';
+            }
+        };
+        
+        document.getElementById('reset-verify-form').onsubmit = async e => {
+            e.preventDefault();
+            const codeInputs = document.querySelectorAll('.code-input');
+            const code = Array.from(codeInputs).map(input => input.value).join('');
+            const email = document.getElementById('reset-email').value.trim().toLowerCase();
+            const btn = document.getElementById('verify-code-btn');
+            
+            if (code.length !== 6) {
+                showAlert('Masukkan semua 6 digit kode!');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.classList.add('loading');
+            btn.innerHTML = '⏳ Memverifikasi...';
+            
+            const result = AUTH.verifyResetCode(email, code);
+            btn.classList.remove('loading');
+            
+            if (result.valid) {
+                showAlert(result.message, 'success');
+                setTimeout(() => {
+                    showResetForm('reset-password-form');
+                }, 1000);
+            } else {
+                showAlert(result.message);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-check"></i> Verifikasi Kode';
+            }
+        };
+        
+        document.getElementById('reset-password-form').onsubmit = async e => {
+            e.preventDefault();
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const email = document.getElementById('reset-email').value.trim().toLowerCase();
+            const btn = document.getElementById('reset-password-btn');
+            
+            if (newPassword !== confirmPassword) {
+                showAlert('Password tidak cocok!');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.classList.add('loading');
+            btn.innerHTML = '⏳ Menyimpan...';
+            
+            const result = await AUTH.resetPassword(email, newPassword);
+            btn.classList.remove('loading');
+            
+            if (result.success) {
+                showAlert(result.message, 'success');
+                setTimeout(() => {
+                    switchTab('login');
+                    document.getElementById('login-email').value = email;
+                    document.getElementById('login-password').value = '';
+                    document.getElementById('login-password').focus();
+                }, 2000);
+            } else {
+                showAlert(result.message);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-save"></i> Simpan Password Baru';
+            }
+        };
+        
+        // Init
+        window.addEventListener('load', initWhenReady);
+        updateRoleVisual();
+    </script>
+</body>
+</html>

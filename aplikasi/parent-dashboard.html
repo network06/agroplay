@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Orang Tua Realtime - Agroplay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-pink': '#EC4899',
+                        'primary-pink-dark': '#BE185D',
+                        'secondary-pink': '#F472B6',
+                        'success-green': '#10B981',
+                        'warning-yellow': '#F59E0B',
+                        'danger-red': '#EF4444',
+                        'info-blue': '#06B6D4',
+                        'primary-orange': '#FF9800',
+                        'primary-orange-dark': '#F57C00',
+                        'primary-orange-light': '#FFB74D',
+                        'primary-green': '#4CAF50',
+                        'primary-green-dark': '#388E3C',
+                        'primary-green-light': '#81C784'
+                    },
+                    fontFamily: {
+                        'fredoka': ['Fredoka', 'sans-serif'],
+                        'nunito': ['Nunito', 'sans-serif']
+                    },
+                    animation: {
+                        'float-particle': 'floatParticle 15s infinite ease-in-out',
+                        'icon-bounce': 'iconBounce 2s ease infinite',
+                        'card-tilt': 'cardTilt 0.3s ease',
+                        'stat-pulse': 'statPulse 2s ease infinite',
+                        'tab-slide': 'tabSlide 0.3s ease',
+                        'dashboard-fade-in': 'dashboardFadeIn 0.5s ease',
+                        'chart-grow': 'chartGrow 0.6s ease',
+                        'notification-slide': 'notificationSlide 0.4s ease',
+                        'progress-fill': 'progressFill 0.8s ease'
+                    },
+                    keyframes: {
+                        floatParticle: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-20px) rotate(120deg)' },
+                            '66%': { transform: 'translateY(10px) rotate(240deg)' }
+                        },
+                        iconBounce: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        cardTilt: {
+                            '0%': { transform: 'perspective(1000px) rotateY(0deg)' },
+                            '100%': { transform: 'perspective(1000px) rotateY(5deg)' }
+                        },
+                        statPulse: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' }
+                        },
+                        tabSlide: {
+                            '0%': { transform: 'translateX(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        dashboardFadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        chartGrow: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '50%': { transform: 'scale(1.05)', opacity: '1' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        notificationSlide: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(0)' }
+                        },
+                        progressFill: {
+                            '0%': { width: '0%' },
+                            '100%': { width: '100%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/gamification.css">
+    <link rel="stylesheet" href="css/parent-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        /* Parent Dashboard - Pink/Caring Theme (Clean - No Linter Errors) */
+        :root { 
+            --primary: #EC4899; --primary-dark: #BE185D; --secondary: #F472B6; 
+            --success: #10B981; --warning: #F59E0B; --danger: #EF4444; --info: #06B6D4; 
+            --bg-dark: linear-gradient(135deg, #1E1B4B 0%, #3730A3 50%, #581C87 100%);
+        }
+        body { 
+            /* New background matching the provided image */
+            background: linear-gradient(180deg, #87CEEB 0%, #B4E7CE 60%, #4CAF50 100%);
+            min-height: 100vh; 
+            font-family: 'Nunito', sans-serif; 
+            position: relative;
+        }
+        
+        /* Cloud decorations for parent dashboard */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 10%;
+            left: 10%;
+            width: 80px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 40px;
+            z-index: -1;
+            box-shadow: 20px 10px 0 10px rgba(255, 255, 255, 0.9),
+                        40px 5px 0 8px rgba(255, 255, 255, 0.8);
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 15%;
+            right: 15%;
+            width: 100px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 45px;
+            z-index: -1;
+            box-shadow: -25px 15px 0 12px rgba(255, 255, 255, 0.85),
+                        -50px 8px 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Header */
+        .parent-header { 
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); padding: 20px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; 
+        }
+        .parent-header-content { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; }
+        .parent-logo img { height: 40px; margin-right: 12px; }
+        .parent-logo h1 { color: white; font-size: 22px; font-family: 'Fredoka', sans-serif; margin: 0; }
+        .parent-user { display: flex; align-items: center; gap: 12px; color: white; }
+        .parent-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--success), var(--primary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .parent-btn { padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 13px; transition: all 0.3s; display: flex; align-items: center; gap: 6px; }
+        .parent-btn-primary { background: var(--primary); color: white; }
+        .parent-btn-logout { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); color: #FCA5A5; }
+        
+        /* Container */
+        .parent-container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+        
+        /* Stats Grid */
+        .parent-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 32px; }
+        .parent-stat-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 20px; padding: 24px; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; position: relative; overflow: hidden; }
+        .parent-stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+        .parent-stat-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(236,72,153,0.2); }
+        .parent-stat-card .stat-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .parent-stat-card .stat-value { font-size: 32px; font-weight: 800; color: white; font-family: 'Fredoka', sans-serif; margin-bottom: 8px; }
+        .parent-stat-card .stat-label { color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 600; }
+        .parent-stat-card .stat-change { font-size: 13px; margin-top: 12px; display: flex; align-items: center; gap: 6px; }
+        .stat-change.up { color: var(--success); }
+        .stat-change.down { color: var(--danger); }
+        
+        /* Sections */
+        .parent-section { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border-radius: 20px; padding: 24px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+        .parent-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .parent-section-title { color: white; font-size: 20px; font-family: 'Fredoka', sans-serif; display: flex; align-items: center; gap: 12px; }
+        .parent-section-title i { color: var(--primary); font-size: 22px; }
+        
+        /* Tabs */
+        .parent-tabs { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .parent-tab { background: rgba(255,255,255,0.1); border: none; color: rgba(255,255,255,0.8); padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 14px; }
+        .parent-tab.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(236,72,153,0.3); transform: translateY(-2px); }
+        .parent-tab:hover:not(.active) { background: rgba(255,255,255,0.2); }
+        
+        /* Table */
+        .parent-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .parent-table th { text-align: left; padding: 16px; color: rgba(255,255,255,0.9); font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); }
+        .parent-table td { padding: 16px; color: white; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .parent-table tr:hover td { background: rgba(255,255,255,0.08); }
+        
+        /* Status */
+        .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; animation: statusPulse 2s ease-in-out infinite; }
+        .status-dot.active { background: var(--success); animation-duration: 1.5s; }
+        .status-dot.offline { background: #6B7280; }
+        @keyframes statusPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        /* Search */
+        .search-controls { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .search-input { flex: 1; min-width: 200px; padding: 10px 16px; border: none; border-radius: 8px; background: rgba(255,255,255,0.9); font-size: 14px; }
+        .select-filter { padding: 10px 12px; border: none; border-radius: 8px; background: rgba(255,255,255,0.9); font-size: 14px; color: #333; }
+        
+        /* Responsive */
+        @media (max-width: 768px) { .parent-stats-grid { grid-template-columns: repeat(2, 1fr); } .parent-container { padding: 16px; } .parent-section { padding: 20px; } }
+        @media (max-width: 480px) { .parent-stats-grid { grid-template-columns: 1fr; } .parent-tabs { flex-direction: column; } }
+        
+        /* Child Card Styles */
+        .child-progress-card { background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 24px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.2); }
+        .child-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .child-avatar { font-size: 48px; }
+        .child-name { font-family: 'Fredoka', sans-serif; font-size: 20px; color: white; font-weight: 700; }
+        .child-level { font-size: 14px; color: rgba(255,255,255,0.9); margin-top: 4px; }
+        .progress-stats { display: flex; gap: 20px; margin-bottom: 20px; }
+        .progress-stat { flex: 1; text-align: center; }
+        .progress-stat-value { font-size: 24px; font-weight: 800; color: white; font-family: 'Fredoka', sans-serif; }
+        .progress-stat-label { font-size: 12px; color: rgba(255,255,255,0.8); }
+        .progress-bar-container { background: rgba(255,255,255,0.2); border-radius: 12px; height: 12px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 1s ease; border-radius: 12px; }
+        
+        .dashboard-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: rgba(255,255,255,0.15); border-radius: 16px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
+        .stat-card-icon { font-size: 32px; margin-bottom: 8px; }
+        .stat-card-value { font-size: 24px; font-weight: 700; color: white; margin-bottom: 4px; }
+        .stat-card-label { font-size: 12px; color: rgba(255,255,255,0.8); }
+        
+        .section-title { color: white; font-family: 'Fredoka', sans-serif; font-size: 18px; margin: 24px 0 16px 0; display: flex; align-items: center; gap: 10px; }
+        .class-card { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; }
+        .table-row { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .learning-path-section { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; }
+        .learning-modules { display: flex; flex-direction: column; gap: 12px; }
+        .learning-module { display: flex; align-items: center; gap: 16px; padding: 16px; background: rgba(255,255,255,0.1); border-radius: 12px; }
+        .learning-module.completed { background: rgba(16,185,129,0.2); border-left: 4px solid var(--success); }
+        .learning-module.active { background: rgba(255,152,0,0.2); border-left: 4px solid var(--primary-orange); }
+        .module-icon { font-size: 28px; }
+        .module-title { font-weight: 600; color: white; }
+        .module-desc { font-size: 12px; color: rgba(255,255,255,0.8); }
+        
+        /* Settings Styles */
+        .settings-section { display: flex; flex-direction: column; gap: 16px; }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(255,255,255,0.1); border-radius: 12px; }
+        .setting-info { display: flex; align-items: center; gap: 12px; }
+        .setting-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--primary); }
+        .setting-label { font-weight: 600; color: white; }
+        .setting-desc { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+        
+        /* Toggle Switch */
+        .toggle-switch { position: relative; width: 50px; height: 24px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+        .toggle-slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .toggle-slider { background-color: var(--primary); }
+        input:checked + .toggle-slider:before { transform: translateX(26px); }
+        
+        /* Activity Feed Styles */
+        .activity-feed { display: flex; flex-direction: column; gap: 12px; max-height: 400px; overflow-y: auto; }
+        .activity-item { display: flex; gap: 12px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .activity-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; background: rgba(255,255,255,0.2); }
+        .activity-content { flex: 1; }
+        .activity-title { color: white; font-weight: 500; margin-bottom: 4px; }
+        .activity-time { color: rgba(255,255,255,0.6); font-size: 12px; }
+        
+        /* Achievements Grid */
+        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+        .achievement-badge { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; text-align: center; border: 2px solid rgba(255,255,255,0.2); }
+        .achievement-badge.unlocked { border-color: var(--success); background: rgba(16,185,129,0.2); }
+        .achievement-badge.locked { opacity: 0.6; }
+        .achievement-icon { font-size: 32px; margin-bottom: 8px; }
+        .achievement-name { font-weight: 600; color: white; margin-bottom: 4px; }
+        .achievement-badge .progress { font-size: 12px; color: rgba(255,255,255,0.8); }
+    </style>
+</head>
+<body>
+    <header class="sticky top-0 z-[100] bg-gradient-to-r from-pink-500/20 to-purple-600/20 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-4">
+                    <img src="assets/logo_agroplay.png" alt="Agroplay" class="h-10 w-auto animate-icon-bounce">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white font-fredoka">Agroplay Parent</h1>
+                        <span class="text-sm text-white/80 font-nunito">Child Progress Monitor</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-success-green to-primary-pink flex items-center justify-center text-white text-xl animate-icon-bounce" id="parent-avatar">👩‍👧</div>
+                        <div id="parent-user-info">
+                            <div id="parent-name" class="text-white font-semibold font-nunito">Parent Guardian</div>
+                            <div id="parent-status" class="text-xs text-white/70 font-nunito">
+                                Monitoring <span class="live-indicator inline-block w-2 h-2 bg-success-green rounded-full animate-pulse ml-1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="logout()" class="px-4 py-2 bg-red-500/20 border border-red-500/50 text-red-200 rounded-lg font-nunito font-semibold text-sm transition-all duration-300 hover:bg-red-500/30 hover:scale-105 hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                    <button onclick="window.location.href='index.html'" class="px-4 py-2 bg-primary-pink text-white rounded-lg font-nunito font-semibold text-sm transition-all duration-300 hover:bg-primary-pink-dark hover:scale-105 hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fas fa-home"></i> Menu Siswa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 animate-dashboard-fade-in">
+        <div class="bg-gradient-to-r from-pink-500/20 to-purple-600/20 backdrop-blur-lg rounded-2xl px-6 py-4 text-center border border-white/20 mb-6 animate-notification-slide" id="poll-status">
+            <span class="text-white font-bold font-fredoka text-lg">👨‍👩‍👧 Live Child Monitoring</span>
+        </div>
+        
+        <!-- Parent Dashboard Tabs -->
+        <div class="flex gap-3 mb-8 flex-wrap">
+            <button onclick="showTab('overview')" class="px-6 py-3 bg-primary-pink text-white rounded-xl font-nunito font-semibold text-sm transition-all duration-300 hover:bg-primary-pink-dark hover:scale-105 hover:-translate-y-1 shadow-lg animate-tab-slide">
+                <i class="fas fa-home mr-2"></i> Overview
+            </button>
+            <button onclick="showTab('activities')" class="px-6 py-3 bg-white/10 text-white/80 rounded-xl font-nunito font-semibold text-sm transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:-translate-y-1 animate-tab-slide">
+                <i class="fas fa-history mr-2"></i> Activities
+            </button>
+            <button onclick="showTab('achievements')" class="px-6 py-3 bg-white/10 text-white/80 rounded-xl font-nunito font-semibold text-sm transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:-translate-y-1 animate-tab-slide">
+                <i class="fas fa-trophy mr-2"></i> Prestasi
+            </button>
+        </div>
+        
+        <!-- Tab Contents -->
+        <div id="tab-overview" class="animate-dashboard-fade-in">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white font-fredoka flex items-center gap-3">
+                        <i class="fas fa-chart-line text-primary-pink text-2xl"></i> Child Progress Overview
+                    </h2>
+                </div>
+                <div class="bg-white/15 backdrop-blur-lg rounded-2xl p-6 border border-white/20" id="child-progress-card">
+                    <!-- Dynamic child data -->
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-activities" class="hidden animate-dashboard-fade-in">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white font-fredoka flex items-center gap-3">
+                        <i class="fas fa-history text-primary-pink text-2xl"></i> Recent Activities
+                    </h2>
+                </div>
+                <div id="child-activities-feed" class="flex flex-col gap-3 max-h-96 overflow-y-auto">
+                    <!-- Dynamic activities -->
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-achievements" class="hidden animate-dashboard-fade-in">
+            <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-white font-fredoka flex items-center gap-3">
+                        <i class="fas fa-trophy"></i> Child Achievements
+                    </h2>
+                </div>
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- Dynamic achievements -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Child Selector and Stats -->
+        <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white font-fredoka flex items-center gap-3">
+                    <i class="fas fa-child text-primary-pink text-2xl"></i> Select Child
+                </h2>
+            </div>
+            <div class="bg-white/15 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+                <div class="flex gap-3 items-center mb-4">
+                    <i class="fas fa-search text-white/70"></i>
+                    <input type="text" id="child-search" placeholder="Cari nama atau kelas anak..." class="flex-1 px-4 py-3 bg-white/90 text-gray-800 rounded-xl border-none placeholder-gray-500 font-nunito transition-all duration-300 focus:bg-white focus:ring-2 focus:ring-primary-pink/50">
+                </div>
+                <select id="child-selector" class="w-full px-4 py-3 bg-white/90 text-gray-800 rounded-xl border-none font-nunito transition-all duration-300 focus:bg-white focus:ring-2 focus:ring-primary-pink/50">
+                    <!-- Dynamic children -->
+                </select>
+            </div>
+        </div>
+
+        <!-- Child Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="child-stats-grid">
+            <!-- Dynamic content -->
+        </div>
+
+        <!-- Parent Settings -->
+        <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl">
+            <h2 class="text-2xl font-bold text-white font-fredoka flex items-center gap-3 mb-6">
+                <i class="fas fa-cog text-primary-pink text-2xl"></i> Parent Controls
+            </h2>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center p-4 bg-white/10 rounded-xl border border-white/20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-primary-pink">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <span class="text-white font-semibold font-nunito">Notifications</span>
+                    </div>
+                    <label class="relative inline-block w-14 h-7">
+                        <input type="checkbox" id="notification-toggle" checked onchange="PARENT_DASHBOARD.toggleNotifications(this.checked)" class="opacity-0 w-0 h-0">
+                        <span class="absolute cursor-pointer inset-0 bg-gray-400 transition-all duration-400 rounded-full peer-checked:bg-primary-pink"></span>
+                        <span class="absolute left-1 bottom-1 bg-white w-5 h-5 transition-all duration-400 rounded-full peer-checked:translate-x-7"></span>
+                    </label>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-white/10 rounded-xl border border-white/20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-primary-pink">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <span class="text-white font-semibold font-nunito block">Daily Time Limit</span>
+                            <div class="text-xs text-white/70 font-nunito">Current: 2 hours</div>
+                        </div>
+                    </div>
+                    <button onclick="PARENT_DASHBOARD.setTimeLimit()" class="px-4 py-2 bg-primary-pink text-white rounded-lg font-nunito font-semibold text-sm transition-all duration-300 hover:bg-primary-pink-dark hover:scale-105 hover:-translate-y-1">
+                        Edit
+                    </button>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-white/10 rounded-xl border border-white/20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-primary-pink">
+                            <i class="fas fa-file-export"></i>
+                        </div>
+                        <span class="text-white font-semibold font-nunito">Weekly Report</span>
+                    </div>
+                    <button id="generate-report" onclick="PARENT_DASHBOARD.generateWeeklyReport()" class="px-4 py-2 bg-primary-pink text-white rounded-lg font-nunito font-semibold text-sm transition-all duration-300 hover:bg-primary-pink-dark hover:scale-105 hover:-translate-y-1">
+                        Generate Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts (Proper Order) -->
+    <script src="js/dashboard-fallbacks.js"></script>
+    <script src="js/fallback-logout.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/realtime.js"></script>
+    <script src="js/parent-utils.js"></script>
+    <script src="js/parent-dashboard.js"></script>
+</body>
+</html>
+

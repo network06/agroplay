@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cuan Farming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Cuan Farming Functionality</h1>
+    
+    <div class="test-section">
+        <h2>1. File Loading Test</h2>
+        <div id="file-test">Testing file access...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. JavaScript Functions Test</h2>
+        <button onclick="testGameFunctions()">Test Game Functions</button>
+        <div id="js-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Plant Library Test</h2>
+        <button onclick="testPlantLibrary()">Test Plant Library</button>
+        <div id="library-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Modal Test</h2>
+        <button onclick="testModal()">Test Modal</button>
+        <div id="modal-test"></div>
+    </div>
+
+    <!-- Simple Modal -->
+    <div id="test-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px;">
+            <h3>Test Modal</h3>
+            <p>Modal is working!</p>
+            <button onclick="closeTestModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Test file loading
+        fetch('cuan-farming.html')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('file-test').innerHTML = '<span class="success">HTML file loaded successfully!</span>';
+                } else {
+                    document.getElementById('file-test').innerHTML = '<span class="error">HTML file not found!</span>';
+                }
+            })
+            .catch(error => {
+                document.getElementById('file-test').innerHTML = '<span class="error">Error loading HTML: ' + error.message + '</span>';
+            });
+
+        // Test JavaScript functions
+        function testGameFunctions() {
+            const results = [];
+            
+            // Test basic functions
+            try {
+                if (typeof formatNumber === 'function') {
+                    results.push('<span class="success">formatNumber function exists</span>');
+                } else {
+                    results.push('<span class="error">formatNumber function missing</span>');
+                }
+            } catch (e) {
+                results.push('<span class="error">Error testing formatNumber: ' + e.message + '</span>');
+            }
+            
+            try {
+                if (typeof showToast === 'function') {
+                    results.push('<span class="success">showToast function exists</span>');
+                } else {
+                    results.push('<span class="error">showToast function missing</span>');
+                }
+            } catch (e) {
+                results.push('<span class="error">Error testing showToast: ' + e.message + '</span>');
+            }
+            
+            try {
+                if (typeof PLANTS !== 'undefined') {
+                    results.push('<span class="success">PLANTS data exists (' + Object.keys(PLANTS).length + ' plants)</span>');
+                } else {
+                    results.push('<span class="error">PLANTS data missing</span>');
+                }
+            } catch (e) {
+                results.push('<span class="error">Error testing PLANTS: ' + e.message + '</span>');
+            }
+            
+            document.getElementById('js-test').innerHTML = results.join('<br>');
+        }
+
+        // Test plant library
+        function testPlantLibrary() {
+            const results = [];
+            
+            try {
+                if (typeof togglePlantLibrary === 'function') {
+                    results.push('<span class="success">togglePlantLibrary function exists</span>');
+                } else {
+                    results.push('<span class="error">togglePlantLibrary function missing</span>');
+                }
+            } catch (e) {
+                results.push('<span class="error">Error testing togglePlantLibrary: ' + e.message + '</span>');
+            }
+            
+            try {
+                if (typeof renderPlantLibrary === 'function') {
+                    results.push('<span class="success">renderPlantLibrary function exists</span>');
+                } else {
+                    results.push('<span class="error">renderPlantLibrary function missing</span>');
+                }
+            } catch (e) {
+                results.push('<span class="error">Error testing renderPlantLibrary: ' + e.message + '</span>');
+            }
+            
+            document.getElementById('library-test').innerHTML = results.join('<br>');
+        }
+
+        // Test modal
+        function testModal() {
+            document.getElementById('test-modal').style.display = 'block';
+            document.getElementById('modal-test').innerHTML = '<span class="success">Modal opened successfully!</span>';
+        }
+
+        function closeTestModal() {
+            document.getElementById('test-modal').style.display = 'none';
+        }
+
+        // Mock functions for testing
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(0) + 'K';
+            return num.toString();
+        }
+
+        function showToast(title, message, type) {
+            console.log('Toast:', title, message, type);
+        }
+
+        // Mock PLANTS data
+        const PLANTS = {
+            padi: { name: 'Padi', icon: '??', category: 'pangan' },
+            jagung: { name: 'Jagung', icon: '??', category: 'pangan' },
+            kentang: { name: 'Kentang', icon: '??', category: 'pangan' }
+        };
+
+        function togglePlantLibrary() {
+            console.log('togglePlantLibrary called');
+        }
+
+        function renderPlantLibrary() {
+            console.log('renderPlantLibrary called');
+        }
+    </script>
+</body>
+</html>

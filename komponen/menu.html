@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agroplay - Aplikasi Edukasi Hortikultura untuk SMP">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Agroplay - Menu</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <img src="logo_agroplay.png" alt="Agroplay" class="splash-logo">
+            <div class="splash-animation">
+                <i class="fas fa-seedling"></i>
+                <i class="fas fa-leaf"></i>
+                <i class="fas fa-tree"></i>
+            </div>
+            <p class="splash-tagline">Belajar hortikultura jadi menyenangkan!</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="main-app" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <button class="nav-button" id="back-button" aria-label="Kembali">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="header-title-wrapper">
+                <h1 class="header-title">Menu</h1>
+                <span class="header-subtitle">Pilih menu favoritmu!</span>
+            </div>
+            <button class="nav-button" id="settings-button" aria-label="Pengaturan">
+                <i class="fas fa-cog"></i>
+            </button>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" id="search-input" placeholder="Apa yang kamu cari? 🔍" autocomplete="off">
+            <i class="fas fa-search search-icon"></i>
+            <button class="search-clear" id="search-clear" style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Menu Grid - Menu utama telah dipindahkan ke index.html -->
+        <main class="menu-grid">
+            <div class="menu-redirect">
+                <h3>Menu Utama Agroplay</h3>
+                <p>Semua menu telah dipindahkan ke halaman utama</p>
+                <a href="../aplikasi/index.html" class="back-to-home">
+                    <i class="fas fa-home"></i>
+                    Kembali ke Beranda
+                </a>
+            </div>
+        </main>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h3 class="section-title">
+                <i class="fas fa-bolt"></i> Aksi Cepat
+            </h3>
+            <div class="action-buttons">
+                <button class="action-btn" data-action="random">
+                    <i class="fas fa-random"></i>
+                    <span>Acak</span>
+                </button>
+                <button class="action-btn" data-action="favorites">
+                    <i class="fas fa-heart"></i>
+                    <span>Favorit</span>
+                </button>
+                <button class="action-btn" data-action="recent">
+                    <i class="fas fa-clock"></i>
+                    <span>Terbaru</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Toast Container -->
+        <div id="toast-container" class="toast-container"></div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-nav="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-nav="search">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </button>
+            <button class="nav-item" data-nav="notification">
+                <i class="fas fa-bell"></i>
+                <span>Notifikasi</span>
+                <span class="nav-badge">3</span>
+            </button>
+            <button class="nav-item" data-nav="profile">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="menu.js"></script>
+</body>
+</html>
+
+

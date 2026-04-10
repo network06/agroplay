@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buku Tanamku - Panduan Lengkap Agroplay">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Buku Tanamku - Agroplay</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-green': '#4CAF50',
+                        'primary-green-dark': '#388E3C',
+                        'primary-green-light': '#81C784',
+                        'primary-orange': '#FF9800',
+                        'primary-orange-dark': '#F57C00',
+                        'primary-orange-light': '#FFB74D',
+                        'primary-pink': '#E91E63',
+                        'primary-purple': '#9C27B0',
+                        'primary-blue': '#2196F3',
+                        'primary-red': '#F44336'
+                    },
+                    fontFamily: {
+                        'fredoka': ['Fredoka', 'sans-serif'],
+                        'nunito': ['Nunito', 'sans-serif']
+                    },
+                    animation: {
+                        'float-particle': 'floatParticle 15s linear infinite',
+                        'title-pulse': 'titlePulse 3s ease-in-out infinite',
+                        'bounce-gentle': 'bounceGentle 2s ease infinite',
+                        'icon-float': 'iconFloat 3s ease-in-out infinite',
+                        'card-entrance': 'cardEntrance 0.5s ease forwards',
+                        'character-bounce': 'characterBounce 2s ease infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                        'benefit-slide': 'benefitSlide 0.5s ease forwards',
+                        'toast-slide': 'toastSlide 0.3s ease'
+                    },
+                    keyframes: {
+                        floatParticle: {
+                            '0%': { transform: 'translateY(100vh) rotate(0deg)', opacity: '0' },
+                            '10%': { opacity: '0.3' },
+                            '90%': { opacity: '0.3' },
+                            '100%': { transform: 'translateY(-100px) rotate(360deg)', opacity: '0' }
+                        },
+                        titlePulse: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.02)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        iconFloat: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '25%': { transform: 'translateY(-5px) rotate(2deg)' },
+                            '50%': { transform: 'translateY(0) rotate(0deg)' },
+                            '75%': { transform: 'translateY(5px) rotate(-2deg)' }
+                        },
+                        cardEntrance: {
+                            'from': { opacity: '0', transform: 'translateY(30px) scale(0.9)' },
+                            'to': { opacity: '1', transform: 'translateY(0) scale(1)' }
+                        },
+                        characterBounce: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-10px) scale(1.05)' }
+                        },
+                        shimmer: {
+                            '0%, 100%': { transform: 'translate(-10%, -10%)' },
+                            '50%': { transform: 'translate(10%, 10%)' }
+                        },
+                        benefitSlide: {
+                            'from': { opacity: '0', transform: 'translateX(-20px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        toastSlide: {
+                            'from': { opacity: '0', transform: 'translateY(-20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/guide.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* ============================================
+           BUKU TANAMKU - ROADMAP V COMPLETE
+           Advanced Interactive & Animations
+           ============================================ */
+        
+        :root {
+            --primary-green: #4CAF50;
+            --primary-green-dark: #388E3C;
+            --primary-green-light: #81C784;
+            --primary-orange: #FF9800;
+            --primary-orange-dark: #F57C00;
+            --primary-pink: #E91E63;
+            --primary-purple: #9C27B0;
+            --primary-blue: #2196F3;
+            --primary-red: #F44336;
+            --bg-gradient: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
+        }
+        
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Floating Background Particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.3;
+            animation: floatParticle 15s linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Main Header - Enhanced */
+        .main-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 50%, #2E7D32 100%);
+            padding: 20px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 40px rgba(76, 175, 80, 0.4);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="30">🌱</text><text x="80" y="30" font-size="20">🌿</text><text x="20" y="80" font-size="25">🍃</text></svg>');
+            opacity: 0.1;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1) rotate(-10deg);
+        }
+        
+        .header-title-section {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .header-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .header-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .home-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .home-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .welcome-banner::before {
+            content: '📚';
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 80px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .welcome-icon {
+            font-size: 48px;
+            animation: bounce 2s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .welcome-text h3 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .welcome-text p {
+            font-size: 13px;
+            color: #666;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        /* Main Content Container */
+        .main-container {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Menu Section - Main Navigation */
+        .menu-section {
+            margin-bottom: 24px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        /* Content Menu Grid */
+        .content-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .content-menu-item {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            transition: all 0.3s;
+        }
+        
+        .content-menu-item.pangan::before { background: #FF9800; }
+        .content-menu-item.industri::before { background: #607D8B; }
+        .content-menu-item.hias::before { background: #E91E63; }
+        .content-menu-item.obat::before { background: #4CAF50; }
+        .content-menu-item.serat::before { background: #9C27B0; }
+        .content-menu-item.tentang::before { background: #2196F3; }
+        .content-menu-item.tumbuhan::before { background: #FF9800; }
+        .content-menu-item.hama::before { background: #F44336; }
+        
+        .content-menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-green-light);
+        }
+        
+        .content-menu-item:active {
+            transform: scale(0.98);
+        }
+        
+        .menu-item-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+        
+        .menu-item-text {
+            flex: 1;
+        }
+        
+        .menu-item-text h4 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .menu-item-text p {
+            font-size: 11px;
+            color: #888;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .menu-item-arrow {
+            color: #ccc;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .content-menu-item:hover .menu-item-arrow {
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+        
+        /* Category Tabs - Horizontal Scroll */
+        .category-tabs-container {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #f5f5f5;
+            color: #666;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .tab-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .tab-btn .tab-icon {
+            font-size: 16px;
+        }
+        
+        /* Plants Grid - Enhanced Cards */
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .plant-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            animation: cardEntrance 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .plant-card:nth-child(1) { animation-delay: 0.05s; }
+        .plant-card:nth-child(2) { animation-delay: 0.1s; }
+        .plant-card:nth-child(3) { animation-delay: 0.15s; }
+        .plant-card:nth-child(4) { animation-delay: 0.2s; }
+        .plant-card:nth-child(5) { animation-delay: 0.25s; }
+        .plant-card:nth-child(6) { animation-delay: 0.3s; }
+        
+        .plant-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: var(--primary-green-light);
+        }
+        
+        .plant-card.pangan:hover { border-color: var(--primary-orange); }
+        .plant-card.industri:hover { border-color: #607D8B; }
+        .plant-card.hias:hover { border-color: var(--primary-pink); }
+        .plant-card.obat:hover { border-color: var(--primary-green); }
+        .plant-card.serat:hover { border-color: var(--primary-purple); }
+        .plant-card.tumbuhan:hover { border-color: var(--primary-orange); }
+        .plant-card.hama:hover { border-color: var(--primary-red); }
+        
+        .plant-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .plant-card:hover::after {
+            opacity: 1;
+        }
+        
+        .plant-icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+            display: block;
+            animation: iconFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(2deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(5px) rotate(-2deg); }
+        }
+        
+        .plant-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .plant-category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .plant-category-tag.pangan { background: #FFF3E0; color: #E65100; }
+        .plant-category-tag.industri { background: #ECEFF1; color: #455A64; }
+        .plant-category-tag.hias { background: #FCE4EC; color: #C2185B; }
+        .plant-category-tag.obat { background: #E8F5E9; color: #388E3C; }
+        .plant-category-tag.serat { background: #F3E5F5; color: #7B1FA2; }
+        
+        /* Detail Modal - Full Screen */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .detail-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .detail-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 450px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .detail-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .detail-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translate(-10%, -10%); }
+            50% { transform: translate(10%, 10%); }
+        }
+        
+        .detail-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .detail-close:hover {
+            background: rgba(255,255,255,0.5);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .detail-character {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .detail-icon {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 10px;
+            animation: characterBounce 2s ease infinite;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+        }
+        
+        @keyframes characterBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+        
+        .detail-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .detail-intro {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-style: italic;
+            font-size: 14px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .detail-body {
+            padding: 20px;
+        }
+        
+        .detail-section {
+            margin-bottom: 24px;
+        }
+        
+        .detail-section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--primary-green);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .detail-section-title i {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .detail-description {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+            font-family: 'Nunito', sans-serif;
+            background: #f9f9f9;
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .detail-visual {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-radius: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .visual-stage {
+            text-align: center;
+            font-size: 28px;
+            opacity: 0.4;
+            transition: all 0.3s;
+        }
+        
+        .visual-stage.active {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+        
+        .visual-stage.completed {
+            opacity: 0.7;
+        }
+        
+        .visual-arrow {
+            font-size: 20px;
+            color: var(--primary-green);
+            align-self: center;
+        }
+        
+        .detail-benefits {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+        
+        .detail-benefits li {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-radius: 12px;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            animation: benefitSlide 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes benefitSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .detail-benefits li:nth-child(1) { animation-delay: 0.1s; }
+        .detail-benefits li:nth-child(2) { animation-delay: 0.2s; }
+        .detail-benefits li:nth-child(3) { animation-delay: 0.3s; }
+        
+        .detail-benefits li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+        }
+        
+        .detail-benefits li::before {
+            content: '✓';
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* Info Cards Grid */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .info-card {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .info-card:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px);
+        }
+        
+        .info-card-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        
+        .info-card-label {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 2px;
+        }
+        
+        .info-card-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        /* Olahan Section */
+        .olahan-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .olahan-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 3px solid transparent;
+        }
+        
+        .olahan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .olahan-card.tradisional { border-top: 4px solid #FF5722; }
+        .olahan-card.modern { border-top: 4px solid #00BCD4; }
+        
+        .olahan-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .olahan-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .olahan-desc {
+            font-size: 11px;
+            color: #888;
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.4;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            background: white;
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .search-container:focus-within {
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .search-icon {
+            color: #888;
+            font-size: 18px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: 'Nunito', sans-serif;
+            color: #333;
+        }
+        
+        .search-input::placeholder {
+            color: #aaa;
+        }
+        
+        /* Enhanced Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, #A5D6A7, #81C784);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 12px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 200;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            width: 20px;
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .nav-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            transition: all 0.2s;
+        }
+        
+        .nav-item i {
+            font-size: 22px;
+            color: #558B2F;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: #558B2F;
+            margin-top: 4px;
+        }
+        
+        .nav-item.active .nav-icon {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        .nav-item.active i {
+            color: var(--primary-green-dark);
+        }
+        
+        .nav-item.active .nav-label {
+            color: var(--primary-green-dark);
+        }
+        
+        /* Feature Navigation */
+        .feature-navigation {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 150;
+        }
+        
+        .nav-link {
+            padding: 10px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .nav-link:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.green {
+            background: #E8F5E9;
+            color: var(--primary-green-dark);
+        }
+        
+        .nav-link.green:hover {
+            background: #C8E6C9;
+        }
+        
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            background: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: toastSlide 0.3s ease;
+            min-width: 250px;
+        }
+        
+        @keyframes toastSlide {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toast-success {
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .toast-error {
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        /* Loading Animation */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 380px) {
+            .content-menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .olahan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 480px) {
+            .content-menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div class="bg-particles" id="bg-particles"></div>
+
+    <!-- Enhanced Header with Modern Navbar -->
+    <header class="relative z-[100] bg-gradient-to-br from-primary-green via-primary-green-dark to-green-800 px-5 py-6 rounded-b-3xl shadow-2xl">
+        <!-- Top Navigation Bar -->
+        <div class="flex items-center justify-between mb-6 relative z-10">
+            <button onclick="goHome()" class="w-12 h-12 rounded-full bg-white/20 text-white text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 hover:-rotate-12 backdrop-blur-sm shadow-lg">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="text-center flex-1">
+                <h1 class="text-3xl font-bold text-white font-fredoka animate-title-pulse drop-shadow-lg">📚 Buku Tanamku</h1>
+                <p class="text-sm text-white/90 font-nunito">Panduan Lengkap Hortikultura</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="toggleSearch()" class="w-12 h-12 rounded-full bg-white/20 text-white text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 backdrop-blur-sm shadow-lg">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button onclick="goHome()" class="w-12 h-12 rounded-full bg-white/20 text-white text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 backdrop-blur-sm shadow-lg">
+                    <i class="fas fa-home"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Enhanced Welcome Banner with Stats -->
+        <div class="bg-gradient-to-r from-yellow-50 to-orange-100 rounded-2xl p-5 flex items-center gap-4 shadow-lg relative overflow-hidden">
+            <div class="text-5xl animate-bounce-gentle">🌱</div>
+            <div class="flex-1">
+                <h3 class="text-lg font-bold text-gray-800 font-fredoka mb-1">Selamat Datang! 👋</h3>
+                <p class="text-sm text-gray-600 font-nunito">Pelajari tanaman & makanan khas Indonesia</p>
+                <div class="flex gap-4 mt-2">
+                    <div class="flex items-center gap-1">
+                        <i class="fas fa-book text-xs text-primary-green"></i>
+                        <span class="text-xs font-bold text-gray-700 font-fredoka">50+ Tanaman</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class="fas fa-utensils text-xs text-primary-orange"></i>
+                        <span class="text-xs font-bold text-gray-700 font-fredoka">30+ Olahan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Search Bar (Hidden by default) -->
+        <div id="searchBar" class="hidden mt-4 bg-white rounded-2xl p-4 shadow-xl">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-search text-gray-400"></i>
+                <input type="text" id="searchInput" placeholder="Cari tanaman atau olahan..." class="flex-1 outline-none text-gray-700 font-nunito">
+                <button onclick="toggleSearch()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Menu Section - Main Navigation -->
+        <section class="mb-6">
+            <div class="flex items-center gap-2.5 mb-4">
+                <div class="w-8 h-8 bg-gradient-to-br from-primary-green to-primary-green-dark rounded-lg flex items-center justify-center text-white">
+                    <i class="fas fa-list text-sm"></i>
+                </div>
+                <h2 class="text-lg font-bold text-gray-800 font-fredoka">Daftar Konten</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <div onclick="showCategory('tentang')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-blue-400 before:to-blue-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🏠</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tentang Agroplay</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Kenali aplikasi kami</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('pangan')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-orange-400 before:to-orange-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🍚</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman Pangan</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Pangan & umbi-umbian</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('industri')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-gray-400 before:to-gray-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🏭</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman Industri</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Untuk kebutuhan industri</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('hias')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-pink-400 before:to-pink-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🌸</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman Hias</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Bunga & tanaman indah</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('obat')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-green-400 before:to-green-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">💊</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman Obat</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Obat tradisional</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('serat')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-purple-400 before:to-purple-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🧵</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman Serat</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Serat & anyaman</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('tumbuhan')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-orange-400 before:to-orange-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🍲</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Makanan Tumbuhan</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Makanan dari tanaman</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="showCategory('hama')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-red-400 before:to-red-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🐛</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Mengenal Hama</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Hama & cara mengatasi</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-primary-green group-hover:translate-x-1.5"></i>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Search Bar -->
+        <div class="bg-white rounded-2xl p-3.5 mb-4 flex items-center gap-2.5 shadow-lg transition-all duration-300 focus-within:shadow-xl focus-within:scale-[1.02] focus-within:shadow-primary-green/20">
+            <i class="fas fa-search text-gray-400 text-lg"></i>
+            <input type="text" id="plant-search" placeholder="Cari tanaman atau makanan..." oninput="searchItems()" class="flex-1 border-none outline-none text-sm text-gray-800 font-nunito placeholder-gray-400">
+        </div>
+        
+        <!-- Category Tabs - Horizontal Scroll -->
+        <div class="bg-white rounded-2xl p-4 mb-5 shadow-lg">
+            <div class="flex gap-2 overflow-x-auto pb-2 -webkit-overflow-scrolling:touch" id="category-tabs">
+                <button data-category="all" onclick="filterPlants('all')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gradient-to-r from-primary-green to-primary-green-dark text-white font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:scale-105 flex items-center gap-2 whitespace-nowrap shadow-md">
+                    <span class="text-base">🌟</span> Semua
+                </button>
+                <button data-category="pangan" onclick="filterPlants('pangan')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">🍚</span> Pangan
+                </button>
+                <button data-category="industri" onclick="filterPlants('industri')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">🏭</span> Industri
+                </button>
+                <button data-category="hias" onclick="filterPlants('hias')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">🌸</span> Hias
+                </button>
+                <button data-category="obat" onclick="filterPlants('obat')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">💊</span> Obat
+                </button>
+                <button data-category="serat" onclick="filterPlants('serat')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">🧵</span> Serat
+                </button>
+                <button data-category="tumbuhan" onclick="filterPlants('tumbuhan')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">🍲</span> Makanan Tumbuhan
+                </button>
+                <button data-category="hama" onclick="filterPlants('hama')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-100 text-gray-600 font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+                    <span class="text-base">🐛</span> Mengenal Hama
+                </button>
+            </div>
+        </div>
+        
+        <!-- Plants/Items Grid -->
+        <div class="plants-grid" id="plants-grid">
+            <!-- Generated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-4 py-2.5 pb-5 bg-gradient-to-t from-green-200 to-green-100 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-[200]">
+        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-green-700 transition-all duration-300 hover:text-primary-green">
+            <i class="fas fa-seedling text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Kebun</span>
+        </a>
+        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-green-700 transition-all duration-300 hover:text-primary-green">
+            <i class="fas fa-tractor text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Cuan</span>
+        </a>
+        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-green-700 transition-all duration-300 hover:text-primary-green">
+            <i class="fas fa-hand-planting text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Tanam</span>
+        </a>
+        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-green-700 transition-all duration-300 hover:text-primary-green">
+            <i class="fas fa-brain text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Kuis</span>
+        </a>
+        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-primary-green transition-all duration-300">
+            <i class="fas fa-book text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Buku</span>
+        </a>
+    </nav>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal" id="detail-modal">
+        <div class="detail-content">
+            <button class="detail-close" onclick="closeDetailModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="detail-header">
+                <div class="detail-character">
+                    <span class="detail-icon" id="modal-icon">🌾</span>
+                    <h2 class="detail-name" id="modal-name">Padi</h2>
+                    <span class="detail-intro" id="modal-intro">"Hai anak-anak! Perkenalkan, aku Pak Padi!"</span>
+                </div>
+            </div>
+            <div class="detail-body">
+                <!-- Description -->
+                <div class="detail-section">
+                    <h3 class="detail-section-title">
+                        <i class="fas fa-eye"></i> Deskripsi
+                    </h3>
+                    <p class="detail-description" id="modal-description">
+                        Tinggi 60-120 cm, mirip rumput tapi lebih tinggi. Daun panjang dan ramping seperti pita hijau.
+                    </p>
+                </div>
+                
+                <!-- Visual Stages -->
+                <div class="detail-section">
+                    <h3 class="detail-section-title">
+                        <i class="fas fa-chart-line"></i> Tahap Tumbuh
+                    </h3>
+                    <div class="detail-visual" id="modal-stages">
+                        <span class="visual-stage active">🌱</span>
+                        <span class="visual-arrow">→</span>
+                        <span class="visual-stage">🌿</span>
+                        <span class="visual-arrow">→</span>
+                        <span class="visual-stage">🌸</span>
+                        <span class="visual-arrow">→</span>
+                        <span class="visual-stage">🍎</span>
+                    </div>
+                </div>
+                
+                <!-- Benefits -->
+                <div class="detail-section">
+                    <h3 class="detail-section-title">
+                        <i class="fas fa-star"></i> Manfaat
+                    </h3>
+                    <ul class="detail-benefits" id="modal-benefits">
+                        <!-- Generated by JS -->
+                    </ul>
+                </div>
+                
+                <!-- Info Cards (for plants) -->
+                <div class="detail-section" id="info-cards-section">
+                    <h3 class="detail-section-title">
+                        <i class="fas fa-info-circle"></i> Informasi Tambahan
+                    </h3>
+                    <div class="info-cards-grid" id="info-cards">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Ingredients (for food) -->
+                <div class="detail-section" id="ingredients-section" style="display: none;">
+                    <h3 class="detail-section-title">
+                        <i class="fas fa-carrot"></i> Bahan Baku
+                    </h3>
+                    <ul class="detail-benefits" id="modal-ingredients">
+                        <!-- Generated by JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script src="js/auth.js"></script>
+<script src="js/realtime.js"></script>
+<script src="js/guide.js"></script>
+<script src="js/food.js"></script>
+<script src="js/buku-tanamku.js"></script>
+    <script>
+        // Initialize background particles
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+        
+        function createParticles() {
+            const container = document.getElementById('bg-particles');
+            const emojis = ['🌱', '🌿', '🍃', '🌸', '🌺', '🍀', '🌻', '🌾'];
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+        
+        // Toggle Search Bar
+        function toggleSearch() {
+            const searchBar = document.getElementById('searchBar');
+            const searchInput = document.getElementById('searchInput');
+            
+            if (searchBar.classList.contains('hidden')) {
+                searchBar.classList.remove('hidden');
+                searchInput.focus();
+            } else {
+                searchBar.classList.add('hidden');
+                searchInput.value = '';
+                searchItems();
+            }
+        }
+        
+        // Search functionality for plants and food
+        function searchItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const plantSearch = document.getElementById('plant-search').value.toLowerCase();
+            const finalSearchTerm = searchTerm || plantSearch;
+            
+            const allCards = document.querySelectorAll('.plant-card');
+            
+            allCards.forEach(card => {
+                const name = card.querySelector('.plant-name')?.textContent.toLowerCase() || '';
+                const category = card.querySelector('.plant-category-tag')?.textContent.toLowerCase() || '';
+                
+                if (name.includes(finalSearchTerm) || category.includes(finalSearchTerm)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'cardEntrance 0.5s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Show message if no results
+            const visibleCards = Array.from(allCards).filter(card => card.style.display !== 'none');
+            const grid = document.getElementById('plants-grid');
+            
+            if (visibleCards.length === 0 && finalSearchTerm.length > 0) {
+                if (!document.getElementById('no-results')) {
+                    const noResults = document.createElement('div');
+                    noResults.id = 'no-results';
+                    noResults.className = 'text-center py-12 text-gray-500';
+                    noResults.innerHTML = `
+                        <div class="text-6xl mb-4">emoji: 'search'</div>
+                        <p class="text-lg font-nunito">Tidak ada hasil untuk "${finalSearchTerm}"</p>
+                        <p class="text-sm mt-2">Coba kata kunci lain</p>
+                    `;
+                    grid.appendChild(noResults);
+                }
+            } else {
+                const noResults = document.getElementById('no-results');
+                if (noResults) {
+                    noResults.remove();
+                }
+            }
+        }
+        
+        // Show Toast Notification - Enhanced for XP notifications
+        function showToast(type, message) {
+            var container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 10px;';
+                document.body.appendChild(container);
+            }
+            
+            var toast = document.createElement('div');
+            toast.style.cssText = 'background: white; padding: 14px 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; animation: toastSlide 0.3s ease; min-width: 250px; border-left: 4px solid ' + (type === 'success' ? '#4CAF50' : '#F44336') + ';';
+            toast.className = type === 'success' ? 'toast-success' : 'toast-error';
+            toast.innerHTML = '<span style="font-size: 20px;">' + (type === 'success' ? '&#9989;' : '&#10060;') + '</span><span style="font-size: 14px; color: #333;">' + message + '</span>';
+            
+            container.appendChild(toast);
+            
+            setTimeout(function() {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-20px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(function() {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+

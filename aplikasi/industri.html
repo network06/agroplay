@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Industri - Pengolahan Hasil Bumi Agroplay">
+    <meta name="theme-color" content="#FF9800">
+    <title>Industri - Agroplay</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/activity.css">
+    <link rel="stylesheet" href="css/guide.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Feature Navigation - Consistent styling across all pages */
+        .feature-navigation {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 150;
+        }
+        
+        .nav-link {
+            padding: 10px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.green {
+            background: #E8F5E9;
+            color: #388E3C;
+        }
+        
+        .nav-link.green:hover {
+            background: #C8E6C9;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .feature-navigation {
+                padding: 8px 10px;
+                gap: 4px;
+                bottom: 65px;
+            }
+            
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-industry"></div>
+
+    <!-- Header -->
+    <header class="page-header">
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="header-content">
+            <h1>🏭 Industri</h1>
+            <p>Pengolahan hasil bumi</p>
+        </div>
+        <button class="search-btn">
+            <i class="fas fa-info-circle"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content">
+        <!-- Info Banner -->
+        <div class="info-banner">
+            <div class="banner-icon">🏭</div>
+            <div class="banner-text">
+                <h2>Belajar Pengolahan!</h2>
+                <p>Dari bahan baku sampai produk jadi</p>
+            </div>
+        </div>
+
+        <!-- Industry Categories -->
+        <div class="industry-grid">
+            <!-- Category 1: Pengolahan Sayuran -->
+            <div class="industry-card" onclick="showCategory('sayuran')">
+                <div class="card-icon">🥬</div>
+                <h3>Pengolahan Sayuran</h3>
+                <p>Kranggan, asinan, keripik</p>
+                <span class="card-count">5 Jenis</span>
+            </div>
+            
+            <!-- Category 2: Pengolahan Buah -->
+            <div class="industry-card" onclick="showCategory('buah')">
+                <div class="card-icon">🍎</div>
+                <h3>Pengolahan Buah</h3>
+                <p>Jus, selai, manisan</p>
+                <span class="card-count">5 Jenis</span>
+            </div>
+            
+            <!-- Category 3: Pengolahan Cabe -->
+            <div class="industry-card" onclick="showCategory('cabe')">
+                <div class="card-icon">🌶️</div>
+                <h3>Pengolahan Cabe</h3>
+                <p>Sambal, cabe kering</p>
+                <span class="card-count">3 Jenis</span>
+            </div>
+            
+            <!-- Category 4: Pengolahan Beras -->
+            <div class="industry-card" onclick="showCategory('beras')">
+                <div class="card-icon">🍚</div>
+                <h3>Pengolahan Beras</h3>
+                <p>Beras merah, nasi kernels</p>
+                <span class="card-count">4 Jenis</span>
+            </div>
+            
+            <!-- Category 5: Pengolahan Singkong -->
+            <div class="industry-card" onclick="showCategory('singkong')">
+                <div class="card-icon">🍠</div>
+                <h3>Pengolahan Singkong</h3>
+                <p>Tapioka, kerupuk, getuk</p>
+                <span class="card-count">4 Jenis</span>
+            </div>
+            
+            <!-- Category 6: Pengolahan Kelapa -->
+            <div class="industry-card" onclick="showCategory('kelapa')">
+                <div class="card-icon">🥥</div>
+                <h3>Pengolahan Kelapa</h3>
+                <p>Minyak, kopra, santan</p>
+                <span class="card-count">4 Jenis</span>
+            </div>
+        </div>
+
+        <!-- Featured Product -->
+        <div class="featured-section">
+            <h3 class="section-title">
+                <i class="fas fa-star"></i> Produk Unggulan
+            </h3>
+            <div class="featured-card">
+                <div class="featured-icon">🍯</div>
+                <div class="featured-content">
+                    <h4>Madu Hutan</h4>
+                    <p>Hasil hutan yang bernilai tinggi</p>
+                    <span class="price-tag">Rp 150.000/kg</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='index.html'">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item">
+            <div class="nav-icon"><i class="fas fa-industry"></i></div>
+            <span class="nav-label">Industri</span>
+        </button>
+        <button class="nav-item" onclick="window.location.href='buku-olahan.html'">
+            <div class="nav-icon"><i class="fas fa-utensils"></i></div>
+            <span class="nav-label">Olahan</span>
+        </button>
+        <button class="nav-item" onclick="window.location.href='profil-simple.html'">
+            <div class="nav-icon"><i class="fas fa-user"></i></div>
+            <span class="nav-label">Profil</span>
+        </button>
+    </nav>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modal-body">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/industrial.js"></script>
+</body>
+</html>
+
+
