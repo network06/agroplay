@@ -18,102 +18,11 @@
     <link rel="stylesheet" href="css/quiz.css">
     <link rel="stylesheet" href="css/animations.css">
     <style>
-        /* Enhanced Modern UI Improvements */
-        
+        /* Fix for CSS conflicts and ensure proper loading */
         .quiz-container {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-        
-        .category-card {
-            position: relative;
-            overflow: hidden;
-            transform: perspective(1000px) rotateX(0deg);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            opacity: 0;
-        }
-        
-        .category-card:hover::before {
-            animation: shimmer 0.6s ease;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
-        }
-        
-        .answer-option {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .answer-option::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 152, 0, 0.1);
-            transform: translate(-50%, -50%);
-            transition: all 0.3s ease;
-        }
-        
-        .answer-option:hover::after {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .result-card {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            position: relative;
-        }
-        
-        .result-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 24px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--primary-orange), var(--primary-green));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: -1;
-        }
-        
-        .score-circle {
-            background: linear-gradient(135deg, #FF9800, #FFC107, #FF9800);
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 16px;
         }
         
         /* Feature Navigation - Consistent styling */
@@ -1454,6 +1363,40 @@
     <script src="js/realtime.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/logout-handler.js"></script>
+    
+    <!-- Debug and Enhancement Script -->
+    <script>
+        // Ensure functions are available globally
+        console.log('Quiz page loaded, checking functions...');
+        
+        // Test function availability
+        setTimeout(function() {
+            console.log('selectCategory available:', typeof selectCategory);
+            console.log('goToPlantSelection available:', typeof goToPlantSelection);
+            console.log('backToCategories available:', typeof backToCategories);
+            
+            // Force category cards to work
+            document.querySelectorAll('.category-card').forEach(function(card) {
+                const categoryId = Array.from(card.classList).find(cls => 
+                    ['pangan', 'industri', 'hias', 'obat', 'makanan', 'serat', 'hama'].includes(cls)
+                );
+                
+                if (categoryId) {
+                    console.log('Setting up click for category:', categoryId);
+                    card.onclick = function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Category clicked:', categoryId);
+                        if (typeof selectCategory === 'function') {
+                            selectCategory(categoryId);
+                        } else {
+                            console.error('selectCategory not available!');
+                        }
+                    };
+                }
+            });
+        }, 1000);
+    </script>
 </body>
 </html>
 
