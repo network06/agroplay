@@ -811,7 +811,7 @@ function selectAnswer(index) {
         
         feedbackContainer.innerHTML = 
             '<div class="feedback-correct">' +
-                '<div class="feedback-icon">?</div>' +
+                '<div class="feedback-icon">✅</div>' +
                 '<div class="feedback-text">' +
                     '<div class="feedback-title">Benar!</div>' +
                     '<div class="feedback-explanation">' + q.explanation + '</div>' +
