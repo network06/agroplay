@@ -12,11 +12,6 @@
     <script>
         // Tailwind configuration
         tailwind.config = {
-            plugins: [
-                require('@tailwindcss/forms'),
-                require('@tailwindcss/typography'),
-                require('@tailwindcss/aspect-ratio'),
-            ],
             theme: {
                 extend: {
                     colors: {
@@ -796,6 +791,375 @@
             margin-bottom: 20px;
             color: #333;
         }
+        
+        /* ==================== INNOVATIVE FEATURES STYLES ==================== */
+        .leaderboard-modal {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item.player {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+        }
+        
+        .leaderboard-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .rank {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .leaderboard-item.player .rank {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+        }
+        
+        .player-info {
+            flex: 1;
+        }
+        
+        .player-info .name {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .player-info .stats {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .crown {
+            font-size: 1.5rem;
+        }
+        
+        .plot-slot {
+            background: linear-gradient(135deg, #8B4513, #654321);
+            border: 3px solid #654321;
+            border-radius: 12px;
+            padding: 16px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plot-slot:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            border-color: #4CAF50;
+        }
+        
+        .plot-slot.ready {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            animation: pulse-ready 2s infinite;
+        }
+        
+        @keyframes pulse-ready {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .plot-empty {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: bold;
+        }
+        
+        .plot-plant {
+            text-align: center;
+            color: white;
+        }
+        
+        .plot-icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+        
+        .plot-progress {
+            font-size: 0.8rem;
+            font-weight: bold;
+            background: rgba(0,0,0,0.3);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        
+        /* Mini Games Styles */
+        .mini-game-btn {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+        }
+        
+        .mini-game-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+        
+        .mini-game-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Enhanced Animations */
+        @keyframes toast-in {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .animate-toast-in {
+            animation: toast-in 0.3s ease-out;
+        }
+        
+        /* Weather Effects */
+        .weather-sunny {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        
+        .weather-cloudy {
+            background: linear-gradient(135deg, #B0BEC5, #90A4AE);
+        }
+        
+        .weather-rainy {
+            background: linear-gradient(135deg, #42A5F5, #1E88E5);
+        }
+        
+        /* Market Indicator */
+        .market-up {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .market-down {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .market-stable {
+            color: #FF9800;
+            font-weight: bold;
+        }
+        
+        /* Plant Info Modal Styles */
+        .plant-info-modal {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .plant-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-radius: 12px;
+        }
+        
+        .plant-icon-large {
+            font-size: 3rem;
+        }
+        
+        .plant-title h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #2E7D32;
+        }
+        
+        .plant-category {
+            margin: 4px 0 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .plant-stats {
+            margin-bottom: 20px;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .stat-value.profit {
+            color: #2E7D32;
+        }
+        
+        .stat-value.difficulty {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .stat-value.difficulty.easy {
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+        
+        .stat-value.difficulty.medium {
+            background: #FFE082;
+            color: #F57C00;
+        }
+        
+        .stat-value.difficulty.hard {
+            background: #FFCDD2;
+            color: #C62828;
+        }
+        
+        .plant-details h4 {
+            margin: 16px 0 8px 0;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .plant-details p {
+            margin: 0 0 12px 0;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .pests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .pest-tag {
+            background: #FFCDD2;
+            color: #C62828;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        /* Smart Tips Modal */
+        .smart-tips-modal {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .tips-list {
+            margin-bottom: 20px;
+        }
+        
+        .tip-item {
+            padding: 12px;
+            background: #f5f5f5;
+            border-left: 4px solid #4CAF50;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .tip-text {
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        /* Wheel of Fortune Styles */
+        .wheel-modal {
+            text-align: center;
+        }
+        
+        .wheel-container {
+            margin: 20px 0;
+        }
+        
+        .wheel {
+            width: 200px;
+            height: 200px;
+            border: 4px solid #4CAF50;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
+            background: conic-gradient(
+                #FFD700 0deg 60deg,
+                #FFA000 60deg 120deg,
+                #4CAF50 120deg 180deg,
+                #E91E63 180deg 240deg,
+                #2196F3 240deg 300deg,
+                #9E9E9E 300deg 360deg
+            );
+            animation: wheel-spin 20s linear infinite;
+        }
+        
+        @keyframes wheel-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .spin-btn {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 32px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+        }
+        
+        .spin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+        
+        .spin-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -1122,66 +1486,309 @@
     <script src="js/cuan-farming-enhanced.js"></script>
     
     <script>
-        // ==================== DEBUG & ERROR HANDLING ====================
+        // ==================== INNOVATIVE FEATURES ====================
         
-        // Debug utility
-        const Debug = {
-            log: function(...args) {
-                if (window.DEBUG_VERBOSE !== false) {
-                    console.log('[DEBUG]', ...args);
+        // Advanced Weather System
+        const WeatherSystem = {
+            current: 'Cerah',
+            forecast: [],
+            effects: {
+                'Cerah': { growthBonus: 1.2, waterDecay: 1.5, pestRisk: 0.8 },
+                'Berawan': { growthBonus: 1.0, waterDecay: 1.2, pestRisk: 1.0 },
+                'Mendung': { growthBonus: 0.9, waterDecay: 1.0, pestRisk: 1.2 },
+                'Hujan': { growthBonus: 1.1, waterDecay: 0.5, pestRisk: 1.5 }
+            },
+            
+            updateWeather() {
+                const weathers = ['Cerah', 'Berawan', 'Mendung', 'Hujan'];
+                const icons = { 'Cerah': '☀️', 'Berawan': '☁️', 'Mendung': '☁️', 'Hujan': '🌧️' };
+                
+                if (Math.random() < 0.3) {
+                    this.current = weathers[Math.floor(Math.random() * weathers.length)];
+                    const effect = this.effects[this.current];
+                    
+                    // Update UI
+                    const weatherName = document.getElementById('weather-name');
+                    const weatherIcon = document.getElementById('weather-icon');
+                    if (weatherName) weatherName.textContent = this.current;
+                    if (weatherIcon) weatherIcon.textContent = icons[this.current];
+                    
+                    // Apply effects
+                    gameState.weatherBonus = effect.growthBonus;
+                    
+                    // Show notification
+                    if (window.showToast) {
+                        window.showToast('info', `Cuaca: ${this.current} - ${effect.growthBonus > 1 ? 'Bonus pertumbuhan!' : 'Pertumbuhan normal'}`);
+                    }
                 }
-            },
-            error: function(...args) {
-                console.error('[ERROR]', ...args);
-            },
-            warn: function(...args) {
-                console.warn('[WARN]', ...args);
-            },
-            success: function(...args) {
-                console.log('[SUCCESS]', ...args);
             }
         };
         
-        // Performance monitoring
-        const Performance = {
-            timers: {},
-            start: function(name) {
-                this.timers[name] = performance.now();
-            },
-            end: function(name) {
-                if (this.timers[name]) {
-                    const duration = performance.now() - this.timers[name];
-                    Debug.log(`⏱️ ${name}: ${duration.toFixed(2)}ms`);
-                    delete this.timers[name];
+        // Smart Market AI
+        const MarketAI = {
+            trends: [],
+            predictions: [],
+            
+            analyzeMarket() {
+                const trend = 0.8 + Math.random() * 0.4;
+                gameState.marketTrend = Math.round(trend * 100) / 100;
+                
+                const marketTrend = document.getElementById('market-trend');
+                if (marketTrend) {
+                    const arrow = gameState.marketTrend > 1 ? '📈' : gameState.marketTrend < 1 ? '📉' : '➡️';
+                    marketTrend.textContent = `${arrow} ${Math.round(gameState.marketTrend * 100)}%`;
+                }
+                
+                // Generate market tips
+                if (Math.random() < 0.4) {
+                    const tips = [
+                        '💰 Harga tanaman industri sedang naik!',
+                        '🥬 Sayuran sedang tinggi permintaan',
+                        '🌸 Tanaman hias menguntungkan minggu ini',
+                        '💊 Tanaman obat harga stabil'
+                    ];
+                    if (window.showToast) {
+                        window.showToast('success', tips[Math.floor(Math.random() * tips.length)]);
+                    }
                 }
             }
         };
         
-        // Safe execution wrapper
-        function safeExecute(fn, fallback = null, name = 'Operation') {
-            try {
-                Performance.start(name);
-                const result = fn();
-                Performance.end(name);
-                return result;
-            } catch (error) {
-                Debug.error(`${name} failed:`, error);
-                if (fallback && typeof fallback === 'function') {
-                    return fallback();
+        // Pest & Disease Management
+        const PestSystem = {
+            active: [],
+            
+            checkInfestation() {
+                sessionState.plots.forEach((plot, index) => {
+                    if (plot && Math.random() < 0.1) {
+                        const pests = ['Ulat Grayak', 'Kutu Daun', 'Lalat Buah', 'Thrips'];
+                        const pest = pests[Math.floor(Math.random() * pests.length)];
+                        
+                        this.active.push({ plotIndex: index, pest: pest, severity: Math.random() });
+                        
+                        if (window.showToast) {
+                            window.showToast('warning', `⚠️ ${pest} menyerang plot ${index + 1}!`);
+                        }
+                    }
+                });
+            },
+            
+            treat(plotIndex) {
+                this.active = this.active.filter(p => p.plotIndex !== plotIndex);
+                if (window.showToast) {
+                    window.showToast('success', '✅ Hama berhasil diatasi!');
                 }
-                return false;
             }
-        }
+        };
+        
+        // Smart Farming Assistant
+        const FarmingAssistant = {
+            tips: [
+                '💡 Gunakan pupuk organik untuk hasil maksimal',
+                '🌱 Tanam sayuran di musim hujan untuk hasil lebih baik',
+                '💰 Simpan keuntungan untuk upgrade lahan',
+                '🌾 Padi paling menguntungkan di pasar normal',
+                '🍓 Stroberi premium harga tinggi tapi butuh perawatan',
+                '⏰ Panen tepat waktu untuk kualitas terbaik',
+                '🌿 Rotasi tanaman untuk menjaga kesuburan tanah',
+                '💧 Perhatikan level air untuk hasil optimal'
+            ],
+            
+            giveTip() {
+                const tip = this.tips[Math.floor(Math.random() * this.tips.length)];
+                const tipElement = document.getElementById('daily-tip');
+                if (tipElement) {
+                    tipElement.textContent = tip;
+                }
+                if (window.showToast) {
+                    window.showToast('info', tip);
+                }
+            }
+        };
+        
+        // Advanced Statistics
+        const Analytics = {
+            history: [],
+            
+            recordHarvest(plantId, profit, yield) {
+                this.history.push({
+                    plant: plantId,
+                    profit: profit,
+                    yield: yield,
+                    timestamp: Date.now(),
+                    marketTrend: gameState.marketTrend,
+                    weather: WeatherSystem.current
+                });
+                
+                // Keep only last 50 records
+                if (this.history.length > 50) {
+                    this.history.shift();
+                }
+            },
+            
+            getBestPlant() {
+                if (this.history.length === 0) return null;
+                
+                const profits = {};
+                this.history.forEach(record => {
+                    if (!profits[record.plant]) {
+                        profits[record.plant] = { total: 0, count: 0 };
+                    }
+                    profits[record.plant].total += record.profit;
+                    profits[record.plant].count += 1;
+                });
+                
+                let best = null;
+                let maxProfit = 0;
+                
+                Object.entries(profits).forEach(([plant, data]) => {
+                    const avgProfit = data.total / data.count;
+                    if (avgProfit > maxProfit) {
+                        maxProfit = avgProfit;
+                        best = plant;
+                    }
+                });
+                
+                return best;
+            }
+        };
+        
+        // Social Features
+        const SocialFeatures = {
+            leaderboard: [],
+            
+            updateLeaderboard() {
+                // Simulate other players
+                this.leaderboard = [
+                    { name: 'Anda', level: gameState.level, coins: gameState.coins, isPlayer: true },
+                    { name: 'Petani Pro', level: Math.min(gameState.level + 3, 50), coins: gameState.coins * 1.5 },
+                    { name: 'Tani Master', level: Math.min(gameState.level + 5, 50), coins: gameState.coins * 2 },
+                    { name: 'Agro Expert', level: Math.min(gameState.level + 2, 50), coins: gameState.coins * 1.3 },
+                    { name: 'Green Thumb', level: Math.max(gameState.level - 2, 1), coins: gameState.coins * 0.8 }
+                ];
+                
+                this.leaderboard.sort((a, b) => b.coins - a.coins);
+            },
+            
+            showLeaderboard() {
+                this.updateLeaderboard();
+                
+                const leaderboardHTML = `
+                    <div class="leaderboard-modal">
+                        <h3 class="text-xl font-bold mb-4">🏆 Papan Peringkat</h3>
+                        <div class="space-y-2">
+                            ${this.leaderboard.map((player, index) => `
+                                <div class="leaderboard-item ${player.isPlayer ? 'player' : ''}">
+                                    <div class="rank">${index + 1}</div>
+                                    <div class="player-info">
+                                        <div class="name">${player.name}</div>
+                                        <div class="stats">Level ${player.level} • ${formatNumber(player.coins)} coins</div>
+                                    </div>
+                                    ${index === 0 ? '<div class="crown">👑</div>' : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                if (window.showModal) {
+                    window.showModal('Papan Peringkat', leaderboardHTML);
+                }
+            }
+        };
+        
+        // Mini Games
+        const MiniGames = {
+            wheelOfFortune: {
+                prizes: [
+                    { type: 'coins', value: 5000, icon: '💰' },
+                    { type: 'coins', value: 10000, icon: '💰' },
+                    { type: 'fertilizer', value: 'premium', icon: '🌿' },
+                    { type: 'seed', value: 'strawberry', icon: '🍓' },
+                    { type: 'xp', value: 100, icon: '⭐' },
+                    { type: 'nothing', value: 0, icon: '😅' }
+                ],
+                
+                spin() {
+                    const prize = this.prizes[Math.floor(Math.random() * this.prizes.length)];
+                    
+                    switch (prize.type) {
+                        case 'coins':
+                            gameState.coins += prize.value;
+                            if (window.showToast) {
+                                window.showToast('success', `💰 Menang ${formatNumber(prize.value)} coins!`);
+                            }
+                            break;
+                        case 'fertilizer':
+                            if (window.showToast) {
+                                window.showToast('success', `🌿 Menang pupuk ${prize.value}!`);
+                            }
+                            break;
+                        case 'seed':
+                            if (window.showToast) {
+                                window.showToast('success', `🍓 Menang bibit ${prize.value}!`);
+                            }
+                            break;
+                        case 'xp':
+                            gameState.xp += prize.value;
+                            if (window.showToast) {
+                                window.showToast('success', `⭐ Menang ${prize.value} XP!`);
+                            }
+                            break;
+                        default:
+                            if (window.showToast) {
+                                window.showToast('info', '😅 Coba lagi next time!');
+                            }
+                    }
+                    
+                    if (window.updateUI) {
+                        window.updateUI();
+                    }
+                    if (window.saveGameState) {
+                        window.saveGameState();
+                    }
+                }
+            }
+        };
         
         // ==================== FARM PLOTS FUNCTIONALITY ====================
         
-        // Utility functions (extend from cuan-farming-complete.js)
+        // ==================== ENHANCED FUNCTIONALITY ====================
+        
+        // Initialize innovative systems
+        function initializeInnovativeFeatures() {
+            // Start weather updates every 30 seconds
+            setInterval(() => {
+                WeatherSystem.updateWeather();
+            }, 30000);
+            
+            // Start market analysis every 45 seconds
+            setInterval(() => {
+                MarketAI.analyzeMarket();
+            }, 45000);
+            
+            // Check pest infestation every 2 minutes
+            setInterval(() => {
+                PestSystem.checkInfestation();
+            }, 120000);
+            
+            // Give farming tips every 90 seconds
+            setInterval(() => {
+                FarmingAssistant.giveTip();
+            }, 90000);
+            
+            // Update leaderboard every minute
+            setInterval(() => {
+                SocialFeatures.updateLeaderboard();
+            }, 60000);
+        }
+        
+        // Utility functions
         function showToast(type, message) {
-            return safeExecute(() => {
-                const container = document.getElementById('toast-container');
-                if (!container) {
-                    Debug.error('toast-container not found');
-                    return false;
+            const container = document.getElementById('toast-container');
+            if (!container) {
+                console.error('toast-container not found');
+                return false;
                 }
                 
                 const toast = document.createElement('div');
@@ -1232,91 +1839,339 @@
             }, () => '0', 'Format Number');
         }
 
-        // Use existing FERTILIZERS from cuan-farming-complete.js to avoid duplication
-
-        const METHODS = {
-            tradisional: { name: 'Tradisional', cost: 0, yieldMult: 1.0 },
-            hidroponik: { name: 'Hidroponik', cost: 30000, yieldMult: 1.3 },
-            vertikultur: { name: 'Vertikultur', cost: 20000, yieldMult: 1.2 },
-            greenhouse: { name: 'Greenhouse', cost: 50000, yieldMult: 1.5 }
+        // ==================== DEBUG & ERROR HANDLING ====================
+        
+        // Debug utility
+        const Debug = {
+            log: function(...args) {
+                if (window.DEBUG_VERBOSE !== false) {
+                    console.log('[DEBUG]', ...args);
+                }
+            },
+            error: function(...args) {
+                console.error('[ERROR]', ...args);
+            },
+            warn: function(...args) {
+                console.warn('[WARN]', ...args);
+            },
+            success: function(...args) {
+                console.log('[SUCCESS]', ...args);
+            }
         };
-
-        // Use existing PLANTS from cuan-farming-complete.js to avoid duplication
-
-        // Game state
-        let gameState = {
-            coins: 100000,
-            level: 1,
-            xp: 0,
-            totalPlanted: 0,
-            totalHarvested: 0,
-            totalProfit: 0,
-            streak: 0,
-            lastPlayDate: null,
-            unlockedAchievements: [],
-            plantsUnlocked: new Set(['padi', 'cabai', 'tomat', 'jagung']), // Start with basic plants
-            marketTrend: 1.0
+        
+        // Performance monitoring
+        const Performance = {
+            timers: {},
+            start: function(name) {
+                this.timers[name] = performance.now();
+            },
+            end: function(name) {
+                if (this.timers[name]) {
+                    const duration = performance.now() - this.timers[name];
+                    Debug.log(`⏱️ ${name}: ${duration.toFixed(2)}ms`);
+                    delete this.timers[name];
+                }
+            }
         };
-
-        let sessionState = {
-            selectedPlant: null,
-            quantity: 1,
-            fertilizer: 'organik',
-            method: 'tradisional',
-            waterLevel: 3,
-            plots: Array(9).fill(null),
-            selectedPlotIndex: null
-        };
-
-        // Initialize game
-        document.addEventListener('DOMContentLoaded', function() {
-            loadGameState();
-            updateUI();
-            renderPlots();
-            startGameLoop();
-        });
-
-        // Game loop for growth simulation
-        function startGameLoop() {
-            setInterval(() => {
-                updatePlantGrowth();
-                updateUI();
-            }, 5000); // Update every 5 seconds
+        
+        // Safe execution wrapper
+        function safeExecute(fn, fallback = null, name = 'Operation') {
+            try {
+                Performance.start(name);
+                const result = fn();
+                Performance.end(name);
+                return result;
+            } catch (error) {
+                Debug.error(`${name} failed:`, error);
+                if (fallback && typeof fallback === 'function') {
+                    return fallback();
+                }
+                return false;
+            }
         }
 
-        // Update plant growth with realistic simulation
-        function updatePlantGrowth() {
-            const weather = document.getElementById('weather-name').textContent;
-            const weatherMultiplier = getWeatherMultiplier(weather);
+        // ==================== GAME INITIALIZATION ====================
+        
+        // Initialize game
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Cuan Farming Enhanced - Initializing...');
             
-            sessionState.plots.forEach((plot, index) => {
-                if (plot && plot.progress < 100) {
-                    const plant = PLANTS[plot.plantId];
-                    const fertilizer = FERTILIZERS[plot.fertilizer];
-                    const method = METHODS[plot.method];
-                    
-                    // Base growth rate per update (5 seconds = 1 game hour)
-                    let baseGrowthRate = (100 / (plant.growDays * 24)) * weatherMultiplier;
-                    
-                    // Apply fertilizer and method bonuses
-                    let growthRate = baseGrowthRate * fertilizer.yieldMult * method.yieldMult;
-                    
-                    // Water level effect
-                    const waterBonus = plot.waterLevel / 3; // Optimal is 3
-                    growthRate *= waterBonus;
-                    
-                    // Add some randomness for realism
-                    growthRate *= (0.8 + Math.random() * 0.4);
-                    
-                    plot.progress = Math.min(100, plot.progress + growthRate);
-                    
-                    if (plot.progress >= 100 && !plot.readyNotified) {
-                        plot.readyNotified = true;
-                        showToast('success', `Tanaman ${plant.name} siap dipanen!`);
+            // Initialize innovative features
+            initializeInnovativeFeatures();
+            
+            // Load game state if exists
+            if (window.loadGameState) {
+                window.loadGameState();
+            }
+            
+            // Update UI
+            if (window.updateUI) {
+                window.updateUI();
+            }
+            
+            // Render plots
+            if (window.renderPlots) {
+                window.renderPlots();
+            }
+            
+            // Start game systems
+            if (window.startGrowthSimulation) {
+                window.startGrowthSimulation();
+            }
+            
+            // Initial weather and market
+            WeatherSystem.updateWeather();
+            MarketAI.analyzeMarket();
+            
+            console.log('✅ Cuan Farming Enhanced - Ready!');
+        });
+
+        // ==================== HELPER FUNCTIONS ====================
+        
+        function getWeatherMultiplier(weather) {
+            const multipliers = {
+                'Cerah': 1.2,
+                'Berawan': 1.0,
+                'Mendung': 0.9,
+                'Hujan': 1.1
+            };
+            return multipliers[weather] || 1.0;
+        }
+        
+        function loadGameState() {
+            try {
+                const saved = localStorage.getItem('cuanFarmingState');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (window.gameState) {
+                        Object.assign(window.gameState, parsed);
+                        if (parsed.plantsUnlocked) {
+                            window.gameState.plantsUnlocked = new Set(parsed.plantsUnlocked);
+                        }
                     }
+                    console.log('✅ Game state loaded');
                 }
-            });
-            renderPlots();
+            } catch (error) {
+                console.error('❌ Failed to load game state:', error);
+            }
+        }
+        
+        function saveGameState() {
+            try {
+                if (window.gameState) {
+                    const toSave = { 
+                        ...window.gameState, 
+                        plantsUnlocked: Array.from(window.gameState.plantsUnlocked),
+                        lastSave: Date.now()
+                    };
+                    localStorage.setItem('cuanFarmingState', JSON.stringify(toSave));
+                    console.log('✅ Game state saved');
+                }
+            } catch (error) {
+                console.error('❌ Failed to save game state:', error);
+            }
+        }
+        
+        function updateUI() {
+            try {
+                // Update header stats
+                const coinsDisplay = document.getElementById('coins-display');
+                if (coinsDisplay && window.gameState) {
+                    coinsDisplay.textContent = formatNumber(window.gameState.coins);
+                }
+                
+                const levelDisplay = document.getElementById('level-display');
+                if (levelDisplay && window.gameState) {
+                    levelDisplay.textContent = window.gameState.level;
+                }
+                
+                const xpDisplay = document.getElementById('xp-display');
+                if (xpDisplay && window.gameState) {
+                    const xpNeeded = window.gameState.level * 500;
+                    xpDisplay.textContent = `${window.gameState.xp}/${xpNeeded}`;
+                }
+                
+                // Update stats panel
+                const statPlanted = document.getElementById('stat-planted');
+                if (statPlanted && window.gameState) {
+                    statPlanted.textContent = window.gameState.totalPlanted;
+                }
+                
+                const statHarvested = document.getElementById('stat-harvested');
+                if (statHarvested && window.gameState) {
+                    statHarvested.textContent = window.gameState.totalHarvested;
+                }
+                
+                const statProfit = document.getElementById('stat-profit');
+                if (statProfit && window.gameState) {
+                    statProfit.textContent = formatNumber(window.gameState.totalProfit);
+                }
+                
+                const statStreak = document.getElementById('stat-streak');
+                if (statStreak && window.gameState) {
+                    statStreak.textContent = window.gameState.streak;
+                }
+            } catch (error) {
+                console.error('❌ Failed to update UI:', error);
+            }
+        }
+        
+        function renderPlots() {
+            try {
+                const farmLand = document.getElementById('farm-land');
+                if (!farmLand || !window.sessionState) return;
+                
+                farmLand.innerHTML = window.sessionState.plots.map((plot, index) => {
+                    const isEmpty = !plot;
+                    const isReady = plot && plot.progress >= 100;
+                    
+                    if (isEmpty) {
+                        return `
+                            <div class="plot-slot" onclick="window.openPlantingModal(${index})">
+                                <div class="plot-empty">+</div>
+                            </div>
+                        `;
+                    } else {
+                        const plant = window.PLANTS[plot.plantId];
+                        const progress = Math.min(100, plot.progress || 0);
+                        const readyClass = isReady ? 'ready' : '';
+                        
+                        return `
+                            <div class="plot-slot ${readyClass}" onclick="${isReady ? `window.harvestPlot(${index})` : `window.showPlantProgress(${index})`}">
+                                <div class="plot-plant">
+                                    <div class="plot-icon">${plant.icon}</div>
+                                    <div class="plot-progress">${Math.round(progress)}%</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }).join('');
+            } catch (error) {
+                console.error('❌ Failed to render plots:', error);
+            }
+        }
+        
+        // ==================== ADDITIONAL INNOVATIVE FEATURES ====================
+        
+        // Wheel of Fortune Mini Game
+        function showWheelOfFortune() {
+            const wheelHTML = `
+                <div class="wheel-modal">
+                    <h3 class="text-xl font-bold mb-4">🎯 Roda Keberuntungan</h3>
+                    <div class="wheel-container">
+                        <div class="wheel">
+                            <div class="wheel-section">💰 5K</div>
+                            <div class="wheel-section">💰 10K</div>
+                            <div class="wheel-section">🌿 Premium</div>
+                            <div class="wheel-section">🍓 Bibit</div>
+                            <div class="wheel-section">⭐ 100 XP</div>
+                            <div class="wheel-section">😅 Coba Lagi</div>
+                        </div>
+                        <button class="spin-btn" onclick="spinWheel()">SPIN!</button>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">Putar roda untuk hadiah menarik!</p>
+                </div>
+            `;
+            
+            if (window.showModal) {
+                window.showModal('Roda Keberuntungan', wheelHTML);
+            }
+        }
+        
+        function spinWheel() {
+            MiniGames.wheelOfFortune.spin();
+        }
+        
+        // Smart Farming Tips
+        function showSmartTips() {
+            const bestPlant = Analytics.getBestPlant();
+            const tips = [
+                `💡 Tanaman terbaik Anda: ${bestPlant ? window.PLANTS[bestPlant].name : 'Belum ada data'}`,
+                `🌱 Cuaca saat ini: ${WeatherSystem.current} - ${WeatherSystem.effects[WeatherSystem.current].growthBonus > 1 ? 'Bonus pertumbuhan!' : 'Normal'}`,
+                `💰 Pasar: ${gameState.marketTrend > 1 ? 'Naik' : gameState.marketTrend < 1 ? 'Turun' : 'Stabil'} (${Math.round(gameState.marketTrend * 100)}%)`,
+                `📊 Level: ${gameState.level} - XP: ${gameState.xp}/${gameState.level * 500}`,
+                `🔥 Streak: ${gameState.streak} hari`
+            ];
+            
+            const tipsHTML = `
+                <div class="smart-tips-modal">
+                    <h3 class="text-xl font-bold mb-4">🧠 Tips Cerdas</h3>
+                    <div class="tips-list">
+                        ${tips.map(tip => `
+                            <div class="tip-item">
+                                <span class="tip-text">${tip}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="mini-game-btn" onclick="showWheelOfFortune()">🎯 Main Roda Keberuntungan</button>
+                </div>
+            `;
+            
+            if (window.showModal) {
+                window.showModal('Tips Cerdas', tipsHTML);
+            }
+        }
+        
+        // Enhanced Plant Information
+        function showPlantInfo(plantId) {
+            const plant = window.PLANTS[plantId];
+            if (!plant) return;
+            
+            const infoHTML = `
+                <div class="plant-info-modal">
+                    <div class="plant-header">
+                        <div class="plant-icon-large">${plant.icon}</div>
+                        <div class="plant-title">
+                            <h3>${plant.name}</h3>
+                            <p class="plant-category">${plant.categoryName}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="plant-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">💰 Harga Bibit:</span>
+                            <span class="stat-value">${formatNumber(plant.seedPrice)} coins</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">💵 Harga Jual:</span>
+                            <span class="stat-value">${formatNumber(plant.sellPrice)} coins</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">📈 Profit:</span>
+                            <span class="stat-value profit">${formatNumber(plant.sellPrice - plant.seedPrice)} coins</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">⏱️ Waktu Panen:</span>
+                            <span class="stat-value">${plant.growDays} hari</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">📊 Hasil:</span>
+                            <span class="stat-value">${plant.baseYield} ${plant.unit}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">🎯 Kesulitan:</span>
+                            <span class="stat-value difficulty ${plant.difficulty}">${plant.difficulty}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="plant-details">
+                        <h4>📝 Deskripsi</h4>
+                        <p>${plant.description}</p>
+                        
+                        <h4>💡 Tips</h4>
+                        <p>${plant.tips}</p>
+                        
+                        <h4>🐛 Hama Potensial</h4>
+                        <div class="pests-list">
+                            ${plant.pests.map(pest => `<span class="pest-tag">${pest}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (window.showModal) {
+                window.showModal(plant.name, infoHTML);
+            }
         }
         
         // Get weather multiplier for growth
