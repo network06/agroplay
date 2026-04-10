@@ -60,23 +60,24 @@
             return navHTML;
         },
         
-        // Add universal navigation to current page
+        // Add universal navigation to current page - DISABLED
         injectUniversalNav: function() {
-            const user = typeof AUTH !== 'undefined' ? AUTH.getCurrentUser() : null;
-            if (!user) return;
+            return; // Completely disabled to prevent duplicate menu
+            // const user = typeof AUTH !== 'undefined' ? AUTH.getCurrentUser() : null;
+            // if (!user) return;
             
-            // Find appropriate container for navigation
-            let container = document.querySelector('.menu-section');
-            if (!container) {
-                container = document.querySelector('main') || document.querySelector('.admin-container') || document.querySelector('body');
-            }
+            // // Find appropriate container for navigation
+            // let container = document.querySelector('.menu-section');
+            // if (!container) {
+            //     container = document.querySelector('main') || document.querySelector('.admin-container') || document.querySelector('body');
+            // }
             
-            if (container) {
-                const navHTML = this.createUniversalNav();
-                const navElement = document.createElement('div');
-                navElement.innerHTML = navHTML;
-                container.insertBefore(navElement.firstElementChild, container.firstChild);
-            }
+            // if (container) {
+            //     const navHTML = this.createUniversalNav();
+            //     const navElement = document.createElement('div');
+            //     navElement.innerHTML = navHTML;
+            //     container.insertBefore(navElement.firstElementChild, container.firstChild);
+            // }
         },
         
         // Add floating quick access button

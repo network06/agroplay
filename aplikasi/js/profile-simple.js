@@ -39,20 +39,35 @@
     function loadSimpleProfile() {
         const user = AUTH.getCurrentUser();
         if (!user) {
-            console.log('👤 No user from AUTH');
+            console.log('No user from AUTH');
             return;
         }
         
-        console.log('👤 Loading profile for:', user.email);
+        console.log('Loading profile for:', user.email);
         
         // Add loading state
         document.body.classList.add('loading');
         
-        // Direct localStorage access for reliability
+        // Try comprehensive scoring system first
+        try {
+            const userDataKey = `agroplay_user_${user.email}`;
+            const userData = JSON.parse(localStorage.getItem(userDataKey));
+            
+            if (userData) {
+                console.log('Profile: Found comprehensive scoring data:', userData);
+                updateProfileUI(user, userData);
+                document.body.classList.remove('loading');
+                return;
+            }
+        } catch (e) {
+            console.log('Profile: Comprehensive scoring data not found, trying legacy system');
+        }
+        
+        // Fallback to legacy system
         try {
             const allUsersData = localStorage.getItem('agroplay_all_users_data');
             if (!allUsersData) {
-                console.log('👤 No user data in localStorage');
+                console.log('No user data in localStorage');
                 showEmptyState();
                 document.body.classList.remove('loading');
                 return;
@@ -62,19 +77,19 @@
             const userData = parsed[user.id];
             
             if (!userData) {
-                console.log('👤 User data not found for ID:', user.id);
-                console.log('👤 Available IDs:', Object.keys(parsed));
+                console.log('User data not found for ID:', user.id);
+                console.log('Available IDs:', Object.keys(parsed));
                 showEmptyState();
                 document.body.classList.remove('loading');
                 return;
             }
             
-            console.log('👤 User data found:', userData);
+            console.log('User data found:', userData);
             // Update UI with data
             updateProfileUI(user, userData);
             
         } catch (e) {
-            console.error('👤 Error loading profile:', e);
+            console.error('Error loading profile:', e);
             showEmptyState();
         }
         
@@ -87,18 +102,37 @@
 
     function updateProfileUI(user, userData) {
         // Update basic info
-        updateElement('profile-name', user.name || 'Siswa Agroplay');
+        updateElement('profile-name', user.name || userData.name || 'Siswa Agroplay');
         updateElement('profile-level', `Level ${userData.level || 1}`);
         updateElement('profile-xp', `${userData.xp || 0} XP`);
 
+        // Handle comprehensive scoring system data
+        let totalScore = 0;
+        let totalSessions = 0;
+        let activityCount = 0;
+        
+        if (userData.activities) {
+            // New comprehensive scoring system
+            Object.values(userData.activities).forEach(activity => {
+                totalScore += activity.score || 0;
+                totalSessions += activity.sessions || 0;
+                if (activity.sessions > 0) activityCount++;
+            });
+        } else {
+            // Legacy system
+            const stats = userData.stats || {};
+            totalScore = stats.totalScore || 0;
+            totalSessions = stats.quizzesCompleted || 0;
+            activityCount = stats.gamesPlayed || 0;
+        }
+
         // Update stats
-        const stats = userData.stats || {};
-        updateElement('stat-quizzes', stats.quizzesCompleted || 0);
-        updateElement('stat-score', stats.totalScore || 0);
+        updateElement('stat-score', totalScore);
+        updateElement('stat-quizzes', userData.activities?.['kuis-seru']?.sessions || 0);
+        updateElement('stat-plants', userData.activities?.['tanam-yuk']?.sessions || 0);
+        updateElement('stat-books', userData.activities?.['buku-tanamku']?.sessions || 0);
+        updateElement('stat-games', activityCount);
         updateElement('stat-streak', userData.streak || 0);
-        updateElement('stat-plants', stats.plantsPlanted || 0);
-        updateElement('stat-books', stats.booksRead || 0);
-        updateElement('stat-games', stats.gamesPlayed || 0);
 
         // Update achievements
         const achievements = userData.achievements || [];
@@ -106,8 +140,11 @@
 
         // Update progress bars
         updateProgressBar('xp-progress', userData.xp || 0, (userData.level || 1) * 100);
-        updateProgressBar('quiz-progress', stats.quizzesCompleted || 0, 50);
-        updateProgressBar('plant-progress', stats.plantsPlanted || 0, 100);
+        updateProgressBar('quiz-progress', userData.activities?.['kuis-seru']?.sessions || 0, 50);
+        updateProgressBar('plant-progress', userData.activities?.['tanam-yuk']?.sessions || 0, 100);
+        
+        // Update activity breakdown if element exists
+        updateActivityBreakdown(userData);
     }
 
     function showEmptyState() {
@@ -146,9 +183,47 @@
         }
     }
 
+    function updateActivityBreakdown(userData) {
+        const breakdownElement = document.getElementById('activity-breakdown');
+        if (!breakdownElement || !userData.activities) return;
+        
+        const activities = userData.activities;
+        let html = '<div class="activity-grid">';
+        
+        const activityInfo = {
+            'kebun-ajaib': { name: 'Kebun Ajaib', icon: '??', color: '#4CAF50' },
+            'tanam-yuk': { name: 'Tanam Yuk!', icon: '??', color: '#FF9800' },
+            'kuis-seru': { name: 'Kuis Seru Tani', icon: '??', color: '#2196F3' },
+            'buku-tanamku': { name: 'Buku Tanamku', icon: '??', color: '#9C27B0' },
+            'cuan-farming': { name: 'Cuan Farming', icon: '??', color: '#F44336' }
+        };
+        
+        Object.entries(activityInfo).forEach(([key, info]) => {
+            const activity = activities[key] || { score: 0, xp: 0, sessions: 0 };
+            if (activity.sessions > 0) {
+                html += `
+                    <div class="activity-item" style="border-left: 4px solid ${info.color}">
+                        <div class="activity-icon">${info.icon}</div>
+                        <div class="activity-details">
+                            <div class="activity-name">${info.name}</div>
+                            <div class="activity-stats">
+                                <span>Skor: ${activity.score}</span>
+                                <span>XP: ${activity.xp}</span>
+                                <span>Sesi: ${activity.sessions}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        html += '</div>';
+        breakdownElement.innerHTML = html;
+    }
+
     // Simple refresh function
     window.refreshSimpleProfile = function() {
-        console.log('🔄 Refreshing profile...');
+        console.log('Refreshing profile...');
         loadSimpleProfile();
         
         // Visual feedback

@@ -2129,6 +2129,11 @@
                 
                 localStorage.setItem(hasReadKey, 'true');
                 
+                // Update comprehensive scoring system
+                if (typeof updateActivityScore === 'function') {
+                    updateActivityScore('kebun-ajaib', 20, 20); // Score and XP for reading plant guides
+                }
+                
                 if (result.level > 1) {
                     showToast('success', '🎉 Selamat! Kamu naik ke Level ' + result.level + '!');
                 }

@@ -804,9 +804,14 @@ function selectAnswer(index) {
         xp += 10;
         correctAnswers++;
         
+        // Update comprehensive scoring system
+        if (typeof updateActivityScore === 'function') {
+            updateActivityScore('kuis-seru', 10, 10); // Score and XP for correct answer
+        }
+        
         feedbackContainer.innerHTML = 
             '<div class="feedback-correct">' +
-                '<div class="feedback-icon">✅</div>' +
+                '<div class="feedback-icon">?</div>' +
                 '<div class="feedback-text">' +
                     '<div class="feedback-title">Benar!</div>' +
                     '<div class="feedback-explanation">' + q.explanation + '</div>' +

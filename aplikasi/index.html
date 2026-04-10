@@ -885,6 +885,154 @@
         .nav-item {
             position: relative;
         }
+        
+        /* Leaderboard Styles */
+        .leaderboard-section {
+            padding: 30px 20px 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .leaderboard-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        .leaderboard-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .leaderboard-title i {
+            color: #FFD700;
+            font-size: 20px;
+            animation: sparkle 2s infinite;
+        }
+        
+        .leaderboard-subtitle {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+        
+        .leaderboard-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item:hover {
+            background: rgba(76, 175, 80, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .leaderboard-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 15px;
+        }
+        
+        .rank-1 {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+        }
+        
+        .rank-2 {
+            background: linear-gradient(135deg, #C0C0C0, #808080);
+            color: white;
+        }
+        
+        .rank-3 {
+            background: linear-gradient(135deg, #CD7F32, #8B4513);
+            color: white;
+        }
+        
+        .rank-other {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+        
+        .leaderboard-info {
+            flex: 1;
+        }
+        
+        .leaderboard-name {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .leaderboard-stats {
+            font-family: 'Nunito', sans-serif;
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .leaderboard-score {
+            font-weight: 600;
+            color: #4CAF50;
+        }
+        
+        .leaderboard-level {
+            font-weight: 600;
+            color: #FF9800;
+        }
+        
+        .leaderboard-activity {
+            font-weight: 600;
+            color: #2196F3;
+        }
+        
+        @media (max-width: 480px) {
+            .leaderboard-title {
+                font-size: 18px;
+            }
+            
+            .leaderboard-container {
+                padding: 15px;
+                margin: 0 10px;
+            }
+            
+            .leaderboard-stats {
+                flex-direction: column;
+                gap: 2px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1031,6 +1179,20 @@
                         <div class="decoration-item coin4"></div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section class="leaderboard-section">
+            <div class="leaderboard-header">
+                <h2 class="leaderboard-title">
+                    <i class="fas fa-trophy"></i>
+                    Papan Peringkat Siswa
+                </h2>
+                <p class="leaderboard-subtitle">Siswa paling aktif dan berprestasi!</p>
+            </div>
+            <div class="leaderboard-container" id="leaderboard-container">
+                <!-- Leaderboard will be populated by JavaScript -->
             </div>
         </section>
     </div>
@@ -1464,6 +1626,172 @@
         if (!navigator.onLine) {
             document.body.classList.add('offline-mode');
         }
+        
+        // ==================== COMPREHENSIVE SCORING SYSTEM ====================
+        const scoringSystem = {
+            // Initialize user scoring data
+            initUserData: function() {
+                const user = typeof AUTH !== 'undefined' ? AUTH.getCurrentUser() : null;
+                if (!user) return;
+                
+                const userEmail = user.email;
+                let userData = JSON.parse(localStorage.getItem(`agroplay_user_${userEmail}`)) || {
+                    name: user.name || userEmail.split('@')[0],
+                    email: userEmail,
+                    totalScore: 0,
+                    level: 1,
+                    xp: 0,
+                    activities: {
+                        'kebun-ajaib': { score: 0, xp: 0, sessions: 0, lastPlayed: null },
+                        'tanam-yuk': { score: 0, xp: 0, sessions: 0, lastPlayed: null },
+                        'kuis-seru': { score: 0, xp: 0, sessions: 0, lastPlayed: null },
+                        'buku-tanamku': { score: 0, xp: 0, sessions: 0, lastPlayed: null },
+                        'cuan-farming': { score: 0, xp: 0, sessions: 0, lastPlayed: null }
+                    },
+                    achievements: [],
+                    totalSessions: 0,
+                    firstLogin: new Date().toISOString(),
+                    lastLogin: new Date().toISOString()
+                };
+                
+                localStorage.setItem(`agroplay_user_${userEmail}`, JSON.stringify(userData));
+                return userData;
+            },
+            
+            // Update score for specific activity
+            updateScore: function(activity, score, xp = 0) {
+                const user = typeof AUTH !== 'undefined' ? AUTH.getCurrentUser() : null;
+                if (!user) return;
+                
+                const userEmail = user.email;
+                let userData = JSON.parse(localStorage.getItem(`agroplay_user_${userEmail}`));
+                
+                if (!userData) {
+                    userData = this.initUserData();
+                }
+                
+                // Update activity data
+                if (!userData.activities[activity]) {
+                    userData.activities[activity] = { score: 0, xp: 0, sessions: 0, lastPlayed: null };
+                }
+                
+                userData.activities[activity].score += score;
+                userData.activities[activity].xp += xp;
+                userData.activities[activity].sessions += 1;
+                userData.activities[activity].lastPlayed = new Date().toISOString();
+                
+                // Update total stats
+                userData.totalScore += score;
+                userData.xp += xp;
+                userData.totalSessions += 1;
+                userData.lastLogin = new Date().toISOString();
+                
+                // Calculate level based on XP
+                userData.level = Math.floor(userData.xp / 100) + 1;
+                
+                // Save to localStorage
+                localStorage.setItem(`agroplay_user_${userEmail}`, JSON.stringify(userData));
+                
+                // Update leaderboard
+                this.updateLeaderboard();
+                
+                return userData;
+            },
+            
+            // Get all users data for leaderboard
+            getAllUsersData: function() {
+                const allUsers = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('agroplay_user_')) {
+                        const userData = JSON.parse(localStorage.getItem(key));
+                        allUsers.push(userData);
+                    }
+                }
+                return allUsers.sort((a, b) => b.totalScore - a.totalScore);
+            },
+            
+            // Update leaderboard display
+            updateLeaderboard: function() {
+                const container = document.getElementById('leaderboard-container');
+                if (!container) return;
+                
+                const allUsers = this.getAllUsersData();
+                const topUsers = allUsers.slice(0, 10); // Show top 10
+                
+                let leaderboardHTML = '';
+                
+                if (topUsers.length === 0) {
+                    leaderboardHTML = `
+                        <div style="text-align: center; padding: 20px; color: #666;">
+                            <i class="fas fa-users" style="font-size: 24px; margin-bottom: 10px;"></i>
+                            <p>Belum ada data siswa. Mainkan game untuk masuk leaderboard!</p>
+                        </div>
+                    `;
+                } else {
+                    topUsers.forEach((user, index) => {
+                        const rank = index + 1;
+                        const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
+                        const activityCount = Object.values(user.activities).filter(a => a.sessions > 0).length;
+                        
+                        leaderboardHTML += `
+                            <div class="leaderboard-item">
+                                <div class="leaderboard-rank ${rankClass}">${rank}</div>
+                                <div class="leaderboard-info">
+                                    <div class="leaderboard-name">${user.name}</div>
+                                    <div class="leaderboard-stats">
+                                        <span class="leaderboard-score">Skor: ${user.totalScore}</span>
+                                        <span class="leaderboard-level">Level: ${user.level}</span>
+                                        <span class="leaderboard-activity">Aktif: ${activityCount} game</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                container.innerHTML = leaderboardHTML;
+            },
+            
+            // Get current user data
+            getCurrentUserData: function() {
+                const user = typeof AUTH !== 'undefined' ? AUTH.getCurrentUser() : null;
+                if (!user) return null;
+                
+                const userEmail = user.email;
+                let userData = JSON.parse(localStorage.getItem(`agroplay_user_${userEmail}`));
+                
+                if (!userData) {
+                    userData = this.initUserData();
+                }
+                
+                return userData;
+            }
+        };
+        
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize scoring system
+            setTimeout(() => {
+                scoringSystem.initUserData();
+                scoringSystem.updateLeaderboard();
+                console.log('Scoring system initialized');
+            }, 1000);
+        });
+        
+        // ==================== ACTIVITY SCORE UPDATES ====================
+        // These functions will be called from individual game pages
+        window.updateActivityScore = function(activity, score, xp) {
+            return scoringSystem.updateScore(activity, score, xp);
+        };
+        
+        window.getCurrentUserData = function() {
+            return scoringSystem.getCurrentUserData();
+        };
+        
+        window.updateLeaderboard = function() {
+            return scoringSystem.updateLeaderboard();
+        };
     </script>
 </body>
 </html>

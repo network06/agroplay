@@ -66,7 +66,7 @@ if (typeof originalBukuShowDetail === 'function') {
             
             // Show notification
             if (typeof showToast === 'function') {
-                showToast('success', `🔍 +15 XP - Detail tanaman!`);
+                showToast('success', `+15 XP - Detail tanaman!`);
             }
             
             REALTIME.recordActivity(REALTIME.ACTIVITY_TYPES.READ_GUIDE, { 
@@ -74,6 +74,11 @@ if (typeof originalBukuShowDetail === 'function') {
                 type: 'buku_tanamku_detail',
                 virtual: true 
             });
+        }
+        
+        // Update comprehensive scoring system
+        if (typeof updateActivityScore === 'function') {
+            updateActivityScore('buku-tanamku', 15, 15); // Score and XP for reading plant details
         }
         
         originalBukuShowDetail(plantId);
@@ -91,8 +96,13 @@ if (originalSaveFunction) {
             
             // Show notification
             if (typeof showToast === 'function') {
-                showToast('success', `🔖 +35 XP - Bookmark tersimpan!`);
+                showToast('success', `+35 XP - Bookmark tersimpan!`);
             }
+        }
+        
+        // Update comprehensive scoring system
+        if (typeof updateActivityScore === 'function') {
+            updateActivityScore('buku-tanamku', 35, 35); // Score and XP for bookmarking
         }
         originalSaveFunction(id);
     };

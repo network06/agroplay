@@ -624,7 +624,7 @@
     <main class="relative z-[1] px-4 pb-24">
         <!-- Farm Land -->
         <div id="farm-land" class="grid grid-cols-3 gap-3 p-5 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 rounded-2xl shadow-md mb-4">
-            <!-- 9 plots will be rendered by JS -->
+            <!-- 6 plots will be rendered by JS -->
         </div>
         
         <!-- Action Buttons -->
@@ -1206,6 +1206,12 @@
                 const plantingXP = Math.max(5, Math.floor(totalCost / 1000));
                 gameState.xp += plantingXP;
                 
+                // Update comprehensive scoring system
+                if (typeof updateActivityScore === 'function') {
+                    const score = Math.floor(totalCost / 100); // Score based on investment
+                    updateActivityScore('cuan-farming', score, plantingXP);
+                }
+                
                 // Save and update
                 saveGameState();
                 updateUI();
@@ -1277,6 +1283,12 @@ XP: +${plantingXP}`;
             gameState.totalHarvested++;
             gameState.totalProfit += profit;
             gameState.xp += xpGain;
+            
+            // Update comprehensive scoring system
+            if (typeof updateActivityScore === 'function') {
+                const score = Math.floor(profit / 100); // Score based on profit
+                updateActivityScore('cuan-farming', score, xpGain);
+            }
             
             // Update market trend (small fluctuation)
             gameState.marketTrend = Math.max(0.5, Math.min(1.5, 

@@ -2506,6 +2506,12 @@
                 this.currentUser.totalPointsEarned += points;
                 this.showPointsPopup(points);
                 this.updateStats();
+                
+                // Update comprehensive scoring system
+                if (typeof updateActivityScore === 'function') {
+                    const xp = Math.floor(points / 10); // 1 XP per 10 points
+                    updateActivityScore('tanam-yuk', points, xp);
+                }
             }
 
             showPointsPopup(points) {
