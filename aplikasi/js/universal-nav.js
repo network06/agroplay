@@ -128,7 +128,7 @@
             // Wait for DOM and AUTH
             function tryInit() {
                 if (typeof AUTH !== 'undefined' && AUTH.getCurrentUser()) {
-                    this.injectUniversalNav();
+                    // this.injectUniversalNav(); // Commented out to remove duplicate menu
                     this.addFloatingQuickAccess();
                     console.log('🌱 Universal Navigation initialized for all roles');
                 } else {
