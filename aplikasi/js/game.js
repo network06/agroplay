@@ -1,8 +1,7 @@
 // ==================== KEBUN AJAIB - GAME.JS ====================
 // Main JavaScript for Kebun Ajaib page functionality
 
-// Global variables
-let currentCategory = 'pangan';
+// Global variables (only variables not defined in HTML)
 let currentPlant = null;
 
 // Initialize the page
@@ -41,7 +40,8 @@ function loadPlants() {
     
     grid.innerHTML = '';
     
-    const plants = PLANTS_DATA[currentCategory] || [];
+    // Use PLANTS_DATA from HTML (window scope)
+    const plants = (typeof PLANTS_DATA !== 'undefined' && PLANTS_DATA[currentCategory]) ? PLANTS_DATA[currentCategory] : [];
     
     plants.forEach((plant, index) => {
         const card = createPlantCard(plant, index);
@@ -80,14 +80,19 @@ function closeModal() {
 
 // Filter plants by category
 function filterCategory(category) {
-    currentCategory = category;
+    // Use currentCategory from HTML scope
+    if (typeof currentCategory !== 'undefined') {
+        window.currentCategory = category;
+    }
     loadPlants();
     
     // Update button states
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    event.target.classList.add('active');
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
 }
 
 // Show all categories
@@ -127,10 +132,8 @@ function setupEventListeners() {
     });
 }
 
-// Export functions for global access
-window.showPlantDetail = showPlantDetail;
+// Export functions for global access (only functions not defined in HTML)
 window.closeModal = closeModal;
-window.toggleGuideSection = toggleGuideSection;
 window.filterCategory = filterCategory;
 window.showAllCategories = showAllCategories;
 
