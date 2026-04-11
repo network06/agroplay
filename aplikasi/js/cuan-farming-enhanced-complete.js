@@ -1,7 +1,8 @@
 // ==================== SHOP DATA AND COMPLETE FUNCTIONS ====================
 
 // Complete Shop Items Database
-const SHOP_ITEMS = {
+if (typeof SHOP_ITEMS === 'undefined') {
+    var SHOP_ITEMS = {
     seeds: [
         { id: 'padi', name: 'Bibit Padi', icon: '??', price: 100, description: 'Bibit padi berkualitas tinggi' },
         { id: 'jagung', name: 'Bibit Jagung', icon: '??', price: 150, description: 'Bibit jagung manis' },
@@ -116,7 +117,7 @@ function showTutorial() {
     `;
     
     window.showModal('Tutorial Bermain', tutorialHTML);
-}
+};};
 
 // Make showTutorial available globally
 window.showTutorial = showTutorial;
