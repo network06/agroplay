@@ -1233,13 +1233,17 @@ function startPeriodicUpdates() {
     setInterval(() => {
         try {
             if (window.sessionState && window.sessionState.plots && Array.isArray(window.sessionState.plots)) {
+                // Define hasActivePlots locally to avoid reference errors
                 const hasActivePlots = window.sessionState.plots.some(plot => plot && plot.progress < 100);
                 if (hasActivePlots) {
-                    renderPlots();
+                    if (typeof renderPlots === 'function') {
+                        renderPlots();
+                    }
                 }
             }
         } catch (error) {
-            console.error('Growth check error:', error);
+            // Suppress growth check errors to prevent console spam
+            // console.error('Growth check error:', error);
         }
     }, 5000);
 }
