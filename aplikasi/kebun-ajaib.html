@@ -1322,8 +1322,10 @@ n           Advanced Interactive & Animations
     <script>
         // ==================== PLANTS DATA WITH COMPLETE PLANTING GUIDES ====================
         
-        // Global variables
-        var currentCategory = 'pangan';
+        // Global variables - avoid duplicate declaration
+        if (typeof currentCategory === 'undefined') {
+            var currentCategory = 'pangan';
+        }
         var selectedPlantId = null;
         var selectedPlantCategory = null;
         

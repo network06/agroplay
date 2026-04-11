@@ -76,9 +76,12 @@
 
 /* Enhanced Planting Container */
 .enhanced-planting-container {
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
     padding: 0;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 /* Planting Header */
@@ -134,8 +137,9 @@
 
 /* Categories */
 .planting-categories {
-    display: flex;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
     padding: 20px;
     background: white;
     border-bottom: 1px solid #e0e0e0;
@@ -598,9 +602,14 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .enhanced-planting-container {
+        max-height: 90vh;
+        border-radius: 10px;
+    }
+    
     .planting-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 15px;
+        grid-template-columns: 1fr;
+        gap: 12px;
         padding: 15px;
     }
     
@@ -617,20 +626,52 @@
     }
     
     .planting-categories {
+        grid-template-columns: repeat(2, 1fr);
         padding: 15px;
         gap: 8px;
     }
     
     .category-btn {
-        padding: 10px 14px;
-        font-size: 13px;
+        padding: 8px 12px;
+        font-size: 12px;
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+    }
+    
+    .category-name {
+        font-size: 11px;
+    }
+    
+    .category-count {
+        font-size: 10px;
     }
     
     .title-text {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     .modal-header-enhanced {
-        padding: 15px 20px;
+        padding: 12px 15px;
+    }
+    
+    .planting-header {
+        padding: 15px;
+    }
+    
+    .planting-search {
+        padding: 15px;
+    }
+    
+    .plant-card {
+        padding: 12px;
+    }
+    
+    .plant-name {
+        font-size: 16px;
+    }
+    
+    .option-section {
+        padding: 12px;
     }
 }

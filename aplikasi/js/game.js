@@ -41,7 +41,14 @@ function loadPlants() {
     // Use PLANTS_DATA from HTML (window scope) with proper error handling
     let plants = [];
     if (typeof PLANTS_DATA !== 'undefined' && PLANTS_DATA && typeof currentCategory !== 'undefined') {
-        plants = PLANTS_DATA[currentCategory] || [];
+        plants = PLANTS_DATA[currentCategory] || PLANTS_DATA['sayuran'] || [];
+    } else {
+        // Fallback data if PLANTS_DATA or currentCategory is not available
+        plants = [
+            { name: 'Padi', icon: '??', description: 'Tanaman padi', growthTime: '90 hari' },
+            { name: 'Jagung', icon: '??', description: 'Tanaman jagung', growthTime: '70 hari' },
+            { name: 'Cabai', icon: '??', description: 'Tanaman cabai', growthTime: '60 hari' }
+        ];
     }
     
     plants.forEach((plant, index) => {
@@ -134,6 +141,16 @@ function setupEventListeners() {
         }
     });
 }
+
+// Add missing showPlantDetail function
+window.showPlantDetail = function(plantId) {
+    console.log('Showing plant detail for:', plantId);
+    // This function should show plant details in a modal
+    // Implementation depends on the specific requirements
+    if (window.showModal) {
+        window.showModal('Detail Tanaman', `<p>Detail untuk ${plantId} akan segera tersedia.</p>`);
+    }
+};
 
 // Export functions for global access (only if not already defined)
 if (typeof window.closeModal === 'undefined') {
