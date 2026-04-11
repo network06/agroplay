@@ -748,20 +748,35 @@ function startQuiz() {
 function showScreen(screenId) {
     console.log('showScreen called with:', screenId);
     
-    // Hide all screens with animation
+    // Hide all screens
     document.querySelectorAll('.quiz-screen').forEach(function(screen) {
         screen.classList.remove('active');
         screen.style.display = 'none';
+        screen.style.opacity = '0';
+        screen.style.transform = 'translateY(20px)';
     });
     
-    // Show target screen with animation
+    // Show target screen
     var targetScreen = document.getElementById(screenId);
     if (targetScreen) {
+        console.log('Found target screen:', screenId);
+        
+        // Reset styles
         targetScreen.style.display = 'block';
+        targetScreen.style.opacity = '0';
+        targetScreen.style.transform = 'translateY(20px)';
+        
         // Force reflow
         targetScreen.offsetHeight;
-        targetScreen.classList.add('active');
-        console.log('Screen shown:', screenId);
+        
+        // Animate in
+        setTimeout(function() {
+            targetScreen.style.opacity = '1';
+            targetScreen.style.transform = 'translateY(0)';
+            targetScreen.classList.add('active');
+            console.log('Screen animated in:', screenId);
+        }, 50);
+        
     } else {
         console.error('Screen not found:', screenId);
     }

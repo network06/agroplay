@@ -192,8 +192,28 @@ body::after {
 }
 
 .quiz-screen.active {
-    display: block;
+    display: block !important;
     animation: fadeIn 0.5s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced transitions */
+.quiz-screen {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+/* Button improvements */
+#btn-select-category:not(:disabled):hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4) !important;
+}
+
+#btn-select-category:not(:disabled):active {
+    transform: translateY(0) scale(0.98) !important;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3) !important;
 }
 
 /* Plant Cards Styling */

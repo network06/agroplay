@@ -1202,7 +1202,7 @@
                     </div>
                 </div>
                 
-                <button id="btn-select-category" onclick="goToPlantSelection()" disabled class="w-full bg-gradient-to-r from-primary-orange to-primary-orange-dark text-white py-4 rounded-xl font-fredoka font-bold transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2">
+                <button id="btn-select-category" disabled class="w-full bg-gradient-to-r from-primary-orange to-primary-orange-dark text-white py-4 rounded-xl font-fredoka font-bold transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2">
                     <i class="fas fa-arrow-right"></i> Lanjut Pilih Tanaman
                 </button>
             </div>
@@ -1425,19 +1425,54 @@
                 }
             });
             
-            // Setup button handlers
-            const btnSelectCategory = document.getElementById('btn-select-category');
-            if (btnSelectCategory) {
-                btnSelectCategory.onclick = function(e) {
-                    e.preventDefault();
-                    console.log('Continue button clicked');
+            // Setup button handlers with aggressive approach
+            const setupButton = () => {
+                const btnSelectCategory = document.getElementById('btn-select-category');
+                if (btnSelectCategory) {
+                    console.log('Setting up button handler');
                     
-                    if (typeof goToPlantSelection === 'function') {
-                        goToPlantSelection();
-                    } else {
-                        console.error('goToPlantSelection not available!');
-                        alert('Error: Navigation not available. Please refresh the page.');
-                    }
+                    // Remove all existing handlers
+                    btnSelectCategory.onclick = null;
+                    
+                    // Clone button to remove all event listeners
+                    const newBtn = btnSelectCategory.cloneNode(true);
+                    btnSelectCategory.parentNode.replaceChild(newBtn, btnSelectCategory);
+                    
+                    // Add new event listener
+                    newBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Continue button clicked!');
+                        
+                        // Visual feedback
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                        
+                        if (typeof goToPlantSelection === 'function') {
+                            console.log('Calling goToPlantSelection...');
+                            goToPlantSelection();
+                        } else {
+                            console.error('goToPlantSelection not available!');
+                            alert('Error: Navigation not available. Please refresh the page.');
+                        }
+                    });
+                    
+                    console.log('Button handler setup complete');
+                } else {
+                    console.error('Button not found!');
+                }
+            };
+            
+            setupButton();
+            
+            // Also setup when category is selected
+            const originalSelectCategory = window.selectCategory;
+            if (originalSelectCategory) {
+                window.selectCategory = function(categoryId) {
+                    originalSelectCategory(categoryId);
+                    setTimeout(setupButton, 100);
                 };
             }
             
