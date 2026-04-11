@@ -16,6 +16,19 @@
     };
     
     console.warn = function(...args) {
+        const message = args[0] || '';
+        const messageStr = typeof message === 'string' ? message : String(message);
+        
+        // Filter out CDN warnings and toolbar errors
+        if (messageStr.includes('cdn.tailwindcss.com') || 
+            messageStr.includes('should not be used in production') ||
+            messageStr.includes('install it as a PostCSS plugin') ||
+            messageStr.includes('toolbar.js') ||
+            messageStr.includes('Could not establish connection') ||
+            messageStr.includes('Receiving end does not exist')) {
+            return;
+        }
+        
         return;
     };
     
@@ -23,13 +36,17 @@
         const message = args[0] || '';
         const messageStr = typeof message === 'string' ? message : String(message);
         
-        // Only allow critical system logs
+        // Only allow critical system logs - filter out spam
         if (messageStr.includes('AUTH:') || 
             messageStr.includes('Initializing') || 
             messageStr.includes('Ready!') ||
-            messageStr.includes('Game state loaded') ||
-            messageStr.includes('Farm plots rendered')) {
+            messageStr.includes('Game state loaded')) {
             originalConsole.log.apply(console, args);
+        }
+        
+        // Filter out spam messages
+        if (messageStr.includes('Farm plots rendered')) {
+            return;
         }
         
         return;
