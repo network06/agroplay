@@ -1322,10 +1322,8 @@ n           Advanced Interactive & Animations
     <script>
         // ==================== PLANTS DATA WITH COMPLETE PLANTING GUIDES ====================
         
-        // Global variables - avoid duplicate declaration
-        if (typeof currentCategory === 'undefined') {
-            var currentCategory = 'pangan';
-        }
+        // Global variables
+        let currentCategory = 'pangan';
         var selectedPlantId = null;
         var selectedPlantCategory = null;
         
@@ -2519,6 +2517,7 @@ n           Advanced Interactive & Animations
         function filterCategory(category) {
             currentCategory = category;
             
+            // Update button states
             document.querySelectorAll('.tab-btn').forEach(function(btn) {
                 btn.classList.remove('active');
             });
@@ -2917,6 +2916,12 @@ n           Advanced Interactive & Animations
             }
         }
 
+        // Make variables available globally for game.js
+        window.currentCategory = currentCategory;
+        window.selectedPlantId = selectedPlantId;
+        window.selectedPlantCategory = selectedPlantCategory;
+        window.PLANTS_DATA = PLANTS_DATA;
+        
         // Initialize page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Kebun Ajaib page loaded, initializing...');

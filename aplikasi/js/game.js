@@ -16,13 +16,12 @@ function initializeBackgroundParticles() {
     const particlesContainer = document.getElementById('bg-particles');
     if (!particlesContainer) return;
     
-    const particles = ['leaf', 'flower', 'seed', 'sparkle'];
-    const particleEmojis = ['leaf', 'flower', 'seed', 'sparkle'];
+    const particleEmojis = ['', '', '', '', '', '', '', '', '', ''];
     
     for (let i = 0; i < 15; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        particle.textContent = ['leaf', 'flower', 'seed', 'sparkle'][Math.floor(Math.random() * 4)];
+        particle.textContent = particleEmojis[Math.floor(Math.random() * particleEmojis.length)];
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
         particle.style.animationDelay = Math.random() * 15 + 's';
@@ -40,15 +39,8 @@ function loadPlants() {
     
     // Use PLANTS_DATA from HTML (window scope) with proper error handling
     let plants = [];
-    if (typeof PLANTS_DATA !== 'undefined' && PLANTS_DATA && typeof currentCategory !== 'undefined') {
-        plants = PLANTS_DATA[currentCategory] || PLANTS_DATA['sayuran'] || [];
-    } else {
-        // Fallback data if PLANTS_DATA or currentCategory is not available
-        plants = [
-            { name: 'Padi', icon: '??', description: 'Tanaman padi', growthTime: '90 hari' },
-            { name: 'Jagung', icon: '??', description: 'Tanaman jagung', growthTime: '70 hari' },
-            { name: 'Cabai', icon: '??', description: 'Tanaman cabai', growthTime: '60 hari' }
-        ];
+    if (typeof window.PLANTS_DATA !== 'undefined' && window.PLANTS_DATA && typeof window.currentCategory !== 'undefined') {
+        plants = window.PLANTS_DATA[window.currentCategory] || [];
     }
     
     plants.forEach((plant, index) => {
@@ -60,17 +52,23 @@ function loadPlants() {
 // Create plant card element
 function createPlantCard(plant, index) {
     const card = document.createElement('div');
-    card.className = 'plant-card bg-white rounded-2xl p-5 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl border-3 border-transparent hover:border-primary-green/30';
+    card.className = 'plant-card';
     card.style.animationDelay = `${index * 0.1}s`;
-    card.style.animation = 'plantCardEntrance 0.5s ease forwards';
     
     card.innerHTML = `
-        <div class="text-5xl mb-3 plant-card-icon">${plant.icon}</div>
-        <div class="font-fredoka font-bold text-lg mb-1 plant-card-name">${plant.name}</div>
-        <div class="text-xs text-gray-600 font-nunito plant-card-desc">${plant.nameId}</div>
+        <div class="plant-card-wrapper">
+            <span class="plant-card-icon">${plant.icon || ''}</span>
+            <h3 class="plant-card-name">${plant.name || 'Tanaman'}</h3>
+            <p class="plant-card-desc">${plant.nameId || plant.description || 'Deskripsi tanaman'}</p>
+        </div>
+        <div class="plant-card-glow"></div>
     `;
     
-    card.onclick = () => showPlantDetail(plant.id, plant.category);
+    card.onclick = () => {
+        if (window.showPlantDetail) {
+            window.showPlantDetail(plant.id, plant.category);
+        }
+    };
     
     return card;
 }
@@ -90,13 +88,13 @@ function closeModal() {
 function filterCategory(category) {
     // Only run if filterCategory is not already defined in HTML
     if (typeof window.filterCategory === 'undefined') {
-        if (typeof currentCategory !== 'undefined') {
+        if (typeof window.currentCategory !== 'undefined') {
             window.currentCategory = category;
         }
         loadPlants();
         
         // Update button states
-        document.querySelectorAll('.category-btn').forEach(btn => {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active');
         });
         if (event && event.target) {
@@ -142,15 +140,17 @@ function setupEventListeners() {
     });
 }
 
-// Add missing showPlantDetail function
-window.showPlantDetail = function(plantId) {
-    console.log('Showing plant detail for:', plantId);
-    // This function should show plant details in a modal
-    // Implementation depends on the specific requirements
-    if (window.showModal) {
-        window.showModal('Detail Tanaman', `<p>Detail untuk ${plantId} akan segera tersedia.</p>`);
-    }
-};
+// Add missing showPlantDetail function (only if not defined in HTML)
+if (typeof window.showPlantDetail === 'undefined') {
+    window.showPlantDetail = function(plantId, category) {
+        console.log('Showing plant detail for:', plantId, category);
+        // This function is already implemented in HTML script
+        // This is just a fallback
+        if (window.showModal) {
+            window.showModal('Detail Tanaman', `<p>Detail untuk ${plantId} akan segera tersedia.</p>`);
+        }
+    };
+}
 
 // Export functions for global access (only if not already defined)
 if (typeof window.closeModal === 'undefined') {
