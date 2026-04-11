@@ -274,37 +274,50 @@ function openPlantingModal(plotIndex) {
 }
 
 function selectPlant(plantId) {
-    sessionState.selectedPlant = plantId;
+    window.sessionState.selectedPlant = plantId;
     
     // Update UI
     document.querySelectorAll('.plant-option').forEach(el => {
         el.classList.remove('selected');
     });
     
-    event.target.closest('.plant-option').classList.add('selected');
-}
+    // Find the clicked element
+    const clickedElement = event.target.closest('.plant-option');
+    if (clickedElement) {
+        clickedElement.classList.add('selected');
+    }
 
 function confirmPlanting() {
-    if (!sessionState.selectedPlant || sessionState.selectedPlotIndex === null) {
-        showToast('error', 'Pilih tanaman dan plot terlebih dahulu!');
+    if (!window.sessionState.selectedPlant || window.sessionState.selectedPlotIndex === null) {
+        window.showToast('error', 'Pilih tanaman dan plot terlebih dahulu!');
         return;
     }
     
-    const plant = PLANTS[sessionState.selectedPlant];
-    const fertilizer = document.getElementById('fertilizer-select').value;
-    const method = document.getElementById('method-select').value;
-    const waterLevel = parseInt(document.getElementById('water-slider').value);
+    const plant = window.PLANTS[window.sessionState.selectedPlant];
+    const fertilizerSelect = document.getElementById('fertilizer-select');
+    const methodSelect = document.getElementById('method-select');
+    const waterSlider = document.getElementById('water-slider');
     
-    const totalCost = plant.seedPrice + FERTILIZERS[fertilizer].cost + METHODS[method].cost;
+    // Safety checks for form elements
+    if (!fertilizerSelect || !methodSelect || !waterSlider) {
+        window.showToast('error', 'Form tidak lengkap, silakan coba lagi!');
+        return;
+    }
     
-    if (gameState.coins < totalCost) {
-        showToast('error', `Coins tidak cukup! Butuh ${formatNumber(totalCost)} coins`);
+    const fertilizer = fertilizerSelect.value;
+    const method = methodSelect.value;
+    const waterLevel = parseInt(waterSlider.value);
+    
+    const totalCost = plant.seedPrice + window.FERTILIZERS[fertilizer].cost + window.METHODS[method].cost;
+    
+    if (window.gameState.coins < totalCost) {
+        window.showToast('error', `Coins tidak cukup! Butuh ${window.formatNumber(totalCost)} coins`);
         return;
     }
     
     // Plant the crop
-    sessionState.plots[sessionState.selectedPlotIndex] = {
-        plantId: sessionState.selectedPlant,
+    window.sessionState.plots[window.sessionState.selectedPlotIndex] = {
+        plantId: window.sessionState.selectedPlant,
         fertilizer: fertilizer,
         method: method,
         waterLevel: waterLevel,
@@ -313,53 +326,171 @@ function confirmPlanting() {
     };
     
     // Deduct coins
-    gameState.coins -= totalCost;
-    gameState.totalPlanted++;
-    gameState.xp += 10;
+    window.gameState.coins -= totalCost;
+    window.gameState.totalPlanted++;
+    window.gameState.xp += 10;
     
-    // Unlock new plants at certain milestones
-    if (gameState.totalPlanted === 5) {
-        gameState.plantsUnlocked.add('wortel');
-        showToast('success', '?? Tanaman baru terbuka: Wortel!');
-    }
-    if (gameState.totalPlanted === 10) {
-        gameState.plantsUnlocked.add('strawberry');
-        showToast('success', '?? Tanaman baru terbuka: Stroberi!');
-    }
-    if (gameState.totalPlanted === 20) {
-        gameState.plantsUnlocked.add('tebu');
-        showToast('success', '?? Tanaman baru terbuka: Tebu!');
-    }
-    if (gameState.totalPlanted === 30) {
-        gameState.plantsUnlocked.add('jahe');
-        showToast('success', '?? Tanaman baru terbuka: Jahe!');
-    }
-    if (gameState.totalPlanted === 50) {
-        gameState.plantsUnlocked.add('mawar');
-        showToast('success', '?? Tanaman baru terbuka: Mawar!');
+    // Unlock all 17 plants progressively
+    const unlockMilestones = {
+        5: { plant: 'wortel', name: 'Wortel' },
+        10: { plant: 'strawberry', name: 'Stroberi' },
+        15: { plant: 'melon', name: 'Melon' },
+        20: { plant: 'tebu', name: 'Tebu' },
+        25: { plant: 'kapas', name: 'Kapas' },
+        30: { plant: 'jahe', name: 'Jahe' },
+        35: { plant: 'kunyit', name: 'Kunyit' },
+        40: { plant: 'kopi', name: 'Kopi' },
+        45: { plant: 'mawar', name: 'Mawar' },
+        50: { plant: 'anggrek', name: 'Anggrek' },
+        55: { plant: 'bawang', name: 'Bawang' },
+        60: { plant: 'buncis', name: 'Buncis' },
+        65: { plant: 'kacang', name: 'Kacang' },
+        70: { plant: 'kedelai', name: 'Kedelai' },
+        75: { plant: 'lada', name: 'Lada' },
+        80: { plant: 'pala', name: 'Pala' }
+    };
+    
+    if (unlockMilestones[window.gameState.totalPlanted]) {
+        const milestone = unlockMilestones[window.gameState.totalPlanted];
+        window.gameState.plantsUnlocked.add(milestone.plant);
+        window.showToast('success', ` Tanaman baru terbuka: ${milestone.name}!`);
     }
     
-    saveGameState();
-    updateUI();
-    renderPlots();
-    closeModal();
+    window.saveGameState();
+    window.updateUI();
+    window.renderPlots();
+    window.closeModal();
     
-    showToast('success', `?? ${plant.name} berhasil ditanam!`);
+    window.showToast('success', `${plant.name} berhasil ditanam!`);
+    
+    console.log('Plant confirmed:', plant.name, 'on plot:', window.sessionState.selectedPlotIndex);
     
     // Start growth simulation
     startGrowthSimulation();
 }
 
+function getCategoryIcon(category) {
+    const icons = {
+        'pangan': '🌾',
+        'sayuran': '🥬',
+        'buah': '🍓',
+        'industri': '🏭',
+        'obat': '💊',
+        'hias': '🌸'
+    };
+    return icons[category] || '🌱';
+}
+
+function getCategoryName(category) {
+    const names = {
+        'pangan': 'Pangan',
+        'sayuran': 'Sayuran',
+        'buah': 'Buah',
+        'industri': 'Industri',
+        'obat': 'Obat',
+        'hias': 'Hias'
+    };
+    return names[category] || 'Tanaman';
+}
+
+function filterPlants(category) {
+    // Update active tab
+    document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Filter plants
+    const plantsHTML = Object.values(window.PLANTS)
+        .filter(p => p.category === category && window.gameState.plantsUnlocked.has(p.id))
+        .map(plant => `
+            <div class="plant-option" onclick="window.selectPlant('${plant.id}')">
+                <div class="plant-option-icon">${plant.icon}</div>
+                <div class="plant-option-name">${plant.name}</div>
+                <div class="plant-option-price">${window.formatNumber(plant.seedPrice)} coins</div>
+                <div class="plant-option-profit">Profit: ${window.formatNumber(plant.sellPrice - plant.seedPrice)}</div>
+                <div class="plant-option-days">${plant.growDays} hari</div>
+                <div class="plant-option-difficulty ${plant.difficulty}">${plant.difficulty}</div>
+            </div>
+        `).join('');
+    
+    const grid = document.querySelector('.plant-selection-grid');
+    if (grid) {
+        grid.innerHTML = plantsHTML;
+    }
+}
+
+function updateWaterLevel(value) {
+    const display = document.getElementById('water-display');
+    if (display) {
+        display.textContent = value;
+    }
+}
+
+function showPlantProgress(plotIndex) {
+    const plot = window.sessionState.plots[plotIndex];
+    if (!plot) return;
+    
+    const plant = window.PLANTS[plot.plantId];
+    const progress = Math.round(plot.progress || 0);
+    
+    const progressHTML = `
+        <div class="plant-progress-detail">
+            <div class="plant-header">
+                <div class="plant-icon-large">${plant.icon}</div>
+                <div class="plant-info">
+                    <h3>${plant.name}</h3>
+                    <p class="plant-category">${plant.categoryName}</p>
+                </div>
+            </div>
+            
+            <div class="progress-section">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: ${progress}%"></div>
+                    <span class="progress-text">${progress}%</span>
+                </div>
+                <p class="progress-status">${progress < 100 ? 'Sedang tumbuh...' : 'Siap dipanen!'}</p>
+            </div>
+            
+            <div class="plant-details">
+                <div class="detail-item">
+                    <span class="detail-label">Ditanam:</span>
+                    <span class="detail-value">${new Date(plot.plantedAt).toLocaleString('id-ID')}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Pupuk:</span>
+                    <span class="detail-value">${window.FERTILIZERS[plot.fertilizer].name}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Air:</span>
+                    <span class="detail-value">Level ${plot.waterLevel}/5</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Estimasi panen:</span>
+                    <span class="detail-value">${plant.growDays} hari</span>
+                </div>
+            </div>
+            
+            <div class="plant-tips">
+                <h4>?? Tips:</h4>
+                <p>${plant.tips}</p>
+            </div>
+        </div>
+    `;
+    
+    window.showModal(`Detail: ${plant.name}`, progressHTML);
+}
+
 function harvestPlot(plotIndex) {
-    const plot = sessionState.plots[plotIndex];
+    const plot = window.sessionState.plots[plotIndex];
     if (!plot || plot.progress < 100) {
-        showToast('error', 'Tanaman belum siap dipanen!');
+        window.showToast('error', 'Tanaman belum siap dipanen!');
         return;
     }
     
-    const plant = PLANTS[plot.plantId];
-    const fertilizer = FERTILIZERS[plot.fertilizer];
-    const method = METHODS[plot.method];
+    const plant = window.PLANTS[plot.plantId];
+    const fertilizer = window.FERTILIZERS[plot.fertilizer];
+    const method = window.METHODS[plot.method];
     
     // Calculate yield
     let yield = plant.baseYield * fertilizer.yieldMult * method.yieldMult;
@@ -377,22 +508,22 @@ function harvestPlot(plotIndex) {
     const profit = revenue - plant.seedPrice - fertilizer.cost - method.cost;
     
     // Update game state
-    gameState.coins += revenue;
-    gameState.totalHarvested++;
-    gameState.totalProfit += profit;
-    gameState.xp += Math.max(10, Math.floor(revenue / 1000));
+    window.gameState.coins += revenue;
+    window.gameState.totalHarvested++;
+    window.gameState.totalProfit += profit;
+    window.gameState.xp += Math.max(10, Math.floor(revenue / 1000));
     
     // Clear plot
-    sessionState.plots[plotIndex] = null;
+    window.sessionState.plots[plotIndex] = null;
     
     // Check achievements
     checkAchievements();
     
-    saveGameState();
-    updateUI();
-    renderPlots();
+    window.saveGameState();
+    window.updateUI();
+    window.renderPlots();
     
-    showToast('success', `?? Panen ${plant.name}: ${yield} ${plant.unit}, +${formatNumber(revenue)} coins!`);
+    window.showToast('success', `?? Panen ${plant.name}: ${yield} ${plant.unit}, +${window.formatNumber(revenue)} coins!`);
 }
 
 function harvestAllReady() {
@@ -988,11 +1119,22 @@ function showToast(type, message) {
 function showModal(title, content) {
     const modal = document.getElementById('game-modal');
     const body = document.getElementById('modal-body');
+    const titleElement = document.getElementById('modal-title');
     
     if (modal && body) {
+        // Set modal title if title element exists
+        if (titleElement) {
+            titleElement.textContent = title;
+        }
+        
+        // Set modal content
         body.innerHTML = content;
+        
+        // Show modal
         modal.classList.remove('hidden');
         modal.classList.add('flex');
+        
+        console.log('Modal opened:', title);
     }
 }
 
