@@ -1309,7 +1309,7 @@
         <!-- Top Navigation Bar -->
         <div class="flex items-center justify-between mb-6 relative z-10">
             <button onclick="window.location.href='index.html'" class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 text-white text-xl flex items-center justify-center transition-all duration-300 hover:from-orange-500 hover:to-orange-700 hover:scale-110 hover:-rotate-12 shadow-lg">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-left text-orange-100"></i>
             </button>
             <div class="text-center flex-1">
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-yellow-200 via-white to-orange-200 bg-clip-text text-transparent font-fredoka animate-title-pulse drop-shadow-lg">🧠 Kuis Seru Tani</h1>
@@ -1317,10 +1317,10 @@
             </div>
             <div class="flex gap-3">
                 <button class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 text-white text-xl flex items-center justify-center transition-all duration-300 hover:from-yellow-500 hover:to-amber-700 hover:scale-110 shadow-lg">
-                    <i class="fas fa-trophy"></i>
+                    <i class="fas fa-trophy text-yellow-100"></i>
                 </button>
                 <button onclick="window.location.href='index.html'" class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 text-white text-xl flex items-center justify-center transition-all duration-300 hover:from-green-500 hover:to-green-700 hover:scale-110 shadow-lg">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-home text-green-100"></i>
                 </button>
             </div>
         </div>
@@ -1807,22 +1807,20 @@
                         if (typeof selectCategory === 'function') {
                             selectCategory(categoryId);
                             
-                            // Auto scroll to continue button after category selection
-                            setTimeout(() => {
-                                const continueBtn = document.getElementById('btn-select-category');
-                                if (continueBtn) {
-                                    continueBtn.scrollIntoView({ 
-                                        behavior: 'smooth', 
-                                        block: 'center' 
-                                    });
-                                    
-                                    // Add pulse animation to button
-                                    continueBtn.classList.add('animate-pulse-once');
-                                    setTimeout(() => {
-                                        continueBtn.classList.remove('animate-pulse-once');
-                                    }, 1000);
-                                }
-                            }, 300);
+                            // Auto scroll immediately to continue button after category selection
+                            const continueBtn = document.getElementById('btn-select-category');
+                            if (continueBtn) {
+                                continueBtn.scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'center' 
+                                });
+                                
+                                // Add pulse animation to button
+                                continueBtn.classList.add('animate-pulse-once');
+                                setTimeout(() => {
+                                    continueBtn.classList.remove('animate-pulse-once');
+                                }, 1000);
+                            }
                         } else {
                             console.error('selectCategory not available!');
                             alert('Error: Category selection not available. Please refresh the page.');
