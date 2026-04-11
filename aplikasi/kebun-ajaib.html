@@ -1322,6 +1322,11 @@ n           Advanced Interactive & Animations
     <script>
         // ==================== PLANTS DATA WITH COMPLETE PLANTING GUIDES ====================
         
+        // Global variables
+        var currentCategory = 'pangan';
+        var selectedPlantId = null;
+        var selectedPlantCategory = null;
+        
         var PLANTS_DATA = {
             // === PANGAN (3) ===
             pangan: [
@@ -2478,8 +2483,6 @@ n           Advanced Interactive & Animations
             ]
         };
 
-        var currentCategory = 'pangan';
-
         // ==================== FUNCTIONS ====================
 
         function renderPlants(category) {
@@ -2815,8 +2818,6 @@ n           Advanced Interactive & Animations
         });
 
         // Navigate to Tanam Yuk with selected plant
-        var selectedPlantId = null;
-        var selectedPlantCategory = null;
         
         function goToTanamYuk() {
             // Use the stored plant data from showPlantDetail

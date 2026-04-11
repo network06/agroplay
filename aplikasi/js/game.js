@@ -1,16 +1,14 @@
 // ==================== KEBUN AJAIB - GAME.JS ====================
 // Main JavaScript for Kebun Ajaib page functionality
-
-// Global variables (only variables not defined in HTML)
-let currentPlant = null;
+// Note: Main functionality is in HTML script, this file provides supplementary functions
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Kebun Ajaib: Initializing...');
-    initializeBackgroundParticles();
-    loadPlants();
-    updateUserInfo();
-    setupEventListeners();
+    // Only initialize if not already initialized by HTML script
+    if (typeof currentCategory === 'undefined') {
+        initializeBackgroundParticles();
+    }
 });
 
 // Background particles animation
@@ -40,8 +38,11 @@ function loadPlants() {
     
     grid.innerHTML = '';
     
-    // Use PLANTS_DATA from HTML (window scope)
-    const plants = (typeof PLANTS_DATA !== 'undefined' && PLANTS_DATA[currentCategory]) ? PLANTS_DATA[currentCategory] : [];
+    // Use PLANTS_DATA from HTML (window scope) with proper error handling
+    let plants = [];
+    if (typeof PLANTS_DATA !== 'undefined' && PLANTS_DATA && typeof currentCategory !== 'undefined') {
+        plants = PLANTS_DATA[currentCategory] || [];
+    }
     
     plants.forEach((plant, index) => {
         const card = createPlantCard(plant, index);
@@ -78,20 +79,22 @@ function closeModal() {
     }
 }
 
-// Filter plants by category
+// Filter plants by category (only if not defined in HTML)
 function filterCategory(category) {
-    // Use currentCategory from HTML scope
-    if (typeof currentCategory !== 'undefined') {
-        window.currentCategory = category;
-    }
-    loadPlants();
-    
-    // Update button states
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    if (event && event.target) {
-        event.target.classList.add('active');
+    // Only run if filterCategory is not already defined in HTML
+    if (typeof window.filterCategory === 'undefined') {
+        if (typeof currentCategory !== 'undefined') {
+            window.currentCategory = category;
+        }
+        loadPlants();
+        
+        // Update button states
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        if (event && event.target) {
+            event.target.classList.add('active');
+        }
     }
 }
 
@@ -132,9 +135,15 @@ function setupEventListeners() {
     });
 }
 
-// Export functions for global access (only functions not defined in HTML)
-window.closeModal = closeModal;
-window.filterCategory = filterCategory;
-window.showAllCategories = showAllCategories;
+// Export functions for global access (only if not already defined)
+if (typeof window.closeModal === 'undefined') {
+    window.closeModal = closeModal;
+}
+if (typeof window.filterCategory === 'undefined') {
+    window.filterCategory = filterCategory;
+}
+if (typeof window.showAllCategories === 'undefined') {
+    window.showAllCategories = showAllCategories;
+}
 
 console.log('Kebun Ajaib: Game.js loaded successfully');
