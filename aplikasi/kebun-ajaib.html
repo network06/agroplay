@@ -2184,12 +2184,37 @@
         }
 
         function toggleGuideSection(section) {
-            var header = document.querySelector('.guide-header[onclick="toggleGuideSection(\'' + section + '\')"]');
+            var header = document.querySelector('[onclick="toggleGuideSection(\'' + section + '\')"]');
             var content = document.getElementById('guide-' + section);
             
-            if (header && content) {
-                header.classList.toggle('active');
-                content.classList.toggle('active');
+            if (!header || !content) return;
+            
+            // Check if this section is already active
+            var isActive = content.style.maxHeight && content.style.maxHeight !== '0px';
+            
+            // Close all sections first
+            document.querySelectorAll('[id^="guide-"]').forEach(function(section) {
+                section.style.maxHeight = '0px';
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('[onclick*="toggleGuideSection"]').forEach(function(h) {
+                h.classList.remove('active');
+                var chevron = h.querySelector('.fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Open clicked section if it wasn't active
+            if (!isActive) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.classList.add('active');
+                header.classList.add('active');
+                var chevron = header.querySelector('.fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(180deg)';
+                }
             }
         }
 
@@ -2314,6 +2339,25 @@
                 container.appendChild(particle);
             }
         }
+        
+        // Update user info
+        function updateUserInfo() {
+            // Update streak from auth system
+            if (window.currentUser && window.currentUser.streak) {
+                const streakElement = document.getElementById('user-streak');
+                if (streakElement) {
+                    streakElement.textContent = window.currentUser.streak;
+                }
+            }
+        }
+
+        // Initialize page - Load plants when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Kebun Ajaib: Loading plants...');
+            renderPlants(currentCategory);
+            createParticles();
+            updateUserInfo();
+        });
         
         // Make functions global
         window.goToTanamYuk = goToTanamYuk;
