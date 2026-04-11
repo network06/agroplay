@@ -1312,8 +1312,8 @@
                 <i class="fas fa-arrow-left"></i>
             </button>
             <div class="text-center flex-1">
-                <h1 class="text-3xl font-bold text-white font-fredoka animate-title-pulse drop-shadow-lg">🧠 Kuis Seru Tani</h1>
-                <p class="text-sm text-white/90 font-nunito">Test pengetahuan hortikultura</p>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-yellow-200 via-white to-orange-200 bg-clip-text text-transparent font-fredoka animate-title-pulse drop-shadow-lg">🧠 Kuis Seru Tani</h1>
+                <p class="text-sm text-yellow-100 font-nunito">Test pengetahuan hortikultura</p>
             </div>
             <div class="flex gap-3">
                 <button class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 text-white text-xl flex items-center justify-center transition-all duration-300 hover:from-yellow-500 hover:to-amber-700 hover:scale-110 shadow-lg">
@@ -1660,6 +1660,39 @@
             border-color: #2196F3 !important;
         }
         
+        /* Pulse animation for buttons */
+        @keyframes pulse-once {
+            0% { transform: scale(1); box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 35px rgba(255, 152, 0, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4); }
+        }
+        
+        .animate-pulse-once {
+            animation: pulse-once 1s ease-in-out;
+        }
+        
+        /* Fix icon colors */
+        .fas {
+            color: inherit !important;
+        }
+        
+        /* Enhanced header icons */
+        .header-icon {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        /* Enhanced title animation */
+        @keyframes title-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-title-gradient {
+            background-size: 200% 200%;
+            animation: title-gradient 3s ease infinite;
+        }
+        
         .nav-item::before {
             content: '';
             position: absolute;
@@ -1773,6 +1806,23 @@
                         
                         if (typeof selectCategory === 'function') {
                             selectCategory(categoryId);
+                            
+                            // Auto scroll to continue button after category selection
+                            setTimeout(() => {
+                                const continueBtn = document.getElementById('btn-select-category');
+                                if (continueBtn) {
+                                    continueBtn.scrollIntoView({ 
+                                        behavior: 'smooth', 
+                                        block: 'center' 
+                                    });
+                                    
+                                    // Add pulse animation to button
+                                    continueBtn.classList.add('animate-pulse-once');
+                                    setTimeout(() => {
+                                        continueBtn.classList.remove('animate-pulse-once');
+                                    }, 1000);
+                                }
+                            }, 300);
                         } else {
                             console.error('selectCategory not available!');
                             alert('Error: Category selection not available. Please refresh the page.');
