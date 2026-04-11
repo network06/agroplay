@@ -16,7 +16,7 @@ function initializeBackgroundParticles() {
     const particlesContainer = document.getElementById('bg-particles');
     if (!particlesContainer) return;
     
-    const particleEmojis = ['', '', '', '', '', '', '', '', ''];
+    const particleEmojis = ['', '', '', '', '', ''];
     
     for (let i = 0; i < 15; i++) {
         const particle = document.createElement('div');
