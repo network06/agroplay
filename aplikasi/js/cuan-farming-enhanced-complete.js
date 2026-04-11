@@ -4,42 +4,42 @@
 if (typeof SHOP_ITEMS === 'undefined') {
     var SHOP_ITEMS = {
     seeds: [
-        { id: 'padi', name: 'Bibit Padi', icon: '??', price: 100, description: 'Bibit padi berkualitas tinggi' },
-        { id: 'jagung', name: 'Bibit Jagung', icon: '??', price: 150, description: 'Bibit jagung manis' },
-        { id: 'cabai', name: 'Bibit Cabai', icon: '??', price: 200, description: 'Bibit cabai pedas' },
-        { id: 'tomat', name: 'Bibit Tomat', icon: '??', price: 180, description: 'Bibit tomat segar' },
-        { id: 'kentang', name: 'Bibit Kentang', icon: '??', price: 250, description: 'Bibit kentang premium' },
-        { id: 'wortel', name: 'Bibit Wortel', icon: '??', price: 220, description: 'Bibit wortel organik' },
-        { id: 'bayam', name: 'Bibit Bayam', icon: '??', price: 80, description: 'Bibit bayam hijau' },
-        { id: 'stroberi', name: 'Bibit Stroberi', icon: '??', price: 300, description: 'Bibit stroberi manis' },
-        { id: 'melon', name: 'Bibit Melon', icon: '??', price: 350, description: 'Bibit melon jumbo' },
-        { id: 'tebu', name: 'Bibit Tebu', icon: '??', price: 120, description: 'Bibit tebu manis' },
-        { id: 'kapas', name: 'Bibit Kapas', icon: '??', price: 200, description: 'Bibit kapas putih' },
-        { id: 'kopi', name: 'Bibit Kopi', icon: '??', price: 400, description: 'Bibit kopi arabika' },
-        { id: 'jahe', name: 'Bibit Jahe', icon: '??', price: 180, description: 'Bibit jahe segar' },
-        { id: 'kunyit', name: 'Bibit Kunyit', icon: '??', price: 160, description: 'Bibit kunyit alami' },
-        { id: 'mawar', name: 'Bibit Mawar', icon: '??', price: 500, description: 'Bibit mawar merah' },
-        { id: 'anggrek', name: 'Bibit Anggrek', icon: '??', price: 800, description: 'Bibit anggrek langka' }
+        { id: 'padi', name: 'Bibit Padi', icon: '🌾', price: 100, description: 'Bibit padi berkualitas tinggi' },
+        { id: 'jagung', name: 'Bibit Jagung', icon: '🌽', price: 150, description: 'Bibit jagung manis' },
+        { id: 'cabai', name: 'Bibit Cabai', icon: '🌶️', price: 200, description: 'Bibit cabai pedas' },
+        { id: 'tomat', name: 'Bibit Tomat', icon: '🍅', price: 180, description: 'Bibit tomat segar' },
+        { id: 'kentang', name: 'Bibit Kentang', icon: '🥔', price: 250, description: 'Bibit kentang premium' },
+        { id: 'wortel', name: 'Bibit Wortel', icon: '🥕', price: 220, description: 'Bibit wortel organik' },
+        { id: 'bayam', name: 'Bibit Bayam', icon: '🥬', price: 80, description: 'Bibit bayam hijau' },
+        { id: 'stroberi', name: 'Bibit Stroberi', icon: '🍓', price: 300, description: 'Bibit stroberi manis' },
+        { id: 'melon', name: 'Bibit Melon', icon: '🍈', price: 350, description: 'Bibit melon jumbo' },
+        { id: 'tebu', name: 'Bibit Tebu', icon: '🎋', price: 120, description: 'Bibit tebu manis' },
+        { id: 'kapas', name: 'Bibit Kapas', icon: '☁️', price: 200, description: 'Bibit kapas putih' },
+        { id: 'kopi', name: 'Bibit Kopi', icon: '☕', price: 400, description: 'Bibit kopi arabika' },
+        { id: 'jahe', name: 'Bibit Jahe', icon: '🫚', price: 180, description: 'Bibit jahe segar' },
+        { id: 'kunyit', name: 'Bibit Kunyit', icon: '🟡', price: 160, description: 'Bibit kunyit alami' },
+        { id: 'mawar', name: 'Bibit Mawar', icon: '🌹', price: 500, description: 'Bibit mawar merah' },
+        { id: 'anggrek', name: 'Bibit Anggrek', icon: '🦋', price: 800, description: 'Bibit anggrek langka' }
     ],
     fertilizers: [
-        { id: 'none', name: 'Tanpa Pupuk', icon: '??', price: 0, description: 'Tidak menggunakan pupuk' },
-        { id: 'organik', name: 'Pupuk Organik', icon: '??', price: 50, description: 'Pupuk alami untuk tanaman' },
-        { id: 'kimia', name: 'Pupuk Kimia', icon: '??', price: 80, description: 'Pupuk kimia cepat bereaksi' },
-        { id: 'kompos', name: 'Pupuk Kompos', icon: '??', price: 60, description: 'Pupuk dari kompos rumah tangga' },
-        { id: 'premium', name: 'Pupuk Premium', icon: '??', price: 150, description: 'Pupuk kualitas tertinggi' }
+        { id: 'none', name: 'Tanpa Pupuk', icon: '🚫', price: 0, description: 'Tidak menggunakan pupuk' },
+        { id: 'organik', name: 'Pupuk Organik', icon: '🌿', price: 50, description: 'Pupuk alami untuk tanaman' },
+        { id: 'kimia', name: 'Pupuk Kimia', icon: '⚗️', price: 80, description: 'Pupuk kimia cepat bereaksi' },
+        { id: 'kompos', name: 'Pupuk Kompos', icon: '♻️', price: 60, description: 'Pupuk dari kompos rumah tangga' },
+        { id: 'premium', name: 'Pupuk Premium', icon: '⭐', price: 150, description: 'Pupuk kualitas tertinggi' }
     ],
     tools: [
-        { id: 'cangkul', name: 'Cangkul', icon: '??', price: 500, description: 'Alat untuk mengolah tanah' },
-        { id: 'garu', name: 'Garu', icon: '??', price: 300, description: 'Alat untuk meratakan tanah' },
-        { id: 'sprayer', name: 'Sprayer', icon: '??', price: 800, description: 'Alat untuk menyemprot pupuk' },
-        { id: 'siram', name: 'Selang Siram', icon: '??', price: 200, description: 'Selang untuk menyiram tanaman' },
-        { id: 'mulsa', name: 'Mulsa Plastik', icon: '??', price: 100, description: 'Plastik penutup tanah' }
+        { id: 'cangkul', name: 'Cangkul', icon: '🔨', price: 500, description: 'Alat untuk mengolah tanah' },
+        { id: 'garu', name: 'Garu', icon: '🔥', price: 300, description: 'Alat untuk meratakan tanah' },
+        { id: 'sprayer', name: 'Sprayer', icon: '💨', price: 800, description: 'Alat untuk menyemprot pupuk' },
+        { id: 'siram', name: 'Selang Siram', icon: '🚿', price: 200, description: 'Selang untuk menyiram tanaman' },
+        { id: 'mulsa', name: 'Mulsa Plastik', icon: '🛡️', price: 100, description: 'Plastik penutup tanah' }
     ],
     upgrades: [
-        { id: 'tanah_plus', name: 'Tanah Premium', icon: '??', price: 1000, description: 'Upgrade kualitas tanah' },
-        { id: 'irigasi', name: 'Sistem Irigasi', icon: '??', price: 2000, description: 'Sistem penyiraman otomatis' },
-        { id: 'greenhouse', name: 'Greenhouse Mini', icon: '??', price: 5000, description: 'Rumah kaca mini' },
-        { id: 'storage', name: 'Gudang Penyimpanan', icon: '??', price: 3000, description: 'Tempat penyimpanan hasil panen' }
+        { id: 'tanah_plus', name: 'Tanah Premium', icon: '🌍', price: 1000, description: 'Upgrade kualitas tanah' },
+        { id: 'irigasi', name: 'Sistem Irigasi', icon: '💧', price: 2000, description: 'Sistem penyiraman otomatis' },
+        { id: 'greenhouse', name: 'Greenhouse Mini', icon: '🏡', price: 5000, description: 'Rumah kaca mini' },
+        { id: 'storage', name: 'Gudang Penyimpanan', icon: '🏭', price: 3000, description: 'Tempat penyimpanan hasil panen' }
     ]
 };
 

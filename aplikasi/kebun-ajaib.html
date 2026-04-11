@@ -1233,7 +1233,7 @@ n           Advanced Interactive & Animations
                         <span class="flex items-center gap-2"><i class="fas fa-tools"></i> Alat & Bahan</span>
                         <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </div>
-                    <div id="guide-tools" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400">
+                    <div id="guide-tools" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400 relative z-10">
                         <ul id="modal-tools" class="space-y-2"></ul>
                     </div>
                 </div>
@@ -1243,7 +1243,7 @@ n           Advanced Interactive & Animations
                         <span class="flex items-center gap-2"><i class="fas fa-seedling"></i> Cara Menanam</span>
                         <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </div>
-                    <div id="guide-steps" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400">
+                    <div id="guide-steps" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400 relative z-10">
                         <ul id="modal-steps" class="space-y-2"></ul>
                     </div>
                 </div>
@@ -1253,7 +1253,7 @@ n           Advanced Interactive & Animations
                         <span class="flex items-center gap-2"><i class="fas fa-heart"></i> Perawatan</span>
                         <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </div>
-                    <div id="guide-care" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400">
+                    <div id="guide-care" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400 relative z-10">
                         <div id="modal-care" class="grid grid-cols-3 gap-2"></div>
                     </div>
                 </div>
@@ -1263,7 +1263,7 @@ n           Advanced Interactive & Animations
                         <span class="flex items-center gap-2"><i class="fas fa-star"></i> Panen</span>
                         <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </div>
-                    <div id="guide-harvest" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400">
+                    <div id="guide-harvest" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400 relative z-10">
                         <div id="modal-harvest" class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-3.5 border-l-4 border-orange-300"></div>
                     </div>
                 </div>
@@ -1273,7 +1273,7 @@ n           Advanced Interactive & Animations
                         <span class="flex items-center gap-2"><i class="fas fa-lightbulb"></i> Fakta Menarik</span>
                         <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </div>
-                    <div id="guide-facts" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400">
+                    <div id="guide-facts" class="bg-gray-50 rounded-b-xl p-4 max-h-0 overflow-hidden transition-all duration-400 relative z-10">
                         <div id="modal-facts" class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-3.5 border-l-4 border-purple-300"></div>
                     </div>
                 </div>
@@ -2536,6 +2536,28 @@ n           Advanced Interactive & Animations
             });
             
             renderPlants(category);
+            
+            // Auto scroll to plants section after rendering
+            setTimeout(function() {
+                const plantsSection = document.getElementById('plants-grid');
+                if (plantsSection) {
+                    plantsSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+                
+                // Also scroll to any "Lanjut Pilih Tanaman" button if exists
+                const continueBtn = document.querySelector('[onclick*="goToTanamYuk"], .continue-btn, .lanjut-btn');
+                if (continueBtn) {
+                    setTimeout(function() {
+                        continueBtn.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 500);
+                }
+            }, 300);
         }
 
         function showAllCategories() {

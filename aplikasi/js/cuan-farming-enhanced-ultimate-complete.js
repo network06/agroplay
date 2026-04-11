@@ -468,7 +468,7 @@ window.confirmPlanting = function() {
             window.sessionState.plots = [null, null, null, null, null, null];
         }
         
-        // Plant the crop
+        // Plant crop
         window.sessionState.plots[window.sessionState.selectedPlotIndex] = {
             plantId: window.sessionState.selectedPlant,
             fertilizer: fertilizer,
@@ -483,9 +483,49 @@ window.confirmPlanting = function() {
         window.gameState.totalPlanted = (window.gameState.totalPlanted || 0) + 1;
         window.gameState.xp = (window.gameState.xp || 0) + (plant.xp || 10);
         
-        // Update UI immediately
-        window.updateUI();
-        window.renderPlots();
+        // Force immediate UI update with multiple approaches
+        try {
+            // Approach 1: Direct DOM update
+            const plotElement = document.querySelector(`[data-plot-index="${window.sessionState.selectedPlotIndex}"]`);
+            if (plotElement) {
+                plotElement.innerHTML = `
+                    <div class="plot-content planted">
+                        <div class="plant-icon">${plant.icon}</div>
+                        <div class="plant-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="plant-info">
+                            <div class="plant-name">${plant.name}</div>
+                            <div class="growth-time">0%</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Approach 2: Call global functions if available
+            if (typeof window.updateUI === 'function') {
+                window.updateUI();
+            }
+            
+            if (typeof window.renderPlots === 'function') {
+                window.renderPlots();
+            }
+            
+            // Approach 3: Force refresh
+            setTimeout(() => {
+                if (typeof window.updateUI === 'function') {
+                    window.updateUI();
+                }
+                if (typeof window.renderPlots === 'function') {
+                    window.renderPlots();
+                }
+            }, 100);
+            
+        } catch (updateError) {
+            console.log('UI Update Error:', updateError);
+        }
         
         // Check for unlocks
         window.checkPlantUnlocks();
@@ -500,7 +540,7 @@ window.confirmPlanting = function() {
         window.closeModal();
         
     } catch (error) {
-        // Silent error handling
+        console.log('Planting Error:', error);
     }
 };
 
