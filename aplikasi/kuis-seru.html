@@ -91,20 +91,56 @@
         }
 
         body {
-            background: var(--bg-sky);
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 25%, #FFCC80 50%, #FFB74D 75%, #FFA726 100%);
             min-height: 100vh;
             font-family: var(--font-primary);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background Particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.3;
+            animation: floatParticle 20s linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Main content wrapper */
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
         }
 
         /* Quiz Header - Enhanced */
         .quiz-header {
-            background: linear-gradient(135deg, #FF9800, #F57C00);
-            padding: 16px;
-            border-radius: 0 0 24px 24px;
-            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.3);
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 50%, #E65100 100%);
+            padding: 20px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 8px 30px rgba(255, 152, 0, 0.4);
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .quiz-header-content {
@@ -116,43 +152,49 @@
         }
 
         .quiz-header .back-btn {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
             color: white;
-            border: none;
-            width: 44px;
-            height: 44px;
+            border: 2px solid rgba(255,255,255,0.3);
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s;
+            font-size: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .quiz-header .back-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.15) rotate(-5deg);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         .quiz-header .home-btn {
-            background: rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, #FFB74D, #FF9800);
             color: white;
-            border: none;
-            width: 44px;
-            height: 44px;
+            border: 2px solid rgba(255,255,255,0.4);
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s;
+            font-size: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
         }
 
         .quiz-header .home-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #FFA726, #FF8F00);
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
         }
 
         .quiz-title {
@@ -161,10 +203,16 @@
         }
 
         .quiz-title h1 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             margin-bottom: 4px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .quiz-title .subtitle {
@@ -241,12 +289,12 @@
         }
 
         .category-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px 16px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E1 100%);
+            border-radius: 24px;
+            padding: 24px 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             border: 3px solid transparent;
             position: relative;
             overflow: hidden;
@@ -255,6 +303,7 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            backdrop-filter: blur(10px);
         }
 
         .category-card::before {
@@ -283,19 +332,21 @@
         }
 
         .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
             z-index: 20;
         }
 
         .category-card:active {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transform: translateY(-3px) scale(0.98);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .category-card.selected {
             border-color: var(--primary-orange);
-            background: #FFF3E0;
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            box-shadow: 0 8px 30px rgba(255, 152, 0, 0.3);
+            transform: translateY(-4px) scale(1.02);
         }
 
         .category-icon {
@@ -318,28 +369,47 @@
 
         .select-category-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
+            padding: 18px;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 50%, #E65100 100%);
             color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 16px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
             font-family: var(--font-primary);
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .select-category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
         }
 
         .select-category-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(255, 152, 0, 0.6);
+        }
+        
+        .select-category-btn:hover::before {
+            left: 100%;
         }
 
         .select-category-btn:disabled {
-            background: #ccc;
+            background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
             cursor: not-allowed;
-            box-shadow: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: none;
         }
 
         /* ===== SCREEN 2: PLANT SELECTION ===== */
@@ -403,13 +473,13 @@
         }
 
         .plant-card {
-            background: white;
-            border-radius: 16px;
-            padding: 16px 12px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E1 100%);
+            border-radius: 18px;
+            padding: 18px 14px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
             border: 3px solid transparent;
             pointer-events: auto;
             user-select: none;
@@ -418,11 +488,12 @@
             -ms-user-select: none;
             position: relative;
             z-index: 5;
+            backdrop-filter: blur(10px);
         }
 
         .plant-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
             z-index: 10;
         }
 
@@ -433,7 +504,9 @@
 
         .plant-card.selected {
             border-color: var(--primary-orange);
-            background: #FFF3E0;
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.25);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .plant-emoji {
@@ -450,28 +523,47 @@
 
         .select-plant-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
+            padding: 18px;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 50%, #E65100 100%);
             color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 16px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
             font-family: var(--font-primary);
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .select-plant-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
         }
 
         .select-plant-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(255, 152, 0, 0.6);
+        }
+        
+        .select-plant-btn:hover::before {
+            left: 100%;
         }
 
         .select-plant-btn:disabled {
-            background: #ccc;
+            background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
             cursor: not-allowed;
-            box-shadow: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: none;
         }
 
         /* ===== SCREEN 3: QUESTION ===== */
@@ -1067,22 +1159,93 @@
             }
         }
 
-        /* Responsive */
-        @media (max-width: 400px) {
+        /* Enhanced Responsive Design */
+        @media (max-width: 480px) {
             .category-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .category-card {
+                padding: 20px 16px;
             }
 
             .plant-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .plant-card {
+                padding: 12px 8px;
             }
 
             .result-stats {
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
 
             .result-actions {
                 flex-direction: column;
+                gap: 8px;
+            }
+            
+            .quiz-header {
+                padding: 16px;
+            }
+            
+            .quiz-header .back-btn,
+            .quiz-header .home-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .quiz-title h1 {
+                font-size: 20px;
+            }
+            
+            .nav-item {
+                padding: 8px 10px;
+                gap: 6px;
+            }
+            
+            .nav-item i {
+                font-size: 16px;
+            }
+            
+            .nav-item span {
+                font-size: 9px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .category-card {
+                padding: 16px 12px;
+            }
+            
+            .quiz-title h1 {
+                font-size: 18px;
+            }
+            
+            .select-category-btn {
+                padding: 14px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .plant-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -1124,6 +1287,11 @@
     </style>
 </head>
 <body>
+    <!-- Background Particles -->
+    <div id="bg-particles" class="bg-particles"></div>
+    
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
     <!-- Responsive Quiz Header -->
     <header class="relative z-[100] bg-gradient-to-br from-primary-orange via-primary-orange-dark to-orange-800 px-2 sm:px-4 lg:px-6 py-3 sm:py-4 rounded-b-2xl sm:rounded-b-3xl shadow-2xl sticky top-0">
         <div class="flex items-center justify-between w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto">
@@ -1331,40 +1499,84 @@
 
     </main>
 
-    <!-- Clean Bottom Navigation - Like Buku Tanamku -->
-    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-2 sm:px-4 py-2 pb-4 sm:pb-5 bg-gradient-to-t from-orange-200 to-orange-100 shadow-[0_-4px_20px_rgba(255,152,0,0.1)] z-[250] border-t border-orange-300/30">
+    <!-- Elegant Bottom Navigation - Enhanced Design -->
+    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-3 sm:px-6 py-3 pb-5 sm:pb-6 bg-gradient-to-t from-orange-300/90 via-orange-200/80 to-orange-100/70 backdrop-blur-xl shadow-[0_-8px_30px_rgba(255,152,0,0.25)] z-[250] border-t border-orange-400/40">
         <!-- Kebun -->
-        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600 hover:scale-105">
+        <a href="kebun-ajaib.html" class="nav-item flex flex-col items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-white/60 backdrop-blur-sm cursor-pointer text-orange-700 transition-all duration-400 hover:bg-white/80 hover:text-orange-600 hover:scale-105 hover:shadow-lg border border-orange-300/30">
             <i class="fas fa-seedling text-lg sm:text-xl"></i>
-            <span class="text-[10px] sm:text-xs font-semibold font-nunito">Kebun</span>
+            <span class="text-[10px] sm:text-xs font-bold font-nunito">Kebun</span>
         </a>
         
         <!-- Cuan -->
-        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600 hover:scale-105">
+        <a href="cuan-farming.html" class="nav-item flex flex-col items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-white/60 backdrop-blur-sm cursor-pointer text-orange-700 transition-all duration-400 hover:bg-white/80 hover:text-orange-600 hover:scale-105 hover:shadow-lg border border-orange-300/30">
             <i class="fas fa-tractor text-lg sm:text-xl"></i>
-            <span class="text-[10px] sm:text-xs font-semibold font-nunito">Cuan</span>
+            <span class="text-[10px] sm:text-xs font-bold font-nunito">Cuan</span>
         </a>
         
         <!-- Tanam -->
-        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600 hover:scale-105">
+        <a href="tanam-yuk.html" class="nav-item flex flex-col items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-white/60 backdrop-blur-sm cursor-pointer text-orange-700 transition-all duration-400 hover:bg-white/80 hover:text-orange-600 hover:scale-105 hover:shadow-lg border border-orange-300/30">
             <i class="fas fa-hand-planting text-lg sm:text-xl"></i>
-            <span class="text-[10px] sm:text-xs font-semibold font-nunito">Tanam</span>
+            <span class="text-[10px] sm:text-xs font-bold font-nunito">Tanam</span>
         </a>
         
         <!-- Kuis (Active) -->
-        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border-none bg-none cursor-pointer text-orange-600 transition-all duration-300 scale-105">
+        <a href="kuis-seru.html" class="nav-item flex flex-col items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-500 text-white cursor-pointer transition-all duration-400 scale-105 shadow-lg border-2 border-orange-300/50">
             <i class="fas fa-brain text-lg sm:text-xl"></i>
-            <span class="text-[10px] sm:text-xs font-semibold font-nunito">Kuis</span>
+            <span class="text-[10px] sm:text-xs font-bold font-nunito">Kuis</span>
         </a>
         
         <!-- Buku -->
-        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600 hover:scale-105">
+        <a href="buku-tanamku.html" class="nav-item flex flex-col items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-white/60 backdrop-blur-sm cursor-pointer text-orange-700 transition-all duration-400 hover:bg-white/80 hover:text-orange-600 hover:scale-105 hover:shadow-lg border border-orange-300/30">
             <i class="fas fa-book text-lg sm:text-xl"></i>
-            <span class="text-[10px] sm:text-xs font-semibold font-nunito">Buku</span>
+            <span class="text-[10px] sm:text-xs font-bold font-nunito">Buku</span>
         </a>
     </nav>
+    </div>
     
     <style>
+        /* Navigation Item Styles */
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 152, 0, 0.1);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+        
+        .nav-item:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Enhanced Animations */
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FF9800, #FFB74D, #FF9800);
+            border-radius: inherit;
+            z-index: -1;
+            animation: shimmer 2s linear infinite;
+        }
+        
         @keyframes animate-bounce-slow {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-3px); }
@@ -1509,6 +1721,28 @@
             
             console.log('Enhanced event handlers setup complete');
         }, 1000);
+    </script>
+    <script>
+        // Initialize background particles
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+        
+        function createParticles() {
+            const container = document.getElementById('bg-particles');
+            const emojis = ['🌱', '🌿', '🍃', '🌸', '🌺', '🍀', '🌻', '🌾', '🧠', '📚'];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (20 + Math.random() * 10) + 's';
+                particle.style.fontSize = (15 + Math.random() * 10) + 'px';
+                container.appendChild(particle);
+            }
+        }
     </script>
 </body>
 </html>
