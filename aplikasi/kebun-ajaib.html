@@ -955,6 +955,69 @@ n           Advanced Interactive & Animations
             }
         }
         
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .toast {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 250px;
+            animation: slideInRight 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            border-left: 4px solid;
+        }
+        
+        .toast-success {
+            border-left-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+        
+        .toast-warning {
+            border-left-color: var(--primary-orange);
+            color: var(--primary-orange);
+        }
+        
+        .toast-error {
+            border-left-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+        
+        .toast-info {
+            border-left-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        
+        .toast i {
+            font-size: 18px;
+        }
+        
+        .toast span {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
         /* Enhanced Bottom Navigation - Like Buku Tanamku */
         .bottom-nav {
             position: fixed;
@@ -2451,10 +2514,22 @@ n           Advanced Interactive & Animations
         function filterCategory(category) {
             currentCategory = category;
             
-            document.querySelectorAll('.category-btn').forEach(function(btn) {
+            document.querySelectorAll('.tab-btn').forEach(function(btn) {
                 btn.classList.remove('active');
             });
-            document.querySelector('.category-btn.' + category).classList.add('active');
+            
+            // Find the button for this category and make it active
+            const categoryButtons = document.querySelectorAll('.tab-btn');
+            categoryButtons.forEach(function(btn) {
+                if (btn.textContent.toLowerCase().includes(category) || 
+                    (category === 'pangan' && btn.textContent.includes('PANGAN')) ||
+                    (category === 'industri' && btn.textContent.includes('INDUSTRI')) ||
+                    (category === 'hias' && btn.textContent.includes('HIAS')) ||
+                    (category === 'obat' && btn.textContent.includes('OBAT')) ||
+                    (category === 'serat' && btn.textContent.includes('SERAT'))) {
+                    btn.classList.add('active');
+                }
+            });
             
             renderPlants(category);
         }
@@ -2499,6 +2574,10 @@ n           Advanced Interactive & Animations
                 showToast('error', 'Kategori tanaman tidak ditemukan!');
                 return;
             }
+            
+            // Store selected plant data for goToTanamYuk function
+            selectedPlantId = plantId;
+            selectedPlantCategory = category;
             
             // Find plant data
             const plant = PLANTS_DATA[category].find(p => p.id === plantId);
@@ -2806,15 +2885,11 @@ n           Advanced Interactive & Animations
             }, 3000);
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            renderPlants('pangan');
-            createParticles(); // Add background particles
-        });
-        
         // Create background particles - Same as other pages
         function createParticles() {
             const container = document.getElementById('bg-particles');
+            if (!container) return;
+            
             const emojis = ['🌱', '🌿', '🍃', '🌸', '🌺', '🍀', '🌻', '🌾'];
             
             for (let i = 0; i < 15; i++) {
@@ -2839,12 +2914,26 @@ n           Advanced Interactive & Animations
             }
         }
 
-        // Initialize page - Load plants when page loads
+        // Initialize page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Kebun Ajaib: Loading plants...');
-            renderPlants(currentCategory);
+            console.log('Kebun Ajaib page loaded, initializing...');
+            
+            // Initialize with pangan category
+            renderPlants('pangan');
+            
+            // Set active tab
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // Initialize background particles
             createParticles();
+            
+            // Update user info
             updateUserInfo();
+            
+            console.log('Kebun Ajaib initialized successfully');
         });
         
         // Make functions global
