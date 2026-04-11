@@ -91,7 +91,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 25%, #FFCC80 50%, #FFB74D 75%, #FFA726 100%);
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 25%, #FFE082 50%, #FFD54F 75%, #FFCA28 100%);
             min-height: 100vh;
             font-family: var(--font-primary);
             position: relative;
@@ -130,17 +130,15 @@
             z-index: 10;
         }
 
-        /* Quiz Header - Enhanced */
+        /* Quiz Header - Like Buku Tanamku */
         .quiz-header {
-            background: linear-gradient(135deg, #FF9800 0%, #F57C00 50%, #E65100 100%);
-            padding: 20px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 0 8px 30px rgba(255, 152, 0, 0.4);
+            background: linear-gradient(135deg, #FFB300 0%, #FFA000 50%, #FF8F00 100%);
+            padding: 24px;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 8px 32px rgba(255, 179, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .quiz-header-content {
@@ -223,9 +221,11 @@
 
         /* Main Quiz Container */
         .quiz-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px 16px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
         }
 
         /* Screen Management */
@@ -323,12 +323,16 @@
         .category-card.makanan::before { background: linear-gradient(90deg, #FF5722, #FF9800); }
         .category-card.hama::before { background: linear-gradient(90deg, #F44336, #E91E63); }
         
+        .category-card.pangan {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+        }
+        
         .category-card.makanan {
             background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
         }
         
         .category-card.hama {
-            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+            background: linear-gradient(135deg, #FFF3E0, #FFCCBC);
         }
 
         .category-card:hover {
@@ -1292,24 +1296,105 @@
     
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
-    <!-- Responsive Quiz Header -->
-    <header class="relative z-[100] bg-gradient-to-br from-primary-orange via-primary-orange-dark to-orange-800 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 rounded-b-3xl shadow-2xl sticky top-0">
-        <div class="flex items-center justify-between w-full max-w-7xl mx-auto">
-            <button onclick="window.location.href='index.html'" class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-white/20 text-white text-lg sm:text-xl lg:text-2xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 hover:-rotate-12 backdrop-blur-sm shadow-lg">
-                <i class="fas fa-arrow-left text-orange-100 hover:text-white"></i>
+    <!-- Enhanced Header with Modern Navbar - Like Buku Tanamku -->
+    <header class="relative z-[100] bg-gradient-to-br from-amber-500 via-amber-600 to-orange-700 px-5 py-6 rounded-b-3xl shadow-2xl">
+        <!-- Top Navigation Bar -->
+        <div class="flex items-center justify-between mb-6 relative z-10">
+            <button onclick="window.location.href='index.html'" class="w-12 h-12 rounded-full bg-white/20 text-white text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 hover:-rotate-12 backdrop-blur-sm shadow-lg">
+                <i class="fas fa-arrow-left"></i>
             </button>
-            <div class="text-center flex-1 px-2 sm:px-4 lg:px-6">
-                <h1 class="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white font-fredoka animate-icon-bounce drop-shadow-lg">🧠 Kuis Seru Tani</h1>
-                <span class="text-xs sm:text-sm lg:text-base text-white/90 font-nunito block mt-1 sm:mt-2">Test pengetahuan hortikultura!</span>
+            <div class="text-center flex-1">
+                <h1 class="text-3xl font-bold text-white font-fredoka animate-title-pulse drop-shadow-lg">🧠 Kuis Seru Tani</h1>
+                <p class="text-sm text-white/90 font-nunito">Test pengetahuan hortikultura</p>
             </div>
-            <button onclick="window.location.href='index.html'" class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br from-orange-500 via-orange-600 to-red-500 text-white text-lg sm:text-xl lg:text-2xl flex items-center justify-center transition-all duration-300 hover:from-orange-600 hover:via-orange-700 hover:to-red-600 hover:scale-110 hover:shadow-xl hover:shadow-orange-500/50 backdrop-blur-sm border-2 border-white/30">
-                <i class="fas fa-home text-white drop-shadow-lg"></i>
-            </button>
+            <div class="flex gap-3">
+                <button class="w-12 h-12 rounded-full bg-white/20 text-white text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 backdrop-blur-sm shadow-lg">
+                    <i class="fas fa-trophy"></i>
+                </button>
+                <button onclick="window.location.href='index.html'" class="w-12 h-12 rounded-full bg-white/20 text-white text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 backdrop-blur-sm shadow-lg">
+                    <i class="fas fa-home"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Enhanced Welcome Banner with Stats -->
+        <div class="bg-gradient-to-r from-yellow-50 to-amber-100 rounded-2xl p-5 flex items-center gap-4 shadow-lg relative overflow-hidden">
+            <div class="text-5xl animate-bounce-gentle">🧠</div>
+            <div class="flex-1">
+                <h3 class="text-lg font-bold text-gray-800 font-fredoka mb-1">Siap Bermain Kuis? 🎮</h3>
+                <p class="text-sm text-gray-600 font-nunito">Uji pengetahuan hortikultura kamu!</p>
+                <div class="flex gap-4 mt-2">
+                    <div class="flex items-center gap-1">
+                        <i class="fas fa-brain text-xs text-amber-600"></i>
+                        <span class="text-xs font-bold text-gray-700 font-fredoka">5 Kategori</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class="fas fa-star text-xs text-amber-500"></i>
+                        <span class="text-xs font-bold text-gray-700 font-fredoka">50+ Soal</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Main Quiz Container -->
-    <main class="quiz-container pb-24 sm:pb-28 md:pb-32">
+    <main class="main-container">
+        <!-- Menu Section - Main Navigation -->
+        <section class="mb-6">
+            <div class="flex items-center gap-2.5 mb-4">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center text-white">
+                    <i class="fas fa-brain text-sm"></i>
+                </div>
+                <h2 class="text-lg font-bold text-gray-800 font-fredoka">Pilih Kategori Kuis</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <div onclick="selectCategory('tanaman')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-green-400 before:to-green-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🌱</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Jenis tanaman</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="selectCategory('makanan')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-orange-400 before:to-orange-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🍚</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Makanan</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Olahan pangan</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="selectCategory('hama')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-red-400 before:to-red-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🐛</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Hama</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Hama & penyakit</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="selectCategory('alat')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-blue-400 before:to-blue-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🔧</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Alat</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Peralatan</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
+                </div>
+                
+                <div onclick="selectCategory('teknik')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-purple-400 before:to-purple-600">
+                    <span class="text-4xl flex-shrink-0 animate-icon-float">🌾</span>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Teknik</h4>
+                        <p class="text-xs text-gray-500 font-nunito">Cara bercocok</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
+                </div>
+            </div>
+        </section>    
         
         <!-- SCREEN 1: Category Selection -->
         <div class="quiz-screen active animate-quiz-fade-in" id="category-screen">
@@ -1500,24 +1585,24 @@
     </main>
 
     <!-- Bottom Navigation - Like Buku Tanamku -->
-    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-4 py-2.5 pb-5 bg-gradient-to-t from-orange-200 to-orange-100 shadow-[0_-4px_20px_rgba(255,152,0,0.1)] z-[200]">
-        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-primary-orange">
+    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-4 py-2.5 pb-5 bg-gradient-to-t from-amber-200 to-yellow-100 shadow-[0_-4px_20px_rgba(255,193,7,0.15)] z-[200]">
+        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
             <i class="fas fa-seedling text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Kebun</span>
         </a>
-        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-primary-orange">
+        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
             <i class="fas fa-tractor text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Cuan</span>
         </a>
-        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-primary-orange">
+        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
             <i class="fas fa-hand-planting text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Tanam</span>
         </a>
-        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-primary-orange transition-all duration-300">
+        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-600 transition-all duration-300">
             <i class="fas fa-brain text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Kuis</span>
         </a>
-        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-primary-orange">
+        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
             <i class="fas fa-book text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Buku</span>
         </a>
