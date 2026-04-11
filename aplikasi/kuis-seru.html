@@ -226,6 +226,7 @@
             padding: 20px;
             position: relative;
             z-index: 10;
+            padding-bottom: 120px;
         }
 
         /* Screen Management */
@@ -1019,14 +1020,16 @@
         }
 
         .btn-home {
-            background: white;
-            color: #333;
-            border: 2px solid #E0E0E0;
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
         }
 
         .btn-home:hover {
-            border-color: var(--primary-orange);
-            color: var(--primary-orange);
+            background: linear-gradient(135deg, #F57C00, #E65100);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
         }
 
         /* Leaderboard */
@@ -1041,14 +1044,19 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 16px;
-            color: #333;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 700;
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .leaderboard-header i {
-            color: #FFD700;
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .leaderboard-list {
@@ -1338,63 +1346,11 @@
     </header>
 
     <!-- Main Quiz Container -->
-    <main class="main-container">
-        <!-- Menu Section - Main Navigation -->
-        <section class="mb-6">
-            <div class="flex items-center gap-2.5 mb-4">
-                <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center text-white">
-                    <i class="fas fa-brain text-sm"></i>
-                </div>
-                <h2 class="text-lg font-bold text-gray-800 font-fredoka">Pilih Kategori Kuis</h2>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-3">
-                <div onclick="selectCategory('tanaman')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-green-400 before:to-green-600">
-                    <span class="text-4xl flex-shrink-0 animate-icon-float">🌱</span>
-                    <div class="flex-1">
-                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Tanaman</h4>
-                        <p class="text-xs text-gray-500 font-nunito">Jenis tanaman</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
-                </div>
-                
-                <div onclick="selectCategory('makanan')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-orange-400 before:to-orange-600">
-                    <span class="text-4xl flex-shrink-0 animate-icon-float">🍚</span>
-                    <div class="flex-1">
-                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Makanan</h4>
-                        <p class="text-xs text-gray-500 font-nunito">Olahan pangan</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
-                </div>
-                
-                <div onclick="selectCategory('hama')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-red-400 before:to-red-600">
-                    <span class="text-4xl flex-shrink-0 animate-icon-float">🐛</span>
-                    <div class="flex-1">
-                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Hama</h4>
-                        <p class="text-xs text-gray-500 font-nunito">Hama & penyakit</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
-                </div>
-                
-                <div onclick="selectCategory('alat')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-blue-400 before:to-blue-600">
-                    <span class="text-4xl flex-shrink-0 animate-icon-float">🔧</span>
-                    <div class="flex-1">
-                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Alat</h4>
-                        <p class="text-xs text-gray-500 font-nunito">Peralatan</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
-                </div>
-                
-                <div onclick="selectCategory('teknik')" class="bg-white rounded-2xl p-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl border-3 border-transparent relative overflow-hidden group before:absolute before:left-0 before:top-0 before:w-1 before:h-full before:bg-gradient-to-b before:from-purple-400 before:to-purple-600">
-                    <span class="text-4xl flex-shrink-0 animate-icon-float">🌾</span>
-                    <div class="flex-1">
-                        <h4 class="text-sm font-bold text-gray-800 font-fredoka mb-0.5">Teknik</h4>
-                        <p class="text-xs text-gray-500 font-nunito">Cara bercocok</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-lg transition-all duration-300 group-hover:text-amber-600 group-hover:translate-x-1.5"></i>
-                </div>
-            </div>
-        </section>    
+    <main class="main-container pb-32">
+        <!-- Quiz Content Area -->
+        <div id="quiz-content" class="hidden">
+            <!-- Content will be dynamically loaded here -->
+        </div>    
         
         <!-- SCREEN 1: Category Selection -->
         <div class="quiz-screen active animate-quiz-fade-in" id="category-screen">
@@ -1584,25 +1540,25 @@
 
     </main>
 
-    <!-- Bottom Navigation - Like Buku Tanamku -->
-    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-4 py-2.5 pb-5 bg-gradient-to-t from-amber-200 to-yellow-100 shadow-[0_-4px_20px_rgba(255,193,7,0.15)] z-[200]">
-        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
+    <!-- Bottom Navigation - Full Width Orange Theme -->
+    <nav class="fixed bottom-0 left-0 right-0 w-screen flex justify-around px-4 py-2.5 pb-5 bg-gradient-to-t from-orange-300 to-orange-200 shadow-[0_-4px_20px_rgba(255,152,0,0.25)] z-[200]">
+        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-800 transition-all duration-300 hover:text-orange-600">
             <i class="fas fa-seedling text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Kebun</span>
         </a>
-        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
+        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-800 transition-all duration-300 hover:text-orange-600">
             <i class="fas fa-tractor text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Cuan</span>
         </a>
-        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
+        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-800 transition-all duration-300 hover:text-orange-600">
             <i class="fas fa-hand-planting text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Tanam</span>
         </a>
-        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-600 transition-all duration-300">
+        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-600 transition-all duration-300">
             <i class="fas fa-brain text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Kuis</span>
         </a>
-        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-amber-700 transition-all duration-300 hover:text-amber-600">
+        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-800 transition-all duration-300 hover:text-orange-600">
             <i class="fas fa-book text-xl"></i>
             <span class="text-xs font-semibold font-nunito">Buku</span>
         </a>
@@ -1674,6 +1630,26 @@
     
     <!-- Debug and Enhancement Script -->
     <script>
+        // Fix toolbar.js connection errors
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+            // Handle chrome extension connection errors
+            chrome.runtime.onConnect.addListener(function(port) {
+                if (port.name === 'toolbar') {
+                    port.onMessage.addListener(function(msg) {
+                        // Handle toolbar messages silently
+                    });
+                }
+            });
+        }
+        
+        // Suppress toolbar.js errors
+        window.addEventListener('error', function(e) {
+            if (e.filename && e.filename.includes('toolbar.js')) {
+                e.preventDefault();
+                return true;
+            }
+        });
+        
         // Ensure functions are available globally
         console.log('Quiz page loaded, checking functions...');
         
