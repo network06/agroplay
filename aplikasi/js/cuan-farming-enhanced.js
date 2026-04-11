@@ -1078,7 +1078,7 @@ function startPeriodicUpdates() {
     // Check growth every 5 seconds
     setInterval(() => {
         if (window.sessionState && window.sessionState.plots) {
-            const hasActivePlants = window.sessionState.plots.some(plot => plot && plot.progress < 100);
+            const hasActivePlots = window.sessionState.plots.some(plot => plot && plot.progress < 100);
             if (hasActivePlots) {
                 renderPlots();
             }
@@ -1130,16 +1130,20 @@ document.addEventListener('DOMContentLoaded', function() {
     window.formatNumber = formatNumber;
     
     console.log('?? Cuan Farming Enhanced - Ready!');
-    console.log(`?? Starting with ${sessionState.plots.length} plots and ${gameState.plantsUnlocked.size} unlocked plants`);
+    console.log(`?? Starting with ${window.sessionState ? window.sessionState.plots.length : 6} plots and ${window.gameState ? window.gameState.plantsUnlocked.size : 4} unlocked plants`);
 });
 
 // ==================== GLOBAL ERROR HANDLING ====================
 window.addEventListener('error', function(event) {
     console.error('Global error:', event.error);
-    showToast('error', 'Terjadi kesalahan, silakan refresh halaman');
+    if (typeof showToast === 'function') {
+        showToast('error', 'Terjadi kesalahan, silakan refresh halaman');
+    }
 });
 
 window.addEventListener('unhandledrejection', function(event) {
     console.error('Unhandled promise rejection:', event.reason);
-    showToast('error', 'Terjadi kesalahan sistem');
+    if (typeof showToast === 'function') {
+        showToast('error', 'Terjadi kesalahan sistem');
+    }
 });
