@@ -1070,18 +1070,34 @@ function startAutoSave() {
 
 function startPeriodicUpdates() {
     // Update weather every 30 seconds
-    setInterval(updateWeather, 30000);
+    setInterval(() => {
+        try {
+            updateWeather();
+        } catch (error) {
+            console.error('Weather update error:', error);
+        }
+    }, 30000);
     
     // Update market every 45 seconds
-    setInterval(updateMarket, 45000);
+    setInterval(() => {
+        try {
+            updateMarket();
+        } catch (error) {
+            console.error('Market update error:', error);
+        }
+    }, 45000);
     
     // Check growth every 5 seconds
     setInterval(() => {
-        if (window.sessionState && window.sessionState.plots) {
-            const hasActivePlots = window.sessionState.plots.some(plot => plot && plot.progress < 100);
-            if (hasActivePlots) {
-                renderPlots();
+        try {
+            if (window.sessionState && window.sessionState.plots && Array.isArray(window.sessionState.plots)) {
+                const hasActivePlots = window.sessionState.plots.some(plot => plot && plot.progress < 100);
+                if (hasActivePlots) {
+                    renderPlots();
+                }
             }
+        } catch (error) {
+            console.error('Growth check error:', error);
         }
     }, 5000);
 }
@@ -1134,16 +1150,35 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==================== GLOBAL ERROR HANDLING ====================
+let errorToastCount = 0;
+const MAX_ERROR_TOASTS = 3;
+
 window.addEventListener('error', function(event) {
     console.error('Global error:', event.error);
-    if (typeof showToast === 'function') {
+    
+    // Prevent toast spam
+    if (errorToastCount < MAX_ERROR_TOASTS && typeof showToast === 'function') {
         showToast('error', 'Terjadi kesalahan, silakan refresh halaman');
+        errorToastCount++;
     }
+    
+    // Reset counter after 10 seconds
+    setTimeout(() => {
+        errorToastCount = 0;
+    }, 10000);
 });
 
 window.addEventListener('unhandledrejection', function(event) {
     console.error('Unhandled promise rejection:', event.reason);
-    if (typeof showToast === 'function') {
+    
+    // Prevent toast spam
+    if (errorToastCount < MAX_ERROR_TOASTS && typeof showToast === 'function') {
         showToast('error', 'Terjadi kesalahan sistem');
+        errorToastCount++;
     }
+    
+    // Reset counter after 10 seconds
+    setTimeout(() => {
+        errorToastCount = 0;
+    }, 10000);
 });
