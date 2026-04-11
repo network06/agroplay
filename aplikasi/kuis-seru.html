@@ -1134,8 +1134,8 @@
                 <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white font-fredoka animate-icon-bounce drop-shadow-lg">🧠 Kuis Seru Tani</h1>
                 <span class="text-xs sm:text-sm text-white/90 font-nunito block mt-1">Test pengetahuan hortikultura!</span>
             </div>
-            <button onclick="window.location.href='index.html'" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 text-white text-lg sm:text-xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 hover:scale-110 backdrop-blur-sm">
-                <i class="fas fa-home text-orange-100 hover:text-white"></i>
+            <button onclick="window.location.href='index.html'" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white text-lg sm:text-xl flex items-center justify-center transition-all duration-300 hover:from-orange-500 hover:via-orange-600 hover:to-orange-700 hover:scale-110 hover:shadow-lg hover:shadow-orange-400/40 backdrop-blur-sm border-2 border-white/20">
+                <i class="fas fa-home text-white drop-shadow-sm"></i>
             </button>
         </div>
     </header>
@@ -1331,56 +1331,36 @@
 
     </main>
 
-    <!-- Responsive Bottom Navigation -->
-    <nav class="fixed bottom-0 left-0 right-0 flex justify-around items-center px-4 py-3 pb-6 bg-gradient-to-t from-orange-100 via-white to-white/95 backdrop-blur-xl shadow-[0_-8px_32px_rgba(255,152,0,0.12)] z-[200] border-t border-orange-100/60">
+    <!-- Clean Bottom Navigation - Like Buku Tanamku -->
+    <nav class="fixed bottom-0 left-0 right-0 flex justify-around px-4 py-2.5 pb-5 bg-gradient-to-t from-orange-200 to-orange-100 shadow-[0_-4px_20px_rgba(255,152,0,0.1)] z-[200]">
         <!-- Kebun -->
-        <a href="kebun-ajaib.html" class="nav-item group relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-2xl transition-all duration-400 hover:bg-gradient-to-br hover:from-green-50 hover:to-green-100 hover:shadow-lg hover:shadow-green-200/30 hover:scale-105 active:scale-95 min-w-[60px] max-w-[80px]">
-            <div class="icon-wrapper relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"></div>
-                <i class="fas fa-seedling text-xl sm:text-2xl text-green-600 group-hover:text-green-700 transition-all duration-300 relative z-10"></i>
-                <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-green-400 to-green-500 rounded-full animate-pulse shadow-sm shadow-green-400/50"></div>
-            </div>
-            <span class="text-[10px] sm:text-xs font-extrabold font-nunito text-gray-700 group-hover:text-green-700 transition-colors duration-300">Kebun</span>
+        <a href="kebun-ajaib.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600">
+            <i class="fas fa-seedling text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Kebun</span>
         </a>
         
         <!-- Cuan -->
-        <a href="cuan-farming.html" class="nav-item group relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-2xl transition-all duration-400 hover:bg-gradient-to-br hover:from-yellow-50 hover:to-yellow-100 hover:shadow-lg hover:shadow-yellow-200/30 hover:scale-105 active:scale-95 min-w-[60px] max-w-[80px]">
-            <div class="icon-wrapper relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"></div>
-                <i class="fas fa-tractor text-xl sm:text-2xl text-yellow-600 group-hover:text-yellow-700 transition-all duration-300 relative z-10"></i>
-                <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full animate-pulse shadow-sm shadow-yellow-400/50"></div>
-            </div>
-            <span class="text-[10px] sm:text-xs font-extrabold font-nunito text-gray-700 group-hover:text-yellow-700 transition-colors duration-300">Cuan</span>
+        <a href="cuan-farming.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600">
+            <i class="fas fa-tractor text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Cuan</span>
         </a>
         
         <!-- Tanam -->
-        <a href="tanam-yuk.html" class="nav-item group relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-2xl transition-all duration-400 hover:bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100 hover:shadow-lg hover:shadow-emerald-200/30 hover:scale-105 active:scale-95 min-w-[60px] max-w-[80px]">
-            <div class="icon-wrapper relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"></div>
-                <i class="fas fa-hand-planting text-xl sm:text-2xl text-emerald-600 group-hover:text-emerald-700 transition-all duration-300 relative z-10"></i>
-                <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full animate-pulse shadow-sm shadow-emerald-400/50"></div>
-            </div>
-            <span class="text-[10px] sm:text-xs font-extrabold font-nunito text-gray-700 group-hover:text-emerald-700 transition-colors duration-300">Tanam</span>
+        <a href="tanam-yuk.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600">
+            <i class="fas fa-hand-planting text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Tanam</span>
         </a>
         
         <!-- Kuis (Active) -->
-        <a href="kuis-seru.html" class="nav-item group relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-2xl bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 shadow-xl shadow-orange-300/40 transition-all duration-400 hover:scale-105 hover:shadow-2xl hover:shadow-orange-400/50 active:scale-95 min-w-[60px] max-w-[80px]">
-            <div class="icon-wrapper relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-orange-300 to-orange-500 rounded-full opacity-30 blur-xl animate-pulse"></div>
-                <i class="fas fa-brain text-xl sm:text-2xl text-white transition-all duration-300 relative z-10 animate-bounce-slow"></i>
-                <div class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-red-400 to-pink-500 rounded-full animate-pulse shadow-lg shadow-red-400/60"></div>
-            </div>
-            <span class="text-[10px] sm:text-xs font-extrabold font-nunito text-white transition-colors duration-300">Kuis</span>
+        <a href="kuis-seru.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-600 transition-all duration-300">
+            <i class="fas fa-brain text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Kuis</span>
         </a>
         
         <!-- Buku -->
-        <a href="buku-tanamku.html" class="nav-item group relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-2xl transition-all duration-400 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100 hover:shadow-lg hover:shadow-blue-200/30 hover:scale-105 active:scale-95 min-w-[60px] max-w-[80px]">
-            <div class="icon-wrapper relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"></div>
-                <i class="fas fa-book text-xl sm:text-2xl text-blue-600 group-hover:text-blue-700 transition-all duration-300 relative z-10"></i>
-                <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full animate-pulse shadow-sm shadow-blue-400/50"></div>
-            </div>
-            <span class="text-[10px] sm:text-xs font-extrabold font-nunito text-gray-700 group-hover:text-blue-700 transition-colors duration-300">Buku</span>
+        <a href="buku-tanamku.html" class="flex flex-col items-center gap-1 px-4 py-2 border-none bg-none cursor-pointer text-orange-700 transition-all duration-300 hover:text-orange-600">
+            <i class="fas fa-book text-xl"></i>
+            <span class="text-xs font-semibold font-nunito">Buku</span>
         </a>
     </nav>
     
