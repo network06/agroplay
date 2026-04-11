@@ -1671,9 +1671,22 @@
             animation: pulse-once 1s ease-in-out;
         }
         
-        /* Fix icon colors */
+        /* Fix icon colors - ensure all header icons are white */
         .fas {
             color: inherit !important;
+        }
+        
+        /* Header button icons should be white */
+        .header-btn .fas,
+        button .fas {
+            color: white !important;
+        }
+        
+        /* Specific icon overrides */
+        .fa-trophy,
+        .fa-home,
+        .fa-arrow-left {
+            color: white !important;
         }
         
         /* Enhanced header icons */
