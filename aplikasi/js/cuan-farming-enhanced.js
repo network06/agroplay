@@ -585,40 +585,39 @@ function buyItem(itemId, category) {
 // ==================== ACHIEVEMENTS ====================
 function showAchievements() {
     const achievements = [
-        { id: 'first_harvest', name: 'Panen Pertama', icon: '??', description: 'Panen tanaman pertama Anda', unlocked: gameState.totalHarvested >= 1, reward: '1000 coins' },
-        { id: 'farmer_level_5', name: 'Petani Level 5', icon: '??', description: 'Capai level 5', unlocked: gameState.level >= 5, reward: '5000 coins' },
-        { id: 'coin_master', name: 'Master Coin', icon: '??', description: 'Kumpulkan 1M coins', unlocked: gameState.coins >= 1000000, reward: '10000 coins' },
-        { id: 'green_thumb', name: 'Jempol Hijau', icon: '??', description: 'Tanam 50 tanaman', unlocked: gameState.totalPlanted >= 50, reward: '3000 coins' },
-        { id: 'streak_warrior', name: 'Petani Setia', icon: '??', description: 'Main 7 hari berturut-turut', unlocked: gameState.streak >= 7, reward: '7000 coins' },
-        { id: 'diverse_farm', name: 'Kebun Beragam', icon: '??', description: 'Buka 10 jenis tanaman', unlocked: gameState.plantsUnlocked.size >= 10, reward: '4000 coins' },
-        { id: 'profit_king', name: 'Raja Keuntungan', icon: '??', description: 'Dapatkan 500K profit', unlocked: gameState.totalProfit >= 500000, reward: '8000 coins' },
-        { id: 'harvest_master', name: 'Master Panen', icon: '??', description: 'Panen 100 tanaman', unlocked: gameState.totalHarvested >= 100, reward: '15000 coins' }
+        { id: 'first_plant', name: 'Tanaman Pertama', icon: '🌱', description: 'Tanam tanaman pertama Anda', reward: '100 coins + 10 XP', unlocked: false },
+        { id: 'first_harvest', name: 'Panen Pertama', icon: '🌾', description: 'Panen tanaman pertama Anda', reward: '200 coins + 20 XP', unlocked: false },
+        { id: 'level_5', name: 'Level 5', icon: '⭐', description: 'Capai level 5', reward: '1000 coins + 100 XP', unlocked: false },
+        { id: 'level_10', name: 'Level 10', icon: '🌟', description: 'Capai level 10', reward: '2000 coins + 200 XP', unlocked: false },
+        { id: 'rich_farmer', name: 'Petani Kaya', icon: '💰', description: 'Kumpulkan 50,000 coins', reward: '5000 coins + 500 XP', unlocked: false },
+        { id: 'master_farmer', name: 'Master Petani', icon: '👑', description: 'Capai level 20', reward: '10000 coins + 1000 XP', unlocked: false },
+        { id: 'green_thumb', name: 'Jempol Hijau', icon: '👍', description: 'Tanam 50 tanaman', reward: '3000 coins + 300 XP', unlocked: false },
+        { id: 'harvest_master', name: 'Master Panen', icon: '🏆', description: 'Panen 100 tanaman', reward: '5000 coins + 500 XP', unlocked: false }
     ];
     
     const unlockedCount = achievements.filter(a => a.unlocked).length;
     
     const achievementsHTML = `
-        <div class="achievements-modal">
-            <h3 class="text-xl font-bold mb-4">?? Prestasi Petani</h3>
+        <div class="achievements-container">
+            <h3 class="text-xl font-bold mb-4">🏆 Prestasi Petani</h3>
             <p class="text-gray-600 mb-4">Terbuka: ${unlockedCount}/${achievements.length} prestasi</p>
             
             <div class="space-y-3 max-h-96 overflow-y-auto">
                 ${achievements.map(achievement => `
-                    <div class="achievement-card ${achievement.unlocked ? 'unlocked' : 'locked'}">
+                    <div class="achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}">
                         <div class="achievement-icon">${achievement.icon}</div>
-                        <div class="achievement-info">
-                            <h4 class="achievement-name">${achievement.name}</h4>
-                            <p class="achievement-desc">${achievement.description}</p>
-                            <div class="achievement-reward">Reward: ${achievement.reward}</div>
+                        <div class="achievement-content">
+                            <div class="achievement-title">${achievement.name}</div>
+                            <div class="achievement-description">${achievement.description}</div>
+                            <div class="achievement-progress">Reward: ${achievement.reward}</div>
                         </div>
-                        <div class="achievement-status">${achievement.unlocked ? '?? Terbuka' : '? Terkunci'}</div>
                     </div>
                 `).join('')}
             </div>
         </div>
     `;
     
-    showModal('Prestasi Petani', achievementsHTML);
+    showModal('🏆 Prestasi Petani', achievementsHTML);
 }
 
 // ==================== DAILY CHALLENGES ====================
@@ -627,7 +626,7 @@ function showDailyChallenges() {
         { 
             id: 'plant_3_padi', 
             name: 'Petani Padi', 
-            icon: '??', 
+            icon: '🌾', 
             description: 'Tanam 3 padi', 
             target: 3, 
             current: getPlantCount('padi'), 
@@ -637,7 +636,7 @@ function showDailyChallenges() {
         { 
             id: 'harvest_5_any', 
             name: 'Panen Sukses', 
-            icon: '??', 
+            icon: '🌾', 
             description: 'Panen 5 tanaman apa saja', 
             target: 5, 
             current: gameState.totalHarvested, 
@@ -647,91 +646,102 @@ function showDailyChallenges() {
         { 
             id: 'use_fertilizer', 
             name: 'Pupuk Cerdas', 
-            icon: '??', 
-            description: 'Gunakan pupuk pada 2 tanaman', 
-            target: 2, 
+            icon: '🧪', 
+            description: 'Gunakan pupuk minimal 3 kali', 
+            target: 3, 
             current: getFertilizedCount(), 
-            completed: getFertilizedCount() >= 2, 
+            completed: getFertilizedCount() >= 3, 
             reward: '2000 coins + 20 XP'
         },
         { 
-            id: 'earn_50k', 
-            name: 'Target Hari', 
-            icon: '??', 
-            description: 'Dapatkan 50K coins hari ini', 
-            target: 50000, 
-            current: getTodayEarnings(), 
-            completed: getTodayEarnings() >= 50000, 
-            reward: 'Bonus 10000 coins'
+            id: 'daily_login', 
+            name: 'Harian Aktif', 
+            icon: '🔥', 
+            description: 'Main 3 hari berturut-turut', 
+            target: 3, 
+            current: gameState.streak, 
+            completed: gameState.streak >= 3, 
+            reward: '1000 coins + 10 XP'
         }
     ];
     
-    const completedCount = challenges.filter(c => c.completed).length;
-    
     const challengesHTML = `
-        <div class="challenges-modal">
-            <h3 class="text-xl font-bold mb-4">?? Tantangan Harian</h3>
-            <p class="text-gray-600 mb-4">Selesai: ${completedCount}/${challenges.length} tantangan</p>
-            
+        <div class="challenges-container">
+            <h3 class="text-xl font-bold mb-4">🔥 Tantangan Harian</h3>
             <div class="space-y-3 max-h-96 overflow-y-auto">
                 ${challenges.map(challenge => `
-                    <div class="challenge-card ${challenge.completed ? 'completed' : 'active'}">
-                        <div class="challenge-icon">${challenge.icon}</div>
-                        <div class="challenge-info">
-                            <h4 class="challenge-name">${challenge.name}</h4>
-                            <p class="challenge-desc">${challenge.description}</p>
-                            <div class="challenge-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: ${Math.min(100, (challenge.current / challenge.target) * 100)}%"></div>
-                                </div>
-                                <span class="progress-text">${challenge.current}/${challenge.target}</span>
-                            </div>
-                            <div class="challenge-reward">${challenge.completed ? '?? Selesai!' : '?? ' + challenge.reward}</div>
+                    <div class="challenge-item ${challenge.completed ? 'completed' : ''}">
+                        <div class="challenge-header">
+                            <div class="challenge-icon">${challenge.icon}</div>
+                            <div class="challenge-title">${challenge.name}</div>
                         </div>
+                        <div class="challenge-description">${challenge.description}</div>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(100, (challenge.current / challenge.target) * 100)}%"></div>
+                            </div>
+                            <div class="progress-text">${challenge.current}/${challenge.target}</div>
+                        </div>
+                        <div class="challenge-reward">🎁 ${challenge.reward}</div>
                     </div>
                 `).join('')}
             </div>
         </div>
     `;
     
-    showModal('Tantangan Harian', challengesHTML);
-}
-
-// ==================== TUTORIAL ====================
 function showTutorial() {
+    const tutorialSteps = [
+        {
+            step: 1,
+            title: 'Selamat Datang di Cuan Farming!',
+            content: 'Cuan Farming adalah simulasi pertanian virtual yang seru dan mendidik. Anda bisa menanam berbagai jenis tanaman, merawatnya, dan memanen hasilnya untuk mendapatkan coins.',
+            image: '🌱'
+        },
+        {
+            step: 2,
+            title: 'Memulai Pertanian',
+            content: 'Klik pada plot kosong (+) untuk memulai menanam. Pilih tanaman yang ingin Anda tanam, lalu konfirmasi untuk mulai menanam.',
+            image: '🚜'
+        },
+        {
+            step: 3,
+            title: 'Merawat Tanaman',
+            content: 'Tanaman membutuhkan waktu untuk tumbuh. Gunakan pupuk untuk mempercepat pertumbuhan dan pastikan tanaman mendapatkan air yang cukup.',
+            image: '💧'
+        },
+        {
+            step: 4,
+            title: 'Panen Hasil',
+            content: 'Ketika tanaman sudah tumbuh 100%, Anda bisa memanen hasilnya. Klik pada tanaman yang siap dipanen untuk mendapatkan coins.',
+            image: '🌾'
+        },
+        {
+            step: 5,
+            title: 'Naik Level',
+            content: 'Dapatkan XP dengan menanam dan memanen. Naik level untuk membuka tanaman baru dan fitur-fitur menarik lainnya!',
+            image: '⭐'
+        }
+    ];
+    
     const tutorialHTML = `
-        <div class="tutorial-modal">
-            <h3 class="text-xl font-bold mb-4">?? Tutorial Bermain</h3>
-            
-            <div class="tutorial-steps">
-                <div class="tutorial-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Menanam Bibit</h4>
-                        <p>Klik plot kosong, pilih tanaman, atur opsi, lalu tanam!</p>
+        <div class="tutorial-container">
+            <h3 class="text-xl font-bold mb-4">📖 Tutorial Bermain</h3>
+            <div class="space-y-4 max-h-96 overflow-y-auto">
+                ${tutorialSteps.map((step, index) => `
+                    <div class="tutorial-step ${index === 0 ? 'active' : ''}">
+                        <div class="tutorial-header">
+                            <div class="tutorial-step-number">${step.step}</div>
+                            <div class="tutorial-title">${step.title}</div>
+                        </div>
+                        <div class="tutorial-content">${step.content}</div>
+                        <div class="tutorial-image">${step.image}</div>
+                        <div class="tutorial-actions">
+                            <button class="tutorial-btn" ${index === tutorialSteps.length - 1 ? 'primary' : ''}>
+                                ${index === tutorialSteps.length - 1 ? '🚀 Mulai Bermain' : '➡️ Lanjut'}
+                            </button>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="tutorial-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Merawat Tanaman</h4>
-                        <p>Gunakan pupuk dan air untuk hasil maksimal. Perhatikan cuaca!</p>
-                    </div>
-                </div>
-                
-                <div class="tutorial-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Memetik Hasil</h4>
-                        <p>Panen saat 100% untuk kualitas terbaik dan profit maksimal!</p>
-                    </div>
-                </div>
-                
-                <div class="tutorial-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Beli di Toko</h4>
+                `).join('')}
                         <p>Investasi bibit, pupuk, alat, dan upgrade untuk keuntungan lebih!</p>
                     </div>
                 </div>
