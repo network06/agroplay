@@ -1323,9 +1323,9 @@ n           Advanced Interactive & Animations
         // ==================== PLANTS DATA WITH COMPLETE PLANTING GUIDES ====================
         
         // Global variables
-        let currentCategory = 'pangan';
-        var selectedPlantId = null;
-        var selectedPlantCategory = null;
+        window.currentCategory = 'pangan';
+        window.selectedPlantId = null;
+        window.selectedPlantCategory = null;
         
         var PLANTS_DATA = {
             // === PANGAN (3) ===
@@ -2916,10 +2916,10 @@ n           Advanced Interactive & Animations
             }
         }
 
-        // Make variables available globally for game.js
-        window.currentCategory = currentCategory;
-        window.selectedPlantId = selectedPlantId;
-        window.selectedPlantCategory = selectedPlantCategory;
+        // Make variables available globally for game.js immediately
+        window.currentCategory = 'pangan';
+        window.selectedPlantId = null;
+        window.selectedPlantCategory = null;
         window.PLANTS_DATA = PLANTS_DATA;
         
         // Initialize page when DOM is loaded

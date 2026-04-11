@@ -41,6 +41,13 @@ function loadPlants() {
     let plants = [];
     if (typeof window.PLANTS_DATA !== 'undefined' && window.PLANTS_DATA && typeof window.currentCategory !== 'undefined') {
         plants = window.PLANTS_DATA[window.currentCategory] || [];
+    } else {
+        // Fallback data if PLANTS_DATA is not available
+        plants = [
+            { id: 'padi', name: 'PADI', icon: '🌾', category: 'pangan', nameId: 'Padi - Penghasil Nasi' },
+            { id: 'jagung', name: 'JAGUNG', icon: '🌽', category: 'pangan', nameId: 'Jagung - Biji Runcing' },
+            { id: 'kentang', name: 'KENTANG', icon: '🥔', category: 'pangan', nameId: 'Kentang - Umbi Lezat' }
+        ];
     }
     
     plants.forEach((plant, index) => {
@@ -144,10 +151,33 @@ function setupEventListeners() {
 if (typeof window.showPlantDetail === 'undefined') {
     window.showPlantDetail = function(plantId, category) {
         console.log('Showing plant detail for:', plantId, category);
-        // This function is already implemented in HTML script
-        // This is just a fallback
-        if (window.showModal) {
-            window.showModal('Detail Tanaman', `<p>Detail untuk ${plantId} akan segera tersedia.</p>`);
+        // Store selected plant data
+        window.selectedPlantId = plantId;
+        window.selectedPlantCategory = category;
+        
+        // Find plant data
+        let plant = null;
+        if (typeof window.PLANTS_DATA !== 'undefined' && window.PLANTS_DATA) {
+            if (category && window.PLANTS_DATA[category]) {
+                plant = window.PLANTS_DATA[category].find(p => p.id === plantId);
+            }
+        }
+        
+        if (plant) {
+            // Show modal with plant details
+            const modal = document.getElementById('detail-modal');
+            if (modal) {
+                // Update modal content
+                const modalIcon = document.getElementById('modal-icon');
+                const modalName = document.getElementById('modal-name');
+                const modalCategory = document.getElementById('modal-category');
+                
+                if (modalIcon) modalIcon.textContent = plant.icon;
+                if (modalName) modalName.textContent = plant.name;
+                if (modalCategory) modalCategory.textContent = plant.categoryName || category;
+                
+                modal.classList.add('active');
+            }
         }
     };
 }
@@ -161,6 +191,9 @@ if (typeof window.filterCategory === 'undefined') {
 }
 if (typeof window.showAllCategories === 'undefined') {
     window.showAllCategories = showAllCategories;
+}
+if (typeof window.showPlantDetail === 'undefined') {
+    window.showPlantDetail = showPlantDetail;
 }
 
 console.log('Kebun Ajaib: Game.js loaded successfully');
