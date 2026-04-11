@@ -18,10 +18,31 @@
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/animations.css">
     <style>
+        /* ============================================
+           KEBUN AJAIB - ENHANCED LIKE BUKU TANAMKU
+n           Advanced Interactive & Animations
+           ============================================ */
+        
+        :root {
+            --primary-green: #4CAF50;
+            --primary-green-dark: #388E3C;
+            --primary-green-light: #81C784;
+            --primary-orange: #FF9800;
+            --primary-orange-dark: #F57C00;
+            --primary-orange-light: #FFB74D;
+            --primary-pink: #E91E63;
+            --primary-purple: #9C27B0;
+            --primary-blue: #2196F3;
+            --primary-red: #F44336;
+            --bg-gradient: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
+        }
+        
         /* Background - Same as other pages */
         body {
-            background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
         }
         
         /* Background Particles - Same as other pages */
@@ -96,8 +117,19 @@
             box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor;
         }
         
-        /* Plants Grid */
-        .plants-container { padding: 16px; }
+        /* Main Content Container - Like Buku Tanamku */
+        .main-container {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Plants Grid - Enhanced Like Buku Tanamku */
+        .plants-container { 
+            padding: 16px;
+            position: relative;
+            z-index: 1;
+        }
         
         .plants-grid {
             display: grid;
@@ -113,43 +145,68 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             border: 3px solid transparent;
             position: relative;
             overflow: hidden;
             opacity: 0;
             transform: translateY(30px) scale(0.9);
+            animation: cardEntrance 0.5s ease forwards;
         }
         
-        .plant-card.entrance-active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        .plant-card-wrapper {
-            position: relative;
-            z-index: 2;
+        .plant-card:nth-child(1) { animation-delay: 0.05s; }
+        .plant-card:nth-child(2) { animation-delay: 0.1s; }
+        .plant-card:nth-child(3) { animation-delay: 0.15s; }
+        .plant-card:nth-child(4) { animation-delay: 0.2s; }
+        .plant-card:nth-child(5) { animation-delay: 0.25s; }
+        .plant-card:nth-child(6) { animation-delay: 0.3s; }
+        
+        .plant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            transition: all 0.3s;
         }
         
-        .plant-card-glow {
+        .plant-card.pangan::before { background: #FF9800; }
+        .plant-card.industri::before { background: #607D8B; }
+        .plant-card.hias::before { background: #E91E63; }
+        .plant-card.obat::before { background: #4CAF50; }
+        .plant-card.serat::before { background: #9C27B0; }
+        
+        .plant-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: var(--primary-green-light);
+        }
+        
+        .plant-card.pangan:hover { border-color: var(--primary-orange); }
+        .plant-card.industri:hover { border-color: #607D8B; }
+        .plant-card.hias:hover { border-color: var(--primary-pink); }
+        .plant-card.obat:hover { border-color: var(--primary-green); }
+        .plant-card.serat:hover { border-color: var(--primary-purple); }
+        
+        .plant-card::after {
+            content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
             opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
+            transition: opacity 0.3s;
         }
         
-        .plant-card:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-            border-color: rgba(76, 175, 80, 0.3);
-        }
-        
-        .plant-card:hover .plant-card-glow {
+        .plant-card:hover::after {
             opacity: 1;
         }
         
@@ -163,6 +220,15 @@
             margin-bottom: 12px; 
             display: block; 
             transition: all 0.3s ease;
+            animation: iconFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(2deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(5px) rotate(-2deg); }
         }
         
         .plant-card:hover .plant-card-icon {
@@ -172,12 +238,80 @@
         .plant-card-name {
             font-family: 'Fredoka', sans-serif;
             font-weight: 700;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .plant-card-desc { 
+            font-size: 11px; 
+            color: #888; 
+            font-family: 'Nunito', sans-serif;
+            margin-top: 8px;
+        }
+        
+        .plant-category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .plant-category-tag.pangan { background: #FFF3E0; color: #E65100; }
+        .plant-category-tag.industri { background: #ECEFF1; color: #455A64; }
+        .plant-category-tag.hias { background: #FCE4EC; color: #C2185B; }
+        .plant-category-tag.obat { background: #E8F5E9; color: #388E3C; }
+        .plant-category-tag.serat { background: #F3E5F5; color: #7B1FA2; }
+        
+        /* Welcome Banner - Like Buku Tanamku */
+        .welcome-banner {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-banner::before {
+            content: '📚';
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 80px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .welcome-icon {
+            font-size: 48px;
+            animation: bounce 2s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .welcome-text h3 {
+            font-family: 'Fredoka', sans-serif;
             font-size: 18px;
             color: #333;
             margin-bottom: 4px;
         }
         
-        .plant-card-desc { font-size: 12px; color: #666; font-family: 'Nunito', sans-serif; }
+        .welcome-text p {
+            font-size: 13px;
+            color: #666;
+            font-family: 'Nunito', sans-serif;
+        }
         
         /* Detail Modal - ENHANCED */
         .detail-modal {
@@ -443,6 +577,57 @@
         }
         
         /* Header Styles - Like Buku Tanamku */
+        .main-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 50%, #2E7D32 100%);
+            padding: 20px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 40px rgba(76, 175, 80, 0.4);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="30">🌱</text><text x="80" y="30" font-size="20">🌿</text><text x="20" y="80" font-size="25">🍃</text></svg>');
+            opacity: 0.1;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-btn {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1) rotate(-10deg);
+        }
+        
         .header-title-section {
             text-align: center;
             flex: 1;
@@ -500,6 +685,60 @@
             align-items: center;
             gap: 4px;
             border: 1px solid rgba(255, 87, 34, 0.5);
+        }
+        
+        /* Category Tabs Container - Like Buku Tanamku */
+        .category-tabs-container {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #f5f5f5;
+            color: #666;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .tab-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .tab-btn .tab-icon {
+            font-size: 16px;
         }
         
         .harvest-signs { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
@@ -608,8 +847,23 @@
         
         .back-link:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5); }
         
-        /* Responsive - BETTER FOR LAPTOP/TABLET */
+        /* Responsive Design - Enhanced Like Buku Tanamku */
         @media (max-width: 400px) {
+            .main-header { padding: 16px; }
+            .header-title { font-size: 24px; }
+            .header-subtitle { font-size: 12px; }
+            .welcome-banner { padding: 16px; gap: 12px; }
+            .welcome-icon { font-size: 36px; }
+            .welcome-text h3 { font-size: 16px; }
+            .welcome-text p { font-size: 12px; }
+            .category-tabs-container { padding: 12px; margin: 12px; }
+            .tab-btn { padding: 10px 16px; font-size: 12px; }
+            .tab-btn .tab-icon { font-size: 14px; }
+            .plants-container { padding: 12px; }
+            .plant-card { padding: 16px; }
+            .plant-card-icon { font-size: 48px; }
+            .plant-card-name { font-size: 14px; }
+            .plant-card-desc { font-size: 10px; }
             .detail-content { border-radius: 20px; }
             .quick-info { grid-template-columns: 1fr 1fr; gap: 8px; }
             .care-grid { grid-template-columns: 1fr; }
@@ -619,15 +873,13 @@
         
         /* Tablet Responsive */
         @media (min-width: 401px) and (max-width: 768px) {
+            .main-container { padding: 20px; }
+            .welcome-banner { padding: 24px; }
+            .category-tabs-container { padding: 20px; margin: 20px; }
             .plants-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
                 padding: 20px;
-            }
-            
-            .category-nav {
-                padding: 20px 24px;
-                margin: 16px 24px;
             }
             
             .plant-card {
@@ -635,12 +887,33 @@
             }
             
             .plant-card-icon { font-size: 64px; }
-            .plant-card-name { font-size: 20px; }
-            .plant-card-desc { font-size: 14px; }
+            .plant-card-name { font-size: 18px; }
+            .plant-card-desc { font-size: 12px; }
+            
+            .detail-content {
+                max-width: 480px;
+            }
         }
         
         /* Laptop/Desktop Responsive */
         @media (min-width: 769px) {
+            .main-container { 
+                padding: 32px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .welcome-banner {
+                padding: 28px;
+                border-radius: 24px;
+            }
+            
+            .category-tabs-container {
+                padding: 24px;
+                margin: 24px auto;
+                max-width: 1200px;
+            }
+            
             .plants-container { 
                 padding: 24px;
                 max-width: 1200px;
@@ -652,29 +925,14 @@
                 gap: 24px;
             }
             
-            .category-nav {
-                padding: 20px 32px;
-                margin: 16px 32px;
-                max-width: 1200px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
             .plant-card {
                 padding: 28px;
                 border-radius: 24px;
             }
             
             .plant-card-icon { font-size: 72px; }
-            .plant-card-name { font-size: 22px; }
-            .plant-card-desc { font-size: 15px; }
-            
-            .game-header {
-                padding: 20px 32px;
-                max-width: 1200px;
-                margin-left: auto;
-                margin-right: auto;
-            }
+            .plant-card-name { font-size: 20px; }
+            .plant-card-desc { font-size: 13px; }
             
             .detail-content {
                 max-width: 500px;
@@ -690,7 +948,87 @@
             }
             
             .plant-card-icon { font-size: 80px; }
-            .plant-card-name { font-size: 24px; }
+            .plant-card-name { font-size: 22px; }
+            
+            .welcome-banner {
+                padding: 32px;
+            }
+        }
+        
+        /* Enhanced Bottom Navigation - Like Buku Tanamku */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, #A5D6A7, #81C784);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 12px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 200;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: rgba(255,255,255,0.8);
+            font-family: 'Nunito', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+            transition: all 0.2s;
+        }
+        
+        .nav-item:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            margin: 0 8px;
+        }
+        
+        .nav-item.active i {
+            transform: scale(1.1);
+        }
+        
+        /* Responsive for Bottom Navigation */
+        @media (max-width: 400px) {
+            .nav-item {
+                font-size: 9px;
+                padding: 6px 2px;
+            }
+            
+            .nav-item i {
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .bottom-nav {
+                max-width: 1200px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 20px 20px 0 0;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -699,17 +1037,17 @@
     <div class="bg-particles" id="bg-particles"></div>
     
     <!-- Enhanced Header - Like Buku Tanamku -->
-    <header class="relative z-[100] bg-gradient-to-br from-primary-green via-primary-green-dark to-green-800 px-4 py-4 rounded-b-3xl shadow-2xl">
-        <div class="flex items-center justify-between">
-            <button onclick="window.location.href='index.html'" class="home-btn">
+    <header class="main-header">
+        <div class="header-top">
+            <button onclick="window.location.href='index.html'" class="back-btn">
                 <i class="fas fa-arrow-left"></i>
             </button>
             <div class="header-title-section">
                 <h1 class="header-title">Kebun Ajaib</h1>
                 <div class="header-subtitle">Jelajahi 17 Tanaman Menakjubkan</div>
                 <div class="flex items-center justify-center gap-2 mt-2">
-                    <div class="bg-white/20 px-3 py-1 rounded-full text-white text-xs font-semibold flex items-center gap-1.5 backdrop-blur-sm">
-                        <i class="fas fa-fire text-orange-300"></i>
+                    <div class="user-streak-info">
+                        <i class="fas fa-fire"></i>
                         <span id="user-streak">0</span>
                     </div>
                 </div>
@@ -720,31 +1058,69 @@
         </div>
     </header>
 
-    <!-- Category Navigation -->
-    <nav class="bg-white/95 backdrop-blur-sm mx-4 mt-2.5 p-4 rounded-2xl shadow-lg flex gap-2.5 overflow-x-auto -webkit-overflow-scrolling:touch">
-        <button onclick="filterCategory('pangan')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gradient-to-r from-primary-orange to-primary-orange-dark text-white font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap shadow-md">
-            <span class="text-base">🍚</span> PANGAN
+    <!-- Main Content Container -->
+    <div class="main-container">
+        <!-- Welcome Banner - Like Buku Tanamku -->
+        <div class="welcome-banner">
+            <div class="welcome-icon">🌻</div>
+            <div class="welcome-text">
+                <h3>Selamat Datang di Kebun Ajaib!</h3>
+                <p>Jelajahi 17 tanaman menakjubkan dan pelajari cara menanamnya</p>
+            </div>
+        </div>
+        
+        <!-- Category Navigation - Like Buku Tanamku -->
+        <div class="category-tabs-container">
+            <div class="category-tabs">
+                <button onclick="filterCategory('pangan')" class="tab-btn active">
+                    <span class="tab-icon">🍚</span> PANGAN
+                </button>
+                <button onclick="filterCategory('industri')" class="tab-btn">
+                    <span class="tab-icon">🏭</span> INDUSTRI
+                </button>
+                <button onclick="filterCategory('hias')" class="tab-btn">
+                    <span class="tab-icon">🌸</span> HIAS
+                </button>
+                <button onclick="filterCategory('obat')" class="tab-btn">
+                    <span class="tab-icon">💊</span> OBAT
+                </button>
+                <button onclick="filterCategory('serat')" class="tab-btn">
+                    <span class="tab-icon">🧵</span> SERAT
+                </button>
+            </div>
+        </div>
+
+        <!-- Plants Grid -->
+        <div class="plants-container">
+            <div id="plants-grid" class="plants-grid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Bottom Navigation - Like Buku Tanamku -->
+    <nav class="bottom-nav">
+        <button onclick="window.location.href='index.html'" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
         </button>
-        <button onclick="filterCategory('industri')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gradient-to-r from-gray-600 to-gray-700 text-white font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap shadow-md">
-            <span class="text-base">🏭</span> INDUSTRI
+        <button onclick="window.location.href='buku-tanamku.html'" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>Buku</span>
         </button>
-        <button onclick="filterCategory('hias')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gradient-to-r from-primary-pink to-pink-700 text-white font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap shadow-md">
-            <span class="text-base">🌸</span> HIAS
+        <button onclick="window.location.href='kebun-ajaib.html'" class="nav-item active">
+            <i class="fas fa-seedling"></i>
+            <span>Kebun</span>
         </button>
-        <button onclick="filterCategory('obat')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gradient-to-r from-primary-green to-primary-green-dark text-white font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap shadow-md">
-            <span class="text-base">💊</span> OBAT
+        <button onclick="window.location.href='tanam-yuk.html'" class="nav-item">
+            <i class="fas fa-play"></i>
+            <span>Main</span>
         </button>
-        <button onclick="filterCategory('serat')" class="flex-shrink-0 px-5 py-3 rounded-full bg-gradient-to-r from-primary-purple to-purple-700 text-white font-fredoka font-semibold text-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap shadow-md">
-            <span class="text-base">🧵</span> SERAT
+        <button onclick="window.location.href='profile.html'" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
         </button>
     </nav>
-
-    <!-- Plants Grid -->
-    <main class="p-4 mb-24">
-        <div id="plants-grid" class="grid grid-cols-2 gap-4">
-            <!-- Will be populated by JavaScript -->
-        </div>
-    </main>
 
     <!-- Detail Modal - Enhanced with Guide -->
     <div id="detail-modal" class="detail-modal">
