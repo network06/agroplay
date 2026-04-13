@@ -3,141 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tanam Yuk - Simulasi Menanam Interaktif dengan 4 Metode">
-    <meta name="theme-color" content="#FF9800">
+    <meta name="description" content="Tanam Yuk - Aktivitas Pertanian Interaktif">
+    <meta name="theme-color" content="#4CAF50">
     <title>Tanam Yuk! - Agroplay</title>
-    
-    <!-- Custom Tailwind CSS -->
-    <link rel="stylesheet" href="css/tailwind-custom.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'fredoka': ['Fredoka', 'sans-serif'],
-                        'nunito': ['Nunito', 'sans-serif']
-                    },
-                    colors: {
-                        'primary-green': '#4CAF50',
-                        'primary-orange': '#FF9800',
-                        'sky-blue': '#87CEEB',
-                        'earth-brown': '#8B4513',
-                        'soil': '#8B4513',
-                        'water': '#2196F3',
-                        'plant': '#4CAF50'
-                    },
-                    animation: {
-                        'float-particle': 'floatParticle 15s infinite ease-in-out',
-                        'icon-bounce': 'iconBounce 2s ease infinite',
-                        'modal-slide-up': 'modalSlideUp 0.4s ease',
-                        'char-wave': 'charWave 1s ease infinite',
-                        'progress-grow': 'progressGrow 0.5s ease',
-                        'plant-grow': 'plantGrow 3s ease-in-out',
-                        'point-popup': 'pointPopup 0.6s ease',
-                        'leaderboard-update': 'leaderboardUpdate 0.8s ease',
-                        'phase-transition': 'phaseTransition 0.6s ease',
-                        'tool-highlight': 'toolHighlight 0.4s ease',
-                        'step-complete': 'stepComplete 0.5s ease',
-                        'water-flow': 'waterFlow 2s ease-in-out infinite',
-                        'plant-sway': 'plantSway 3s ease-in-out infinite',
-                        'dig-animation': 'digAnimation 1s ease-in-out',
-                        'pour-animation': 'pourAnimation 2s ease-in-out',
-                        'harvest-swing': 'harvestSwing 1s ease-in-out',
-                        'method-card-hover': 'methodCardHover 0.3s ease',
-                        'interactive-pulse': 'interactivePulse 2s ease-in-out infinite',
-                        'simulation-active': 'simulationActive 0.5s ease'
-                    },
-                    keyframes: {
-                        floatParticle: {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '33%': { transform: 'translateY(-20px) rotate(120deg)' },
-                            '66%': { transform: 'translateY(10px) rotate(240deg)' }
-                        },
-                        iconBounce: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-8px)' }
-                        },
-                        modalSlideUp: {
-                            'from': { opacity: '0', transform: 'translateY(50px)' },
-                            'to': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        charWave: {
-                            '0%, 100%': { transform: 'rotate(-5deg)' },
-                            '50%': { transform: 'rotate(5deg)' }
-                        },
-                        progressGrow: {
-                            'from': { width: '0%' },
-                            'to': { width: '100%' }
-                        },
-                        plantGrow: {
-                            '0%': { transform: 'scale(0.8) rotate(-5deg)' },
-                            '50%': { transform: 'scale(1.1) rotate(2deg)' },
-                            '100%': { transform: 'scale(1) rotate(0deg)' }
-                        },
-                        pointPopup: {
-                            '0%': { transform: 'translateY(20px) scale(0.5)', opacity: '0' },
-                            '50%': { transform: 'translateY(-10px) scale(1.2)', opacity: '1' },
-                            '100%': { transform: 'translateY(0) scale(1)', opacity: '1' }
-                        },
-                        leaderboardUpdate: {
-                            'from': { transform: 'translateX(-20px)', opacity: '0' },
-                            'to': { transform: 'translateX(0)', opacity: '1' }
-                        },
-                        phaseTransition: {
-                            'from': { opacity: '0', transform: 'translateX(30px)' },
-                            'to': { opacity: '1', transform: 'translateX(0)' }
-                        },
-                        toolHighlight: {
-                            '0%, 100%': { transform: 'scale(1)', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' },
-                            '50%': { transform: 'scale(1.05)', boxShadow: '0 8px 25px rgba(255,152,0,0.3)' }
-                        },
-                        stepComplete: {
-                            '0%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.05)' },
-                            '100%': { transform: 'scale(1)' }
-                        },
-                        waterFlow: {
-                            '0%': { transform: 'translateY(-10px)', opacity: '0.3' },
-                            '50%': { transform: 'translateY(0)', opacity: '0.8' },
-                            '100%': { transform: 'translateY(10px)', opacity: '0.3' }
-                        },
-                        plantSway: {
-                            '0%, 100%': { transform: 'rotate(-2deg)' },
-                            '50%': { transform: 'rotate(2deg)' }
-                        },
-                        digAnimation: {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '25%': { transform: 'rotate(-15deg)' },
-                            '75%': { transform: 'rotate(15deg)' },
-                            '100%': { transform: 'rotate(0deg)' }
-                        },
-                        pourAnimation: {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '50%': { transform: 'rotate(-30deg)' },
-                            '100%': { transform: 'rotate(0deg)' }
-                        },
-                        harvestSwing: {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '50%': { transform: 'rotate(45deg)' },
-                            '100%': { transform: 'rotate(0deg)' }
-                        },
-                        methodCardHover: {
-                            'from': { transform: 'scale(1)' },
-                            'to': { transform: 'scale(1.05)' }
-                        },
-                        interactivePulse: {
-                            '0%, 100%': { transform: 'scale(1)', opacity: '1' },
-                            '50%': { transform: 'scale(1.05)', opacity: '0.8' }
-                        },
-                        simulationActive: {
-                            'from': { opacity: '0', transform: 'scale(0.9)' },
-                            'to': { opacity: '1', transform: 'scale(1)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,755 +19,213 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
-        /* Background Design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(180deg, #87CEEB 0%, #FFE0B2 50%, #FF9800 100%);
+            background: linear-gradient(180deg, #87CEEB 0%, #ffffff 100%);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
         
-        /* Animated Background Particles */
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0.3;
-            animation: float-particle 15s infinite ease-in-out;
-        }
-        
-        /* Header Styles */
+        /* Header with Green Background and Clouds */
         .header-container {
             position: relative;
-            z-index: 10;
-            padding: 20px;
+            background: #4CAF50;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 0 0 20px 20px;
+            overflow: hidden;
         }
         
-        .header-btn {
-            width: 45px;
-            height: 45px;
+        /* Cloud Shapes */
+        .cloud-left {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+        }
+        
+        .cloud-left::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: -10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            background: #FF9800;
-            border: none;
+        }
+        
+        .cloud-right {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+        }
+        
+        .cloud-right::before {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: -10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        /* Header Buttons */
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4CAF50;
+            border: 2px solid rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
-        }
-        
-        .header-btn.logout {
-            background: linear-gradient(135deg, #f44336, #d32f2f);
-            color: white;
-            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+            z-index: 10;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .header-btn.logout::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .header-btn.logout:hover::before {
-            left: 100%;
-        }
-        
-        .header-btn.logout:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
         }
         
         .header-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Title Container */
+        .title-container {
+            position: relative;
+            z-index: 10;
         }
         
         .page-title {
+            background: #4CAF50;
             color: white;
             font-family: 'Fredoka', sans-serif;
             font-weight: 600;
-            font-size: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Stats Bar */
-        .stats-bar {
-            position: relative;
-            z-index: 10;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.95);
-            margin: 10px 20px;
+            font-size: 18px;
+            padding: 8px 20px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        
-        .stat-item {
             text-align: center;
-            padding: 10px;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #FF9800, #FFB74D);
-            color: white;
-            min-width: 80px;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
-        }
-        
-        .stat-value {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            font-weight: 600;
-            opacity: 0.9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
         /* Main Content */
         .main-container {
             position: relative;
             z-index: 10;
-            padding: 0 20px 100px;
+            padding: 20px;
+            padding-bottom: 100px;
         }
         
-        /* Section Headers */
-        .section-header {
+        /* Instruction Text */
+        .instruction-text {
             text-align: center;
-            margin: 30px 0 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .section-title {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: #FF9800;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .section-subtitle {
-            font-size: 14px;
-            color: #666;
-            font-weight: 600;
-        }
-        
-        /* Plant Selection Grid */
-        .plants-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .plant-card {
-            background: white;
-            border-radius: 20px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .plant-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .plant-card.selected {
-            border-color: #FF9800;
-            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-            animation: interactive-pulse 2s ease-in-out infinite;
-        }
-        
-        .plant-card-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-            display: block;
-            animation: icon-bounce 2s ease infinite;
-        }
-        
-        .plant-card-name {
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .plant-card-category {
-            font-size: 12px;
-            color: #666;
-            background: rgba(255, 152, 0, 0.1);
-            padding: 4px 8px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        
-        /* Method Selection */
-        .method-selection {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-        
-        .method-selection.show {
-            display: block;
-            animation: simulation-active 0.5s ease;
-        }
-        
-        .method-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .method-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .method-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            animation: method-card-hover 0.3s ease;
-        }
-        
-        .method-card.selected {
-            border-color: #4CAF50;
-            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-        }
-        
-        .method-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .method-name {
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .method-difficulty {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
-        .method-points {
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            color: #4CAF50;
-            background: rgba(76, 175, 80, 0.1);
-            padding: 4px 8px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        
-        /* Simulation Area */
-        .simulation-area {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            min-height: 400px;
-            position: relative;
-            display: none;
-        }
-        
-        .simulation-area.show {
-            display: block;
-            animation: simulation-active 0.5s ease;
-        }
-        
-        .simulation-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .simulation-title {
             font-family: 'Fredoka', sans-serif;
             font-size: 18px;
             font-weight: 600;
             color: #333;
+            margin: 30px 0;
+        }
+        
+        /* Activity Cards Container */
+        .activity-cards {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
         }
         
-        .simulation-progress {
-            width: 100%;
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #FF9800, #4CAF50);
-            transition: width 0.5s ease;
-            animation: progress-grow 0.5s ease;
-        }
-        
-        /* Phase Navigation */
-        .phase-nav {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            overflow-x: auto;
-        }
-        
-        .phase-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 10px;
-            background: white;
-            color: #666;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .phase-btn:hover {
-            background: #fff3e0;
-            transform: translateY(-2px);
-        }
-        
-        .phase-btn.active {
+        /* Activity Card */
+        .activity-card {
             background: linear-gradient(135deg, #FF9800, #FFB74D);
-            color: white;
-        }
-        
-        .phase-btn.completed {
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            color: white;
-        }
-        
-        /* Phase Content */
-        .phase-content {
-            display: none;
-            animation: phase-transition 0.6s ease;
-        }
-        
-        .phase-content.active {
-            display: block;
-        }
-        
-        /* Interactive Simulation Canvas */
-        .simulation-canvas {
-            background: linear-gradient(180deg, #87CEEB 0%, #8B4513 100%);
-            border-radius: 15px;
-            height: 300px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .simulation-element {
-            position: absolute;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .simulation-element:hover {
-            transform: scale(1.1);
-        }
-        
-        .soil-area {
-            background: #8B4513;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            border-radius: 0 0 15px 15px;
-        }
-        
-        .plant-container {
-            position: absolute;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 60px;
-            animation: plant-sway 3s ease-in-out infinite;
-        }
-        
-        .water-drop {
-            position: absolute;
-            font-size: 20px;
-            color: #2196F3;
-            animation: water-flow 2s ease-in-out infinite;
-        }
-        
-        .tool-animation {
-            position: absolute;
-            font-size: 40px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-animation:hover {
-            transform: scale(1.2) rotate(10deg);
-        }
-        
-        .tool-animation.digging {
-            animation: dig-animation 1s ease-in-out;
-        }
-        
-        .tool-animation.pouring {
-            animation: pour-animation 2s ease-in-out;
-        }
-        
-        .tool-animation.harvesting {
-            animation: harvest-swing 1s ease-in-out;
-        }
-        
-        /* Tools and Materials */
-        .tools-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .tool-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            background: white;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        
-        .tool-item:hover {
-            background: #fff3e0;
-            transform: scale(1.02);
-            animation: tool-highlight 0.4s ease;
-        }
-        
-        .tool-item.selected {
-            border-color: #4CAF50;
-            background: #e8f5e8;
-        }
-        
-        .tool-icon {
-            font-size: 24px;
-            width: 40px;
-            text-align: center;
-        }
-        
-        .tool-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        /* Steps Container */
-        .steps-container {
-            margin-top: 20px;
-        }
-        
-        .step-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            border: 2px solid transparent;
-        }
-        
-        .step-item:hover {
-            background: #fff3e0;
-            transform: translateX(5px);
-        }
-        
-        .step-item.completed {
-            background: #e8f5e8;
-            border-left: 4px solid #4CAF50;
-        }
-        
-        .step-item.active {
-            background: #fff3e0;
-            border-left: 4px solid #FF9800;
-            animation: modal-slide-up 0.4s ease;
-        }
-        
-        .step-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #FF9800;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-        
-        .step-item.completed .step-number {
-            background: #4CAF50;
-        }
-        
-        .step-content {
-            flex: 1;
-        }
-        
-        .step-title {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .step-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
-        .step-tip {
-            font-size: 12px;
-            color: #FF9800;
-            font-style: italic;
-            background: rgba(255, 152, 0, 0.1);
-            padding: 8px;
-            border-radius: 8px;
-        }
-        
-        .step-action {
-            margin-top: 10px;
-        }
-        
-        .action-button {
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-        }
-        
-        .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
-        
-        .action-button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* Leaderboard */
-        .leaderboard-section {
-            background: white;
+            border: 3px solid #FFD700;
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .leaderboard-list {
-            margin-top: 15px;
-        }
-        
-        .leaderboard-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 8px;
+            justify-content: space-between;
+            cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .leaderboard-item:hover {
-            background: #fff3e0;
-            transform: translateX(5px);
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(255, 152, 0, 0.4);
         }
         
-        .leaderboard-item.top-1 {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+        
+        .activity-card:hover::before {
+            animation: shimmer 0.5s ease;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Activity Text */
+        .activity-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
             color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            position: relative;
         }
         
-        .leaderboard-item.top-2 {
-            background: linear-gradient(135deg, #C0C0C0, #808080);
-            color: white;
-        }
-        
-        .leaderboard-item.top-3 {
-            background: linear-gradient(135deg, #CD7F32, #8B4513);
-            color: white;
-        }
-        
-        .rank-badge {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+        /* Activity Illustration */
+        .activity-illustration {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
         }
         
-        .leaderboard-name {
-            flex: 1;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .leaderboard-points {
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-        }
-        
-        /* Points Animation */
-        .points-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 20px;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
-            z-index: 1000;
-            animation: point-popup 0.6s ease;
-            display: none;
-        }
-        
-        .points-popup.show {
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6347);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.5);
-            border: 3px solid #FFD700;
-        }
-        
-        /* Additional animations for completion celebration */
-        @keyframes completionCelebration {
-            0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 0; }
-            20% { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); opacity: 1; }
-            40% { transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); opacity: 1; }
-            60% { transform: translate(-50%, -50%) scale(1.1) rotate(3deg); opacity: 1; }
-            80% { transform: translate(-50%, -50%) scale(1) rotate(-2deg); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
-        }
-
-        @keyframes confettiFall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(320px) rotate(720deg); opacity: 0; }
-        }
-        
-        .points-popup.show {
-            display: block;
+        .illustration-placeholder {
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         /* Bottom Navigation */
@@ -908,7 +234,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: #FF9800;
+            background: #4CAF50;
             border-radius: 25px 25px 0 0;
             padding: 15px 20px 25px;
             z-index: 20;
@@ -930,6 +256,10 @@
             transition: all 0.3s ease;
             padding: 5px 10px;
             border-radius: 10px;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-family: 'Nunito', sans-serif;
         }
         
         .nav-item:hover {
@@ -948,2131 +278,202 @@
         
         .nav-label {
             color: white;
-            font-family: 'Nunito', sans-serif;
             font-size: 12px;
             font-weight: 600;
         }
         
         /* Responsive Design */
         @media (max-width: 380px) {
-            .plants-grid {
-                gap: 10px;
+            .activity-card {
+                padding: 15px;
             }
             
-            .plant-card-icon {
-                font-size: 40px;
+            .activity-text {
+                font-size: 18px;
             }
             
-            .plant-card-name {
-                font-size: 14px;
+            .activity-illustration {
+                width: 100px;
+                height: 100px;
             }
             
-            .section-title {
-                font-size: 20px;
+            .illustration-placeholder {
+                font-size: 50px;
+            }
+            
+            .instruction-text {
+                font-size: 16px;
             }
         }
         
         @media (min-width: 768px) {
-            .plants-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
+            .activity-cards {
+                max-width: 600px;
             }
             
-            .method-grid {
-                grid-template-columns: repeat(4, 1fr);
+            .activity-card {
+                padding: 25px;
             }
             
-            .tools-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .activity-text {
+                font-size: 22px;
+            }
+            
+            .activity-illustration {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .illustration-placeholder {
+                font-size: 70px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background Particles -->
-    <div class="bg-particles">
-        <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;">🌾</div>
-        <div class="particle" style="top: 20%; left: 80%; animation-delay: 2s;">🌽</div>
-        <div class="particle" style="top: 60%; left: 20%; animation-delay: 4s;">🌿</div>
-        <div class="particle" style="top: 80%; left: 70%; animation-delay: 6s;">🌺</div>
-        <div class="particle" style="top: 40%; left: 50%; animation-delay: 8s;">🌱</div>
-    </div>
-
-    <!-- Header -->
-    <div class="header-container">
+    <!-- Header with Green Background and Clouds -->
+    <header class="header-container">
+        <!-- Cloud Shapes -->
+        <div class="cloud-left"></div>
+        <div class="cloud-right"></div>
+        
+        <!-- Left Button -->
         <button class="header-btn" onclick="goBack()">
             <i class="fas fa-arrow-left"></i>
         </button>
-        <h1 class="page-title">Tanam Yuk!</h1>
-        <button class="header-btn logout" onclick="handleLogout()">
-            <i class="fas fa-sign-out-alt"></i>
+        
+        <!-- Title -->
+        <div class="title-container">
+            <h1 class="page-title">Tanam Yuk!</h1>
+        </div>
+        
+        <!-- Right Button -->
+        <button class="header-btn" onclick="openSettings()">
+            <i class="fas fa-cog"></i>
         </button>
-    </div>
-
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-        <div class="stat-item">
-            <span class="stat-value" id="user-points">0</span>
-            <span class="stat-label">Points</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" id="plants-count">0</span>
-            <span class="stat-label">Tanaman</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" id="level">1</span>
-            <span class="stat-label">Level</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" id="streak">0</span>
-            <span class="stat-label">Streak</span>
-        </div>
-    </div>
-
+    </header>
+    
     <!-- Main Content -->
-    <div class="main-container">
-        <!-- Plant Selection Section -->
-        <section class="section-header">
-            <h2 class="section-title">
-                <i class="fas fa-seedling"></i>
-                Pilih Tanamanmu (17 Jenis)
-            </h2>
-            <p class="section-subtitle">Pilih tanaman yang ingin kamu tanam hari ini</p>
-        </section>
-
-        <div class="plants-grid" id="plants-grid">
-            <!-- Plants will be populated by JavaScript -->
-        </div>
-
-        <!-- Method Selection Section -->
-        <div class="method-selection" id="method-selection">
-            <h3 class="section-title">
-                <i class="fas fa-layer-group"></i>
-                Pilih Metode Menanam
-            </h3>
-            <p class="section-subtitle">Setiap metode memiliki tantangan dan poin berbeda</p>
+    <main class="main-container">
+        <!-- Instruction Text -->
+        <p class="instruction-text">Ayo pilih aktivitas di bawah ini!</p>
+        
+        <!-- Activity Cards -->
+        <div class="activity-cards">
+            <!-- Mengenal Hama Card (replacing Pilih Tanaman) -->
+            <div class="activity-card" onclick="goToMengenalHama()">
+                <div class="activity-text">Mengenal Hama</div>
+                <div class="activity-illustration">
+                    <div class="illustration-placeholder">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                </div>
+            </div>
             
-            <div class="method-grid" id="method-grid">
-                <!-- Methods will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <!-- Simulation Area -->
-        <div class="simulation-area" id="simulation-area">
-            <div class="simulation-header">
-                <h3 class="simulation-title">
-                    <span id="simulation-plant-icon">-</span>
-                    <span id="simulation-plant-name">-</span>
-                    <span id="simulation-method-name" style="font-size: 14px; color: #666;">-</span>
-                </h3>
-                <div class="simulation-progress">
-                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <!-- Interactive Simulation Canvas -->
-            <div class="simulation-canvas" id="simulation-canvas">
-                <div class="soil-area"></div>
-                <div class="plant-container" id="plant-container" style="display: none;">
-                    <span id="simulation-plant">🌱</span>
-                </div>
-                <!-- Interactive elements will be added dynamically -->
-            </div>
-
-            <!-- Phase Navigation -->
-            <div class="phase-nav" id="phase-nav">
-                <!-- Phase buttons will be populated by JavaScript -->
-            </div>
-
-            <!-- Phase Contents -->
-            <div id="phase-contents">
-                <!-- Phase 1: Tools and Materials -->
-                <div class="phase-content" id="phase-tools">
-                    <div class="tools-section">
-                        <h4 class="section-title" style="font-size: 16px; margin: 0;">
-                            <i class="fas fa-tools"></i>
-                            Alat dan Bahan
-                        </h4>
-                        <div class="tools-grid" id="tools-grid">
-                            <!-- Tools will be populated by JavaScript -->
-                        </div>
-                        <div class="step-action" style="margin-top: 15px;">
-                            <button class="action-button" id="tools-ready-btn" onclick="game.completePhase('tools')">
-                                <i class="fas fa-check"></i> Alat Siap
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Phase 2: Planting Steps -->
-                <div class="phase-content" id="phase-planting">
-                    <div class="steps-container">
-                        <h4 class="section-title" style="font-size: 16px; margin: 0 0 15px;">
-                            <i class="fas fa-seedling"></i>
-                            Cara Menanam
-                        </h4>
-                        <div id="planting-steps">
-                            <!-- Planting steps will be populated by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Phase 3: Care Steps -->
-                <div class="phase-content" id="phase-care">
-                    <div class="steps-container">
-                        <h4 class="section-title" style="font-size: 16px; margin: 0 0 15px;">
-                            <i class="fas fa-hand-holding-water"></i>
-                            Cara Merawat
-                        </h4>
-                        <div id="care-steps">
-                            <!-- Care steps will be populated by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Phase 4: Harvest Steps -->
-                <div class="phase-content" id="phase-harvest">
-                    <div class="steps-container">
-                        <h4 class="section-title" style="font-size: 16px; margin: 0 0 15px;">
-                            <i class="fas fa-cut"></i>
-                            Cara Memanen
-                        </h4>
-                        <div id="harvest-steps">
-                            <!-- Harvest steps will be populated by JavaScript -->
-                        </div>
+            <!-- Cara Menanam Card -->
+            <div class="activity-card" onclick="goToCaraMenanam()">
+                <div class="activity-text">Cara Menanam</div>
+                <div class="activity-illustration">
+                    <div class="illustration-placeholder">
+                        <i class="fas fa-seedling"></i>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Leaderboard Section -->
-        <section class="leaderboard-section">
-            <h3 class="section-title">
-                <i class="fas fa-trophy"></i>
-                Leaderboard Penanam Terbaik
-            </h3>
-            <div class="leaderboard-list" id="leaderboard-list">
-                <!-- Leaderboard will be populated by JavaScript -->
-            </div>
-        </section>
-    </div>
-
-    <!-- Points Popup -->
-    <div class="points-popup" id="points-popup">
-        <i class="fas fa-star"></i>
-        <span id="points-text">+10 Points!</span>
-    </div>
-
+    </main>
+    
     <!-- Bottom Navigation -->
-    <div class="bottom-nav">
+    <nav class="bottom-nav">
         <div class="nav-container">
-            <div class="nav-item" onclick="navigateTo('index.html')">
+            <a href="index.html" class="nav-item">
                 <i class="fas fa-home nav-icon"></i>
-                <span class="nav-label">Beranda</span>
-            </div>
-            <div class="nav-item active">
-                <i class="fas fa-seedling nav-icon"></i>
-                <span class="nav-label">Tanam</span>
-            </div>
-            <div class="nav-item" onclick="navigateTo('kebun-ajaib.html')">
-                <i class="fas fa-magic nav-icon"></i>
-                <span class="nav-label">Kebun</span>
-            </div>
-            <div class="nav-item" onclick="navigateTo('buku-tanamku.html')">
-                <i class="fas fa-book nav-icon"></i>
-                <span class="nav-label">Buku</span>
-            </div>
-            <div class="nav-item" onclick="navigateTo('profil-simple.html')">
+                <span class="nav-label">Home</span>
+            </a>
+            
+            <button class="nav-item" onclick="openSearch()">
+                <i class="fas fa-search nav-icon"></i>
+                <span class="nav-label">Search</span>
+            </button>
+            
+            <button class="nav-item" onclick="openNotifications()">
+                <i class="fas fa-bell nav-icon"></i>
+                <span class="nav-label">Notification</span>
+            </button>
+            
+            <button class="nav-item" onclick="openProfile()">
                 <i class="fas fa-user nav-icon"></i>
-                <span class="nav-label">Profil</span>
-            </div>
+                <span class="nav-label">Profile</span>
+            </button>
         </div>
-    </div>
-
+    </nav>
+    
+    <!-- JavaScript -->
     <script>
-        // ==================== PLANTING METHODS DATA ====================
-        const PLANTING_METHODS = {
-            lahan: {
-                id: 'lahan',
-                name: 'Lahan Terbuka',
-                icon: '🌳',
-                description: 'Menanam langsung di tanah terbuka',
-                difficulty: 'Mudah',
-                basePoints: 1.0,
-                suitableFor: ['padi', 'jagung', 'kentang', 'kelapasawit', 'karet', 'tebu', 'kapas', 'jahe', 'kunyit'],
-                tools: [
-                    { icon: '🔨', text: 'Cangkul' },
-                    { icon: '🔧', text: 'Sekop' },
-                    { icon: '💧', text: 'Gembor' },
-                    { icon: '🌱', text: 'Pupuk organik' }
-                ],
-                steps: [
-                    {
-                        title: 'Gemburkan Tanah',
-                        description: 'Gemburkan tanah dengan cangkul sedalam 20-30 cm',
-                        icon: '🌽',
-                        tip: 'Tanah yang gembur membuat akar tumbuh baik',
-                        interactive: true,
-                        action: 'dig'
-                    },
-                    {
-                        title: 'Buat Lubang Tanam',
-                        description: 'Buat lubang tanam dengan jarak sesuai jenis tanaman',
-                        icon: '🔧',
-                        tip: 'Jarak tanam yang tepat menghindari kompetisi nutrisi',
-                        interactive: true,
-                        action: 'dig'
-                    },
-                    {
-                        title: 'Masukkan Bibit',
-                        description: 'Masukkan bibit tanaman ke dalam lubang',
-                        icon: '🌱',
-                        tip: 'Pastikan posisi bibit tegak dan akar tidak terlipat',
-                        interactive: true,
-                        action: 'plant'
-                    }
-                ]
-            },
-            vertikultur: {
-                id: 'vertikultur',
-                name: 'Vertikultur',
-                icon: '🌿',
-                description: 'Menanam secara vertikal menghemat lahan',
-                difficulty: 'Sedang',
-                basePoints: 1.5,
-                suitableFor: ['kembangsepatu', 'rumputbojosh', 'lidahbuaya', 'sisal', 'melok', 'rumputserat', 'altpalea', 'rumputodod'],
-                tools: [
-                    { icon: '🏗️', text: 'Rak vertikal' },
-                    { icon: '🪴', text: 'Pot gantung' },
-                    { icon: '🌿', text: 'Media tanam' },
-                    { icon: '💦', text: 'Sistem irigasi' }
-                ],
-                steps: [
-                    {
-                        title: 'Siapkan Rak Vertikal',
-                        description: 'Pasang rak vertikal di lokasi yang cukup sinar',
-                        icon: '🏗️',
-                        tip: 'Rak harus kokoh dan tahan beban tanaman',
-                        interactive: true,
-                        action: 'build'
-                    },
-                    {
-                        title: 'Isi Pot dengan Media',
-                        description: 'Isi pot gantung dengan media tanam yang subur',
-                        icon: '🌿',
-                        tip: 'Campuran tanah, kompos, dan pasir ideal',
-                        interactive: true,
-                        action: 'fill'
-                    },
-                    {
-                        title: 'Tanam Secara Vertikal',
-                        description: 'Tanam bibit dalam pot dan susun secara vertikal',
-                        icon: '🪴',
-                        tip: 'Susun dari bawah ke atas untuk kemudahan perawatan',
-                        interactive: true,
-                        action: 'plant'
-                    }
-                ]
-            },
-            tabulampot: {
-                id: 'tabulampot',
-                name: 'Tabulampot',
-                icon: '🪴',
-                description: 'Menanam dalam pot atau wadah',
-                difficulty: 'Mudah',
-                basePoints: 1.2,
-                suitableFor: ['kembangsepatu', 'rumputbojosh', 'lidahbuaya', 'jahe', 'kunyit', 'sisal', 'melok', 'rumputserat', 'altpalea', 'rumputodod'],
-                tools: [
-                    { icon: '🪴', text: 'Pot tanam' },
-                    { icon: '🟫', text: 'Tanah pot' },
-                    { icon: '🪨', text: 'Kerikil' },
-                    { icon: '🧪', text: 'Pupuk cair' }
-                ],
-                steps: [
-                    {
-                        title: 'Siapkan Pot',
-                        description: 'Bersihkan pot dan pastikan ada lubang drainase',
-                        icon: '🪴',
-                        tip: 'Lubang drainase mencegah akar busuk',
-                        interactive: true,
-                        action: 'prepare'
-                    },
-                    {
-                        title: 'Isi dengan Tanah',
-                        description: 'Isi pot dengan tanah pot yang subur',
-                        icon: '🪨',
-                        tip: 'Tambahkan kerikil di dasar untuk drainase lebih baik',
-                        interactive: true,
-                        action: 'fill'
-                    },
-                    {
-                        title: 'Tanam dalam Pot',
-                        description: 'Tanam bibit di tengah pot dengan kedalaman tepat',
-                        icon: '🌱',
-                        tip: 'Jangan terlalu dalam atau terlalu dangkal',
-                        interactive: true,
-                        action: 'plant'
-                    }
-                ]
-            },
-            hidroponik: {
-                id: 'hidroponik',
-                name: 'Hidroponik',
-                icon: '💧',
-                description: 'Menanam tanpa tanah menggunakan nutrisi cair',
-                difficulty: 'Sulit',
-                basePoints: 2.0,
-                suitableFor: ['jagung', 'kentang', 'kembangsepatu', 'lidahbuaya', 'jahe', 'kunyit'],
-                tools: [
-                    { icon: '🧪', text: 'Nutrisi hidroponik' },
-                    { icon: '🧱', text: 'Rockwool' },
-                    { icon: '⚡', text: 'Pompa air' },
-                    { icon: '📊', text: 'pH meter' }
-                ],
-                steps: [
-                    {
-                        title: 'Siapkan Sistem',
-                        description: 'Siapkan sistem hidroponik dan pastikan semua komponen berfungsi',
-                        icon: '⚡',
-                        tip: 'Periksa pompa dan sirkulasi air',
-                        interactive: true,
-                        action: 'setup'
-                    },
-                    {
-                        title: 'Campur Nutrisi',
-                        description: 'Campur nutrisi dengan air sesuai dosis yang direkomendasikan',
-                        icon: '🧪',
-                        tip: 'pH ideal untuk tanaman 5.5-6.5',
-                        interactive: true,
-                        action: 'mix'
-                    },
-                    {
-                        title: 'Tanam di Media',
-                        description: 'Tanam bibit di rockwool atau media hidroponik lainnya',
-                        icon: '🌱',
-                        tip: 'Pastikan akar terendam dalam nutrisi',
-                        interactive: true,
-                        action: 'plant'
-                    }
-                ]
-            }
-        };
-
-        // ==================== COMPLETE PLANTS DATA (17 Plants) ====================
-        const PLANTS_DATA = {
-            pangan: [
-                {
-                    id: 'padi',
-                    name: 'PADI',
-                    nameId: 'Padi - Penghasil Nasi',
-                    category: 'pangan',
-                    categoryName: 'Pangan',
-                    icon: '🌾',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Padi! Aku adalah tanaman pangan utama Indonesia!",
-                    description: "Tinggi 60-120 cm, mirip rumput tapi lebih tinggi. Daun panjang dan ramping seperti pita hijau.",
-                    difficulty: 'Mudah',
-                    time: '3-4 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 50,
-                    funFacts: [
-                        'Padi adalah makanan pokok terbesar di dunia!',
-                        'Indonesia adalah negara ketiga penghasil padi terbesar dunia!',
-                        'Satu tanaman padi bisa menghasilkan 3000 butir beras!'
-                    ]
-                },
-                {
-                    id: 'jagung',
-                    name: 'JAGUNG',
-                    nameId: 'Jagung - Biji Runcing',
-                    category: 'pangan',
-                    categoryName: 'Pangan',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Jagung! Aku jagung segar dari ladang!",
-                    description: "Tinggi 150-300 cm. Batang lurus dengan daun lebar. Bunga jantan di ujung, bunga betina di tengah.",
-                    difficulty: 'Sedang',
-                    time: '3-4 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 45,
-                    funFacts: [
-                        'Jagung adalah serealia terbesar di dunia!',
-                        'Jagung bisa dibuat popcorn yang renyah!',
-                        'Warna jagung kuning berasal dari vitamin A'
-                    ]
-                },
-                {
-                    id: 'kentang',
-                    name: 'KENTANG',
-                    nameId: 'Kentang - Umbi Lezat',
-                    category: 'pangan',
-                    categoryName: 'Pangan',
-                    icon: '🥔',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Kentang! Aku si umbi yang tasty!",
-                    description: "Tinggi 30-100 cm. Daun berbentuk oval dengan tepi bergerigi. Kentang menghasilkan umbi.",
-                    difficulty: 'Sedang',
-                    time: '3-4 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 40,
-                    funFacts: [
-                        'Kentang berasal dari Pegunungan Andes, Amerika Selatan!',
-                        'Kentang adalah makanan keempat di dunia!',
-                        'Kentang mengandung vitamin C yang baik untuk tubuh!'
-                    ]
-                }
-            ],
-            industri: [
-                {
-                    id: 'kelapasawit',
-                    name: 'KELAPA SAWIT',
-                    nameId: 'Kelapa Sawit - Penghasil Minyak',
-                    category: 'industri',
-                    categoryName: 'Industri',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Kelapa Sawit! Aku pohon penghasil minyak!",
-                    description: "Tinggi 10-20 meter. Daun menyirip panjang seperti kipas. Buah berwarna merah-oranye saat matang.",
-                    difficulty: 'Sulit',
-                    time: '2-3 tahun',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 60,
-                    funFacts: [
-                        'Indonesia adalah produsen minyak kelapa terbesar dunia!',
-                        '80% minyak goreng Indonesia dari kelapa sawit!',
-                        'Kelapa sawit juga bahan bakar nabati (biodiesel)'
-                    ]
-                },
-                {
-                    id: 'karet',
-                    name: 'KARET',
-                    nameId: 'Karet - Penghasil Getah',
-                    category: 'industri',
-                    categoryName: 'Industri',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Karet! Aku pohon penghasil getah putih!",
-                    description: "Tinggi 20-30 meter. Daun berbentuk hati. Getah putih seperti susu (lateks).",
-                    difficulty: 'Sulit',
-                    time: '5-7 tahun',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 65,
-                    funFacts: [
-                        'Getah karet pertama kali ditemukan di Brasil!',
-                        '70% penggunaan karet untuk ban kendaraan!',
-                        'Sarung tangan medis terbuat dari getah alami!'
-                    ]
-                },
-                {
-                    id: 'tebu',
-                    name: 'TEBU',
-                    nameId: 'Tebu - Batang Manis',
-                    category: 'industri',
-                    categoryName: 'Industri',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Tebu! Aku batang manis penghasil gula!",
-                    description: "Tinggi 2-6 meter. Batang beruas keras yang mengandung gula. Daun panjang dan tajam.",
-                    difficulty: 'Sedang',
-                    time: '10-14 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 55,
-                    funFacts: [
-                        'Gula yang kamu konsumsi berasal dari tebu!',
-                        'Tebu bisa tumbuh setinggi 2-6 meter!',
-                        'Indonesia penghasil gula tebu terbesar di Asia Tenggara!'
-                    ]
-                },
-                {
-                    id: 'kapas',
-                    name: 'KAPAS',
-                    nameId: 'Kapas - Serat Putih',
-                    category: 'industri',
-                    categoryName: 'Industri',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Kapas! Aku adalah bulu lembut untuk kain!",
-                    description: "Tinggi 1-2 meter. Bunga berwarna kuning yang berubah menjadi putih. Buah berbentuk kapsul.",
-                    difficulty: 'Sedang',
-                    time: '4-6 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 50,
-                    funFacts: [
-                        'Sebagian besar pakaian di dunia dari kapas!',
-                        'Serat kapas lebih kuat saat basah!',
-                        'Kapas digunakan manusia sejak 5000 tahun lalu!'
-                    ]
-                }
-            ],
-            hias: [
-                {
-                    id: 'kembangsepatu',
-                    name: 'KEMBANG SEPATU',
-                    nameId: 'Kembang Sepatu - Bunga Cantik',
-                    category: 'hias',
-                    categoryName: 'Hias',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Kembang Sepatu! Aku bunga merah merona!",
-                    description: "Tinggi 1-3 meter. Bunga berwarna merah, kuning, atau putih. Daun berbentuk oval.",
-                    difficulty: 'Mudah',
-                    time: '6-12 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 35,
-                    funFacts: [
-                        'Kembang Sepatu adalah bunga nasional Malaysia!',
-                        'Di Indonesia, bunga ini juga untuk obat tradisional!',
-                        'Kupu-kupu suka sekali mendekati bunga ini!'
-                    ]
-                },
-                {
-                    id: 'rumputbojosh',
-                    name: 'RUMPUT BOJOSH',
-                    nameId: 'Rumput Bojosh - Hijau Segar',
-                    category: 'hias',
-                    categoryName: 'Hias',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Rumput Bojosh! Aku rumput hijau yang segar!",
-                    description: "Tinggi 1-2 meter. Daun lebar dan panjang. Batang kuat dan beruas.",
-                    difficulty: 'Sangat Mudah',
-                    time: '3-6 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 25,
-                    funFacts: [
-                        'Rumput menghasilkan oksigen untuk kita hirup!',
-                        'Halaman hijau membuat rumah sejuk!',
-                        'Rumput rumah juga rumah untuk serangga kecil!'
-                    ]
-                }
-            ],
-            obat: [
-                {
-                    id: 'jahe',
-                    name: 'JAHE',
-                    nameId: 'Jahe - Rimpang Pedas',
-                    category: 'obat',
-                    categoryName: 'Obat',
-                    icon: '🫚',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Jahe! Aku rimpang pedas yang hangat!",
-                    description: "Tinggi 30-60 cm. Batang semu berbentuk rimpang. Daun panjang dan ramping.",
-                    difficulty: 'Sedang',
-                    time: '8-10 bulan',
-                    sunlight: 'Teduh parsial',
-                    basePoints: 40,
-                    funFacts: [
-                        'Jahe sudah digunakan sejak 5000 tahun lalu!',
-                        'Jahe bisa menghangatkan tubuh!',
-                        'Minuman jahe baik untuk masuk angin!'
-                    ]
-                },
-                {
-                    id: 'kunyit',
-                    name: 'KUNYIT',
-                    nameId: 'Kunyit - Rimpang Emas',
-                    category: 'obat',
-                    categoryName: 'Obat',
-                    icon: '🫛',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Kunyit! Aku rimpang emas berwarna kuning!",
-                    description: "Tinggi 60-100 cm. Batang berbentuk rimpang kuning cerah. Bunga berwarna kuning terang.",
-                    difficulty: 'Sedang',
-                    time: '8-12 bulan',
-                    sunlight: 'Teduh parsial',
-                    basePoints: 40,
-                    funFacts: [
-                        'Kunyit mengandung kurkumin yang baik untuk kesehatan!',
-                        'Kunyit digunakan sebagai pewarna alami!',
-                        'Kunyit adalah bahan utama jamu tradisional!'
-                    ]
-                },
-                {
-                    id: 'lidahbuaya',
-                    name: 'LIDAH BUAYA',
-                    nameId: 'Lidah Buaya - Tanaman Penyembuh',
-                    category: 'obat',
-                    categoryName: 'Obat',
-                    icon: '🪴',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Lidah Buaya! Aku bisa menyembuhkan luka!",
-                    description: "Tinggi 50-80 cm. Daun tebal berdaging dengan duri kecil. Berwarna hijau tua.",
-                    difficulty: 'Sangat Mudah',
-                    time: '6-12 bulan',
-                    sunlight: 'Cahaya sedang',
-                    basePoints: 30,
-                    funFacts: [
-                        'Lidah buaya bisa menyembuhkan luka bakar!',
-                        'Gel lidah buaya bagus untuk perawatan kulit!',
-                        'Lidah buaya juga bisa diminum sebagai jus sehat!'
-                    ]
-                }
-            ],
-            serat: [
-                {
-                    id: 'sisal',
-                    name: 'SISAL',
-                    nameId: 'Sisal - Daun Kuat',
-                    category: 'serat',
-                    categoryName: 'Serat',
-                    icon: '🌾',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Sisal! Aku daun kuat untuk tali!",
-                    description: "Tinggi 1-1.5 meter. Daun panjang dan tajam. Berbentuk roset di pangkal.",
-                    difficulty: 'Mudah',
-                    time: '2-3 tahun',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 35,
-                    funFacts: [
-                        'Serat sisal sangat kuat dan tahan lama!',
-                        'Sisal digunakan untuk membuat tali kapal!',
-                        'Sisal juga bahan kerajinan anyaman!'
-                    ]
-                },
-                {
-                    id: 'melok',
-                    name: 'MELOK',
-                    nameId: 'Melok - Daun Kipas',
-                    category: 'serat',
-                    categoryName: 'Serat',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Melok! Aku pohon daun kipas!",
-                    description: "Tinggi 2-3 meter. Daun besar berbentuk kipas. Batang beruas kuat.",
-                    difficulty: 'Mudah',
-                    time: '1-2 tahun',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 30,
-                    funFacts: [
-                        'Daun melok untuk membuat anyaman topi!',
-                        'Melok juga bahan atap tradisional!',
-                        'Tanaman ini sangat populer di Bali!'
-                    ]
-                },
-                {
-                    id: 'rumputserat',
-                    name: 'RUMPUT SERAT',
-                    nameId: 'Rumput Serat - Serat Alami',
-                    category: 'serat',
-                    categoryName: 'Serat',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Rumput Serat! Aku lembut tapi kuat!",
-                    description: "Tinggi 1-2 meter. Batang ramping dan kuat. Daun panjang dan tipis.",
-                    difficulty: 'Sangat Mudah',
-                    time: '3-6 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 25,
-                    funFacts: [
-                        'Rumput serat untuk anyaman!',
-                        'Bahan kerajinan tradisional!',
-                        'Ramah lingkungan!'
-                    ]
-                },
-                {
-                    id: 'altpalea',
-                    name: 'ALTPALEA',
-                    nameId: 'Altpalea - Tanaman Unik',
-                    category: 'serat',
-                    categoryName: 'Serat',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Altpalea! Aku unik dan menarik!",
-                    description: "Tinggi 1-2 meter. Batang beruas kuat. Daun panjang dan lebar.",
-                    difficulty: 'Mudah',
-                    time: '6-12 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 30,
-                    funFacts: [
-                        'Altpalea untuk bahan anyaman!',
-                        'Tanaman tradisional Indonesia!',
-                        'Bahan kerajinan yang indah!'
-                    ]
-                },
-                {
-                    id: 'rumputodod',
-                    name: 'RUMPUT ODOD',
-                    nameId: 'Rumput Odod - Hijau Bergizi',
-                    category: 'serat',
-                    categoryName: 'Serat',
-                    icon: '�',
-                    intro: "Hai anak-anak! Perkenalkan, aku Pak Rumput Odod! Aku hijau sepanjang tahun!",
-                    description: "Tinggi 30-50 cm. Batang ramping dan beruas. Daun tipis dan panjang.",
-                    difficulty: 'Sangat Mudah',
-                    time: '2-4 bulan',
-                    sunlight: 'Sinar penuh',
-                    basePoints: 20,
-                    funFacts: [
-                        'Rumput odod bergizi tinggi!',
-                        'Bahan makanan ternak!',
-                        'Tumbuh cepat dan mudah!'
-                    ]
-                }
-            ]
-        };
-
-        // ==================== ADVANCED GAME STATE MANAGEMENT ====================
-        class TanamYukGame {
-            constructor() {
-                this.currentUser = this.loadUserProfile();
-                this.selectedPlant = null;
-                this.selectedMethod = null;
-                this.currentPhase = 'tools';
-                this.completedPhases = [];
-                this.gameStartTime = Date.now();
-                this.phaseProgress = {
-                    tools: { completed: false, steps: [] },
-                    planting: { completed: false, steps: [] },
-                    care: { completed: false, steps: [] },
-                    harvest: { completed: false, steps: [] }
-                };
-                this.gameActive = false;
-                this.leaderboard = this.loadLeaderboard();
-                this.initializeGame();
-            }
-
-            initializeGame() {
-                this.renderPlants();
-                this.updateStats();
-                this.renderLeaderboard();
-                this.setupEventListeners();
-                this.animateBackgroundParticles();
-            }
-
-            loadUserProfile() {
-                const saved = localStorage.getItem('userProfile');
-                if (saved) {
-                    return JSON.parse(saved);
-                } else {
-                    // Create new user with unique ID
-                    const newUser = {
-                        userId: this.generateUserId(),
-                        name: 'Petani Muda',
-                        points: 0,
-                        level: 1,
-                        plantsCompleted: 0,
-                        streak: 0,
-                        lastActivity: new Date().toISOString(),
-                        achievements: [],
-                        plantsHistory: [],
-                        totalPlayTime: 0,
-                        lastLogin: new Date().toISOString(),
-                        createdAt: new Date().toISOString(),
-                        favoritePlant: null,
-                        favoriteMethod: null,
-                        perfectCompletions: 0,
-                        totalPointsEarned: 0
-                    };
-                    this.saveUserProfile(newUser);
-                    return newUser;
-                }
-            }
-
-            generateUserId() {
-                // Generate unique user ID based on timestamp and random string
-                const timestamp = Date.now().toString(36);
-                const randomStr = Math.random().toString(36).substr(2, 5);
-                return `user_${timestamp}_${randomStr}`;
-            }
-
-            saveUserProfile(userData = null) {
-                const userToSave = userData || this.currentUser;
-                userToSave.lastLogin = new Date().toISOString();
-                localStorage.setItem('userProfile', JSON.stringify(userToSave));
-                
-                // Also save to user database (simulated)
-                this.saveToUserDatabase(userToSave);
-            }
-
-            saveToUserDatabase(user) {
-                // Simulate saving to a database
-                const userDatabase = JSON.parse(localStorage.getItem('userDatabase') || '{}');
-                userDatabase[user.userId] = {
-                    ...user,
-                    savedAt: new Date().toISOString()
-                };
-                localStorage.setItem('userDatabase', JSON.stringify(userDatabase));
-            }
-
-            loadUserDatabase() {
-                return JSON.parse(localStorage.getItem('userDatabase') || '{}');
-            }
-
-            loadLeaderboard() {
-                const saved = localStorage.getItem('tanamYukLeaderboard');
-                return saved ? JSON.parse(saved) : [];
-            }
-
-            saveLeaderboard() {
-                localStorage.setItem('tanamYukLeaderboard', JSON.stringify(this.leaderboard));
-            }
-
-            renderPlants() {
-                const plantsGrid = document.getElementById('plants-grid');
-                plantsGrid.innerHTML = '';
-
-                Object.keys(PLANTS_DATA).forEach(category => {
-                    PLANTS_DATA[category].forEach(plant => {
-                        const plantCard = document.createElement('div');
-                        plantCard.className = 'plant-card';
-                        plantCard.dataset.plantId = plant.id;
-                        plantCard.innerHTML = `
-                            <span class="plant-card-icon">${plant.icon}</span>
-                            <h3 class="plant-card-name">${plant.name}</h3>
-                            <span class="plant-card-category">${plant.categoryName}</span>
-                        `;
-                        plantCard.onclick = () => this.selectPlant(plant);
-                        plantsGrid.appendChild(plantCard);
-                    });
-                });
-            }
-
-            selectPlant(plant) {
-                // Remove previous selection
-                document.querySelectorAll('.plant-card').forEach(card => {
-                    card.classList.remove('selected');
-                });
-
-                // Add selection to clicked plant
-                const selectedCard = document.querySelector(`[data-plant-id="${plant.id}"]`);
-                selectedCard.classList.add('selected');
-
-                this.selectedPlant = plant;
-                this.showMethodSelection();
-            }
-
-            showMethodSelection() {
-                const methodSelection = document.getElementById('method-selection');
-                methodSelection.classList.add('show');
-
-                this.renderMethods();
-
-                // Scroll to method selection
-                methodSelection.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            renderMethods() {
-                const methodGrid = document.getElementById('method-grid');
-                methodGrid.innerHTML = '';
-
-                Object.values(PLANTING_METHODS).forEach(method => {
-                    // Filter metode yang sesuai untuk tanaman ini
-                    if (!method.suitableFor.includes(this.selectedPlant.id)) {
-                        return; // Skip metode yang tidak sesuai
-                    }
-
-                    const methodCard = document.createElement('div');
-                    methodCard.className = 'method-card';
-                    methodCard.dataset.methodId = method.id;
-                    
-                    const totalPoints = Math.floor(this.selectedPlant.basePoints * method.basePoints);
-                    
-                    methodCard.innerHTML = `
-                        <span class="method-icon">${method.icon}</span>
-                        <h3 class="method-name">${method.name}</h3>
-                        <p class="method-difficulty">${method.difficulty}</p>
-                        <span class="method-points">+${totalPoints} pts</span>
-                    `;
-                    methodCard.onclick = () => this.selectMethod(method);
-                    methodGrid.appendChild(methodCard);
-                });
-
-                // Jika tidak ada metode yang tersedia
-                if (methodGrid.innerHTML === '') {
-                    methodGrid.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Tidak ada metode penanaman yang tersedia untuk tanaman ini.</p>';
-                }
-            }
-
-            selectMethod(method) {
-                // Remove previous selection
-                document.querySelectorAll('.method-card').forEach(card => {
-                    card.classList.remove('selected');
-                });
-
-                // Add selection to clicked method
-                const selectedCard = document.querySelector(`[data-method-id="${method.id}"]`);
-                selectedCard.classList.add('selected');
-
-                this.selectedMethod = method;
-                this.startSimulation();
-            }
-
-            startSimulation() {
-                if (!this.selectedPlant || !this.selectedMethod) return;
-
-                // Show simulation area
-                const simulationArea = document.getElementById('simulation-area');
-                simulationArea.classList.add('show');
-
-                // Update simulation header
-                document.getElementById('simulation-plant-icon').textContent = this.selectedPlant.icon;
-                document.getElementById('simulation-plant-name').textContent = this.selectedPlant.name;
-                document.getElementById('simulation-method-name').textContent = `(${this.selectedMethod.name})`;
-
-                // Setup phase navigation
-                this.setupPhaseNavigation();
-
-                // Render phase contents
-                this.renderToolsPhase();
-                this.renderPlantingPhase();
-                this.renderCarePhase();
-                this.renderHarvestPhase();
-
-                // Setup interactive simulation
-                this.setupInteractiveSimulation();
-
-                // Reset game state
-                this.currentPhase = 'tools';
-                this.completedPhases = [];
-                this.phaseProgress = {
-                    tools: { completed: false, steps: [] },
-                    planting: { completed: false, steps: [] },
-                    care: { completed: false, steps: [] },
-                    harvest: { completed: false, steps: [] }
-                };
-                this.gameActive = true;
-
-                // Show first phase
-                this.showPhase('tools');
-
-                // Update progress
-                this.updateProgress();
-
-                // Scroll to simulation
-                simulationArea.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            setupInteractiveSimulation() {
-                const canvas = document.getElementById('simulation-canvas');
-                
-                // Add interactive elements based on current method
-                this.addMethodSpecificElements(canvas);
-            }
-
-            addMethodSpecificElements(canvas) {
-                // Clear existing elements
-                const existingElements = canvas.querySelectorAll('.simulation-element:not(.soil-area):not(.plant-container)');
-                existingElements.forEach(el => el.remove());
-
-                // Add method-specific tools
-                if (this.selectedMethod.id === 'lahan') {
-                    this.addCangkulTool(canvas);
-                    this.addWateringCan(canvas);
-                } else if (this.selectedMethod.id === 'vertikultur') {
-                    this.addRakTool(canvas);
-                    this.addPotTool(canvas);
-                } else if (this.selectedMethod.id === 'tabulampot') {
-                    this.addPotTool(canvas);
-                    this.addSoilTool(canvas);
-                } else if (this.selectedMethod.id === 'hidroponik') {
-                    this.addNutrientTool(canvas);
-                    this.addPumpTool(canvas);
-                }
-            }
-
-            addCangkulTool(canvas) {
-                const cangkul = document.createElement('div');
-                cangkul.className = 'tool-animation simulation-element';
-                cangkul.style.top = '50px';
-                cangkul.style.left = '50px';
-                cangkul.innerHTML = '🔨';
-                cangkul.onclick = () => this.performDigging(cangkul);
-                canvas.appendChild(cangkul);
-            }
-
-            addWateringCan(canvas) {
-                const watering = document.createElement('div');
-                watering.className = 'tool-animation simulation-element';
-                watering.style.top = '50px';
-                watering.style.right = '50px';
-                watering.innerHTML = '💧';
-                watering.onclick = () => this.performWatering(watering);
-                canvas.appendChild(watering);
-            }
-
-            addRakTool(canvas) {
-                const rak = document.createElement('div');
-                rak.className = 'tool-animation simulation-element';
-                rak.style.top = '30px';
-                rak.style.left = '50%';
-                rak.style.transform = 'translateX(-50%)';
-                rak.innerHTML = '🏗️';
-                rak.onclick = () => this.performBuilding(rak);
-                canvas.appendChild(rak);
-            }
-
-            addPotTool(canvas) {
-                const pot = document.createElement('div');
-                pot.className = 'tool-animation simulation-element';
-                pot.style.bottom = '120px';
-                pot.style.left = '50%';
-                pot.style.transform = 'translateX(-50%)';
-                pot.innerHTML = '🪴';
-                pot.onclick = () => this.performPotting(pot);
-                canvas.appendChild(pot);
-            }
-
-            addSoilTool(canvas) {
-                const soil = document.createElement('div');
-                soil.className = 'tool-animation simulation-element';
-                soil.style.top = '50px';
-                soil.style.left = '50px';
-                soil.innerHTML = '🟫';
-                soil.onclick = () => this.performFilling(soil);
-                canvas.appendChild(soil);
-            }
-
-            addNutrientTool(canvas) {
-                const nutrient = document.createElement('div');
-                nutrient.className = 'tool-animation simulation-element';
-                nutrient.style.top = '50px';
-                nutrient.style.left = '50px';
-                nutrient.innerHTML = '🌿';
-                nutrient.onclick = () => this.performMixing(nutrient);
-                canvas.appendChild(nutrient);
-            }
-
-            addPumpTool(canvas) {
-                const pump = document.createElement('div');
-                pump.className = 'tool-animation simulation-element';
-                pump.style.bottom = '120px';
-                pump.style.right = '50px';
-                pump.innerHTML = '⚙️';
-                pump.onclick = () => this.performPumping(pump);
-                canvas.appendChild(pump);
-            }
-
-            performDigging(element) {
-                element.classList.add('digging');
-                setTimeout(() => {
-                    element.classList.remove('digging');
-                    this.awardPoints(5);
-                    this.showActionFeedback('Menggali tanah!');
-                }, 1000);
-            }
-
-            performWatering(element) {
-                element.classList.add('pouring');
-                this.addWaterDrops();
-                setTimeout(() => {
-                    element.classList.remove('pouring');
-                    this.awardPoints(3);
-                    this.showActionFeedback('Menyiram tanaman!');
-                }, 2000);
-            }
-
-            performBuilding(element) {
-                element.classList.add('digging');
-                setTimeout(() => {
-                    element.classList.remove('digging');
-                    this.awardPoints(8);
-                    this.showActionFeedback('Membangun rak vertikal!');
-                }, 1000);
-            }
-
-            performPotting(element) {
-                element.classList.add('digging');
-                setTimeout(() => {
-                    element.classList.remove('digging');
-                    this.awardPoints(5);
-                    this.showActionFeedback('Menyiapkan pot!');
-                }, 1000);
-            }
-
-            performFilling(element) {
-                element.classList.add('pouring');
-                setTimeout(() => {
-                    element.classList.remove('pouring');
-                    this.awardPoints(4);
-                    this.showActionFeedback('Mengisi tanah!');
-                }, 2000);
-            }
-
-            performMixing(element) {
-                element.classList.add('pouring');
-                setTimeout(() => {
-                    element.classList.remove('pouring');
-                    this.awardPoints(6);
-                    this.showActionFeedback('Mencampur nutrisi!');
-                }, 2000);
-            }
-
-            performPumping(element) {
-                element.classList.add('pouring');
-                setTimeout(() => {
-                    element.classList.remove('pouring');
-                    this.awardPoints(5);
-                    this.showActionFeedback('Mengaktifkan pompa!');
-                }, 2000);
-            }
-
-            addWaterDrops() {
-                const canvas = document.getElementById('simulation-canvas');
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const drop = document.createElement('div');
-                        drop.className = 'water-drop simulation-element';
-                        drop.style.left = `${Math.random() * 80 + 10}%`;
-                        drop.style.top = '100px';
-                        drop.innerHTML = '💧';
-                        canvas.appendChild(drop);
-                        
-                        setTimeout(() => drop.remove(), 2000);
-                    }, i * 200);
-                }
-            }
-
-            showPlant() {
-                const plantContainer = document.getElementById('plant-container');
-                const plantElement = document.getElementById('simulation-plant');
-                plantElement.textContent = this.selectedPlant.icon;
-                plantContainer.style.display = 'block';
-                plantContainer.style.animation = 'plant-grow 3s ease-in-out';
-            }
-
-            showActionFeedback(message) {
-                const popup = document.getElementById('points-popup');
-                const pointsText = document.getElementById('points-text');
-                pointsText.innerHTML = `<i class="fas fa-check"></i> ${message}`;
-                popup.classList.add('show');
-                setTimeout(() => popup.classList.remove('show'), 1500);
-            }
-
-            setupPhaseNavigation() {
-                const phaseNav = document.getElementById('phase-nav');
-                phaseNav.innerHTML = '';
-
-                const phases = [
-                    { id: 'tools', name: 'Alat & Bahan', icon: '🔧' },
-                    { id: 'planting', name: 'Menanam', icon: '🌱' },
-                    { id: 'care', name: 'Merawat', icon: '💧' },
-                    { id: 'harvest', name: 'Memanen', icon: '🌾' }
-                ];
-
-                phases.forEach(phase => {
-                    const phaseBtn = document.createElement('button');
-                    phaseBtn.className = 'phase-btn';
-                    phaseBtn.dataset.phase = phase.id;
-                    phaseBtn.innerHTML = `
-                        <span>${phase.icon}</span>
-                        <span>${phase.name}</span>
-                    `;
-                    phaseBtn.onclick = () => this.showPhase(phase.id);
-                    phaseNav.appendChild(phaseBtn);
-                });
-            }
-
-            showPhase(phaseId) {
-                // Cek apakah user boleh mengakses phase ini
-                if (!this.canAccessPhase(phaseId)) {
-                    this.showActionFeedback('Selesaikan tahap sebelumnya terlebih dahulu!');
-                    return;
-                }
-
-                // Update phase navigation
-                document.querySelectorAll('.phase-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                document.querySelector(`[data-phase="${phaseId}"]`).classList.add('active');
-
-                // Update phase content
-                document.querySelectorAll('.phase-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(`phase-${phaseId}`).classList.add('active');
-
-                this.currentPhase = phaseId;
-            }
-
-            canAccessPhase(phaseId) {
-                const phases = ['tools', 'planting', 'care', 'harvest'];
-                const currentIndex = phases.indexOf(phaseId);
-                
-                // User selalu bisa mengakses phase pertama (tools)
-                if (currentIndex === 0) return true;
-                
-                // Cek apakah semua phase sebelumnya sudah completed
-                for (let i = 0; i < currentIndex; i++) {
-                    if (!this.phaseProgress[phases[i]].completed) {
-                        return false;
-                    }
-                }
-                
-                return true;
-            }
-
-            renderToolsPhase() {
-                const toolsGrid = document.getElementById('tools-grid');
-                toolsGrid.innerHTML = '';
-
-                this.selectedMethod.tools.forEach(tool => {
-                    const toolItem = document.createElement('div');
-                    toolItem.className = 'tool-item';
-                    toolItem.dataset.toolId = tool.text;
-                    toolItem.innerHTML = `
-                        <span class="tool-icon">${tool.icon}</span>
-                        <span class="tool-name">${tool.text}</span>
-                    `;
-                    toolItem.onclick = () => this.selectTool(toolItem);
-                    toolsGrid.appendChild(toolItem);
-                });
-            }
-
-            selectTool(toolElement) {
-                toolElement.classList.toggle('selected');
-                
-                // Check if all tools are selected
-                const allTools = document.querySelectorAll('.tool-item');
-                const selectedTools = document.querySelectorAll('.tool-item.selected');
-                
-                const readyBtn = document.getElementById('tools-ready-btn');
-                if (selectedTools.length === allTools.length) {
-                    readyBtn.disabled = false;
-                } else {
-                    readyBtn.disabled = true;
-                }
-            }
-
-            renderPlantingPhase() {
-                const plantingSteps = document.getElementById('planting-steps');
-                plantingSteps.innerHTML = '';
-
-                this.selectedMethod.steps.forEach((step, index) => {
-                    const stepItem = document.createElement('div');
-                    stepItem.className = 'step-item';
-                    stepItem.dataset.stepIndex = index;
-                    stepItem.dataset.phase = 'planting';
-                    stepItem.innerHTML = `
-                        <div class="step-number">${index + 1}</div>
-                        <div class="step-content">
-                            <h4 class="step-title">${step.title}</h4>
-                            <p class="step-description">${step.description}</p>
-                            <div class="step-tip">
-                                <i class="fas fa-lightbulb"></i> ${step.tip}
-                            </div>
-                            <div class="step-action">
-                                <button class="action-button" onclick="game.completeStep('planting', ${index})">
-                                    <i class="fas fa-check"></i> Selesai
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    plantingSteps.appendChild(stepItem);
-                });
-            }
-
-            renderCarePhase() {
-                const careSteps = document.getElementById('care-steps');
-                careSteps.innerHTML = '';
-
-                // Generate care steps based on method
-                const careStepsData = this.generateCareSteps();
-                
-                careStepsData.forEach((step, index) => {
-                    const stepItem = document.createElement('div');
-                    stepItem.className = 'step-item';
-                    stepItem.dataset.stepIndex = index;
-                    stepItem.dataset.phase = 'care';
-                    stepItem.innerHTML = `
-                        <div class="step-number">${index + 1}</div>
-                        <div class="step-content">
-                            <h4 class="step-title">${step.title}</h4>
-                            <p class="step-description">${step.description}</p>
-                            <div class="step-tip">
-                                <i class="fas fa-lightbulb"></i> ${step.tip}
-                            </div>
-                            <div class="step-action">
-                                <button class="action-button" onclick="game.completeStep('care', ${index})">
-                                    <i class="fas fa-check"></i> Selesai
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    careSteps.appendChild(stepItem);
-                });
-            }
-
-            generateCareSteps() {
-                const baseSteps = [
-                    {
-                        title: 'Penyiraman Rutin',
-                        description: 'Siram tanaman secara teratur sesuai kebutuhan',
-                        icon: '🌾',
-                        tip: 'Siram di pagi hari untuk hasil terbaik'
-                    },
-                    {
-                        title: 'Pemupukan',
-                        description: 'Berikan pupuk untuk nutrisi tanaman',
-                        icon: '🌾',
-                        tip: 'Pupuk saat tanaman sudah tumbuh baik'
-                    },
-                    {
-                        title: 'Pemangkasan',
-                        description: 'Pangkas daun atau cabang yang tidak perlu',
-                        icon: '🌾',
-                        tip: 'Pangkas untuk merangsang pertumbuhan baru'
-                    }
-                ];
-
-                // Add method-specific care steps
-                if (this.selectedMethod.id === 'hidroponik') {
-                    baseSteps.push({
-                        title: 'Cek pH Nutrisi',
-                        description: 'Periksa pH larutan nutrisi secara rutin',
-                        icon: '🌾',
-                        tip: 'pH ideal antara 5.5-6.5'
-                    });
-                } else if (this.selectedMethod.id === 'vertikultur') {
-                    baseSteps.push({
-                        title: 'Rotasi Tanaman',
-                        description: 'Putar posisi tanaman untuk sinar merata',
-                        icon: '🌾',
-                        tip: 'Rotasi seminggu sekali'
-                    });
-                }
-
-                return baseSteps;
-            }
-
-            renderHarvestPhase() {
-                const harvestSteps = document.getElementById('harvest-steps');
-                harvestSteps.innerHTML = '';
-
-                // Generate harvest steps based on plant and method
-                const harvestStepsData = this.generateHarvestSteps();
-                
-                harvestStepsData.forEach((step, index) => {
-                    const stepItem = document.createElement('div');
-                    stepItem.className = 'step-item';
-                    stepItem.dataset.stepIndex = index;
-                    stepItem.dataset.phase = 'harvest';
-                    stepItem.innerHTML = `
-                        <div class="step-number">${index + 1}</div>
-                        <div class="step-content">
-                            <h4 class="step-title">${step.title}</h4>
-                            <p class="step-description">${step.description}</p>
-                            <div class="step-tip">
-                                <i class="fas fa-lightbulb"></i> ${step.tip}
-                            </div>
-                            <div class="step-action">
-                                <button class="action-button" onclick="game.completeStep('harvest', ${index})">
-                                    <i class="fas fa-check"></i> Selesai
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    harvestSteps.appendChild(stepItem);
-                });
-            }
-
-            generateHarvestSteps() {
-                const baseSteps = [
-                    {
-                        title: 'Periksa Kematangan',
-                        description: 'Periksa apakah tanaman sudah siap dipanen',
-                        icon: '🌾',
-                        tip: 'Perhatikan warna dan ukuran hasil'
-                    },
-                    {
-                        title: 'Siapkan Alat Panen',
-                        description: 'Siapkan alat untuk memanen hasil',
-                        icon: '🌾',
-                        tip: 'Gunakan alat yang tajam dan bersih'
-                    },
-                    {
-                        title: 'Panen Hasil',
-                        description: 'Panen hasil dengan hati-hati',
-                        icon: '🌾',
-                        tip: 'Jangan merusak tanaman untuk panen berikutnya'
-                    }
-                ];
-
-                // Add method-specific harvest steps
-                if (this.selectedMethod.id === 'hidroponik') {
-                    baseSteps.push({
-                        title: 'Bersihkan Sistem',
-                        description: 'Bersihkan sistem hidroponik setelah panen',
-                        icon: '🌾',
-                        tip: 'Ganti larutan nutrisi untuk tanaman baru'
-                    });
-                }
-
-                return baseSteps;
-            }
-
-            completeStep(phase, stepIndex) {
-                if (!this.gameActive) return;
-
-                // Mark step as completed
-                this.phaseProgress[phase].steps.push(stepIndex);
-
-                // Update step appearance with animation
-                const stepElement = document.querySelector(`[data-phase="${phase}"][data-step-index="${stepIndex}"]`);
-                const button = stepElement.querySelector('.action-button');
-                
-                // Add completion animation to button
-                button.style.transform = 'scale(1.2)';
-                button.style.background = 'linear-gradient(135deg, #4CAF50, #66BB6A)';
-                button.innerHTML = '<i class="fas fa-check-circle"></i> Selesai!';
-                button.disabled = true;
-                
-                // Add celebration effect
-                this.createStepCompletionEffect(stepElement);
-                
-                setTimeout(() => {
-                    stepElement.classList.remove('active');
-                    stepElement.classList.add('completed');
-                    button.style.transform = 'scale(1)';
-                }, 600);
-
-                // Award points based on method difficulty
-                const stepPoints = Math.floor((this.selectedPlant.basePoints * this.selectedMethod.basePoints) / 12);
-                this.awardPoints(stepPoints);
-
-                // Show plant if this is a planting step
-                if (phase === 'planting' && stepIndex === this.selectedMethod.steps.length - 1) {
-                    this.showPlant();
-                }
-
-                // Check if phase is complete
-                const phaseSteps = document.querySelectorAll(`[data-phase="${phase}"]`);
-                const completedSteps = this.phaseProgress[phase].steps.length;
-                
-                if (completedSteps === phaseSteps.length) {
-                    this.completePhase(phase);
-                }
-
-                // Update progress
-                this.updateProgress();
-            }
-
-            completePhase(phase) {
-                this.phaseProgress[phase].completed = true;
-                this.completedPhases.push(phase);
-
-                // Update phase button with animation
-                const phaseBtn = document.querySelector(`[data-phase="${phase}"]`);
-                phaseBtn.classList.add('completed');
-                
-                // Create phase completion effect
-                this.createPhaseCompletionEffect(phaseBtn, phase);
-
-                // Award phase completion bonus
-                const phaseBonus = Math.floor((this.selectedPlant.basePoints * this.selectedMethod.basePoints) / 8);
-                this.awardPoints(phaseBonus);
-
-                // Show phase completion message
-                this.showPhaseCompletionMessage(phase);
-
-                // Move to next phase
-                const phases = ['tools', 'planting', 'care', 'harvest'];
-                const currentIndex = phases.indexOf(phase);
-                if (currentIndex < phases.length - 1) {
-                    const nextPhase = phases[currentIndex + 1];
-                    setTimeout(() => {
-                        this.showPhase(nextPhase);
-                    }, 2000);
-                } else {
-                    setTimeout(() => {
-                        this.completePlanting();
-                    }, 2000);
-                }
-            }
-
-            completePlanting() {
-                this.gameActive = false;
-
-                // Calculate total points
-                const totalPoints = Math.floor(this.selectedPlant.basePoints * this.selectedMethod.basePoints);
-                
-                // Award completion bonus
-                this.awardPoints(totalPoints);
-
-                // Update user stats
-                this.currentUser.plantsCompleted++;
-                this.currentUser.streak++;
-                this.currentUser.perfectCompletions++;
-                
-                // Save plant history
-                const plantHistory = {
-                    plantId: this.selectedPlant.id,
-                    plantName: this.selectedPlant.name,
-                    methodId: this.selectedMethod.id,
-                    methodName: this.selectedMethod.name,
-                    pointsEarned: totalPoints,
-                    completedAt: new Date().toISOString(),
-                    completionTime: Date.now() - this.gameStartTime,
-                    perfectCompletion: true,
-                    level: this.currentUser.level
-                };
-                
-                this.currentUser.plantsHistory.push(plantHistory);
-                
-                // Update favorites
-                if (!this.currentUser.favoritePlant) {
-                    this.currentUser.favoritePlant = this.selectedPlant.name;
-                }
-                if (!this.currentUser.favoriteMethod) {
-                    this.currentUser.favoriteMethod = this.selectedMethod.name;
-                }
-                
-                // Check and award achievements
-                this.checkAndAwardAchievements();
-                
-                this.updateLevel();
-
-                // Show celebration effects
-                this.createCompletionCelebration();
-
-                // Show completion message with toast
-                const messages = [
-                    `🎉 Selamat! ${this.selectedPlant.name} berhasil ditanam!`,
-                    `🏆 Hebat! Kamu ahli bertani ${this.selectedPlant.name}!`,
-                    `⭐ Luar biasa! ${this.selectedPlant.name} siap dipanen!`,
-                    `🌟 Fantastis! Kamu petani ${this.selectedPlant.name} yang handal!`
-                ];
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                this.showToast(randomMessage, 'success');
-
-                // Update leaderboard
-                this.updateLeaderboard();
-
-                // Save progress
-                this.saveUserProfile();
-                this.saveLeaderboard();
-
-                // Update UI
-                this.updateStats();
-            }
-
-            awardPoints(points) {
-                this.currentUser.points += points;
-                this.currentUser.totalPointsEarned += points;
-                this.showPointsPopup(points);
-                this.updateStats();
-                
-                // Update comprehensive scoring system
-                if (typeof updateActivityScore === 'function') {
-                    const xp = Math.floor(points / 10); // 1 XP per 10 points
-                    updateActivityScore('tanam-yuk', points, xp);
-                }
-            }
-
-            showPointsPopup(points) {
-                const popup = document.getElementById('points-popup');
-                const pointsText = document.getElementById('points-text');
-                
-                pointsText.textContent = `+${points} Points!`;
-                popup.classList.add('show');
-
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 2000);
-            }
-
-            updateLevel() {
-                const newLevel = Math.floor(this.currentUser.points / 100) + 1;
-                if (newLevel > this.currentUser.level) {
-                    this.currentUser.level = newLevel;
-                    this.showLevelUpMessage();
-                }
-            }
-
-            showLevelUpMessage() {
-                const popup = document.getElementById('points-popup');
-                const pointsText = document.getElementById('points-text');
-                
-                pointsText.innerHTML = `<i class="fas fa-star"></i> Level Up! Level ${this.currentUser.level}`;
-                popup.classList.add('show');
-
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 3000);
-            }
-
-            showCompletionMessage() {
-                const popup = document.getElementById('points-popup');
-                const pointsText = document.getElementById('points-text');
-                const totalPoints = Math.floor(this.selectedPlant.basePoints * this.selectedMethod.basePoints);
-                
-                // Tambahkan animasi khusus untuk completion
-                popup.style.animation = 'none';
-                setTimeout(() => {
-                    popup.style.animation = 'completionCelebration 3s ease-in-out';
-                }, 10);
-                
-                pointsText.innerHTML = `
-                    <div style="font-size: 60px; margin-bottom: 10px;">${this.selectedPlant.icon}</div>
-                    <div style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">SELAMAT! &#127881;</div>
-                    <div style="font-size: 16px; margin-bottom: 5px;">Berhasil menanam ${this.selectedPlant.name}</div>
-                    <div style="font-size: 14px; color: #FFD700;">dengan metode ${this.selectedMethod.name}</div>
-                    <div style="font-size: 18px; font-weight: 600; margin-top: 10px; color: #FFD700;">+${totalPoints} Points!</div>
-                    <div style="font-size: 12px; margin-top: 8px; opacity: 0.8;">Level ${this.currentUser.level} &#11088;</div>
-                `;
-                popup.classList.add('show');
-
-                // Tambahkan konfetti effect
-                this.createConfettiEffect();
-
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 4000);
-            }
-
-            createConfettiEffect() {
-                const canvas = document.getElementById('simulation-canvas');
-                const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#FFD700'];
-                
-                for (let i = 0; i < 30; i++) {
-                    setTimeout(() => {
-                        const confetti = document.createElement('div');
-                        confetti.style.position = 'absolute';
-                        confetti.style.width = '10px';
-                        confetti.style.height = '10px';
-                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                        confetti.style.left = Math.random() * 100 + '%';
-                        confetti.style.top = '-20px';
-                        confetti.style.borderRadius = '50%';
-                        confetti.style.zIndex = '1000';
-                        confetti.style.animation = `confettiFall ${2 + Math.random() * 2}s ease-out forwards`;
-                        canvas.appendChild(confetti);
-                        
-                        setTimeout(() => confetti.remove(), 4000);
-                    }, i * 100);
-                }
-            }
-
-            updateProgress() {
-                const totalPhases = 4;
-                const completedPhases = this.completedPhases.length;
-                const progress = (completedPhases / totalPhases) * 100;
-                
-                const progressFill = document.getElementById('progress-fill');
-                progressFill.style.width = `${progress}%`;
-            }
-
-            updateStats() {
-                document.getElementById('user-points').textContent = this.currentUser.points;
-                document.getElementById('plants-count').textContent = this.currentUser.plantsCompleted;
-                document.getElementById('level').textContent = this.currentUser.level;
-                document.getElementById('streak').textContent = this.currentUser.streak;
-            }
-
-            updateLeaderboard() {
-                // Check if user should be on leaderboard
-                const userEntry = {
-                    name: this.currentUser.name,
-                    points: this.currentUser.points,
-                    level: this.currentUser.level
-                };
-
-                // Add or update user in leaderboard
-                const existingIndex = this.leaderboard.findIndex(entry => entry.name === userEntry.name);
-                if (existingIndex >= 0) {
-                    this.leaderboard[existingIndex] = userEntry;
-                } else {
-                    this.leaderboard.push(userEntry);
-                }
-
-                // Sort leaderboard by points
-                this.leaderboard.sort((a, b) => b.points - a.points);
-
-                // Keep only top 10
-                this.leaderboard = this.leaderboard.slice(0, 10);
-
-                // Render leaderboard
-                this.renderLeaderboard();
-            }
-
-            renderLeaderboard() {
-                const leaderboardList = document.getElementById('leaderboard-list');
-                leaderboardList.innerHTML = '';
-
-                if (this.leaderboard.length === 0) {
-                    leaderboardList.innerHTML = '<p style="text-align: center; color: #666;">Belum ada data. Mulai menanam untuk masuk leaderboard!</p>';
-                    return;
-                }
-
-                this.leaderboard.slice(0, 5).forEach((entry, index) => {
-                    const leaderboardItem = document.createElement('div');
-                    leaderboardItem.className = 'leaderboard-item';
-                    
-                    if (index === 0) leaderboardItem.classList.add('top-1');
-                    else if (index === 1) leaderboardItem.classList.add('top-2');
-                    else if (index === 2) leaderboardItem.classList.add('top-3');
-
-                    const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}`;
-
-                    leaderboardItem.innerHTML = `
-                        <div class="rank-badge">${medal}</div>
-                        <div class="leaderboard-name">${entry.name}</div>
-                        <div class="leaderboard-points">${entry.points} pts</div>
-                    `;
-                    
-                    leaderboardList.appendChild(leaderboardItem);
-                });
-            }
-
-            animateBackgroundParticles() {
-                const particles = document.querySelectorAll('.particle');
-                const plantIcons = ['🌾', '🌽', '🌿', '🌺', '🌱', '🌴', '🎋', '🫚'];
-                
-                particles.forEach((particle, index) => {
-                    particle.textContent = plantIcons[index % plantIcons.length];
-                });
-            }
-
-            createStepCompletionEffect(stepElement) {
-                // Create floating particles effect
-                const rect = stepElement.getBoundingClientRect();
-                const colors = ['#4CAF50', '#FF9800', '#2196F3', '#FFC107'];
-                
-                for (let i = 0; i < 8; i++) {
-                    const particle = document.createElement('div');
-                    particle.style.position = 'fixed';
-                    particle.style.left = rect.left + rect.width / 2 + 'px';
-                    particle.style.top = rect.top + rect.height / 2 + 'px';
-                    particle.style.width = '8px';
-                    particle.style.height = '8px';
-                    particle.style.backgroundColor = colors[i % colors.length];
-                    particle.style.borderRadius = '50%';
-                    particle.style.pointerEvents = 'none';
-                    particle.style.zIndex = '9999';
-                    particle.style.transition = 'all 1s ease-out';
-                    
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        const angle = (i / 8) * Math.PI * 2;
-                        const distance = 50 + Math.random() * 50;
-                        particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`;
-                        particle.style.opacity = '0';
-                    }, 10);
-                    
-                    setTimeout(() => particle.remove(), 1000);
-                }
-            }
-            
-            createPhaseCompletionEffect(phaseBtn, phase) {
-                // Create ripple effect on phase button
-                const ripple = document.createElement('div');
-                const rect = phaseBtn.getBoundingClientRect();
-                
-                ripple.style.position = 'fixed';
-                ripple.style.left = rect.left + rect.width / 2 + 'px';
-                ripple.style.top = rect.top + rect.height / 2 + 'px';
-                ripple.style.width = '0';
-                ripple.style.height = '0';
-                ripple.style.borderRadius = '50%';
-                ripple.style.backgroundColor = 'rgba(76, 175, 80, 0.3)';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.zIndex = '9998';
-                ripple.style.transform = 'translate(-50%, -50%)';
-                ripple.style.transition = 'all 0.8s ease-out';
-                
-                document.body.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.style.width = '100px';
-                    ripple.style.height = '100px';
-                    ripple.style.opacity = '0';
-                }, 10);
-                
-                setTimeout(() => ripple.remove(), 800);
-            }
-            
-            showPhaseCompletionMessage(phase) {
-                const phaseNames = {
-                    'tools': 'Alat & Bahan',
-                    'planting': 'Menanam',
-                    'care': 'Merawat',
-                    'harvest': 'Memanen'
-                };
-                
-                const messages = {
-                    'tools': '🔧 Alat siap digunakan!',
-                    'planting': '🌱 Tanaman berhasil ditanam!',
-                    'care': '💧 Perawatan selesai dengan baik!',
-                    'harvest': '🌾 Panen berhasil!'
-                };
-                
-                this.showToast(messages[phase] || `✅ ${phaseNames[phase]} selesai!`, 'success');
-            }
-            
-            createCompletionCelebration() {
-                // Create confetti effect
-                const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#FFD700', '#FF69B4'];
-                const confettiCount = 50;
-                
-                for (let i = 0; i < confettiCount; i++) {
-                    setTimeout(() => {
-                        const confetti = document.createElement('div');
-                        confetti.style.cssText = `
-                            position: fixed;
-                            width: 10px;
-                            height: 10px;
-                            background: ${colors[Math.floor(Math.random() * colors.length)]};
-                            left: ${Math.random() * 100}%;
-                            top: -10px;
-                            opacity: 1;
-                            transform: rotate(${Math.random() * 360}deg);
-                            pointer-events: none;
-                            z-index: 9999;
-                            border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                        `;
-                        
-                        document.body.appendChild(confetti);
-                        
-                        const duration = 2000 + Math.random() * 1000;
-                        const horizontalMovement = (Math.random() - 0.5) * 200;
-                        
-                        confetti.animate([
-                            { 
-                                transform: `translateY(0) translateX(0) rotate(0deg)`,
-                                opacity: 1 
-                            },
-                            { 
-                                transform: `translateY(${window.innerHeight + 20}px) translateX(${horizontalMovement}px) rotate(${Math.random() * 720}deg)`,
-                                opacity: 0.8 
-                            }
-                        ], {
-                            duration: duration,
-                            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                        });
-                        
-                        setTimeout(() => confetti.remove(), duration);
-                    }, i * 30);
-                }
-                
-                // Create floating stars effect
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        const star = document.createElement('div');
-                        star.innerHTML = '⭐';
-                        star.style.cssText = `
-                            position: fixed;
-                            font-size: ${20 + Math.random() * 20}px;
-                            left: ${Math.random() * 100}%;
-                            top: ${Math.random() * 100}%;
-                            opacity: 0;
-                            pointer-events: none;
-                            z-index: 9998;
-                            animation: twinkle 2s ease-in-out;
-                        `;
-                        
-                        document.body.appendChild(star);
-                        
-                        setTimeout(() => star.remove(), 2000);
-                    }, i * 100);
-                }
-                
-                // Add twinkle animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes twinkle {
-                        0% { opacity: 0; transform: scale(0) rotate(0deg); }
-                        50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
-                        100% { opacity: 0; transform: scale(0) rotate(360deg); }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                setTimeout(() => style.remove(), 5000);
-            }
-
-            showToast(message, type = 'info') {
-                // Remove existing toast if any
-                const existingToast = document.querySelector('.toast-notification');
-                if (existingToast) {
-                    existingToast.remove();
-                }
-                
-                const toast = document.createElement('div');
-                toast.className = 'toast-notification';
-                toast.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: ${type === 'success' ? 'linear-gradient(135deg, #4CAF50, #66BB6A)' : 'linear-gradient(135deg, #FF9800, #FFB74D)'};
-                    color: white;
-                    padding: 15px 25px;
-                    border-radius: 50px;
-                    font-family: 'Fredoka', sans-serif;
-                    font-weight: 600;
-                    font-size: 16px;
-                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-                    z-index: 10000;
-                    animation: slideDown 0.5s ease, slideUp 0.5s ease 2.5s forwards;
-                `;
-                
-                toast.textContent = message;
-                document.body.appendChild(toast);
-                
-                // Add animations
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes slideDown {
-                        from { opacity: 0; transform: translateX(-50%) translateY(-100px); }
-                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
-                    }
-                    @keyframes slideUp {
-                        from { opacity: 1; transform: translateX(-50%) translateY(0); }
-                        to { opacity: 0; transform: translateX(-50%) translateY(-100px); }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                setTimeout(() => {
-                    toast.remove();
-                    style.remove();
-                }, 3000);
-            }
-
-            checkAndAwardAchievements() {
-                const achievements = [];
-                
-                // First plant achievement
-                if (this.currentUser.plantsCompleted === 1 && !this.currentUser.achievements.includes('first_plant')) {
-                    achievements.push({
-                        id: 'first_plant',
-                        name: 'Petani Pemula',
-                        description: 'Berhasil menanam tanaman pertama!',
-                        icon: '🌱',
-                        points: 10
-                    });
-                }
-                
-                // 5 plants achievement
-                if (this.currentUser.plantsCompleted === 5 && !this.currentUser.achievements.includes('five_plants')) {
-                    achievements.push({
-                        id: 'five_plants',
-                        name: 'Petani Cukup Terlatih',
-                        description: 'Berhasil menanam 5 tanaman!',
-                        icon: '🌿',
-                        points: 25
-                    });
-                }
-                
-                // 10 plants achievement
-                if (this.currentUser.plantsCompleted === 10 && !this.currentUser.achievements.includes('ten_plants')) {
-                    achievements.push({
-                        id: 'ten_plants',
-                        name: 'Petani Berpengalaman',
-                        description: 'Berhasil menanam 10 tanaman!',
-                        icon: '🌳',
-                        points: 50
-                    });
-                }
-                
-                // Perfect completion streak
-                if (this.currentUser.perfectCompletions === 5 && !this.currentUser.achievements.includes('perfect_five')) {
-                    achievements.push({
-                        id: 'perfect_five',
-                        name: 'Kesempurnaan',
-                        description: '5 kali menyelesaikan tanaman dengan sempurna!',
-                        icon: '⭐',
-                        points: 30
-                    });
-                }
-                
-                // Level achievements
-                if (this.currentUser.level === 5 && !this.currentUser.achievements.includes('level_five')) {
-                    achievements.push({
-                        id: 'level_five',
-                        name: 'Petani Level 5',
-                        description: 'Mencapai level 5!',
-                        icon: '🏆',
-                        points: 20
-                    });
-                }
-                
-                // Award new achievements
-                achievements.forEach(achievement => {
-                    this.currentUser.achievements.push(achievement.id);
-                    this.awardPoints(achievement.points);
-                    this.showAchievementNotification(achievement);
-                });
-            }
-            
-            showAchievementNotification(achievement) {
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 80px;
-                    right: 20px;
-                    background: linear-gradient(135deg, #FFD700, #FFA500);
-                    color: white;
-                    padding: 15px 20px;
-                    border-radius: 15px;
-                    font-family: 'Fredoka', sans-serif;
-                    font-weight: 600;
-                    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-                    z-index: 10001;
-                    max-width: 300px;
-                    animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 3.5s forwards;
-                `;
-                
-                notification.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">${achievement.icon}</span>
-                        <div>
-                            <div style="font-size: 14px; margin-bottom: 2px;">Achievement Unlocked!</div>
-                            <div style="font-size: 16px; font-weight: 700;">${achievement.name}</div>
-                            <div style="font-size: 12px; opacity: 0.9;">${achievement.description}</div>
-                            <div style="font-size: 11px; margin-top: 4px;">+${achievement.points} pts</div>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                // Add animations
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes slideInRight {
-                        from { opacity: 0; transform: translateX(100%); }
-                        to { opacity: 1; transform: translateX(0); }
-                    }
-                    @keyframes slideOutRight {
-                        from { opacity: 1; transform: translateX(0); }
-                        to { opacity: 0; transform: translateX(100%); }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                setTimeout(() => {
-                    notification.remove();
-                    style.remove();
-                }, 4000);
-            }
-
-            startGame() {
-                this.gameStartTime = Date.now();
-                this.gameActive = true;
-            }
-
-            setupEventListeners() {
-                // Add any additional event listeners here
-            }
-        }
-
-        // ==================== GLOBAL FUNCTIONS ====================
-        let game;
-
+        // Navigation Functions
         function goBack() {
             window.history.back();
         }
-
-        function handleLogout() {
-            if (confirm('Apakah Anda yakin ingin keluar? Semua progress akan tersimpan.')) {
-                // Clear current user session
-                if (typeof AUTH !== 'undefined' && AUTH.logout) {
-                    AUTH.logout();
-                } else {
-                    // Fallback: clear localStorage and redirect
-                    localStorage.clear();
-                    alert('Anda telah keluar dari sistem.');
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 1500);
+        
+        function openSettings() {
+            alert('Settings akan segera tersedia!');
+        }
+        
+        function goToMengenalHama() {
+            // Navigate to Mengenal Hama page
+            window.location.href = 'mengenal-hama.html';
+        }
+        
+        function goToCaraMenanam() {
+            // Navigate to Cara Menanam page
+            window.location.href = 'cara-menanam.html';
+        }
+        
+        function openSearch() {
+            alert('Search akan segera tersedia!');
+        }
+        
+        function openNotifications() {
+            alert('Notifications akan segera tersedia!');
+        }
+        
+        function openProfile() {
+            alert('Profile akan segera tersedia!');
+        }
+        
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slideInUp 0.5s ease forwards';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observe activity cards
+            document.querySelectorAll('.activity-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+        
+        // Add slide in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
                 }
             }
-        }
-
-        function navigateTo(page) {
-            window.location.href = page;
-        }
-
-        // ==================== INITIALIZATION ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            game = new TanamYukGame();
-        });
+        `;
+        document.head.appendChild(style);
     </script>
-    <script src="js/logout-handler.js"></script>
 </body>
 </html>
