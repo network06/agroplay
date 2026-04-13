@@ -33,74 +33,98 @@
             position: relative;
         }
         
-        /* Header with Green Background and Clouds */
+        /* Header with Green Background and Clouds - Updated Design */
         .header-container {
             position: relative;
             background: #4CAF50;
-            padding: 15px 20px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
         
-        /* Cloud Shapes */
+        /* Cloud Shapes - Updated */
         .cloud-left {
             position: absolute;
-            left: 10px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 60px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
+            width: 80px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 40px;
         }
         
         .cloud-left::before {
             content: '';
             position: absolute;
-            left: 15px;
+            left: 20px;
+            top: -15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+        }
+        
+        .cloud-left::after {
+            content: '';
+            position: absolute;
+            right: 15px;
             top: -10px;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
         }
         
         .cloud-right {
             position: absolute;
-            right: 10px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 60px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
+            width: 80px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 40px;
         }
         
         .cloud-right::before {
             content: '';
             position: absolute;
-            right: 15px;
+            right: 20px;
+            top: -15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+        }
+        
+        .cloud-right::after {
+            content: '';
+            position: absolute;
+            left: 15px;
             top: -10px;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
         }
         
         /* Header Buttons */
         .header-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: #4CAF50;
+            background: rgba(255, 255, 255, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 10;
@@ -109,25 +133,29 @@
         
         .header-btn:hover {
             transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
         }
         
         /* Title Container */
         .title-container {
             position: relative;
             z-index: 10;
+            flex: 1;
+            text-align: center;
         }
         
         .page-title {
-            background: #4CAF50;
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            color: #4CAF50;
             font-family: 'Fredoka', sans-serif;
-            font-weight: 600;
-            font-size: 18px;
-            padding: 8px 20px;
-            border-radius: 20px;
+            font-weight: 700;
+            font-size: 20px;
+            padding: 12px 30px;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin: 0 auto;
         }
         
         /* Main Content */
@@ -148,33 +176,37 @@
             margin: 30px 0;
         }
         
-        /* Activity Cards Container */
+        /* Activity Cards Container - Square Grid Layout */
         .activity-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
             max-width: 400px;
             margin: 0 auto;
+            padding: 0 10px;
         }
         
-        /* Activity Card */
+        /* Activity Card - Square Design */
         .activity-card {
             background: linear-gradient(135deg, #FF9800, #FFB74D);
             border: 3px solid #FFD700;
             border-radius: 20px;
             padding: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
             position: relative;
             overflow: hidden;
+            aspect-ratio: 1;
+            min-height: 160px;
         }
         
         .activity-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: 0 12px 35px rgba(255, 152, 0, 0.4);
         }
         
@@ -199,21 +231,23 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
-        /* Activity Text */
+        /* Activity Text - Square Card Layout */
         .activity-text {
             font-family: 'Fredoka', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: white;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             z-index: 2;
             position: relative;
+            text-align: center;
+            margin-bottom: 15px;
         }
         
-        /* Activity Illustration */
+        /* Activity Illustration - Square Design */
         .activity-illustration {
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             display: flex;
@@ -224,8 +258,15 @@
         }
         
         .illustration-placeholder {
-            font-size: 60px;
+            font-size: 40px;
             color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
         }
         
         /* Bottom Navigation */
@@ -282,14 +323,59 @@
             font-weight: 600;
         }
         
-        /* Responsive Design */
+        /* Responsive Design - Square Cards */
         @media (max-width: 380px) {
+            .activity-cards {
+                max-width: 320px;
+                gap: 12px;
+                padding: 0 5px;
+            }
+            
             .activity-card {
                 padding: 15px;
+                min-height: 140px;
             }
             
             .activity-text {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            
+            .activity-illustration {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .illustration-placeholder {
+                font-size: 30px;
+            }
+            
+            .instruction-text {
+                font-size: 16px;
+                margin: 20px 0;
+            }
+            
+            .page-title {
                 font-size: 18px;
+                padding: 10px 20px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .activity-cards {
+                max-width: 500px;
+                gap: 20px;
+                padding: 0 20px;
+            }
+            
+            .activity-card {
+                padding: 25px;
+                min-height: 200px;
+            }
+            
+            .activity-text {
+                font-size: 20px;
+                margin-bottom: 20px;
             }
             
             .activity-illustration {
@@ -302,30 +388,13 @@
             }
             
             .instruction-text {
-                font-size: 16px;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .activity-cards {
-                max-width: 600px;
+                font-size: 20px;
+                margin: 40px 0;
             }
             
-            .activity-card {
-                padding: 25px;
-            }
-            
-            .activity-text {
+            .page-title {
                 font-size: 22px;
-            }
-            
-            .activity-illustration {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .illustration-placeholder {
-                font-size: 70px;
+                padding: 14px 35px;
             }
         }
     </style>
@@ -364,7 +433,8 @@
             <div class="activity-card" onclick="goToMengenalHama()">
                 <div class="activity-text">Mengenal Hama</div>
                 <div class="activity-illustration">
-                    <div class="illustration-placeholder">
+                    <img src="assets/mengenal-hama.png" alt="Mengenal Hama" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="illustration-placeholder" style="display: none;">
                         <i class="fas fa-bug"></i>
                     </div>
                 </div>
@@ -374,7 +444,8 @@
             <div class="activity-card" onclick="goToCaraMenanam()">
                 <div class="activity-text">Cara Menanam</div>
                 <div class="activity-illustration">
-                    <div class="illustration-placeholder">
+                    <img src="assets/cara-menanam.png" alt="Cara Menanam" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="illustration-placeholder" style="display: none;">
                         <i class="fas fa-seedling"></i>
                     </div>
                 </div>
