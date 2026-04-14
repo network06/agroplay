@@ -175,7 +175,7 @@
             margin: 30px 0;
         }
         
-        /* Activity Cards - Tall Layout */
+        /* Activity Cards - Colorful Layout Like Tanaman Pangan */
         .activity-cards {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -185,74 +185,135 @@
             padding: 0 10px;
         }
         
-        /* Activity Card - Tall Design */
+        /* Activity Card - Colorful Design Like Tanaman Pangan */
         .activity-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
+            border-radius: 24px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             min-height: 200px;
-            border: 2px solid #e0e0e0;
+            border: none;
         }
         
         .activity-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-            border-color: #4CAF50;
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
-        /* Activity Card Colors */
-        .activity-card:nth-child(1) { border-color: #FF9800; }
-        .activity-card:nth-child(2) { border-color: #2196F3; }
+        .activity-card:active {
+            transform: translateY(-6px) scale(1.01);
+            transition: all 0.1s ease;
+        }
         
-        /* Activity Image Container */
-        .activity-image-container {
-            width: 100%;
-            height: 140px;
-            background: #f5f5f5;
+        /* Card Background - Colorful Gradients Like Tanaman Pangan */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        
+        .activity-card.mengenal-hama .card-background {
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
+        }
+        
+        .activity-card.cara-menanam .card-background {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Menu Logo Wrapper - Like Tanaman Pangan */
+        .menu-logo-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            border-radius: 18px 18px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        .activity-image {
+        .menu-logo {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.3s ease;
         }
         
-        .image-placeholder {
-            font-size: 60px;
-            color: #999;
-            display: flex;
+        /* Fallback for icons if logo fails to load */
+        .menu-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none; /* Hidden by default, shown if logo fails */
             align-items: center;
             justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        /* Activity Content */
-        .activity-content {
-            padding: 15px;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .menu-icon {
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        /* Activity Text */
+        /* Activity Text - Like Tanaman Pangan */
         .activity-text {
             font-family: 'Fredoka', sans-serif;
             font-size: 18px;
             font-weight: 700;
-            color: #333;
+            color: white;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Activity Description - Like Tanaman Pangan */
+        .activity-description {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            line-height: 1.3;
             margin: 0;
         }
         
@@ -354,20 +415,21 @@
                 min-height: 180px;
             }
             
-            .activity-image-container {
-                height: 120px;
+            .menu-logo-wrapper {
+                width: 70px;
+                height: 70px;
             }
             
-            .image-placeholder {
-                font-size: 50px;
-            }
-            
-            .activity-content {
-                padding: 12px;
+            .menu-icon {
+                font-size: 24px;
             }
             
             .activity-text {
                 font-size: 16px;
+            }
+            
+            .activity-description {
+                font-size: 13px;
             }
         }
         
@@ -414,20 +476,21 @@
                 min-height: 220px;
             }
             
-            .activity-image-container {
-                height: 160px;
+            .menu-logo-wrapper {
+                width: 90px;
+                height: 90px;
             }
             
-            .image-placeholder {
-                font-size: 70px;
-            }
-            
-            .activity-content {
-                padding: 18px;
+            .menu-icon {
+                font-size: 32px;
             }
             
             .activity-text {
                 font-size: 20px;
+            }
+            
+            .activity-description {
+                font-size: 15px;
             }
         }
     </style>
@@ -460,28 +523,34 @@
         <!-- Activity Cards -->
         <div class="activity-cards">
             <!-- Mengenal Hama Card -->
-            <div class="activity-card" onclick="goToMengenalHama()">
-                <div class="activity-image-container">
-                    <img src="assets/mengenal-hama.png" alt="Mengenal Hama" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none;">
-                        <i class="fas fa-bug"></i>
+            <div class="activity-card mengenal-hama loading" onclick="goToMengenalHama()">
+                <div class="card-background"></div>
+                <div class="card-pattern"></div>
+                <div class="card-content">
+                    <div class="menu-logo-wrapper">
+                        <img src="assets/mengenal-hama.png" alt="Mengenal Hama" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="menu-icon-wrapper" style="display: none;">
+                            <i class="fas fa-bug menu-icon"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="activity-content">
                     <h3 class="activity-text">Mengenal Hama</h3>
+                    <p class="activity-description">Pelajari berbagai jenis hama tanaman</p>
                 </div>
             </div>
             
             <!-- Cara Menanam Card -->
-            <div class="activity-card" onclick="goToCaraMenanam()">
-                <div class="activity-image-container">
-                    <img src="assets/cara-menanam.png" alt="Cara Menanam" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none;">
-                        <i class="fas fa-seedling"></i>
+            <div class="activity-card cara-menanam loading" onclick="goToCaraMenanam()">
+                <div class="card-background"></div>
+                <div class="card-pattern"></div>
+                <div class="card-content">
+                    <div class="menu-logo-wrapper">
+                        <img src="assets/cara-menanam.png" alt="Cara Menanam" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="menu-icon-wrapper" style="display: none;">
+                            <i class="fas fa-seedling menu-icon"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="activity-content">
                     <h3 class="activity-text">Cara Menanam</h3>
+                    <p class="activity-description">Teknik bercocok tanam yang benar</p>
                 </div>
             </div>
         </div>
