@@ -228,9 +228,9 @@
         
         .plants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
@@ -293,13 +293,16 @@
             overflow: hidden;
         }
         
-        .plant-image-placeholder::before {
-            content: 'Gambar';
-            position: absolute;
-            font-size: 14px;
-            color: #666;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 600;
+        .plant-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+        
+        .plant-icon {
+            font-size: 60px;
+            color: #999;
         }
         
         /* Plant Name */
@@ -468,7 +471,8 @@
         @media (min-width: 401px) and (max-width: 768px) {
             .plants-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 18px;
+                gap: 20px;
+                max-width: 600px;
             }
             
             .plant-image-placeholder {
@@ -481,7 +485,8 @@
         @media (min-width: 769px) {
             .plants-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
+                gap: 30px;
+                max-width: 900px;
             }
             
             .plant-image-placeholder {
@@ -501,8 +506,9 @@
         
         @media (min-width: 1200px) {
             .plants-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 30px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px;
+                max-width: 900px;
             }
             
             .plant-image-placeholder {
@@ -551,112 +557,34 @@
         <!-- Plants Grid -->
         <div class="plants-container">
             <div class="plants-grid">
-                <!-- Plant Card 1 -->
+                <!-- Plant Card 1 - Padi -->
                 <div class="plant-card loading" onclick="selectPlant('padi')">
                     <div class="plant-image-placeholder">
-                        <i class="fas fa-seedling"></i>
+                        <img src="https://via.placeholder.com/120x120/4CAF50/FFFFFF?text=PADI" alt="Padi" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
+                        <i class="fas fa-seedling plant-icon" style="display: none;"></i>
                     </div>
                     <h3 class="plant-name">Padi</h3>
                     <p class="plant-description">Tanaman pangan utama di Indonesia</p>
                 </div>
                 
-                <!-- Plant Card 2 -->
-                <div class="plant-card loading" onclick="selectPlant('jagung')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-corn"></i>
-                    </div>
-                    <h3 class="plant-name">Jagung</h3>
-                    <p class="plant-description">Sumber karbohidrat alternatif</p>
-                </div>
-                
-                <!-- Plant Card 3 -->
-                <div class="plant-card loading" onclick="selectPlant('kedelai')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3 class="plant-name">Kedelai</h3>
-                    <p class="plant-description">Sumber protein nabati</p>
-                </div>
-                
-                <!-- Plant Card 4 -->
+                <!-- Plant Card 2 - Kentang -->
                 <div class="plant-card loading" onclick="selectPlant('kentang')">
                     <div class="plant-image-placeholder">
-                        <i class="fas fa-circle"></i>
+                        <img src="https://via.placeholder.com/120x120/FF9800/FFFFFF?text=KENTANG" alt="Kentang" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
+                        <i class="fas fa-circle plant-icon" style="display: none;"></i>
                     </div>
                     <h3 class="plant-name">Kentang</h3>
                     <p class="plant-description">Umbi kaya akan karbohidrat</p>
                 </div>
                 
-                <!-- Plant Card 5 -->
-                <div class="plant-card loading" onclick="selectPlant('ubi')">
+                <!-- Plant Card 3 - Jagung -->
+                <div class="plant-card loading" onclick="selectPlant('jagung')">
                     <div class="plant-image-placeholder">
-                        <i class="fas fa-carrot"></i>
+                        <img src="https://via.placeholder.com/120x120/FFC107/FFFFFF?text=JAGUNG" alt="Jagung" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
+                        <i class="fas fa-corn plant-icon" style="display: none;"></i>
                     </div>
-                    <h3 class="plant-name">Ubi Jalar</h3>
-                    <p class="plant-description">Umbi manis bergizi</p>
-                </div>
-                
-                <!-- Plant Card 6 -->
-                <div class="plant-card loading" onclick="selectPlant('gandum')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-wheat-awn"></i>
-                    </div>
-                    <h3 class="plant-name">Gandum</h3>
-                    <p class="plant-description">Bahan dasar berbagai makanan</p>
-                </div>
-                
-                <!-- Plant Card 7 -->
-                <div class="plant-card loading" onclick="selectPlant('sorgum')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-grass"></i>
-                    </div>
-                    <h3 class="plant-name">Sorgum</h3>
-                    <p class="plant-description">Tanaman pangan tahan kering</p>
-                </div>
-                
-                <!-- Plant Card 8 -->
-                <div class="plant-card loading" onclick="selectPlant('milet')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <h3 class="plant-name">Milet</h3>
-                    <p class="plant-description">Serealia bergizi tinggi</p>
-                </div>
-                
-                <!-- Plant Card 9 -->
-                <div class="plant-card loading" onclick="selectPlant('kacang-hijau')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-circle"></i>
-                    </div>
-                    <h3 class="plant-name">Kacang Hijau</h3>
-                    <p class="plant-description">Kacangan kaya protein</p>
-                </div>
-                
-                <!-- Plant Card 10 -->
-                <div class="plant-card loading" onclick="selectPlant('kacang-tanah')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-circle"></i>
-                    </div>
-                    <h3 class="plant-name">Kacang Tanah</h3>
-                    <p class="plant-description">Kacangan berminyak</p>
-                </div>
-                
-                <!-- Plant Card 11 -->
-                <div class="plant-card loading" onclick="selectPlant('talas')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3 class="plant-name">Talas</h3>
-                    <p class="plant-description">Umbi tradisional Indonesia</p>
-                </div>
-                
-                <!-- Plant Card 12 -->
-                <div class="plant-card loading" onclick="selectPlant('ganyong')">
-                    <div class="plant-image-placeholder">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3 class="plant-name">Ganyong</h3>
-                    <p class="plant-description">Umbi langka tradisional</p>
+                    <h3 class="plant-name">Jagung</h3>
+                    <p class="plant-description">Sumber karbohidrat alternatif</p>
                 </div>
             </div>
         </div>
@@ -734,7 +662,12 @@
             
             // Show plant details (for future implementation)
             setTimeout(() => {
-                alert(`Detail untuk ${plantType.replace('-', ' ')} akan segera tersedia!`);
+                const plantNames = {
+                    'padi': 'Padi',
+                    'kentang': 'Kentang', 
+                    'jagung': 'Jagung'
+                };
+                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
             }, 300);
         }
         
