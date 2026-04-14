@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kebun Ajaib - Semua Tanaman Lengkap Agroplay">
-    <meta name="theme-color" content="#4CAF50">
-    <title>Kebun Ajaib - Agroplay</title>
+    <meta name="description" content="Tanaman Serat - Kategori Tanaman Agroplay">
+    <meta name="theme-color" content="#9C27B0">
+    <title>Tanaman Serat - Agroplay</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,21 +14,35 @@
     
     <style>
         /* ============================================
-           KEBUN AJAIB - EXACT REPLICA FROM IMAGE
-           Single Column Hanging Signs with Long Ropes
+           TANAMAN SERAT - EXACT DESIGN FROM IMAGE
+           Purple Theme with Colorful Cards
            ============================================ */
         
         :root {
             --primary-green: #4CAF50;
             --primary-green-dark: #388E3C;
-            --wood-brown: #8B4513;
-            --wood-dark: #654321;
-            --rope-color: #D2691E;
+            --primary-green-light: #81C784;
+            --primary-orange: #FF9800;
+            --primary-blue: #2196F3;
+            --primary-red: #F44336;
+            --primary-purple: #9C27B0;
+            --primary-purple-dark: #7B1FA2;
+            --primary-purple-light: #BA68C8;
+            --primary-yellow: #FFC107;
+            --primary-pink: #E91E63;
+            --primary-teal: #009688;
+            --primary-indigo: #3F51B5;
+            --primary-amber: #FFB300;
+            --primary-cyan: #00BCD4;
+            --primary-lime: #CDDC39;
+            --primary-brown: #795548;
+            --primary-grey: #9E9E9E;
+            --primary-blue-grey: #607D8B;
             --sky-blue: #87CEEB;
             --cloud-white: #FFFFFF;
         }
         
-        /* Background */
+        /* Background - Same as Other Pages */
         body {
             background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
             min-height: 100vh;
@@ -124,7 +138,7 @@
             flex-direction: column;
         }
         
-        /* Top Section */
+        /* Top Section - Purple Theme from Image */
         .top-section {
             padding: 20px;
             display: flex;
@@ -137,7 +151,7 @@
             width: 50px;
             height: 50px;
             border-radius: 25px;
-            background: var(--primary-green);
+            background: var(--primary-purple);
             border: none;
             color: white;
             font-size: 20px;
@@ -161,7 +175,7 @@
         }
         
         .title-btn {
-            background: var(--primary-green);
+            background: var(--primary-purple);
             border: none;
             border-radius: 25px;
             padding: 15px 30px;
@@ -190,7 +204,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--primary-green);
+            background: var(--primary-purple);
             border: none;
             color: white;
             font-size: 20px;
@@ -207,153 +221,165 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
-        /* Hanging Signs Container - SINGLE COLUMN */
-        .hanging-signs-container {
+        /* Plants Grid Container */
+        .plants-container {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
-            gap: 45px;
             margin-bottom: 100px;
         }
         
-        /* Hanging Sign */
-        .hanging-sign {
-            position: relative;
-            width: 100%;
-            max-width: 320px;
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 900px;
             margin: 0 auto;
-            animation: swing 4s ease-in-out infinite;
         }
         
-        @keyframes swing {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
-        }
-        
-        /* Rope Container - Two Ropes from Top */
-        .rope-container {
+        /* Enhanced Plant Cards - Same as Tanaman Industri */
+        .plant-card {
             position: relative;
-            width: 100%;
-            height: 100px;
-            margin-bottom: 5px;
-        }
-        
-        /* Left Rope */
-        .rope-left {
-            position: absolute;
-            top: 0;
-            left: 20%;
-            width: 3px;
-            height: 100px;
-            background: linear-gradient(180deg, #D2691E, #8B4513);
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .rope-left::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -2px;
-            width: 7px;
-            height: 7px;
-            background: #654321;
-            border-radius: 50%;
-        }
-        
-        /* Right Rope */
-        .rope-right {
-            position: absolute;
-            top: 0;
-            right: 20%;
-            width: 3px;
-            height: 100px;
-            background: linear-gradient(180deg, #D2691E, #8B4513);
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .rope-right::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -2px;
-            width: 7px;
-            height: 7px;
-            background: #654321;
-            border-radius: 50%;
-        }
-        
-        /* Wooden Plank */
-        .wooden-plank {
-            background: linear-gradient(180deg, #654321, #8B4513);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 
-                0 8px 20px rgba(0,0,0,0.3),
-                inset 0 2px 5px rgba(255,255,255,0.1),
-                inset 0 -2px 5px rgba(0,0,0,0.2);
+            border-radius: 24px;
+            overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid #654321;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            min-height: 200px;
+            border: none;
         }
         
-        .wooden-plank::before {
-            content: '';
+        .plant-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .plant-card:active {
+            transform: translateY(-6px) scale(1.01);
+            transition: all 0.1s ease;
+        }
+        
+        /* Card Background - Colorful Gradients for Fiber Plants */
+        .card-background {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            z-index: 1;
+        }
+        
+        .plant-card.kapas .card-background {
+            background: linear-gradient(135deg, #9C27B0, #BA68C8, #CE93D8);
+        }
+        
+        .plant-card.rami .card-background {
+            background: linear-gradient(135deg, #2196F3, #64B5F6, #90CAF9);
+        }
+        
+        .plant-card.kenaf .card-background {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
             background-image: 
-                repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 11px),
-                repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(0,0,0,0.1) 5px, rgba(0,0,0,0.1) 6px);
-            border-radius: 13px;
-            pointer-events: none;
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
         }
         
-        .wooden-plank:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 
-                0 12px 30px rgba(0,0,0,0.4),
-                inset 0 2px 5px rgba(255,255,255,0.2),
-                inset 0 -2px 5px rgba(0,0,0,0.3);
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         
-        .wooden-plank:active {
-            transform: translateY(-2px) scale(1.01);
-            transition: all 0.1s ease;
+        /* Menu Logo Wrapper - Same as Tanaman Industri */
+        .menu-logo-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        .plank-text {
+        .menu-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        /* Fallback for icons if logo fails to load */
+        .menu-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none; /* Hidden by default, shown if logo fails */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .menu-icon {
+            font-size: 28px;
             color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Plant Name */
+        .plant-name {
             font-family: 'Fredoka', sans-serif;
             font-weight: 700;
-            font-size: 18px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            position: relative;
-            z-index: 1;
+            font-size: 20px;
+            color: white;
             margin: 0;
-            padding: 0;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         
-        /* Different swing delays for each sign */
-        .hanging-sign:nth-child(1) { animation-delay: 0.1s; }
-        .hanging-sign:nth-child(2) { animation-delay: 0.3s; }
-        .hanging-sign:nth-child(3) { animation-delay: 0.5s; }
-        .hanging-sign:nth-child(4) { animation-delay: 0.7s; }
-        .hanging-sign:nth-child(5) { animation-delay: 0.9s; }
-        .hanging-sign:nth-child(6) { animation-delay: 1.1s; }
+        /* Plant Description */
+        .plant-description {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            line-height: 1.4;
+            font-weight: 500;
+        }
         
-        /* Bottom Navigation */
+        /* Bottom Navigation - Purple Theme from Image */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--primary-green);
+            background: var(--primary-purple);
             padding: 10px 0;
             box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
             z-index: 1000;
@@ -415,7 +441,12 @@
             }
         }
         
-        /* Responsive Design - ALWAYS SINGLE COLUMN */
+        /* Different delays for cards */
+        .plant-card:nth-child(1) { animation-delay: 0.1s; }
+        .plant-card:nth-child(2) { animation-delay: 0.2s; }
+        .plant-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        /* Responsive Design */
         @media (max-width: 400px) {
             .top-section {
                 padding: 15px;
@@ -436,25 +467,26 @@
                 font-size: 12px;
             }
             
-            .hanging-signs-container {
-                padding: 15px;
-                gap: 30px;
-            }
-            
-            .rope-container {
-                height: 80px;
-            }
-            
-            .rope-left, .rope-right {
-                height: 80px;
-            }
-            
-            .wooden-plank {
+            .plants-container {
                 padding: 15px;
             }
             
-            .plank-text {
-                font-size: 16px;
+            .plants-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .plant-name {
+                font-size: 18px;
+            }
+            
+            .plant-description {
+                font-size: 12px;
             }
             
             .nav-item {
@@ -471,34 +503,52 @@
         }
         
         @media (min-width: 401px) and (max-width: 768px) {
-            .hanging-signs-container {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            
-            .hanging-sign {
-                max-width: 400px;
+            .plants-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 600px;
             }
         }
         
         @media (min-width: 769px) {
-            /* Always keep single column - NO ROW LAYOUT */
-            .hanging-signs-container {
-                max-width: 400px;
-                margin: 0 auto;
-                padding: 40px 20px;
+            .plants-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                max-width: 900px;
             }
             
-            .hanging-sign {
-                max-width: 320px;
+            .menu-logo-wrapper {
+                width: 90px;
+                height: 90px;
             }
             
-            .rope-container {
-                height: 120px;
+            .plant-name {
+                font-size: 22px;
             }
             
-            .rope-left, .rope-right {
-                height: 120px;
+            .plant-description {
+                font-size: 15px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .plants-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px;
+                max-width: 900px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .plant-name {
+                font-size: 24px;
+            }
+            
+            .plant-description {
+                font-size: 16px;
             }
         }
     </style>
@@ -520,9 +570,9 @@
             
             <div class="title-section">
                 <button class="title-btn" onclick="showTitleAnimation()">
-                    Kebun Ajaib
+                    Tanaman Serat
                 </button>
-                <p class="subtitle">Ayo pilih tanaman yang ingin kamu pelajari!</p>
+                <p class="subtitle">Jelajahi berbagai jenis tanaman serat!</p>
             </div>
             
             <button class="settings-btn" onclick="openSettings()">
@@ -530,71 +580,55 @@
             </button>
         </div>
         
-        <!-- Hanging Signs Container - SINGLE COLUMN -->
-        <div class="hanging-signs-container">
-            <!-- Hanging Sign 1 -->
-            <div class="hanging-sign loading">
-                <div class="rope-container">
-                    <div class="rope-left"></div>
-                    <div class="rope-right"></div>
+        <!-- Plants Grid -->
+        <div class="plants-container">
+            <div class="plants-grid">
+                <!-- Plant Card 1 - Kapas -->
+                <div class="plant-card kapas loading" onclick="selectPlant('kapas')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Kapas" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-cloud menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Kapas</h3>
+                        <p class="plant-description">Bahan baku tekstil</p>
+                    </div>
                 </div>
-                <div class="wooden-plank" onclick="selectPlant('pangan')">
-                    <p class="plank-text">Tanaman Pangan</p>
+                
+                <!-- Plant Card 2 - Rami -->
+                <div class="plant-card rami loading" onclick="selectPlant('rami')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Rami" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-leaf menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Rami</h3>
+                        <p class="plant-description">Serat alami kuat</p>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Hanging Sign 2 -->
-            <div class="hanging-sign loading">
-                <div class="rope-container">
-                    <div class="rope-left"></div>
-                    <div class="rope-right"></div>
-                </div>
-                <div class="wooden-plank" onclick="selectPlant('industri')">
-                    <p class="plank-text">Tanaman Industri</p>
-                </div>
-            </div>
-            
-            <!-- Hanging Sign 3 -->
-            <div class="hanging-sign loading">
-                <div class="rope-container">
-                    <div class="rope-left"></div>
-                    <div class="rope-right"></div>
-                </div>
-                <div class="wooden-plank" onclick="selectPlant('serat')">
-                    <p class="plank-text">Tanaman Serat</p>
-                </div>
-            </div>
-            
-            <!-- Hanging Sign 4 -->
-            <div class="hanging-sign loading">
-                <div class="rope-container">
-                    <div class="rope-left"></div>
-                    <div class="rope-right"></div>
-                </div>
-                <div class="wooden-plank" onclick="selectPlant('hias')">
-                    <p class="plank-text">Tanaman Hias</p>
-                </div>
-            </div>
-            
-            <!-- Hanging Sign 5 -->
-            <div class="hanging-sign loading">
-                <div class="rope-container">
-                    <div class="rope-left"></div>
-                    <div class="rope-right"></div>
-                </div>
-                <div class="wooden-plank" onclick="selectPlant('pakan')">
-                    <p class="plank-text">Tanaman Pakan Ternak</p>
-                </div>
-            </div>
-            
-            <!-- Hanging Sign 6 -->
-            <div class="hanging-sign loading">
-                <div class="rope-container">
-                    <div class="rope-left"></div>
-                    <div class="rope-right"></div>
-                </div>
-                <div class="wooden-plank" onclick="selectPlant('obat')">
-                    <p class="plank-text">Tanaman Obat</p>
+                
+                <!-- Plant Card 3 - Kenaf -->
+                <div class="plant-card kenaf loading" onclick="selectPlant('kenaf')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Kenaf" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-seedling menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Kenaf</h3>
+                        <p class="plant-description">Serat pulp dan kertas</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -603,7 +637,7 @@
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-item active">
+            <a href="index.html" class="nav-item">
                 <i class="fas fa-home nav-icon"></i>
                 <span class="nav-label">Home</span>
             </a>
@@ -626,12 +660,11 @@
     <script>
         // Sound effects
         const clickSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
-        const swingSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
         
         // Navigation functions
         function goBack() {
             playClickSound();
-            window.history.back();
+            window.location.href = 'kebun-ajaib.html';
         }
         
         function openSettings() {
@@ -663,39 +696,23 @@
             }, 300);
         }
         
-        function selectPlant(type) {
-            playSwingSound();
-            const sign = event.currentTarget.closest('.hanging-sign');
-            sign.style.animation = 'none';
+        function selectPlant(plantType) {
+            playClickSound();
+            const card = event.currentTarget;
+            card.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                sign.style.animation = 'swing 0.5s ease-in-out';
-            }, 10);
+                card.style.transform = '';
+            }, 200);
             
-            // Navigate to specific plant category
+            // Show plant details (for future implementation)
             setTimeout(() => {
-                switch(type) {
-                    case 'pangan':
-                        window.location.href = 'tanaman-pangan.html';
-                        break;
-                    case 'industri':
-                        window.location.href = 'tanaman-industri.html';
-                        break;
-                    case 'serat':
-                        window.location.href = 'tanaman-serat.html';
-                        break;
-                    case 'hias':
-                        window.location.href = 'tanaman-hias.html';
-                        break;
-                    case 'pakan':
-                        alert('Halaman Tanaman Pakan Ternak akan segera tersedia!');
-                        break;
-                    case 'obat':
-                        alert('Halaman Tanaman Obat akan segera tersedia!');
-                        break;
-                    default:
-                        alert(`Halaman untuk ${type} akan segera tersedia!`);
-                }
-            }, 500);
+                const plantNames = {
+                    'kapas': 'Kapas',
+                    'rami': 'Rami', 
+                    'kenaf': 'Kenaf'
+                };
+                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+            }, 300);
         }
         
         function playClickSound() {
@@ -707,26 +724,17 @@
             }
         }
         
-        function playSwingSound() {
-            try {
-                swingSound.currentTime = 0;
-                swingSound.play().catch(e => console.log('Audio play failed:', e));
-            } catch(e) {
-                console.log('Audio not supported');
-            }
-        }
-        
         // Add interactive hover effects
         document.addEventListener('DOMContentLoaded', function() {
-            const woodenPlanks = document.querySelectorAll('.wooden-plank');
+            const plantCards = document.querySelectorAll('.plant-card');
             
-            woodenPlanks.forEach(plank => {
-                plank.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.02) rotate(1deg)';
+            plantCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px) scale(1.03)';
                 });
                 
-                plank.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
                 });
             });
             
