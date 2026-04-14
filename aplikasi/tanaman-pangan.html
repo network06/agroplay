@@ -234,94 +234,181 @@
             margin: 0 auto;
         }
         
-        /* Plant Card - Box Shape Like Main Menu */
+        /* Enhanced Plant Cards - Like Main Menu */
         .plant-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
+            border-radius: 24px;
             overflow: hidden;
-            border: 3px solid var(--primary-green);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             min-height: 200px;
+            border: none;
         }
         
         .plant-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         .plant-card:active {
-            transform: translateY(-4px) scale(1.01);
+            transform: translateY(-6px) scale(1.01);
             transition: all 0.1s ease;
         }
         
-        /* Plant Card Colors */
-        .plant-card:nth-child(1) { border-color: var(--primary-orange); }
-        .plant-card:nth-child(2) { border-color: var(--primary-blue); }
-        .plant-card:nth-child(3) { border-color: var(--primary-red); }
-        .plant-card:nth-child(4) { border-color: var(--primary-purple); }
-        .plant-card:nth-child(5) { border-color: var(--primary-yellow); }
-        .plant-card:nth-child(6) { border-color: var(--primary-pink); }
-        .plant-card:nth-child(7) { border-color: var(--primary-teal); }
-        .plant-card:nth-child(8) { border-color: var(--primary-indigo); }
-        .plant-card:nth-child(9) { border-color: var(--primary-amber); }
-        .plant-card:nth-child(10) { border-color: var(--primary-cyan); }
-        .plant-card:nth-child(11) { border-color: var(--primary-lime); }
-        .plant-card:nth-child(12) { border-color: var(--primary-brown); }
+        /* Card Background - Colorful Gradients Like Main Menu */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
         
-        /* Image Placeholder */
-        .plant-image-placeholder {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            border-radius: 15px;
-            margin-bottom: 15px;
+        .plant-card.padi .card-background {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+        }
+        
+        .plant-card.jagung .card-background {
+            background: linear-gradient(135deg, #FFC107, #FFD54F, #FFECB3);
+        }
+        
+        .plant-card.kedelai .card-background {
+            background: linear-gradient(135deg, #2196F3, #42A5F5, #64B5F6);
+        }
+        
+        .plant-card.kentang .card-background {
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
+        }
+        
+        .plant-card.ubi .card-background {
+            background: linear-gradient(135deg, #9C27B0, #BA68C8, #CE93D8);
+        }
+        
+        .plant-card.gandum .card-background {
+            background: linear-gradient(135deg, #F44336, #EF5350, #E57373);
+        }
+        
+        .plant-card.sorgum .card-background {
+            background: linear-gradient(135deg, #009688, #26A69A, #4DB6AC);
+        }
+        
+        .plant-card.milet .card-background {
+            background: linear-gradient(135deg, #3F51B5, #5C6BC0, #7986CB);
+        }
+        
+        .plant-card.kacang-hijau .card-background {
+            background: linear-gradient(135deg, #8BC34A, #9CCC65, #AED581);
+        }
+        
+        .plant-card.kacang-tanah .card-background {
+            background: linear-gradient(135deg, #FFB300, #FFCA28, #FFD54F);
+        }
+        
+        .plant-card.talas .card-background {
+            background: linear-gradient(135deg, #795548, #8D6E63, #A1887F);
+        }
+        
+        .plant-card.ganyong .card-background {
+            background: linear-gradient(135deg, #607D8B, #78909C, #90A4AE);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Menu Logo Wrapper - Like Main Menu */
+        .menu-logo-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
-            color: #999;
-            border: 2px dashed #ccc;
-            position: relative;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        .plant-image {
+        .menu-logo {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 13px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Fallback for icons if logo fails to load */
+        .menu-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none; /* Hidden by default, shown if logo fails */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .menu-icon {
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .plant-icon {
             font-size: 60px;
-            color: #999;
+            color: rgba(255, 255, 255, 0.8);
         }
         
-        /* Plant Name */
+        /* Plant Name - Like Main Menu */
         .plant-name {
             font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
             font-size: 18px;
-            color: #333;
-            margin: 0;
-            margin-bottom: 8px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        /* Plant Description */
+        /* Plant Description - Like Main Menu */
         .plant-description {
             font-family: 'Nunito', sans-serif;
             font-size: 14px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            line-height: 1.3;
             margin: 0;
-            line-height: 1.4;
         }
         
         /* Bottom Navigation */
@@ -558,33 +645,45 @@
         <div class="plants-container">
             <div class="plants-grid">
                 <!-- Plant Card 1 - Padi -->
-                <div class="plant-card loading" onclick="selectPlant('padi')">
-                    <div class="plant-image-placeholder">
-                        <img src="https://via.placeholder.com/120x120/4CAF50/FFFFFF?text=PADI" alt="Padi" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
-                        <i class="fas fa-seedling plant-icon" style="display: none;"></i>
+                <div class="plant-card padi loading" onclick="selectPlant('padi')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="plant-image-placeholder">
+                            <img src="assets/kebun-ajaib.png" alt="Padi" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
+                            <i class="fas fa-seedling plant-icon" style="display: none;"></i>
+                        </div>
+                        <h3 class="plant-name">Padi</h3>
+                        <p class="plant-description">Tanaman pangan utama di Indonesia</p>
                     </div>
-                    <h3 class="plant-name">Padi</h3>
-                    <p class="plant-description">Tanaman pangan utama di Indonesia</p>
                 </div>
                 
                 <!-- Plant Card 2 - Kentang -->
-                <div class="plant-card loading" onclick="selectPlant('kentang')">
-                    <div class="plant-image-placeholder">
-                        <img src="https://via.placeholder.com/120x120/FF9800/FFFFFF?text=KENTANG" alt="Kentang" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
-                        <i class="fas fa-circle plant-icon" style="display: none;"></i>
+                <div class="plant-card kentang loading" onclick="selectPlant('kentang')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="plant-image-placeholder">
+                            <img src="assets/tanam-yuk.png" alt="Kentang" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
+                            <i class="fas fa-circle plant-icon" style="display: none;"></i>
+                        </div>
+                        <h3 class="plant-name">Kentang</h3>
+                        <p class="plant-description">Umbi kaya akan karbohidrat</p>
                     </div>
-                    <h3 class="plant-name">Kentang</h3>
-                    <p class="plant-description">Umbi kaya akan karbohidrat</p>
                 </div>
                 
                 <!-- Plant Card 3 - Jagung -->
-                <div class="plant-card loading" onclick="selectPlant('jagung')">
-                    <div class="plant-image-placeholder">
-                        <img src="https://via.placeholder.com/120x120/FFC107/FFFFFF?text=JAGUNG" alt="Jagung" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
-                        <i class="fas fa-corn plant-icon" style="display: none;"></i>
+                <div class="plant-card jagung loading" onclick="selectPlant('jagung')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="plant-image-placeholder">
+                            <img src="assets/kuis-seru-tani.png" alt="Jagung" class="plant-image" onerror="this.style.display='none'; this.parentElement.querySelector('.plant-icon').style.display='flex';">
+                            <i class="fas fa-corn plant-icon" style="display: none;"></i>
+                        </div>
+                        <h3 class="plant-name">Jagung</h3>
+                        <p class="plant-description">Sumber karbohidrat alternatif</p>
                     </div>
-                    <h3 class="plant-name">Jagung</h3>
-                    <p class="plant-description">Sumber karbohidrat alternatif</p>
                 </div>
             </div>
         </div>
