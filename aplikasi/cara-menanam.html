@@ -497,67 +497,67 @@
         <div class="content-section">
             <!-- Step Cards -->
             <div class="step-cards">
-                <!-- Step 1 - Persiapan -->
-                <div class="step-card step1 loading" onclick="selectStep('persiapan')">
+                <!-- Menanam Dilahan -->
+                <div class="step-card step1 loading" onclick="selectMethod('menanam-dilahan')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Persiapan" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/buku-tanamku.png" alt="Menanam Dilahan" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
                                 <i class="fas fa-seedling menu-icon"></i>
                             </div>
                         </div>
-                        <h3 class="step-title">Langkah 1: Persiapan</h3>
-                        <p class="step-description">Siapkan lahan, alat, dan benih yang akan ditanam</p>
+                        <h3 class="step-title">Menanam Dilahan</h3>
+                        <p class="step-description">Teknik menanam langsung di tanah dengan metode tradisional</p>
                     </div>
                 </div>
                 
-                <!-- Step 2 - Penanaman -->
-                <div class="step-card step2 loading" onclick="selectStep('penanaman')">
+                <!-- Vertikultur -->
+                <div class="step-card step2 loading" onclick="selectMethod('vertikultur')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Penanaman" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/buku-tanamku.png" alt="Vertikultur" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
-                                <i class="fas fa-hand-holding-seedling menu-icon"></i>
+                                <i class="fas fa-arrows-alt-v menu-icon"></i>
                             </div>
                         </div>
-                        <h3 class="step-title">Langkah 2: Penanaman</h3>
-                        <p class="step-description">Lakukan proses penanaman benih dengan teknik yang benar</p>
+                        <h3 class="step-title">Vertikultur</h3>
+                        <p class="step-description">Menanam secara vertikal untuk menghemat ruang lahan</p>
                     </div>
                 </div>
                 
-                <!-- Step 3 - Perawatan -->
-                <div class="step-card step3 loading" onclick="selectStep('perawatan')">
+                <!-- Tambulampot -->
+                <div class="step-card step3 loading" onclick="selectMethod('tambulampot')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Perawatan" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/buku-tanamku.png" alt="Tambulampot" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-spa menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="step-title">Tambulampot</h3>
+                        <p class="step-description">Menanam sayuran dan buah dalam pot di rumah</p>
+                    </div>
+                </div>
+                
+                <!-- Hidroponik -->
+                <div class="step-card step4 loading" onclick="selectMethod('hidroponik')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Hidroponik" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
                                 <i class="fas fa-tint menu-icon"></i>
                             </div>
                         </div>
-                        <h3 class="step-title">Langkah 3: Perawatan</h3>
-                        <p class="step-description">Berikan air, pupuk, dan lakukan pemeliharaan rutin</p>
-                    </div>
-                </div>
-                
-                <!-- Step 4 - Panen -->
-                <div class="step-card step4 loading" onclick="selectStep('panen')">
-                    <div class="card-background"></div>
-                    <div class="card-pattern"></div>
-                    <div class="card-content">
-                        <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Panen" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="menu-icon-wrapper" style="display: none;">
-                                <i class="fas fa-wheat-awn menu-icon"></i>
-                            </div>
-                        </div>
-                        <h3 class="step-title">Langkah 4: Panen</h3>
-                        <p class="step-description">Panen hasil tanaman saat sudah matang sempurna</p>
+                        <h3 class="step-title">Hidroponik</h3>
+                        <p class="step-description">Menanam tanpa tanah menggunakan air nutrisi</p>
                     </div>
                 </div>
             </div>
@@ -600,8 +600,8 @@
             alert('Settings akan segera tersedia!');
         }
         
-        function selectStep(step) {
-            alert('Detail untuk ' + step + ' akan segera tersedia!');
+        function selectMethod(method) {
+            alert('Detail untuk ' + method + ' akan segera tersedia!');
         }
         
         function openSearch() {
