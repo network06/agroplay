@@ -175,7 +175,7 @@
             margin: 30px 0;
         }
         
-        /* Activity Cards Container - Square Grid Layout */
+        /* Activity Cards - Tall Layout */
         .activity-cards {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -185,87 +185,75 @@
             padding: 0 10px;
         }
         
-        /* Activity Card - Square Design */
+        /* Activity Card - Tall Design */
         .activity-card {
-            background: linear-gradient(135deg, #FF9800, #FFB74D);
-            border: 3px solid #FFD700;
+            background: white;
             border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
             position: relative;
             overflow: hidden;
-            aspect-ratio: 1;
-            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+            border: 2px solid #e0e0e0;
         }
         
         .activity-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(255, 152, 0, 0.4);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+            border-color: #4CAF50;
         }
         
-        .activity-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-        }
+        /* Activity Card Colors */
+        .activity-card:nth-child(1) { border-color: #FF9800; }
+        .activity-card:nth-child(2) { border-color: #2196F3; }
         
-        .activity-card:hover::before {
-            animation: shimmer 0.5s ease;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        /* Activity Text - Square Card Layout */
-        .activity-text {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-            position: relative;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        
-        /* Activity Illustration - Square Design */
-        .activity-illustration {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
+        /* Activity Image Container */
+        .activity-image-container {
+            width: 100%;
+            height: 140px;
+            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            z-index: 2;
-        }
-        
-        .illustration-placeholder {
-            font-size: 40px;
-            color: rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            border-radius: 18px 18px 0 0;
         }
         
         .activity-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
+        }
+        
+        .image-placeholder {
+            font-size: 60px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Activity Content */
+        .activity-content {
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Activity Text */
+        .activity-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
         }
         
         /* Bottom Navigation */
@@ -363,22 +351,23 @@
             }
             
             .activity-card {
-                padding: 15px;
-                min-height: 140px;
+                min-height: 180px;
+            }
+            
+            .activity-image-container {
+                height: 120px;
+            }
+            
+            .image-placeholder {
+                font-size: 50px;
+            }
+            
+            .activity-content {
+                padding: 12px;
             }
             
             .activity-text {
                 font-size: 16px;
-                margin-bottom: 10px;
-            }
-            
-            .activity-illustration {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .illustration-placeholder {
-                font-size: 30px;
             }
         }
         
@@ -422,22 +411,23 @@
             }
             
             .activity-card {
-                padding: 25px;
-                min-height: 200px;
+                min-height: 220px;
+            }
+            
+            .activity-image-container {
+                height: 160px;
+            }
+            
+            .image-placeholder {
+                font-size: 70px;
+            }
+            
+            .activity-content {
+                padding: 18px;
             }
             
             .activity-text {
                 font-size: 20px;
-                margin-bottom: 20px;
-            }
-            
-            .activity-illustration {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .illustration-placeholder {
-                font-size: 50px;
             }
         }
     </style>
@@ -469,25 +459,29 @@
     <main class="main-container">
         <!-- Activity Cards -->
         <div class="activity-cards">
-            <!-- Mengenal Hama Card (replacing Pilih Tanaman) -->
+            <!-- Mengenal Hama Card -->
             <div class="activity-card" onclick="goToMengenalHama()">
-                <div class="activity-text">Mengenal Hama</div>
-                <div class="activity-illustration">
-                    <img src="https://via.placeholder.com/80x80/4CAF50/FFFFFF?text=HAMA" alt="Mengenal Hama" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="illustration-placeholder" style="display: none;">
+                <div class="activity-image-container">
+                    <img src="assets/mengenal-hama.png" alt="Mengenal Hama" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
                         <i class="fas fa-bug"></i>
                     </div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-text">Mengenal Hama</h3>
                 </div>
             </div>
             
             <!-- Cara Menanam Card -->
             <div class="activity-card" onclick="goToCaraMenanam()">
-                <div class="activity-text">Cara Menanam</div>
-                <div class="activity-illustration">
-                    <img src="https://via.placeholder.com/80x80/FF9800/FFFFFF?text=TANAM" alt="Cara Menanam" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="illustration-placeholder" style="display: none;">
+                <div class="activity-image-container">
+                    <img src="assets/cara-menanam.png" alt="Cara Menanam" class="activity-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
                         <i class="fas fa-seedling"></i>
                     </div>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-text">Cara Menanam</h3>
                 </div>
             </div>
         </div>
