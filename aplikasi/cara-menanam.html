@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cara Menanam - Teknik Bercocok Tanam yang Benar">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Cara Menanam - Agroplay</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #ffffff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Header - Exact Match to Reference Image */
+        .header-container {
+            background: #4CAF50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Cloud Shapes - Exact Design */
+        .cloud-left {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+        }
+        
+        .cloud-left::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: -12px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        .cloud-left::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: -8px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+        }
+        
+        .cloud-right {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+        }
+        
+        .cloud-right::before {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: -12px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        .cloud-right::after {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: -8px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+        }
+        
+        /* Header Buttons - Exact Design */
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+            position: relative;
+        }
+        
+        .header-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Title Container - Exact Design */
+        .title-container {
+            position: relative;
+            z-index: 20;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .page-title {
+            background: rgba(255, 255, 255, 0.95);
+            color: #4CAF50;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .main-container {
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        
+        /* Content Section */
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Step Cards */
+        .step-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        /* Step Card - Colorful Design */
+        .step-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            min-height: 250px;
+            border: none;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Card Background - Colorful Gradients */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        
+        .step-card.step1 .card-background {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+        }
+        
+        .step-card.step2 .card-background {
+            background: linear-gradient(135deg, #2196F3, #42A5F5, #64B5F6);
+        }
+        
+        .step-card.step3 .card-background {
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
+        }
+        
+        .step-card.step4 .card-background {
+            background: linear-gradient(135deg, #9C27B0, #BA68C8, #CE93D8);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Menu Logo Wrapper */
+        .menu-logo-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        /* Fallback for icons if logo fails to load */
+        .menu-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .menu-icon {
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Step Title */
+        .step-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Step Description */
+        .step-description {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #4CAF50;
+            padding: 10px 0;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -4px 20px rgba(76, 175, 80, 0.3);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            padding: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            min-width: 60px;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .nav-label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 380px) {
+            .header-container {
+                padding: 12px 15px;
+            }
+            
+            .cloud-left, .cloud-right {
+                width: 50px;
+                height: 30px;
+            }
+            
+            .cloud-left::before, .cloud-right::before {
+                width: 25px;
+                height: 25px;
+                top: -10px;
+            }
+            
+            .cloud-left::after, .cloud-right::after {
+                width: 15px;
+                height: 15px;
+                top: -6px;
+            }
+            
+            .header-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+                padding: 6px 15px;
+            }
+            
+            .step-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .step-title {
+                font-size: 18px;
+            }
+            
+            .step-description {
+                font-size: 13px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .header-container {
+                padding: 18px 25px;
+            }
+            
+            .cloud-left, .cloud-right {
+                width: 70px;
+                height: 40px;
+            }
+            
+            .cloud-left::before, .cloud-right::before {
+                width: 35px;
+                height: 35px;
+                top: -14px;
+            }
+            
+            .cloud-left::after, .cloud-right::after {
+                width: 25px;
+                height: 25px;
+                top: -10px;
+            }
+            
+            .header-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+                padding: 10px 25px;
+            }
+            
+            .step-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .step-title {
+                font-size: 22px;
+            }
+            
+            .step-description {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Green Background and Clouds -->
+    <header class="header-container">
+        <!-- Cloud Shapes -->
+        <div class="cloud-left"></div>
+        <div class="cloud-right"></div>
+
+        <!-- Left Button -->
+        <button class="header-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <!-- Title -->
+        <div class="title-container">
+            <h1 class="page-title">Cara Menanam</h1>
+        </div>
+
+        <!-- Right Button -->
+        <button class="header-btn" onclick="openSettings()">
+            <i class="fas fa-cog"></i>
+        </button>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="content-section">
+            <!-- Step Cards -->
+            <div class="step-cards">
+                <!-- Step 1 - Persiapan -->
+                <div class="step-card step1 loading" onclick="selectStep('persiapan')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Persiapan" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-seedling menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="step-title">Langkah 1: Persiapan</h3>
+                        <p class="step-description">Siapkan lahan, alat, dan benih yang akan ditanam</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 - Penanaman -->
+                <div class="step-card step2 loading" onclick="selectStep('penanaman')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Penanaman" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-hand-holding-seedling menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="step-title">Langkah 2: Penanaman</h3>
+                        <p class="step-description">Lakukan proses penanaman benih dengan teknik yang benar</p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 - Perawatan -->
+                <div class="step-card step3 loading" onclick="selectStep('perawatan')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Perawatan" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-tint menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="step-title">Langkah 3: Perawatan</h3>
+                        <p class="step-description">Berikan air, pupuk, dan lakukan pemeliharaan rutin</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 - Panen -->
+                <div class="step-card step4 loading" onclick="selectStep('panen')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Panen" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-wheat-awn menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="step-title">Langkah 4: Panen</h3>
+                        <p class="step-description">Panen hasil tanaman saat sudah matang sempurna</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-label">Home</span>
+            </a>
+            
+            <button class="nav-item" onclick="openSearch()">
+                <i class="fas fa-search nav-icon"></i>
+                <span class="nav-label">Search</span>
+            </button>
+            
+            <button class="nav-item" onclick="openNotifications()">
+                <i class="fas fa-bell nav-icon"></i>
+                <span class="nav-label">Notification</span>
+            </button>
+            
+            <button class="nav-item" onclick="openProfile()">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-label">Profile</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- JavaScript -->
+    <script>
+        // Navigation Functions
+        function goBack() {
+            window.history.back();
+        }
+        
+        function openSettings() {
+            alert('Settings akan segera tersedia!');
+        }
+        
+        function selectStep(step) {
+            alert('Detail untuk ' + step + ' akan segera tersedia!');
+        }
+        
+        function openSearch() {
+            alert('Search akan segera tersedia!');
+        }
+        
+        function openNotifications() {
+            alert('Notifications akan segera tersedia!');
+        }
+        
+        function openProfile() {
+            alert('Profile akan segera tersedia!');
+        }
+        
+        // Add loading animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.step-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.remove('loading');
+                    card.style.animation = 'slideInUp 0.5s ease forwards';
+                }, index * 200);
+            });
+        });
+        
+        // Add slide in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .loading {
+                opacity: 0;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
