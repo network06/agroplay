@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tanaman Pakan Ternak - Kategori Tanaman Agroplay">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Tanaman Pakan Ternak - Agroplay</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           TANAMAN PAKAN TERNAK - EXACT REPLICA FROM IMAGE
+           Orange Cards with Buku Tanamku Images
+           ============================================ */
+        
+        :root {
+            --primary-green: #4CAF50;
+            --primary-green-dark: #388E3C;
+            --primary-green-light: #81C784;
+            --primary-orange: #FF9800;
+            --primary-blue: #2196F3;
+            --primary-red: #F44336;
+            --primary-purple: #9C27B0;
+            --primary-yellow: #FFC107;
+            --primary-pink: #E91E63;
+            --primary-teal: #009688;
+            --primary-indigo: #3F51B5;
+            --primary-amber: #FFB300;
+            --primary-cyan: #00BCD4;
+            --primary-lime: #CDDC39;
+            --primary-brown: #795548;
+            --primary-grey: #9E9E9E;
+            --primary-blue-grey: #607D8B;
+            --sky-blue: #87CEEB;
+            --cloud-white: #FFFFFF;
+        }
+        
+        /* Background - Exact Match from Image */
+        body {
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
+            min-height: 100vh;
+            font-family: 'Fredoka', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        /* Cloud Background */
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 0;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.8;
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+        
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 20px;
+            left: 20px;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+        
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+        
+        .cloud2 {
+            width: 80px;
+            height: 35px;
+            top: 60px;
+            right: 50px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        
+        .cloud2::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+        
+        .cloud2::after {
+            width: 50px;
+            height: 35px;
+            top: -10px;
+            right: 15px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(-10px) translateY(5px); }
+            75% { transform: translateX(15px) translateY(-5px); }
+        }
+        
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Top Section */
+        .top-section {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: var(--primary-green);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .title-section {
+            text-align: center;
+            flex: 1;
+            margin: 0 20px;
+        }
+        
+        .title-btn {
+            background: var(--primary-green);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .title-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: #333;
+            font-size: 14px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .settings-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-green);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .settings-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Wooden Sign Style */
+        .wooden-sign {
+            background: linear-gradient(135deg, #8B4513, #A0522D, #6B3410);
+            border-radius: 15px;
+            padding: 15px 25px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin: 10px auto 30px;
+            max-width: 200px;
+            border: 3px solid #654321;
+        }
+        
+        .wooden-sign::before,
+        .wooden-sign::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: #654321;
+            top: -20px;
+        }
+        
+        .wooden-sign::before {
+            left: 30px;
+        }
+        
+        .wooden-sign::after {
+            right: 30px;
+        }
+        
+        /* Plants Grid Container */
+        .plants-container {
+            flex: 1;
+            padding: 20px;
+            margin-bottom: 100px;
+        }
+        
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Enhanced Plant Cards - Like Main Menu */
+        .plant-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            min-height: 200px;
+            border: none;
+        }
+        
+        .plant-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .plant-card:active {
+            transform: translateY(-6px) scale(1.01);
+            transition: all 0.1s ease;
+        }
+        
+        /* Card Background - Orange Background for All Cards */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Menu Logo Wrapper - Like Main Menu */
+        .menu-logo-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        /* Fallback for icons if logo fails to load */
+        .menu-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none; /* Hidden by default, shown if logo fails */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .menu-icon {
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .plant-icon {
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Plant Name - Like Main Menu */
+        .plant-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Plant Description - Like Main Menu */
+        .plant-description {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-green);
+            padding: 10px 0;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Different delays for cards */
+        .plant-card:nth-child(1) { animation-delay: 0.1s; }
+        .plant-card:nth-child(2) { animation-delay: 0.2s; }
+        .plant-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            .top-section {
+                padding: 15px;
+            }
+            
+            .back-btn, .settings-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .title-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+            }
+            
+            .plants-container {
+                padding: 15px;
+            }
+            
+            .plants-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .plant-card {
+                padding: 15px;
+                min-height: 180px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .plant-name {
+                font-size: 16px;
+            }
+            
+            .plant-description {
+                font-size: 12px;
+            }
+            
+            .nav-item {
+                padding: 6px 12px;
+            }
+            
+            .nav-icon {
+                font-size: 18px;
+            }
+            
+            .nav-label {
+                font-size: 10px;
+            }
+        }
+        
+        @media (min-width: 401px) and (max-width: 768px) {
+            .plants-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 600px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .plants-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                max-width: 900px;
+            }
+            
+            .plant-name {
+                font-size: 20px;
+            }
+            
+            .plant-description {
+                font-size: 15px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .plants-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px;
+                max-width: 900px;
+            }
+            
+            .plant-name {
+                font-size: 22px;
+            }
+            
+            .plant-description {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cloud Background -->
+    <div class="clouds">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Top Section -->
+        <div class="top-section">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            
+            <div class="title-section">
+                <button class="title-btn" onclick="showTitleAnimation()">
+                    Kebun Ajaib
+                </button>
+                <p class="subtitle">Jelajahi berbagai jenis tanaman pakan ternak!</p>
+            </div>
+            
+            <button class="settings-btn" onclick="openSettings()">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+        
+        <!-- Wooden Sign -->
+        <div class="wooden-sign">
+            tanaman pakan ternak
+        </div>
+        
+        <!-- Plants Grid -->
+        <div class="plants-container">
+            <div class="plants-grid">
+                <!-- Plant Card 1 - Rumput Gajah -->
+                <div class="plant-card loading" onclick="selectPlant('rumput-gajah')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Rumput Gajah" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-seedling menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Rumput Gajah</h3>
+                        <p class="plant-description">Pakan ternak berkualitas tinggi</p>
+                    </div>
+                </div>
+                
+                <!-- Plant Card 2 - Alfalfa -->
+                <div class="plant-card loading" onclick="selectPlant('alfalfa')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Alfalfa" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-leaf menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Alfalfa</h3>
+                        <p class="plant-description">Pakan bergizi untuk ternak</p>
+                    </div>
+                </div>
+                
+                <!-- Plant Card 3 - Rumput Odot -->
+                <div class="plant-card loading" onclick="selectPlant('rumput-odot')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Rumput Odot" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-grass menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Rumput Odot</h3>
+                        <p class="plant-description">Pakan alternatif ternak</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="#" class="nav-item" onclick="openSearch()">
+                <i class="fas fa-search nav-icon"></i>
+                <span class="nav-label">Search</span>
+            </a>
+            <a href="#" class="nav-item" onclick="openNotifications()">
+                <i class="fas fa-bell nav-icon"></i>
+                <span class="nav-label">Notification</span>
+            </a>
+            <a href="#" class="nav-item" onclick="openProfile()">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-label">Profile</span>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- JavaScript -->
+    <script>
+        // Sound effects
+        const clickSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
+        
+        // Navigation functions
+        function goBack() {
+            playClickSound();
+            window.location.href = 'kebun-ajaib.html';
+        }
+        
+        function openSettings() {
+            playClickSound();
+            alert('Pengaturan akan segera tersedia!');
+        }
+        
+        function openSearch() {
+            playClickSound();
+            alert('Pencarian akan segera tersedia!');
+        }
+        
+        function openNotifications() {
+            playClickSound();
+            alert('Notifikasi akan segera tersedia!');
+        }
+        
+        function openProfile() {
+            playClickSound();
+            alert('Profil akan segera tersedia!');
+        }
+        
+        function showTitleAnimation() {
+            playClickSound();
+            const titleBtn = document.querySelector('.title-btn');
+            titleBtn.style.transform = 'scale(1.2) rotate(10deg)';
+            setTimeout(() => {
+                titleBtn.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+        }
+        
+        function selectPlant(plantType) {
+            playClickSound();
+            const card = event.currentTarget;
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 200);
+            
+            // Show plant details (for future implementation)
+            setTimeout(() => {
+                const plantNames = {
+                    'rumput-gajah': 'Rumput Gajah',
+                    'alfalfa': 'Alfalfa', 
+                    'rumput-odot': 'Rumput Odot'
+                };
+                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+            }, 300);
+        }
+        
+        function playClickSound() {
+            try {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => console.log('Audio play failed:', e));
+            } catch(e) {
+                console.log('Audio not supported');
+            }
+        }
+        
+        // Add interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const plantCards = document.querySelectorAll('.plant-card');
+            
+            plantCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // Add parallax effect to clouds
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const clouds = document.querySelector('.clouds');
+                clouds.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        });
+        
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
