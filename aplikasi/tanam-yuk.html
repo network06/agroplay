@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
+        :root {
+            --primary-green: #4CAF50;
+            --primary-green-dark: #388E3C;
+            --primary-green-light: #81C784;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -33,15 +39,13 @@
             position: relative;
         }
         
-        /* Header - Exact Match to Reference Image */
-        .header-container {
-            background: #4CAF50;
-            padding: 15px 20px;
+        /* Top Section - Like Kebun Ajaib */
+        .top-section {
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 10;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
         
         /* Cloud Shapes - Exact Design */
@@ -112,34 +116,71 @@
         }
         
         /* Header Buttons - Exact Design */
-        .header-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+        .back-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: var(--primary-green);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            z-index: 20;
-            position: relative;
         }
         
-        .header-btn:hover {
+        .back-btn:hover {
             transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
-        /* Title Container - Exact Design */
-        .title-container {
-            position: relative;
-            z-index: 20;
-            flex: 1;
+        .title-btn {
+            background: var(--primary-green);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .title-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .settings-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-green);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .settings-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .title-section {
             text-align: center;
+            flex: 1;
+            margin: 0 20px;
         }
         
         .page-title {
@@ -371,10 +412,21 @@
             font-weight: 600;
         }
         
-        /* Responsive Design - Square Cards & Simple Header */
+        /* Responsive Design */
         @media (max-width: 380px) {
-            .header-container {
-                padding: 12px 15px;
+            .top-section {
+                padding: 15px;
+            }
+            
+            .back-btn, .settings-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .title-btn {
+                padding: 12px 20px;
+                font-size: 16px;
             }
             
             .cloud-left, .cloud-right {
@@ -434,8 +486,8 @@
         }
         
         @media (min-width: 768px) {
-            .header-container {
-                padding: 18px 25px;
+            .top-section {
+                padding: 25px;
             }
             
             .cloud-left, .cloud-right {
@@ -496,27 +548,22 @@
     </style>
 </head>
 <body>
-    <!-- Header with Green Background and Clouds -->
-    <header class="header-container">
-        <!-- Cloud Shapes -->
-        <div class="cloud-left"></div>
-        <div class="cloud-right"></div>
-        
-        <!-- Left Button -->
-        <button class="header-btn" onclick="goBack()">
+    <!-- Top Section -->
+    <div class="top-section">
+        <button class="back-btn" onclick="goBack()">
             <i class="fas fa-arrow-left"></i>
         </button>
         
-        <!-- Title -->
-        <div class="title-container">
-            <h1 class="page-title">Tanam Yuk!</h1>
+        <div class="title-section">
+            <button class="title-btn" onclick="showTitleAnimation()">
+                Tanam Yuk!
+            </button>
         </div>
         
-        <!-- Right Button -->
-        <button class="header-btn" onclick="openSettings()">
+        <button class="settings-btn" onclick="openSettings()">
             <i class="fas fa-cog"></i>
         </button>
-    </header>
+    </div>
     
     <!-- Main Content -->
     <main class="main-container">
@@ -612,6 +659,14 @@
         
         function openProfile() {
             alert('Profile akan segera tersedia!');
+        }
+        
+        function showTitleAnimation() {
+            const titleBtn = document.querySelector('.title-btn');
+            titleBtn.style.transform = 'scale(1.2) rotate(10deg)';
+            setTimeout(() => {
+                titleBtn.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
         }
         
         // Add some interactive animations
