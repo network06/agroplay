@@ -621,39 +621,7 @@
         <!-- Plants Grid -->
         <div class="plants-container">
             <div class="plants-grid">
-                <!-- Plant Card 1 - Tebu -->
-                <div class="plant-card tebu loading" onclick="selectPlant('tebu')">
-                    <div class="card-background"></div>
-                    <div class="card-pattern"></div>
-                    <div class="card-content">
-                        <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Tebu" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="menu-icon-wrapper" style="display: none;">
-                                <i class="fas fa-seedling menu-icon"></i>
-                            </div>
-                        </div>
-                        <h3 class="plant-name">Tebu</h3>
-                        <p class="plant-description">Bahan baku gula pasir</p>
-                    </div>
-                </div>
-                
-                <!-- Plant Card 2 - Kapas -->
-                <div class="plant-card kapas loading" onclick="selectPlant('kapas')">
-                    <div class="card-background"></div>
-                    <div class="card-pattern"></div>
-                    <div class="card-content">
-                        <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Kapas" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="menu-icon-wrapper" style="display: none;">
-                                <i class="fas fa-cloud menu-icon"></i>
-                            </div>
-                        </div>
-                        <h3 class="plant-name">Kapas</h3>
-                        <p class="plant-description">Bahan baku tekstil</p>
-                    </div>
-                </div>
-                
-                <!-- Plant Card 3 - Kelapa -->
+                <!-- Plant Card 1 - Kelapa -->
                 <div class="plant-card kelapa loading" onclick="selectPlant('kelapa')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
@@ -665,7 +633,39 @@
                             </div>
                         </div>
                         <h3 class="plant-name">Kelapa</h3>
-                        <p class="plant-description">Bahan baku minyak goreng</p>
+                        <p class="plant-description">Pohon serbaguna tropis</p>
+                    </div>
+                </div>
+                
+                <!-- Plant Card 2 - Karet -->
+                <div class="plant-card karet loading" onclick="selectPlant('karet')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Karet" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-droplet menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Karet</h3>
+                        <p class="plant-description">Tanaman penghasil lateks</p>
+                    </div>
+                </div>
+                
+                <!-- Plant Card 3 - Tebu -->
+                <div class="plant-card tebu loading" onclick="selectPlant('tebu')">
+                    <div class="card-background"></div>
+                    <div class="card-pattern"></div>
+                    <div class="card-content">
+                        <div class="menu-logo-wrapper">
+                            <img src="assets/buku-tanamku.png" alt="Tebu" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="menu-icon-wrapper" style="display: none;">
+                                <i class="fas fa-seedling menu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="plant-name">Tebu</h3>
+                        <p class="plant-description">Tanaman penghasil gula</p>
                     </div>
                 </div>
             </div>
@@ -745,9 +745,9 @@
             // Show plant details (for future implementation)
             setTimeout(() => {
                 const plantNames = {
-                    'tebu': 'Tebu',
-                    'kapas': 'Kapas', 
-                    'kelapa': 'Kelapa'
+                    'kelapa': 'Kelapa',
+                    'karet': 'Karet',
+                    'tebu': 'Tebu'
                 };
                 alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
             }, 300);
