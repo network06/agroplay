@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pak Padi - Tanaman Pangan Agroplay">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Pak Padi - Agroplay</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --primary-green-dark: #388E3C;
+            --primary-green-light: #81C784;
+            --sky-blue: #87CEEB;
+            --cloud-white: #FFFFFF;
+            --wood-brown: #8B4513;
+            --wood-dark: #654321;
+        }
+        
+        /* Background */
+        body {
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #C8E6C9 100%);
+            min-height: 100vh;
+            font-family: 'Fredoka', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        /* Cloud Background */
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 0;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.8;
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+        
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 20px;
+            left: 20px;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+        
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+        
+        .cloud2 {
+            width: 80px;
+            height: 35px;
+            top: 60px;
+            right: 50px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        
+        .cloud2::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+        
+        .cloud2::after {
+            width: 50px;
+            height: 35px;
+            top: -10px;
+            right: 15px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(-10px) translateY(5px); }
+            75% { transform: translateX(15px) translateY(-5px); }
+        }
+        
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        /* Top Section */
+        .top-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: var(--primary-green);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Wooden Sign Style */
+        .wooden-sign {
+            background: linear-gradient(135deg, #8B4513, #A0522D, #6B3410);
+            border-radius: 15px;
+            padding: 15px 25px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin: 20px auto 30px;
+            max-width: 300px;
+            border: 3px solid #654321;
+        }
+        
+        .wooden-sign::before,
+        .wooden-sign::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: #654321;
+            top: -20px;
+        }
+        
+        .wooden-sign::before {
+            left: 30px;
+        }
+        
+        .wooden-sign::after {
+            right: 30px;
+        }
+        
+        /* Content Container */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Image Frame */
+        .image-frame {
+            background: white;
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px auto 30px;
+            max-width: 350px;
+            border: 6px solid #8B4513;
+            position: relative;
+        }
+        
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #654321, #8B4513, #A0522D);
+            border-radius: 23px;
+            z-index: -1;
+        }
+        
+        .frame-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            object-fit: cover;
+        }
+        
+        /* Introduction Box */
+        .intro-box {
+            background: linear-gradient(135deg, #E8F5E9, #F1F8E9, #E8F5E9);
+            border: 3px solid var(--primary-green);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+            position: relative;
+            text-align: center;
+        }
+        
+        .intro-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2E7D32;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .intro-text span {
+            color: #1B5E20;
+            font-weight: 700;
+        }
+        
+        /* Content Box */
+        .content-box {
+            background: white;
+            border: 4px solid #4CAF50;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .content-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4CAF50, #81C784, #4CAF50);
+            border-radius: 22px;
+            z-index: -1;
+        }
+        
+        .content-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #2E7D32;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .content-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .content-list li {
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .content-list li::before {
+            content: attr(data-number);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4CAF50;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-green);
+            padding: 10px 0;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 15px;
+                padding-bottom: 100px;
+            }
+            
+            .wooden-sign {
+                font-size: 16px;
+                padding: 12px 20px;
+                max-width: 250px;
+            }
+            
+            .image-frame {
+                max-width: 280px;
+                margin: 15px auto 25px;
+                padding: 10px;
+                border: 5px solid #8B4513;
+            }
+            
+            .content-box {
+                padding: 20px;
+                margin: 15px 0;
+            }
+            
+            .intro-box {
+                padding: 18px;
+                margin: 15px 0;
+            }
+            
+            .intro-text {
+                font-size: 16px;
+            }
+            
+            .content-title {
+                font-size: 20px;
+            }
+            
+            .content-list li {
+                font-size: 14px;
+                margin-bottom: 12px;
+                padding-left: 30px;
+            }
+            
+            .content-list li::before {
+                width: 22px;
+                height: 22px;
+                font-size: 12px;
+            }
+            
+            .back-btn, .settings-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .image-frame {
+                max-width: 320px;
+                padding: 11px;
+                border: 5.5px solid #8B4513;
+            }
+            
+            .content-box {
+                padding: 22px;
+            }
+            
+            .intro-box {
+                padding: 21px;
+            }
+            
+            .intro-text {
+                font-size: 17px;
+            }
+            
+            .content-title {
+                font-size: 21px;
+            }
+            
+            .content-list li {
+                font-size: 15px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .image-frame {
+                max-width: 380px;
+                padding: 13px;
+                border: 7px solid #8B4513;
+            }
+            
+            .content-box {
+                padding: 28px;
+            }
+            
+            .intro-box {
+                padding: 25px;
+            }
+            
+            .intro-text {
+                font-size: 19px;
+            }
+            
+            .content-title {
+                font-size: 24px;
+            }
+            
+            .content-list li {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cloud Background -->
+    <div class="clouds">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Top Section -->
+        <div class="top-section">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+        
+        <!-- Wooden Sign -->
+        <div class="wooden-sign loading">
+            Pak Padi si Penghasil nasi
+        </div>
+        
+        <!-- Content Container -->
+        <div class="content-container">
+            <!-- Introduction Box -->
+            <div class="intro-box loading" style="animation-delay: 0.1s;">
+                <p class="intro-text">
+                    Hai anak-anak! Perkenalkan... <span>aku adalah Pak Padi</span>, tanaman paling penting di Indonesia yang menghasilkan beras untuk makanan sehari-hari kalian semua!
+                </p>
+            </div>
+            
+            <!-- Image Frame -->
+            <div class="image-frame loading" style="animation-delay: 0.2s;">
+                <img src="assets/buku-tanamku.png" alt="Pak Padi" class="frame-image">
+            </div>
+            
+            <!-- Content Box 1 - Seperti Apa Aku Terlihat -->
+            <div class="content-box loading" style="animation-delay: 0.4s;">
+                <h3 class="content-title">Seperti Apa Aku Terlihat:</h3>
+                <ul class="content-list">
+                    <li data-number="1">Tinggi badanku sekitar 60-120 cm, mirip rumput tapi lebih tinggi.</li>
+                    <li data-number="2">Daunku panjang dan ramping seperti pita hijau yang melambai-lamba.</li>
+                    <li data-number="3">Aku punya bunga kecil-kecil yang berkelompok jadi satu (namanya malai).</li>
+                    <li data-number="4">Batangku kosong di dalam seperti sedotan, tapi kuat lho!</li>
+                    <li data-number="5">Bulir-bulir berasku tumbuh di ujung batang, seperti rambut yang mengkilap keemasan.</li>
+                </ul>
+            </div>
+            
+            <!-- Content Box 2 - Manfaatku untuk Kalian -->
+            <div class="content-box loading" style="animation-delay: 0.6s;">
+                <h3 class="content-title">Manfaatku untuk Kalian:</h3>
+                <ul class="content-list">
+                    <li data-number="1">Beras putih yang menjadi nasi untuk makanan sehari-hari.</li>
+                    <li data-number="2">Jerami (batangku yang kering) bisa menjadi alas ternak.</li>
+                    <li data-number="3">Bekatul (kulitku) sangat bergizi untuk pakan ayam dan bebek.</li>
+                    <li data-number="4">Aku mengandung karbohidrat untuk energi, protein untuk otot, dan vitamin B untuk otak.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="#" class="nav-item" onclick="openSearch()">
+                <i class="fas fa-search nav-icon"></i>
+                <span class="nav-label">Search</span>
+            </a>
+            <a href="#" class="nav-item" onclick="openNotifications()">
+                <i class="fas fa-bell nav-icon"></i>
+                <span class="nav-label">Notification</span>
+            </a>
+            <a href="#" class="nav-item" onclick="openProfile()">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-label">Profile</span>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- JavaScript -->
+    <script>
+        // Sound effects
+        const clickSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
+        
+        // Navigation functions
+        function goBack() {
+            playClickSound();
+            window.location.href = 'tanaman-pangan.html';
+        }
+        
+        function openSearch() {
+            playClickSound();
+            alert('Pencarian akan segera tersedia!');
+        }
+        
+        function openNotifications() {
+            playClickSound();
+            alert('Notifikasi akan segera tersedia!');
+        }
+        
+        function openProfile() {
+            playClickSound();
+            alert('Profil akan segera tersedia!');
+        }
+        
+        function playClickSound() {
+            try {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => console.log('Audio play failed:', e));
+            } catch(e) {
+                console.log('Audio not supported');
+            }
+        }
+        
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add parallax effect to clouds
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const clouds = document.querySelector('.clouds');
+                clouds.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+            
+            // Add hover effect to content boxes
+            const contentBoxes = document.querySelectorAll('.content-box');
+            contentBoxes.forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+                });
+                
+                box.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
+            });
+        });
+        
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

@@ -805,14 +805,17 @@
                 card.style.transform = '';
             }, 200);
             
-            // Show plant details (for future implementation)
+            // Navigate to plant detail page
             setTimeout(() => {
-                const plantNames = {
-                    'padi': 'Padi',
-                    'kentang': 'Kentang', 
-                    'jagung': 'Jagung'
-                };
-                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                if (plantType === 'padi') {
+                    window.location.href = 'padi-detail.html';
+                } else {
+                    const plantNames = {
+                        'kentang': 'Kentang', 
+                        'jagung': 'Jagung'
+                    };
+                    alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                }
             }, 300);
         }
         
