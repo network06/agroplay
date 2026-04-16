@@ -746,14 +746,22 @@
                 card.style.transform = '';
             }, 200);
             
-            // Show plant details (for future implementation)
+            // Navigate to plant detail page
             setTimeout(() => {
-                const plantNames = {
-                    'kelapa': 'Kelapa',
-                    'karet': 'Karet',
-                    'tebu': 'Tebu'
-                };
-                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                if (plantType === 'tebu') {
+                    window.location.href = 'tebu-detail.html';
+                } else if (plantType === 'kapas') {
+                    window.location.href = 'kapas-detail.html';
+                } else if (plantType === 'kelapa') {
+                    window.location.href = 'kelapa-detail.html';
+                } else {
+                    const plantNames = {
+                        'kelapa': 'Kelapa',
+                        'karet': 'Karet',
+                        'tebu': 'Tebu'
+                    };
+                    alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                }
             }, 300);
         }
         
