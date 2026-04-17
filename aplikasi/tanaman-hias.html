@@ -748,14 +748,22 @@
                 card.style.transform = '';
             }, 200);
             
-            // Show plant details (for future implementation)
+            // Navigate to plant detail page
             setTimeout(() => {
-                const plantNames = {
-                    'mawar': 'Mawar',
-                    'melati': 'Melati', 
-                    'kembang-sepatu': 'Kembang Sepatu'
-                };
-                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                if (plantType === 'mawar') {
+                    window.location.href = 'mawar-detail.html';
+                } else if (plantType === 'melati') {
+                    window.location.href = 'melati-detail.html';
+                } else if (plantType === 'kembang-sepatu') {
+                    window.location.href = 'kembang-sepatu-detail.html';
+                } else {
+                    const plantNames = {
+                        'mawar': 'Mawar',
+                        'melati': 'Melati', 
+                        'kembang-sepatu': 'Kembang Sepatu'
+                    };
+                    alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                }
             }, 300);
         }
         
