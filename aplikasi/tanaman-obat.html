@@ -730,14 +730,22 @@
                 card.style.transform = '';
             }, 200);
             
-            // Show plant details (for future implementation)
+            // Navigate to plant detail page
             setTimeout(() => {
-                const plantNames = {
-                    'lidah-buaya': 'Lidah Buaya',
-                    'jahe': 'Jahe', 
-                    'kunyit': 'Kunyit'
-                };
-                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                if (plantType === 'lidah-buaya') {
+                    window.location.href = 'lidah-buaya-detail.html';
+                } else if (plantType === 'jahe') {
+                    window.location.href = 'jahe-detail.html';
+                } else if (plantType === 'kunyit') {
+                    window.location.href = 'kunyit-detail.html';
+                } else {
+                    const plantNames = {
+                        'lidah-buaya': 'Lidah Buaya',
+                        'jahe': 'Jahe', 
+                        'kunyit': 'Kunyit'
+                    };
+                    alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                }
             }, 300);
         }
         
