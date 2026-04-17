@@ -730,14 +730,22 @@
                 card.style.transform = '';
             }, 200);
             
-            // Show plant details (for future implementation)
+            // Navigate to plant detail page
             setTimeout(() => {
-                const plantNames = {
-                    'rumput-gajah': 'Rumput Gajah',
-                    'alfalfa': 'Alfalfa', 
-                    'rumput-odot': 'Rumput Odot'
-                };
-                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                if (plantType === 'rumput-gajah') {
+                    window.location.href = 'rumput-gajah-detail.html';
+                } else if (plantType === 'alfalfa') {
+                    window.location.href = 'alfalfa-detail.html';
+                } else if (plantType === 'rumput-odot') {
+                    window.location.href = 'rumput-odot-detail.html';
+                } else {
+                    const plantNames = {
+                        'rumput-gajah': 'Rumput Gajah',
+                        'alfalfa': 'Alfalfa', 
+                        'rumput-odot': 'Rumput Odot'
+                    };
+                    alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                }
             }, 300);
         }
         
