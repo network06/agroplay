@@ -754,7 +754,17 @@
             
             // Navigate to plant detail page
             setTimeout(() => {
-                alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                if (plant === 'cabai') {
+                    window.location.href = 'cabai-detail.html';
+                } else if (plant === 'terong') {
+                    window.location.href = 'terong-detail.html';
+                } else if (plant === 'timun') {
+                    window.location.href = 'timun-detail.html';
+                } else if (plant === 'kentang') {
+                    window.location.href = 'kentang-detail.html';
+                } else {
+                    alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                }
             }, 300);
         }
         
