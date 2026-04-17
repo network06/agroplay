@@ -754,7 +754,17 @@
             
             // Navigate to plant detail page
             setTimeout(() => {
-                alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                if (plant === 'selada') {
+                    window.location.href = 'selada-detail.html';
+                } else if (plant === 'kangkung') {
+                    window.location.href = 'kangkung-detail.html';
+                } else if (plant === 'strawbery') {
+                    window.location.href = 'strawbery-detail.html';
+                } else if (plant === 'mint') {
+                    window.location.href = 'mint-detail.html';
+                } else {
+                    alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                }
             }, 300);
         }
         
