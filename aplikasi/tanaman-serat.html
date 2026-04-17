@@ -744,14 +744,22 @@
                 card.style.transform = '';
             }, 200);
             
-            // Show plant details (for future implementation)
+            // Navigate to plant detail page
             setTimeout(() => {
-                const plantNames = {
-                    'kapas': 'Kapas',
-                    'rami': 'Rami',
-                    'sisal': 'Sisal'
-                };
-                alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                if (plantType === 'sisal') {
+                    window.location.href = 'sisal-detail.html';
+                } else if (plantType === 'rami') {
+                    window.location.href = 'rami-detail.html';
+                } else if (plantType === 'karet') {
+                    window.location.href = 'karet-detail.html';
+                } else {
+                    const plantNames = {
+                        'kapas': 'Kapas',
+                        'rami': 'Rami',
+                        'sisal': 'Sisal'
+                    };
+                    alert(`Detail untuk ${plantNames[plantType]} akan segera tersedia!`);
+                }
             }, 300);
         }
         
