@@ -723,7 +723,17 @@
             
             // Navigate to plant detail page
             setTimeout(() => {
-                alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                if (plant === 'selada') {
+                    window.location.href = 'selada-hidroponik-detail.html';
+                } else if (plant === 'kangkung') {
+                    window.location.href = 'kangkung-hidroponik-detail.html';
+                } else if (plant === 'bayam') {
+                    window.location.href = 'bayam-detail.html';
+                } else if (plant === 'tomat') {
+                    window.location.href = 'tomat-detail.html';
+                } else {
+                    alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                }
             }, 300);
         }
         
