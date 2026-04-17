@@ -754,7 +754,17 @@
             
             // Navigate to plant detail page
             setTimeout(() => {
-                alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                if (plant === 'jeruk-nipis') {
+                    window.location.href = 'jeruk-nipis-detail.html';
+                } else if (plant === 'mangga-mini') {
+                    window.location.href = 'mangga-mini-detail.html';
+                } else if (plant === 'jambu-air') {
+                    window.location.href = 'jambu-air-detail.html';
+                } else if (plant === 'stroberi') {
+                    window.location.href = 'strawbery-pot-detail.html';
+                } else {
+                    alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
+                }
             }, 300);
         }
         
