@@ -178,41 +178,7 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
-        /* Wooden Sign Style */
-        .wooden-sign {
-            background: linear-gradient(135deg, #8B4513, #A0522D, #6B3410);
-            border-radius: 15px;
-            padding: 15px 25px;
-            color: white;
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 600;
-            font-size: 18px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            margin: 10px auto 30px;
-            max-width: 200px;
-            border: 3px solid #654321;
-        }
-        
-        .wooden-sign::before,
-        .wooden-sign::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 20px;
-            background: #654321;
-            top: -20px;
-        }
-        
-        .wooden-sign::before {
-            left: 30px;
-        }
-        
-        .wooden-sign::after {
-            right: 30px;
-        }
-        
+                
         .description-text {
             text-align: center;
             color: #333;
@@ -266,21 +232,21 @@
         
         /* Plant Card - Matching Image Design */
         .plant-card {
-            background: white;
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
             border-radius: 20px;
             padding: 15px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
-            border: 3px solid #4CAF50;
+            border: 3px solid #FF9800;
             position: relative;
             overflow: hidden;
         }
         
         .plant-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
         }
         
         .plant-card::before {
@@ -290,7 +256,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255, 152, 0, 0.2), transparent);
             transform: rotate(45deg);
             transition: all 0.6s ease;
             opacity: 0;
@@ -321,11 +287,11 @@
             margin: 0 auto 15px;
             border-radius: 15px;
             overflow: hidden;
-            background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #4CAF50;
+            border: 2px solid #FF9800;
         }
         
         .plant-image {
@@ -344,7 +310,7 @@
             font-family: 'Fredoka', sans-serif;
             font-size: 18px;
             font-weight: 600;
-            color: #2E7D32;
+            color: #E65100;
             margin-bottom: 8px;
         }
         
@@ -352,7 +318,7 @@
         .plant-description {
             font-family: 'Nunito', sans-serif;
             font-size: 14px;
-            color: #666;
+            color: #5D4037;
             font-weight: 500;
             line-height: 1.4;
         }
@@ -525,7 +491,7 @@
         
         <div class="title-section">
             <button class="title-btn" onclick="showTitleAnimation()">
-                Hidroponik
+                Tanam Yuk
             </button>
         </div>
         
@@ -536,11 +502,6 @@
     
     <!-- Main Content -->
     <main class="main-container">
-        <!-- Wooden Sign -->
-        <div class="wooden-sign">
-            Hidroponik
-        </div>
-        
         <!-- Description Text -->
         <div class="description-text">
             Tanaman yang bisa ditanam menggunakan hidroponik
