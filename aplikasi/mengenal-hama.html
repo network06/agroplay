@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mengenal Hama - Pembelajaran Jenis Hama Pertanian">
+    <meta name="theme-color" content="#FF9800">
+    <title>Mengenal Hama - Agroplay</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-orange: #FF9800;
+            --primary-orange-dark: #F57C00;
+            --primary-orange-light: #FFB74D;
+            --primary-green: #4CAF50;
+            --sky-blue: #87CEEB;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #fff3e0 50%, #ffe0b2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Cloud Animation */
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 0;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.8;
+        }
+        
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 20px;
+            left: 20px;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .cloud2 {
+            width: 80px;
+            height: 35px;
+            top: 60px;
+            right: 50px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(-10px) translateY(5px); }
+            75% { transform: translateX(15px) translateY(-5px); }
+        }
+        
+        /* Top Section */
+        .top-section {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header Buttons */
+        .back-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .title-btn {
+            background: var(--primary-orange);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .title-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .settings-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .settings-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Wooden Sign Style */
+        .wooden-sign {
+            background: linear-gradient(135deg, #8B4513, #A0522D, #6B3410);
+            border-radius: 15px;
+            padding: 15px 25px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin: 20px auto 40px;
+            max-width: 350px;
+            border: 3px solid #654321;
+        }
+        
+        .wooden-sign::before,
+        .wooden-sign::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: #654321;
+            top: -20px;
+        }
+        
+        .wooden-sign::before {
+            left: 30px;
+        }
+        
+        .wooden-sign::after {
+            right: 30px;
+        }
+        
+        /* Main Content */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        /* Description Text */
+        .description-text {
+            text-align: center;
+            color: #333;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 20px auto 40px;
+            max-width: 400px;
+        }
+        
+        /* Pest Categories Container */
+        .pest-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Pest Category Card */
+        .pest-category-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            min-height: 250px;
+            border: none;
+        }
+        
+        .pest-category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .pest-category-card:active {
+            transform: translateY(-4px) scale(1.01);
+            transition: all 0.1s ease;
+        }
+        
+        /* Card Background - Different colors for each category */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        
+        .pest-category-card.invertebrata .card-background {
+            background: linear-gradient(135deg, #FF9800, #FFB74D, #FFCC80);
+        }
+        
+        .pest-category-card.vertebrata .card-background {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+        }
+        
+        /* Card Pattern */
+        .card-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Category Image Wrapper */
+        .category-image-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        /* Fallback for icons if image fails to load */
+        .category-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: none; /* Hidden by default, shown if image fails */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .category-icon {
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Category Text */
+        .category-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Category Description */
+        .category-description {
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-orange);
+            border-radius: 25px 25px 0 0;
+            padding: 15px 20px 25px;
+            z-index: 20;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            color: white;
+        }
+        
+        .nav-label {
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .top-section {
+                padding: 15px;
+            }
+            
+            .back-btn, .settings-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .title-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            
+            .wooden-sign {
+                font-size: 18px;
+                padding: 12px 20px;
+                max-width: 280px;
+            }
+            
+            .description-text {
+                font-size: 16px;
+                max-width: 300px;
+            }
+            
+            .pest-categories {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+                gap: 15px;
+                padding: 0 15px;
+            }
+            
+            .pest-category-card {
+                min-height: 200px;
+            }
+            
+            .category-image-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .category-icon {
+                font-size: 28px;
+            }
+            
+            .category-text {
+                font-size: 18px;
+            }
+            
+            .category-description {
+                font-size: 13px;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .pest-categories {
+                max-width: 500px;
+                gap: 18px;
+                padding: 0 18px;
+            }
+            
+            .pest-category-card {
+                min-height: 230px;
+            }
+            
+            .category-image-wrapper {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .category-icon {
+                font-size: 30px;
+            }
+            
+            .category-text {
+                font-size: 19px;
+            }
+            
+            .category-description {
+                font-size: 13.5px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .pest-categories {
+                max-width: 600px;
+                gap: 20px;
+                padding: 0 20px;
+            }
+            
+            .pest-category-card {
+                min-height: 250px;
+            }
+            
+            .category-image-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .category-icon {
+                font-size: 32px;
+            }
+            
+            .category-text {
+                font-size: 20px;
+            }
+            
+            .category-description {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cloud Background -->
+    <div class="clouds">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+    </div>
+    
+    <!-- Top Section -->
+    <div class="top-section">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        
+        <div class="title-section">
+            <button class="title-btn" onclick="showTitleAnimation()">
+                Tanam Yuk
+            </button>
+        </div>
+        
+        <button class="settings-btn" onclick="openSettings()">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Wooden Sign -->
+        <div class="wooden-sign loading" style="animation-delay: 0.1s;">
+            Mengenal Hama Pertanian
+        </div>
+        
+        <!-- Description Text -->
+        <div class="description-text loading" style="animation-delay: 0.2s;">
+            Pelajari berbagai jenis hama tanaman dan cara mengendalikannya
+        </div>
+        
+        <!-- Pest Categories -->
+        <div class="pest-categories">
+            <!-- Invertebrata Category Card -->
+            <div class="pest-category-card invertebrata loading" onclick="goToInvertebrata()" style="animation-delay: 0.3s;">
+                <div class="card-background"></div>
+                <div class="card-pattern"></div>
+                <div class="card-content">
+                    <div class="category-image-wrapper">
+                        <img src="https://via.placeholder.com/100x100/FF9800/FFFFFF?text=🐛" alt="Hama Invertebrata" class="category-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="category-icon-wrapper" style="display: none;">
+                            <i class="fas fa-bug category-icon"></i>
+                        </div>
+                    </div>
+                    <h3 class="category-text">Hama Invertebrata</h3>
+                    <p class="category-description">Serangga, ulat, dan hama tanpa tulang belakang</p>
+                </div>
+            </div>
+            
+            <!-- Vertebrata Category Card -->
+            <div class="pest-category-card vertebrata loading" onclick="goToVertebrata()" style="animation-delay: 0.4s;">
+                <div class="card-background"></div>
+                <div class="card-pattern"></div>
+                <div class="card-content">
+                    <div class="category-image-wrapper">
+                        <img src="https://via.placeholder.com/100x100/4CAF50/FFFFFF?text=🐀" alt="Hama Vertebrata" class="category-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="category-icon-wrapper" style="display: none;">
+                            <i class="fas fa-dove category-icon"></i>
+                        </div>
+                    </div>
+                    <h3 class="category-text">Hama Vertebrata</h3>
+                    <p class="category-description">Tikus, burung, dan hama bertulang belakang</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-label">Home</span>
+            </a>
+            
+            <button class="nav-item" onclick="openSearch()">
+                <i class="fas fa-search nav-icon"></i>
+                <span class="nav-label">Search</span>
+            </button>
+            
+            <button class="nav-item" onclick="openNotifications()">
+                <i class="fas fa-bell nav-icon"></i>
+                <span class="nav-label">Notification</span>
+            </button>
+            
+            <button class="nav-item" onclick="openProfile()">
+                <i class="fas fa-user nav-icon"></i>
+                <span class="nav-label">Profile</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- JavaScript -->
+    <script>
+        // Navigation Functions
+        function goBack() {
+            window.location.href = 'tanam-yuk.html';
+        }
+        
+        function openSettings() {
+            alert('Pengaturan akan segera tersedia!');
+        }
+        
+        function goToInvertebrata() {
+            alert('Halaman detail Hama Invertebrata akan segera tersedia!');
+        }
+        
+        function goToVertebrata() {
+            alert('Halaman detail Hama Vertebrata akan segera tersedia!');
+        }
+        
+        function openSearch() {
+            alert('Pencarian akan segera tersedia!');
+        }
+        
+        function openNotifications() {
+            alert('Notifikasi akan segera tersedia!');
+        }
+        
+        function openProfile() {
+            alert('Profil akan segera tersedia!');
+        }
+        
+        function showTitleAnimation() {
+            const titleBtn = document.querySelector('.title-btn');
+            titleBtn.style.transform = 'scale(1.2) rotate(10deg)';
+            setTimeout(() => {
+                titleBtn.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+        }
+        
+        // Interactive Effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Parallax effect to clouds
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const clouds = document.querySelector('.clouds');
+                clouds.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+            
+            // Animate cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slideInUp 0.5s ease forwards';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observe all loading elements
+            document.querySelectorAll('.loading').forEach(element => {
+                observer.observe(element);
+            });
+        });
+        
+        // Add slide in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
