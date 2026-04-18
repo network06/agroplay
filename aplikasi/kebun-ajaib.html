@@ -642,19 +642,19 @@
                 <i class="fas fa-seedling nav-icon"></i>
                 <span class="nav-label">Tanam Yuk</span>
             </a>
-            <a href="#" class="nav-item" onclick="openKuis()">
+            <a href="kuis-seru-tani.html" class="nav-item">
                 <i class="fas fa-gamepad nav-icon"></i>
                 <span class="nav-label">Kuis Seru</span>
             </a>
-            <a href="#" class="nav-item" onclick="openBuku()">
+            <a href="buku-tanamku.html" class="nav-item">
                 <i class="fas fa-book nav-icon"></i>
                 <span class="nav-label">Buku Tanamku</span>
             </a>
-            <a href="#" class="nav-item" onclick="openCuan()">
+            <a href="cuan-farming.html" class="nav-item">
                 <i class="fas fa-coins nav-icon"></i>
                 <span class="nav-label">Cuan Farming</span>
             </a>
-            <a href="#" class="nav-item" onclick="openProfile()">
+            <a href="profile.html" class="nav-item">
                 <i class="fas fa-user nav-icon"></i>
                 <span class="nav-label">Profile</span>
             </a>
@@ -781,6 +781,14 @@
                 
                 plank.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                });
+            });
+            
+            // Add click sound to navigation items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    playClickSound();
                 });
             });
             
