@@ -401,16 +401,15 @@
         .plant-card:nth-child(3) { animation-delay: 0.3s; }
         .plant-card:nth-child(4) { animation-delay: 0.4s; }
         
-        /* Bottom Navigation */
+        /* Bottom Navigation - Same as Kebun Ajaib */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: #4CAF50;
-            padding: 10px 0;
-            border-radius: 25px 25px 0 0;
-            box-shadow: 0 -4px 20px rgba(76, 175, 80, 0.3);
+            background: var(--primary-green);
+            padding: 8px 0;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
             z-index: 1000;
         }
         
@@ -418,39 +417,49 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            max-width: 400px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 0 10px;
         }
         
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 3px;
+            padding: 6px 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
             text-decoration: none;
             color: white;
-            padding: 8px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            min-width: 60px;
+            min-width: 0;
+            flex: 1;
+            max-width: 100px;
         }
         
         .nav-item:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.1);
             transform: translateY(-2px);
         }
         
+        .nav-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
         .nav-icon {
-            font-size: 20px;
-            margin-bottom: 4px;
+            font-size: 18px;
+            color: white;
         }
         
         .nav-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: white;
             font-family: 'Nunito', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
+            text-align: center;
+            line-height: 1.2;
+            word-wrap: break-word;
         }
         
         /* Responsive Design */
@@ -520,15 +529,15 @@
             }
             
             .nav-item {
-                padding: 6px 12px;
+                padding: 4px 6px;
             }
             
             .nav-icon {
-                font-size: 18px;
+                font-size: 16px;
             }
             
             .nav-label {
-                font-size: 10px;
+                font-size: 9px;
             }
         }
         
@@ -542,6 +551,77 @@
             .menu-logo-wrapper {
                 width: 75px;
                 height: 75px;
+            }
+            
+            .nav-item {
+                padding: 5px 8px;
+            }
+            
+            .nav-icon {
+                font-size: 17px;
+            }
+            
+            .nav-label {
+                font-size: 9.5px;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .top-section {
+                padding: 25px;
+            }
+            
+            .cloud-left, .cloud-right {
+                width: 70px;
+                height: 40px;
+            }
+            
+            .cloud-left::before, .cloud-right::before {
+                width: 35px;
+                height: 35px;
+                top: -14px;
+            }
+            
+            .cloud-left::after, .cloud-right::after {
+                width: 25px;
+                height: 25px;
+                top: -10px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+                padding: 10px 25px;
+            }
+            
+            .plants-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 600px;
+            }
+            
+            .menu-logo-wrapper {
+                width: 75px;
+                height: 75px;
+            }
+            
+            .plant-name {
+                font-size: 20px;
+            }
+            
+            .plant-description {
+                font-size: 15px;
+            }
+            
+            .nav-item {
+                padding: 5px 8px;
+            }
+            
+            .nav-icon {
+                font-size: 17px;
+            }
+            
+            .nav-label {
+                font-size: 9.5px;
             }
         }
         
@@ -589,6 +669,18 @@
             
             .plant-description {
                 font-size: 15px;
+            }
+            
+            .nav-item {
+                padding: 7px 10px;
+            }
+            
+            .nav-icon {
+                font-size: 19px;
+            }
+            
+            .nav-label {
+                font-size: 10.5px;
             }
         }
         
@@ -716,21 +808,26 @@
                 <i class="fas fa-home nav-icon"></i>
                 <span class="nav-label">Home</span>
             </a>
-            
-            <button class="nav-item" onclick="openSearch()">
-                <i class="fas fa-search nav-icon"></i>
-                <span class="nav-label">Search</span>
-            </button>
-            
-            <button class="nav-item" onclick="openNotifications()">
-                <i class="fas fa-bell nav-icon"></i>
-                <span class="nav-label">Notification</span>
-            </button>
-            
-            <button class="nav-item" onclick="openProfile()">
+            <a href="tanam-yuk.html" class="nav-item">
+                <i class="fas fa-seedling nav-icon"></i>
+                <span class="nav-label">Tanam Yuk</span>
+            </a>
+            <a href="kuis-seru.html" class="nav-item">
+                <i class="fas fa-gamepad nav-icon"></i>
+                <span class="nav-label">Kuis Seru</span>
+            </a>
+            <a href="buku-tanamku.html" class="nav-item">
+                <i class="fas fa-book nav-icon"></i>
+                <span class="nav-label">Buku Tanamku</span>
+            </a>
+            <a href="cuan-farming.html" class="nav-item">
+                <i class="fas fa-coins nav-icon"></i>
+                <span class="nav-label">Cuan Farming</span>
+            </a>
+            <a href="profil-simple.html" class="nav-item">
                 <i class="fas fa-user nav-icon"></i>
                 <span class="nav-label">Profile</span>
-            </button>
+            </a>
         </div>
     </nav>
     
