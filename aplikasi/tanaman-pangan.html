@@ -453,7 +453,7 @@
             left: 0;
             right: 0;
             background: var(--primary-green);
-            padding: 10px 0;
+            padding: 8px 0;
             box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
             z-index: 1000;
         }
@@ -462,21 +462,25 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 0 10px;
         }
         
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            padding: 8px 16px;
+            gap: 3px;
+            padding: 6px 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 10px;
             text-decoration: none;
             color: white;
+            min-width: 0;
+            flex: 1;
+            max-width: 100px;
         }
         
         .nav-item:hover {
@@ -489,15 +493,18 @@
         }
         
         .nav-icon {
-            font-size: 20px;
+            font-size: 18px;
             color: white;
         }
         
         .nav-label {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 500;
             color: white;
             font-family: 'Nunito', sans-serif;
+            text-align: center;
+            line-height: 1.2;
+            word-wrap: break-word;
         }
         
         /* Loading Animation */
@@ -578,15 +585,15 @@
             }
             
             .nav-item {
-                padding: 6px 12px;
+                padding: 4px 6px;
             }
             
             .nav-icon {
-                font-size: 18px;
+                font-size: 16px;
             }
             
             .nav-label {
-                font-size: 10px;
+                font-size: 9px;
             }
         }
         
@@ -601,6 +608,18 @@
                 width: 110px;
                 height: 110px;
                 font-size: 55px;
+            }
+            
+            .nav-item {
+                padding: 5px 8px;
+            }
+            
+            .nav-icon {
+                font-size: 17px;
+            }
+            
+            .nav-label {
+                font-size: 9.5px;
             }
         }
         
@@ -623,6 +642,18 @@
             
             .plant-description {
                 font-size: 15px;
+            }
+            
+            .nav-item {
+                padding: 7px 10px;
+            }
+            
+            .nav-icon {
+                font-size: 19px;
+            }
+            
+            .nav-label {
+                font-size: 10.5px;
             }
         }
         
@@ -742,15 +773,23 @@
                 <i class="fas fa-home nav-icon"></i>
                 <span class="nav-label">Home</span>
             </a>
-            <a href="#" class="nav-item" onclick="openSearch()">
-                <i class="fas fa-search nav-icon"></i>
-                <span class="nav-label">Search</span>
+            <a href="tanam-yuk.html" class="nav-item">
+                <i class="fas fa-seedling nav-icon"></i>
+                <span class="nav-label">Tanam Yuk</span>
             </a>
-            <a href="#" class="nav-item" onclick="openNotifications()">
-                <i class="fas fa-bell nav-icon"></i>
-                <span class="nav-label">Notification</span>
+            <a href="kuis-seru.html" class="nav-item">
+                <i class="fas fa-gamepad nav-icon"></i>
+                <span class="nav-label">Kuis Seru</span>
             </a>
-            <a href="#" class="nav-item" onclick="openProfile()">
+            <a href="buku-tanamku.html" class="nav-item">
+                <i class="fas fa-book nav-icon"></i>
+                <span class="nav-label">Buku Tanamku</span>
+            </a>
+            <a href="cuan-farming.html" class="nav-item">
+                <i class="fas fa-coins nav-icon"></i>
+                <span class="nav-label">Cuan Farming</span>
+            </a>
+            <a href="profil-simple.html" class="nav-item">
                 <i class="fas fa-user nav-icon"></i>
                 <span class="nav-label">Profile</span>
             </a>
@@ -843,6 +882,14 @@
                 
                 card.addEventListener('mouseleave', function() {
                     this.style.transform = '';
+                });
+            });
+            
+            // Add click sound to navigation items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    playClickSound();
                 });
             });
             
