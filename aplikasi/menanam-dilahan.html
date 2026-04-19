@@ -740,7 +740,7 @@
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Cabai" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/cabai.png" alt="Cabai" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
                                 <i class="fas fa-pepper-hot menu-icon"></i>
                             </div>
@@ -750,51 +750,51 @@
                     </div>
                 </div>
                 
-                <!-- Plant Card 2 - Terong -->
+                <!-- Plant Card 2 - Tomat besar -->
                 <div class="plant-card terong loading" onclick="selectPlant('terong')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Terong" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/tomat-besar.png" alt="Terong" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
                                 <i class="fas fa-circle menu-icon"></i>
                             </div>
                         </div>
-                        <h3 class="plant-name">Terong</h3>
+                        <h3 class="plant-name">Tomat Besar</h3>
                         <p class="plant-description">Sayuran ungu yang kaya akan serat dan nutrisi</p>
                     </div>
                 </div>
                 
-                <!-- Plant Card 3 - Timun -->
-                <div class="plant-card timun loading" onclick="selectPlant('timun')">
+                <!-- Plant Card 3 - wortel-->
+                <div class="plant-card wortel loading" onclick="selectPlant('wortel')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Timun" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/wortel.png" alt="Wortel" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
                                 <i class="fas fa-seedling menu-icon"></i>
                             </div>
                         </div>
-                        <h3 class="plant-name">Timun</h3>
-                        <p class="plant-description">Sayuran segar yang kaya air dan vitamin K</p>
+                        <h3 class="plant-name">Wortel</h3>
+                        <p class="plant-description">Umbi renyah sumber vitamin A</p>
                     </div>
                 </div>
                 
-                <!-- Plant Card 4 - Kentang -->
-                <div class="plant-card kentang loading" onclick="selectPlant('kentang')">
+                <!-- Plant Card 4 - kangkung -->
+                <div class="plant-card kangkung loading" onclick="selectPlant('kangkung')">
                     <div class="card-background"></div>
                     <div class="card-pattern"></div>
                     <div class="card-content">
                         <div class="menu-logo-wrapper">
-                            <img src="assets/buku-tanamku.png" alt="Kentang" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="assets/kangkung-lahan.png" alt="Kangkung" class="menu-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="menu-icon-wrapper" style="display: none;">
                                 <i class="fas fa-circle menu-icon"></i>
                             </div>
                         </div>
-                        <h3 class="plant-name">Kentang</h3>
-                        <p class="plant-description">Umbi yang kaya karbohidrat dan sumber energi</p>
+                        <h3 class="plant-name">Kangkung</h3>
+                        <p class="plant-description">Sayuran hijau tangguh sumber serat dan zat besi</p>
                     </div>
                 </div>
             </div>
@@ -853,12 +853,12 @@
             setTimeout(() => {
                 if (plant === 'cabai') {
                     window.location.href = 'cabai-detail.html';
-                } else if (plant === 'terong') {
-                    window.location.href = 'terong-detail.html';
-                } else if (plant === 'timun') {
-                    window.location.href = 'timun-detail.html';
-                } else if (plant === 'kentang') {
-                    window.location.href = 'kentang-detail.html';
+                } else if (plant === 'wortel') {
+                    window.location.href = 'wortel-detail.html';
+                } else if (plant === 'tomat-besar') {
+                    window.location.href = 'tomat-besar-detail.html';
+                } else if (plant === 'kangkung-lahan') {
+                    window.location.href = 'kangkung-lahan-detail.html';
                 } else {
                     alert('Detail untuk tanaman ' + plant + ' akan segera tersedia!');
                 }
